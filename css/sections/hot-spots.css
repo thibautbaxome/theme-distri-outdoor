@@ -1,0 +1,130 @@
+/**
+ * ----------------------------------------------------------------------------------------------------
+ * GENERAL
+ * ----------------------------------------------------------------------------------------------------
+ */
+
+.hot-spot {
+  --hot-spot-dot-size: 2rem;
+  --hot-spot-dot-shadow-size: 3rem;
+
+  /* IMPORTANT: we must make sure to not use logical properties here, as dot positioning is set related to image, so this does not change in RTL mode */
+  position: absolute;
+  grid-column: 1 / -1;
+  grid-row: 1 / -1;
+  left: calc(var(--hot-spot-mobile-horizontal-position) - var(--hot-spot-dot-size) / 2);
+  top: calc(var(--hot-spot-mobile-vertical-position) - var(--hot-spot-dot-size) / 2);
+  transition: z-index 0.2s ease-in-out;
+}
+
+.hot-spot:has(.hot-spot__dot[aria-expanded="true"]) {
+  z-index: 2;
+}
+
+/**
+ * ----------------------------------------------------------------------------------------------------
+ * HOT SPOT DOT
+ * ----------------------------------------------------------------------------------------------------
+ */
+
+@keyframes hotSpotDotAnimation {
+  from {
+    transform: scale(1);
+  }
+
+  to {
+    transform: scale(0.8);
+  }
+}
+
+.hot-spot__dot {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: var(--hot-spot-dot-size);
+  height: var(--hot-spot-dot-size);
+  border-radius: 100%;
+  background: rgb(var(--hot-spot-background));
+  color: rgb(var(--hot-spot-text-color));
+
+  &::after {
+    content: '';
+    position: absolute;
+    grid-area: 1 / -1;
+    width: var(--hot-spot-dot-shadow-size);
+    height: var(--hot-spot-dot-shadow-size);
+    background: radial-gradient(50% 50% at 50% 50%, rgb(var(--hot-spot-background) / 0) 0%, rgb(var(--hot-spot-background) / 0.3) 100%);
+    border-radius: inherit;
+    animation: hotSpotDotAnimation 2s ease-in-out infinite alternate;
+  }
+}
+
+.hot-spot__dot--content {
+  svg {
+    transition: rotate 0.2s ease-in-out;
+  }
+
+  &[aria-expanded="true"] svg {
+    rotate: 45deg;
+  }
+}
+
+@media (--md) {
+  .hot-spot {
+    --hot-spot-dot-size: 2.5rem;
+    --hot-spot-dot-shadow-size: 4.25rem;
+
+    left: calc(var(--hot-spot-desktop-horizontal-position) - var(--hot-spot-dot-size) / 2);
+    top: calc(var(--hot-spot-desktop-vertical-position) - var(--hot-spot-dot-size) / 2);
+  }
+}
+
+/**
+ * ----------------------------------------------------------------------------------------------------
+ * HOT SPOT POPOVER
+ * ----------------------------------------------------------------------------------------------------
+ */
+
+.popover--hot-spot {
+  --popover-content-padding: 1.5rem;
+
+  &::part(content) {
+    padding: 0;
+    border: none;
+  }
+
+  &::part(body) {
+    padding: var(--popover-content-padding);
+  }
+
+  .rounded-full {
+    width: 150px;
+    height: 150px;
+  }
+
+  &:has(img:not(.rounded-full))::part(body) {
+    padding-block-start: 0;
+  }
+
+  .prose img:not(.rounded-full):first-child {
+    width: calc(100% + var(--popover-content-padding) * 2);
+    max-width: none;
+    margin-inline: calc(-1 * var(--popover-content-padding));
+    margin-block-end: var(--popover-content-padding);
+  }
+}
+
+@media (--md) {
+  .popover--hot-spot {
+    --popover-content-padding: 2rem;
+
+    &::part(content) {
+      max-height: none;
+      max-width: 20rem;
+    }
+
+    &::part(close-button) {
+      display: none; /* On desktop the close button is not needed as we can easily click outside to close it */
+    }
+  }
+}

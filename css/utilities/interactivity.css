@@ -1,0 +1,55 @@
+/**
+ * -------------------------------------------------------------------------------------------------------------------
+ * LOCK
+ * -------------------------------------------------------------------------------------------------------------------
+ */
+
+.lock {
+  overflow: hidden;
+}
+
+/**
+ * -------------------------------------------------------------------------------------------------------------------
+ * POINTER EVENTS
+ * -------------------------------------------------------------------------------------------------------------------
+ */
+
+.pointer-events-none {
+  pointer-events: none;
+}
+
+/**
+ * -------------------------------------------------------------------------------------------------------------------
+ * SCROLL/SNAP UTILITIES
+ * -------------------------------------------------------------------------------------------------------------------
+ */
+
+.scroll-area,
+::part(scroll-area) {
+  scrollbar-width: none;
+  overflow: auto hidden;
+  overscroll-behavior-x: contain;
+}
+
+.scroll-area::-webkit-scrollbar,
+::part(scroll-area)::-webkit-scrollbar {
+  display: none;
+}
+
+.snap-x {
+  scroll-snap-type: x mandatory;
+}
+
+.snap-y {
+  scroll-snap-type: y mandatory;
+}
+
+.snap-start {
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+}
+
+.snap-center {
+  scroll-snap-align: center;
+  scroll-snap-stop: always;
+}

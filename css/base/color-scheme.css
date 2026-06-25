@@ -1,0 +1,16 @@
+/**
+ * A color scheme creates a new color context from CSS variables
+ */
+
+.color-scheme {
+  background-color: rgb(var(--background));
+  background-image: var(--background-gradient);
+  color: rgb(var(--text-color));
+  border-color: rgb(var(--border-color));
+}
+
+/* When the color scheme is used with an overlaid image, we use a simpler border strategy that usually works better */
+
+.color-scheme--with-image-overlay {
+  --border-color: var(--text-color) / 0.6;
+}

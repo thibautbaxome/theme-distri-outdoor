@@ -1,0 +1,234 @@
+/**
+ * -------------------------------------------------------------------------------------------------------------------
+ * SCROLL MARKER GROUP
+ * -------------------------------------------------------------------------------------------------------------------
+ */
+
+.scroll-marker-group {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: var(--scroll-marker-group-justify-content, safe center);
+  gap: var(--scroll-marker-group-gap, 0.5rem);
+}
+
+.scroll-marker {
+  width: var(--scroll-marker-width, var(--scroll-marker-size));
+  height: var(--scroll-marker-height, var(--scroll-marker-size));
+}
+
+/**
+ * -------------------------------------------------------------------------------------------------------------------
+ * SCROLL MARKER GROUP DOTS
+ * -------------------------------------------------------------------------------------------------------------------
+ */
+
+.scroll-marker-group--dots {
+  --scroll-marker-group-gap: 0.3125rem 0.75rem;
+
+  .scroll-marker {
+    --scroll-marker-size: 0.375rem;
+
+    display: grid;
+    place-content: center;
+    border-radius: var(--button-border-radius);
+    background: currentColor;
+    opacity: 0.3;
+    transition: all 0.2s ease-in-out;
+
+    &[aria-current="true"] {
+      opacity: 1;
+    }
+  }
+}
+
+.scroll-marker-group--dots-sm {
+  --scroll-marker-group-gap: 0.375rem;
+
+  .scroll-marker {
+    --scroll-marker-size: 0.25rem;
+  }
+}
+
+/**
+ * -------------------------------------------------------------------------------------------------------------------
+ * SCROLL MARKER GROUP LINE
+ * -------------------------------------------------------------------------------------------------------------------
+ */
+
+.scroll-marker-group--lines {
+  --scroll-marker-group-gap: 0.375rem;
+
+  align-items: flex-end;
+  height: 2px; /* Force height for smoother transition */
+
+  .scroll-marker {
+    --scroll-marker-width: 0.5rem;
+    --scroll-marker-height: 1px;
+
+    background-color: rgb(from currentColor r g b / 0.3);
+    transition: width 0.3s ease, height 0.3s ease, background-color 0.3s ease;
+    transform-origin: var(--transform-origin-start);
+    will-change: transform;
+
+    &[aria-current="true"] {
+      --scroll-marker-width: 1rem;
+      --scroll-marker-height: 2px;
+
+      background-color: currentColor;
+    }
+  }
+
+  &.scroll-marker-group--autoplay {
+    .scroll-marker[aria-current="true"] {
+      background-color: rgb(from currentColor r g b / 0.3);
+    }
+  }
+}
+
+.scroll-marker-group__line-progress {
+  position: absolute;
+  inset: 0;
+  background-color: currentColor;
+  transform: scaleX(0);
+  transform-origin: var(--transform-origin-start);
+}
+
+@media (--sm) {
+  .scroll-marker-group--lines {
+    --scroll-marker-group-gap: 0.5rem;
+
+    .scroll-marker {
+      --scroll-marker-width: 0.75rem;
+
+      &[aria-current="true"] {
+        --scroll-marker-width: 1.25rem;
+      }
+    }
+  }
+}
+
+/**
+ * -------------------------------------------------------------------------------------------------------------------
+ * SCROLL MARKER GROUP COUNTER
+ * -------------------------------------------------------------------------------------------------------------------
+ */
+
+.scroll-marker-group--counter {
+  --scroll-marker-group-gap: 0.75rem;
+
+  padding: 0.75rem 1rem;
+  background-color: rgb(var(--text-color) / 0.1);
+  backdrop-filter: blur(5px);
+  border-radius: var(--rounded-full);
+  font: var(--button-font);
+}
+
+@media (--sm) {
+  .scroll-marker-group--counter {
+    --scroll-marker-group-gap: 1rem;
+
+    padding: 1rem 1.25rem;
+  }
+}
+
+/**
+ * -------------------------------------------------------------------------------------------------------------------
+ * SCROLL MARKER GROUP THUMBNAILS
+ * -------------------------------------------------------------------------------------------------------------------
+ */
+
+.scroll-marker-group--thumbnails {
+  --scroll-marker-group-justify-content: start;
+
+  flex-wrap: nowrap;
+  padding-block-end: 6px; /* padding added to show current thumbnail indicator */
+  margin-block-end: -6px; /* margin added to remove padding block end */
+
+  .scroll-marker {
+    --scroll-marker-width: 3.625rem;
+
+    position: relative;
+    min-width: var(--scroll-marker-width);
+
+    &::after {
+      content: "";
+      position: absolute;
+      inset-inline: 0;
+      inset-block-end: -4px;
+      width: 0;
+      height: 2px;
+      background-color: rgb(var(--text-color));
+      transition: width 0.2s ease;
+    }
+
+    &[aria-current="true"] {
+      &::after {
+        width: 100%;
+      }
+    }
+  }
+}
+
+/**
+ * -------------------------------------------------------------------------------------------------------------------
+ * FLOATING CONTROLS
+ * -------------------------------------------------------------------------------------------------------------------
+ */
+
+.floating-controls-container {
+  position: relative;
+  display: grid;
+
+  & > * {
+    grid-area: 1 / -1;
+  }
+}
+
+.floating-controls__control {
+  --floating-control-offset: 0px;
+
+  display: grid;
+  grid-template-rows: subgrid;
+  align-items: center;
+  pointer-events: none;
+
+  .circle-button {
+    opacity: 0;
+    translate: 0 1.5rem;
+    grid-row: 1 / span 1;
+    pointer-events: auto;
+    visibility: visible;
+    transition: scale 0.2s ease, translate 0.2s ease, opacity 0.2s ease, visibility 0.2s ease;
+
+    &[disabled] {
+      opacity: 0;
+      translate: 0 0;
+      scale: 0.5;
+      visibility: hidden;
+    }
+  }
+
+  &:first-child .circle-button {
+    justify-self: start;
+    margin-inline-start: var(--floating-control-offset);
+  }
+
+  &:last-child .circle-button {
+    justify-self: end;
+    margin-inline-end: var(--floating-control-offset);
+  }
+}
+
+.floating-controls__control--offset {
+  --floating-control-offset: 1.25rem;
+}
+
+@media (--supports-hover) {
+  .floating-controls-container:has(.is-scrollable):hover {
+    .floating-controls__control .circle-button:not([disabled]) {
+      opacity: 1;
+      translate: 0 0;
+    }
+  }
+}

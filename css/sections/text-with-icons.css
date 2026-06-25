@@ -1,0 +1,60 @@
+@keyframes textWithIconsItemsScale {
+  0% {
+    scale: 0.8;
+    opacity: 0;
+  }
+
+  100% {
+    scale: 1;
+    opacity: 1;
+  }
+}
+
+.text-with-icons {
+  display: grid;
+  grid: var(--text-with-icons-grid);
+  gap: var(--text-with-icons-row-gap) var(--text-with-icons-column-gap);
+}
+
+.text-with-icons__item {
+  display: flex;
+  align-items: start;
+  column-gap: 1.25rem;
+  padding-inline: 0;
+  scroll-snap-align: center;
+  scroll-snap-stop: always;
+
+  @supports (animation-timeline: scroll()) {
+    animation-name: textWithIconsItemsScale, textWithIconsItemsScale;
+    animation-direction: normal, reverse;
+    animation-timeline: view(inline 0px);
+    animation-range: entry-crossing 0% entry-crossing 100%, exit-crossing 0% exit-crossing 100%;
+  }
+}
+
+.text-with-icons--separator-horizontal {
+  .text-with-icons__item {
+    padding-block-start: var(--text-with-icons-row-gap);
+    border-block-start-width: 1px;
+  }
+}
+
+@media (--sm) {
+  .text-with-icons--separator-vertical {
+    column-gap: 0;
+    margin-inline: calc(-1 * var(--container-gutter)); /* Allow content to be align with section header */
+
+    .text-with-icons__item {
+      padding-inline: var(--container-gutter);
+    }
+  }
+}
+
+@media (--sm-max) {
+  .text-with-icons.scroll-area {
+    .text-with-icons__item {
+      padding: 0;
+      border: none; /* When the section is configured to scroll on mobile we ensure we never have border */
+    }
+  }
+}

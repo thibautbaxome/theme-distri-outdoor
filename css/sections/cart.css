@@ -1,0 +1,275 @@
+/**
+ * -------------------------------------------------------------------------------------------------------------
+ * MAIN CART
+ * -------------------------------------------------------------------------------------------------------------
+ */
+
+.cart-header {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  row-gap: 1.6rem;
+  justify-items: center;
+  text-align: center;
+
+  .free-shipping-bar {
+    width: 100%;
+    max-width: 26rem;
+  }
+}
+
+.cart {
+  display: grid;
+  gap: 2rem 3.75rem;
+  align-items: start;
+}
+
+.cart__left {
+  .accordion {
+    box-shadow: 0 1px 0 rgb(var(--border-color));
+  }
+}
+
+.cart__right {
+  position: sticky;
+  inset-block-start: calc(var(--sticky-area-height) + 20px);
+  padding: min(40px, var(--container-gutter));
+  border-width: 1px;
+}
+
+@media (--sm-max) {
+  .cart {
+    th:nth-child(2), th:nth-child(3), td:nth-child(2), td:nth-child(3) {
+      display: none;
+    }
+  }
+}
+
+@media (--sm) {
+  .cart {
+    .line-item__quantity-selector,
+    .line-item__line-price,
+    .line-item__unit-line-price {
+      display: none;
+    }
+  }
+}
+
+@media (--md) {
+  .cart {
+    grid-template-columns: minmax(0, 1fr) 26rem;
+  }
+}
+
+/**
+ * -------------------------------------------------------------------------------------------------------------
+ * CART DRAWER SPECIFICITIES
+ * -------------------------------------------------------------------------------------------------------------
+ */
+
+.drawer--cart {
+  &::part(footer) {
+    padding: 0;
+  }
+
+  .free-shipping-bar {
+    margin-block-start: -0.25rem;
+  }
+
+  .tab-pills {
+    grid-template-rows: auto minmax(0, 1fr);
+  }
+
+  &:has(.tab-pills) {
+    &::part(header) {
+      border-block-end: none;
+    }
+
+    &::part(body) {
+      padding-block-start: 0;
+    }
+  }
+}
+
+@media (--sm-max) {
+  .drawer--cart {
+    --drawer-max-width: none;
+  }
+}
+
+/**
+ * -------------------------------------------------------------------------------------------------------------
+ * CART DRAWER FOOTER
+ * -------------------------------------------------------------------------------------------------------------
+ */
+
+.cart-drawer__footer-inner {
+  padding: min(1.75rem, var(--drawer-footer-padding-block)) var(--drawer-footer-padding-inline);
+}
+
+.cart-drawer__footer-actions {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(0, 1fr));
+  border-block-end-width: 1px;
+}
+
+.cart-drawer__footer-action-button {
+  display: flex;
+  align-items: center;
+  justify-content: safe center;
+  column-gap: 0.5rem;
+  padding: 1.1rem 1rem;
+  text-align: center;
+}
+
+/**
+ * -------------------------------------------------------------------------------------------------------------
+ * CART OFFERS
+ * -------------------------------------------------------------------------------------------------------------
+ */
+
+.cart-offers {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.75rem;
+
+  svg {
+    background: black;
+    fill: grey;
+  }
+}
+
+.cart-offers__item {
+  container-type: inline-size;
+}
+
+.cart-offers__item--full {
+  grid-column: 1 / -1;
+}
+
+.cart-offers {
+  /* For the cart offers, we adjust the content based on the width using container query */
+
+  .offer-item {
+    display: flex;
+    gap: 1rem;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+
+    .offer-item__content {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem 0.75rem;
+      flex-direction: column;
+    }
+  }
+
+  @container (width > 400px) {
+    .offer-item {
+      flex-direction: row;
+      text-align: start;
+      justify-content: space-between;
+
+      .offer-item__content {
+        flex-direction: row;
+      }
+    }
+  }
+}
+
+/**
+ * -------------------------------------------------------------------------------------------------------------
+ * CART DRAWER CROSS SELL
+ * -------------------------------------------------------------------------------------------------------------
+ */
+
+.cart-drawer__cross-sell {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  margin-block-start: 0.5rem;
+  padding-block-start: 1.5rem;
+  row-gap: 1rem;
+  border-block-start-width: 1px;
+}
+
+.cart-drawer__cross-sell-carousel {
+  --distance-to-bleed: var(--drawer-body-padding-inline);
+
+  display: grid;
+  position: relative;
+  grid-auto-flow: column;
+  grid-auto-columns: 100%;
+  column-gap: 1.25rem;
+  scroll-snap-type: x mandatory;
+}
+
+@media (--md) {
+  .cart-drawer__cross-sell-carousel {
+    grid-auto-columns: 65%;
+  }
+}
+
+/**
+ * -------------------------------------------------------------------------------------------------------------
+ * SHIPPING ESTIMATOR
+ * -------------------------------------------------------------------------------------------------------------
+ */
+
+.shipping-estimator__fieldset {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem var(--fieldset-gap);
+
+  .form-control:has([name="address[country]"]) {
+    flex: 1 0 max-content;
+  }
+
+  .form-control:has([name="address[province]"]) {
+    flex: 1 0 max-content;
+  }
+
+  .form-control:has([name="address[zip]"]) {
+    flex-basis: 125px;
+  }
+}
+
+.shipping-estimator__results {
+  padding: 0.625rem 0.75rem;
+  background: rgb(var(--background-secondary));
+}
+
+/**
+ * -------------------------------------------------------------------------------------------------------------
+ * DISCOUNT APPLICATION
+ * -------------------------------------------------------------------------------------------------------------
+ */
+
+.cart-discount-field--error {
+  --input-text-color: var(--error-text);
+
+  .input {
+    box-shadow: 0 0 4px 0 rgb(var(--input-text-color) / 0.50);
+    border: 1px solid rgb(var(--input-text-color));
+  }
+}
+
+.cart-discount-field__loader {
+  display: none;
+  position: absolute;
+  inset-block-start: calc(50% - (0.75rem / 2));
+  inset-inline-end: 1rem;
+
+  .cart-discount-field[aria-busy="true"] & {
+    display: block;
+    animation: spin 1s linear infinite;
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

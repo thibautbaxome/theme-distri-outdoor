@@ -1,0 +1,5 @@
+@media (--sm) {
+  .modal--newsletter::part(content) {
+    place-self: end start;
+  }
+}

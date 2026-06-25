@@ -1,0 +1,75 @@
+/* Text color utilities */
+
+.text-success {
+  color: rgb(var(--success-text));
+}
+
+.text-warning {
+  color: rgb(var(--warning-text));
+}
+
+.text-error {
+  color: rgb(var(--error-text));
+}
+
+.text-subdued {
+  color: rgb(var(--text-color) / 0.6);
+}
+
+.text-ghost {
+  color: rgb(var(--text-color) / 0.1);
+}
+
+.text-on-sale {
+  color: rgb(var(--on-sale-text));
+}
+
+.text-stroke {
+  -webkit-text-stroke: 1px currentColor;
+  -webkit-text-fill-color: transparent;
+}
+
+.text-gradient {
+  background-image: var(--gradient);
+  color: transparent;
+  background-clip: text;
+}
+
+.text-stroke.text-gradient {
+  color: rgb(var(--background));
+  -webkit-text-stroke-color: transparent;
+  -webkit-text-fill-color: unset;
+}
+
+/* Background utilities */
+
+.bg-error, .bg-success, .bg-warning {
+  --border-color: var(--text-color) / 0.15;
+}
+
+.bg-error {
+  background: rgb(var(--error-background));
+}
+
+.bg-success {
+  background: rgb(var(--success-background));
+}
+
+.bg-warning {
+  background: rgb(var(--warning-background));
+}
+
+.bg-secondary {
+  background: rgb(var(--background-secondary));
+}
+
+/* Overlay utility (this requires to define a --overlay CSS property) */
+
+.with-overlay::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--gradient-overlay, rgb(var(--overlay, 0 0 0 / 0.3)));
+  pointer-events: none;
+  border-radius: inherit;
+}

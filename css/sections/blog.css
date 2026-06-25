@@ -1,0 +1,109 @@
+/**
+ * -------------------------------------------------------------------------------------------------------------------
+ * MAIN BLOG
+ * -------------------------------------------------------------------------------------------------------------------
+ */
+
+.blog-tags {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: max-content;
+  justify-content: start;
+  column-gap: 1.5rem;
+  padding-block: 1rem;
+  border-block-end-width: 1px;
+}
+
+.blog-post-list-wrapper {
+  padding-block: var(--container-gutter) var(--section-vertical-spacing);
+}
+
+@media (--md) {
+  .blog-tags {
+    column-gap: 2.5rem;
+    padding-block: 1.75rem;
+  }
+}
+
+/**
+ * -------------------------------------------------------------------------------------------------------------------
+ * BANNER
+ * -------------------------------------------------------------------------------------------------------------------
+ */
+
+ .blog-post-banner__image {
+  width: 100%;
+  max-height: none;
+  margin-inline: auto;
+  margin-block-start: -3.75rem;
+
+  @media (--sm) {
+    width: min(45vw, 48rem);
+  }
+}
+
+/**
+ * -------------------------------------------------------------------------------------------------------------------
+ * MAIN ARTICLE
+ * -------------------------------------------------------------------------------------------------------------------
+ */
+
+.article-comments {
+  margin-block-start: var(--section-vertical-spacing);
+}
+
+.article-comments__list,
+.article-comments__form {
+  border-radius: min(12px, var(--button-border-radius));
+}
+
+.article-comments__list {
+  padding: min(3rem, var(--container-gutter));
+  background: rgb(var(--background-secondary));
+}
+
+.article-comments__form {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  row-gap: 1rem;
+  padding: min(3rem, var(--container-gutter));
+  border: 1px solid rgb(var(--border-color));
+}
+
+.article-comment {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  row-gap: 12px;
+  padding-block-start: 1.25rem;
+  margin-block-start: 1.25rem;
+  border-block-start-width: 1px;
+}
+
+@media (--md) {
+  .article-comments__form {
+    row-gap: 1.5rem;
+  }
+
+  .article-comment {
+    padding-block-start: 1.75rem;
+    margin-block-start: 1.75rem;
+  }
+}
+
+/**
+ * -------------------------------------------------------------------------------------------------------------------
+ * PREV NEXT
+ * -------------------------------------------------------------------------------------------------------------------
+ */
+
+.blog-post-prev-next {
+  display: grid;
+  grid: auto / auto-flow 73vw;
+  gap: var(--container-gutter);
+}
+
+@media (--sm) {
+  .blog-post-prev-next {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}

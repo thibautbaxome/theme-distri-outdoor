@@ -1,0 +1,340 @@
+/**
+ * -------------------------------------------------------------------------------------------------------------------
+ * BUTTONS
+ * -------------------------------------------------------------------------------------------------------------------
+ */
+
+.shopify-challenge__button,
+.shopify-payment-button__button--unbranded {
+  all: revert; /* Make sure we revert the default style for the dynamic button */
+}
+
+.button,
+.shopify-challenge__button,
+.shopify-payment-button__button--unbranded {
+  --button-padding-block: 0.75rem;
+  --button-padding-inline: 1.5rem;
+  --button-background: var(--button-background-primary);
+  --button-text-color: var(--button-text-primary);
+  --button-border-color: 0 0 0 / 0.0;
+
+  display: inline-block;
+  position: relative;
+  appearance: none;
+  background: rgb(var(--button-background));
+  border: 1px solid rgb(var(--button-border-color));
+  border-radius: var(--button-border-radius);
+  color: rgb(var(--button-text-color));
+  font: var(--button-font);
+  letter-spacing: var(--button-letter-spacing);
+  text-transform: var(--button-text-transform);
+  text-shadow: none;
+  text-align: center;
+  cursor: pointer;
+  overflow: hidden;
+  vertical-align: middle; /* Needed when buttons are inline-block */
+  transition: all 0.2s ease-in-out;
+
+  &:has(.icon) {
+    --button-padding-inline: 1.5rem;
+
+    transition: transform 0.1s ease;
+  }
+
+  &:not(:has(.button__content)) {
+    padding: var(--button-padding-block) var(--button-padding-inline);
+  }
+
+  @media (--supports-hover) {
+    &:has(.icon):hover .icon {
+      transform: translateX(4px);
+    }
+  }
+}
+
+.button--outline {
+  background: transparent;
+  color: rgb(var(--button-text-color));
+  border-color: rgb(var(--button-text-color));
+}
+
+.button--sm {
+  --button-padding-block: 0.625rem;
+  --button-padding-inline: 1.25rem;
+
+  font-size: 0.6875rem;
+}
+
+.button__content {
+  display: flex;
+  column-gap: 0.75rem;
+  align-items: center;
+  justify-content: safe center;
+  padding: var(--button-padding-block) var(--button-padding-inline);
+
+  &::part(content) {
+    display: flex; /* This allows to transition as well the Shadow DOM */
+    column-gap: 0.75rem;
+    align-items: center;
+  }
+}
+
+@media (--sm) {
+  .button:not(.button--sm),
+  .shopify-challenge__button,
+  .shopify-payment-button__button--unbranded {
+    --button-padding-block: 0.875rem;
+    --button-padding-inline: 2.5rem;
+  }
+}
+
+@media (--supports-hover) {
+  .button__content[rotated-text]::before {
+    content: attr(rotated-text);
+    position: absolute;
+    inset-inline-end: 100%;
+    min-width: max-content;
+  }
+
+  .button__content[glowing] {
+    &::after {
+      --glowing-shape-width: min(40px, 60%);
+
+      content: "";
+      position: absolute;
+      inset: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      clip-path: polygon(calc(var(--glowing-shape-width) * 0.25) 0%, var(--glowing-shape-width) 0%, calc(var(--glowing-shape-width) * 0.75) 100%, 0% 100%);
+      background-color: rgb(var(--button-text-color) / 0.1);
+      transform: translateX(calc(-1 * var(--glowing-shape-width)));
+      transition: transform 550ms cubic-bezier(0.19, 1, 0.22, 1);
+    }
+
+    [dir="rtl"] & {
+      &::after {
+        transform: translateX(100%);
+      }
+    }
+  }
+
+  .button:has(.button__content[glowing]):hover {
+    .button__content[glowing] {
+      &::after {
+        transform: translateX(100%);
+      }
+
+      [dir="rtl"] & {
+        &::after {
+          transform: translateX(calc(-1 * var(--glowing-shape-width)));
+        }
+      }
+    }
+  }
+
+  .button:has(.button__content[up-text]) {
+    .button__content {
+      transition: transform 0.2s ease-in-out;
+    }
+
+    &:hover:not([aria-busy="true"]) .button__content[up-text] {
+      transform: translateY(-100%);
+    }
+
+    .button__content[up-text]::before {
+      content: attr(up-text);
+      position: absolute;
+      inset-block-start: calc(100% + var(--button-padding-block));
+      min-width: max-content;
+
+      @supports (content: attr(foo) / "") {
+        content: attr(up-text) / "";
+      }
+    }
+  }
+}
+
+/**
+ * -------------------------------------------------------------------------------------------------------------------
+ * BUTTON GROUP
+ * -------------------------------------------------------------------------------------------------------------------
+ */
+
+.button-group {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem;
+
+  & > * {
+    margin: 0 !important;
+  }
+}
+
+/* Same width variation ensure that all the buttons in desktop are doing the same size */
+.button-group--same-width {
+  display: inline-grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(0, 1fr);
+}
+
+@media (--sm) {
+  .button-group {
+    gap: 1.25rem;
+  }
+}
+
+/**
+ * -------------------------------------------------------------------------------------------------------------------
+ * SHOPIFY PAYMENT BUTTON
+ * -------------------------------------------------------------------------------------------------------------------
+ */
+
+.shopify-payment-button__button {
+  width: 100%;
+  min-height: calc(1lh + var(--button-padding-block) * 2);
+  vertical-align: top;
+}
+
+.shopify-payment-button__button--unbranded {
+  border-radius: var(--button-border-radius) !important;
+  background-color: rgb(var(--button-background)) !important;
+  color: rgb(var(--button-text-color)) !important;
+  font: var(--button-font) !important; 
+}
+
+.shopify-payment-button__button--unbranded:hover:not([disabled]) {
+  background-color: rgb(var(--button-background-primary)) !important;
+  color: rgb(var(--button-text-primary)) !important;
+}
+
+shopify-accelerated-checkout,
+shopify-accelerated-checkout-cart {
+  --shopify-accelerated-checkout-button-block-size: 44px;
+  --shopify-accelerated-checkout-button-border-radius: var(--button-border-radius);
+  --shopify-accelerated-checkout-button-box-shadow: none;
+}
+
+/**
+ * -------------------------------------------------------------------------------------------------------------------
+ * CIRCLE BUTTON
+ * 
+ * Those buttons are used only with an icon, and are used for things like back or close button
+ * -------------------------------------------------------------------------------------------------------------------
+ */
+
+.circle-button {
+  --button-size: 1.75rem;
+
+  position: relative;
+  display: grid;
+  place-content: center;
+  width: var(--button-size);
+  height: var(--button-size);
+  border: none;
+  border-radius: 100%;
+  background: none;
+  color: currentColor;
+  cursor: pointer;
+  z-index: 1;
+  transition: opacity 0.2s ease, color 0.2s ease;
+
+  &[disabled] {
+    opacity: 0.5;
+  }
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 100%;
+    background: rgb(var(--text-color) / 0.08);
+    transition: transform 0.2s ease, background 0.2s ease;
+    z-index: -1;
+
+    @supports (color: color-mix(in srgb, white, black)) {
+      background: color-mix(in srgb, rgb(var(--text-color)) 8%, rgb(var(--background)));
+    }
+  }
+
+  @media (--supports-hover) {
+    &:not([disabled]):hover,
+    .group\:circle-button:hover {
+      color: color-mix(in srgb, rgb(var(--text-color)) 8%, rgb(var(--background)));
+
+      &::before {
+        transform: scale(1.2);
+        background: rgb(var(--text-color));
+      }
+    }
+  }
+}
+
+.circle-button--lg,
+.circle-button--xl {
+  --button-size: 2.5rem;
+}
+
+.circle-button--blurred {
+  backdrop-filter: blur(10px);
+
+  &::before {
+    opacity: 0.6;
+  }
+}
+
+@media (--md) {
+  .circle-button--xl {
+    --button-size: 3rem;
+  }
+}
+
+/**
+ * -------------------------------------------------------------------------------------------------------------------
+ * BACK BUTTON
+ * -------------------------------------------------------------------------------------------------------------------
+ */
+
+@keyframes backButtonBounce {
+  0% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(calc(var(--transform-logical-flip) * 4px));
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+.back-button {
+  display: inline-flex;
+  align-items: center;
+  column-gap: 0.625rem;
+  padding: 0.375rem 0.625rem;
+  border-radius: 20px;
+  background: rgb(var(--text-color) / 0.08);
+
+  @media (--supports-hover) {
+    &:hover svg {
+      animation: backButtonBounce 0.5s ease;
+    }
+  }
+}
+
+/**
+ * -------------------------------------------------------------------------------------------------------------------
+ * BUTTON THAT SERVES AS POPOVER TOGGLE
+ * -------------------------------------------------------------------------------------------------------------------
+ */
+
+[aria-haspopup] {
+  .icon-chevron-down {
+    transition: rotate 0.2s ease;
+  }
+
+  &[aria-expanded="true"] .icon-chevron-down {
+    rotate: 180deg;
+  }
+}

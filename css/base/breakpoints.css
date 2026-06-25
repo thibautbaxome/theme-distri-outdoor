@@ -1,0 +1,17 @@
+@custom-media --sm screen and (min-width: 700px);
+@custom-media --md screen and (min-width: 1000px);
+@custom-media --lg screen and (min-width: 1150px);
+@custom-media --xl screen and (min-width: 1400px);
+@custom-media --2xl screen and (min-width: 1600px);
+
+@custom-media --sm-max screen and (max-width: 699px);
+@custom-media --md-max screen and (max-width: 999px);
+@custom-media --lg-max screen and (max-width: 1149px);
+@custom-media --xl-max screen and (max-width: 1399px);
+@custom-media --2xl-max screen and (max-width: 1599px);
+
+@custom-media --motion-safe (prefers-reduced-motion: no-preference);
+@custom-media --motion-reduce (prefers-reduced-motion: reduce);
+@custom-media --supports-hover screen and (pointer: fine);
+@custom-media --supports-touch screen and (pointer: coarse);
+@custom-media --print print;

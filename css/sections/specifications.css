@@ -1,0 +1,26 @@
+.specification-table {
+  --specification-row-block-padding: 1rem;
+
+  border-block-width: 1px;
+}
+
+.specification-table__row {
+  display: grid;
+  grid-template-columns: minmax(0, 0.4fr) minmax(0, 0.6fr);
+  column-gap: 1rem;
+  align-items: end;
+  padding-block: var(--specification-row-block-padding);
+}
+
+.specification-table__row-name,
+.specification-table__row-value {
+  padding: 0;
+  font-weight: normal;
+  text-align: start;
+}
+
+@media (--sm) {
+  .specification-table {
+    --specification-row-block-padding: 1.65rem;
+  }
+}

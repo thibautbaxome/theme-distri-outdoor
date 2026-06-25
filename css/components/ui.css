@@ -1,0 +1,730 @@
+/**
+ * -------------------------------------------------------------------------------------------------------------------
+ * PAGE TRANSITION
+ * -------------------------------------------------------------------------------------------------------------------
+ */
+
+@media (--motion-safe) {
+  .features--page-transition {
+    opacity: 0;
+  }
+}
+
+/**
+ * -------------------------------------------------------------------------------------------------------------------
+ * CONSTRAINED IMAGE
+ * -------------------------------------------------------------------------------------------------------------------
+ */
+
+.constrained-image {
+  width: var(--image-mobile-max-width, var(--image-max-width));
+  max-width: 100%;
+  flex-shrink: 0; /* Ensure it works when use inside flex context */
+}
+
+@media (--sm) {
+  .constrained-image {
+    width: var(--image-max-width);
+  }
+}
+
+/**
+ * -------------------------------------------------------------------------------------------------------------------
+ * TEXT WITH ICON
+ * -------------------------------------------------------------------------------------------------------------------
+ */
+
+.text-with-icon {
+  --text-with-icon-gap: 0.5rem;
+
+  display: flex;
+  gap: var(--text-with-icon-gap);
+  align-items: center;
+
+  & > svg {
+    flex-shrink: 0;
+  }
+}
+
+.text-with-icon--stacked {
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+@media (--sm) {
+  .text-with-icon {
+    --text-with-icon-gap: 1rem;
+  }
+
+}
+
+/**
+ * -------------------------------------------------------------------------------------------------------------------
+ * ICON
+ * 
+ * IMPLEMENTATION NOTES (PLEASE READ): I've experimented with various ways to implement icons. In the past, the icons
+ * used to be set in display: block, but unfortunately this makes positioning (when the text alignment change) harder.
+ * I have then tried inline-block, but this cause a lot of spacing issue, so now I do not change the display property
+ * and let it uses the default inline value. We will see in the future if we face other issues. If we do, we will
+ * probably need to go back to block, as this is the most consistent behavior.
+ * -------------------------------------------------------------------------------------------------------------------
+ */
+
+.icon {
+  height: auto;
+  width: var(--icon-mobile-max-width, var(--icon-max-width, auto));
+  transition: transform 0.2s ease;
+
+  .group[aria-expanded="true"] &.group-expanded\:rotate {
+    transform: rotateZ(180deg);
+  }
+}
+
+[dir="rtl"] .icon--direction-aware {
+  scale: -1;
+}
+
+.capped-icon {
+  height: 1cap;
+  width: auto;
+}
+
+.offset-icon {
+  --icon-baseline-distance: calc(1em * 1.65 / 2);
+
+  position: relative;
+  top: var(--icon-baseline-distance);
+  translate: 0 -50%;
+}
+
+@supports (top: 1lh) {
+  .offset-icon {
+    top: 0.5lh;
+  }
+}
+
+@media (--sm) {
+  .icon {
+    width: var(--icon-max-width, auto);
+  }
+}
+
+/**
+ * -------------------------------------------------------------------------------------------------------------------
+ * VERTICALLY SEPARATED LIST
+ * -------------------------------------------------------------------------------------------------------------------
+ */
+
+.vertically-separated-list {
+  display: flex;
+  align-items: center;
+  column-gap: 1.5rem;
+
+  hr {
+    height: 1rem;
+    width: 1px;
+    background: rgb(var(--text-color) / 0.15);
+  }
+}
+
+/**
+ * -------------------------------------------------------------------------------------------------------------------
+ * INVENTORY
+ * -------------------------------------------------------------------------------------------------------------------
+ */
+
+.inventory {
+  display: grid;
+  row-gap: 0.7rem;
+
+  .progress-bar {
+    max-width: 18rem;
+  }
+}
+
+.inventory__text {
+  display: flex;
+  align-items: center;
+  justify-content: inherit;
+  column-gap: 0.5rem;
+
+  &::before {
+    position: relative;
+    content: '';
+    width: 0.4375rem;
+    height: 0.4375rem;
+    border-radius: 100%;
+    background: currentColor;
+  }
+}
+
+/**
+ * -------------------------------------------------------------------------------------------------------------------
+ * PROGRESS BAR
+ * -------------------------------------------------------------------------------------------------------------------
+ */
+
+@property --progress-bar-progress {
+  syntax: "<number>";
+  inherits: true;
+  initial-value: 0;
+}
+
+.progress-bar {
+  position: relative;
+  display: block;
+  height: 3px;
+  width: 100%;
+  overflow: hidden;
+  background: color-mix(in srgb, currentColor 20%, transparent);
+
+  &::before {
+    content: '';
+    display: block;
+    height: 100%;
+    width: 100%;
+    transform: scaleX(var(--progress-bar-progress, 0));
+    transform-origin: var(--transform-origin-start);
+    background: currentColor;
+  }
+}
+
+.progress-bar--limit-width {
+  height: 2px;
+  max-width: min(25vw, 180px);
+  margin-inline: auto;
+}
+
+/**
+ * -------------------------------------------------------------------------------------------------------------------
+ * TOOLTIP
+ * -------------------------------------------------------------------------------------------------------------------
+ */
+
+[data-tooltip] {
+  --tooltip-text-color: var(--text-color);
+  --tooltip-background: var(--background);
+
+  position: relative;
+}
+
+@media (--supports-hover) {
+  [data-tooltip]::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    justify-self: center;
+    inset-block-end: calc(100% + var(--tooltip-offset, -0.5rem));
+    left: 50%; /* No need to use logical property here */
+    transform: translateX(-50%);
+    padding: 0.2rem 0.5rem;
+    width: max-content;
+    max-width: 15rem;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    scale: 0.9;
+    border-radius: min(1.5rem, var(--button-border-radius));
+    background: rgb(var(--tooltip-background));
+    color: rgb(var(--tooltip-text-color));
+    border-width: 1px;
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.1s ease-in-out, visibility 0.1s ease-in-out, scale 0.1s ease-in-out;
+    pointer-events: none;
+    z-index: 1;
+    box-shadow: 0 3px 6px rgb(var(--text-color) / 0.05);
+  }
+
+  [data-tooltip-style="color"]::after {
+    transform: none;
+    box-shadow: none;
+  }
+
+  [data-tooltip]:hover::after {
+    visibility: visible;
+    opacity: 1;
+    scale: 1;
+  }
+}
+
+/**
+ * -------------------------------------------------------------------------------------------------------------------
+ * LOCALIZATION
+ * -------------------------------------------------------------------------------------------------------------------
+ */
+
+.localization-selectors {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: safe center;
+  gap: 0.75rem 1.75rem;
+}
+
+/**
+ * -------------------------------------------------------------------------------------------------------------------
+ * COUNTRY FLAG
+ * -------------------------------------------------------------------------------------------------------------------
+ */
+
+.country-flag {
+  width: 20px;
+  height: 15px;
+  outline: 1px solid rgb(var(--border-color));
+}
+
+/**
+ * -------------------------------------------------------------------------------------------------------------------
+ * PAYMENT METHODS
+ * -------------------------------------------------------------------------------------------------------------------
+ */
+
+.payment-methods {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+/**
+ * -------------------------------------------------------------------------------------------------------------------
+ * BADGE
+ * -------------------------------------------------------------------------------------------------------------------
+ */
+
+/* Main badge */
+
+.badge {
+  display: block;
+  padding: 0.15rem 0.375rem;
+  width: max-content;
+  font-family: var(--heading-font-family);
+  font-weight: 600;
+  font-style: var(--heading-font-style);
+  letter-spacing: var(--heading-letter-spacing);
+  -webkit-font-smoothing: antialiased;
+  font-size: 0.5625rem;
+  text-transform: uppercase;
+
+  @media (--sm) {
+    font-size: 0.625rem;
+  }
+
+  &.vertical-text {
+    white-space: nowrap; /* This is needed for fixing an issue on iOS */
+    padding: 0.375rem 0.15rem;
+  }
+
+  @supports (text-box: trim-both cap alphabetic) {
+    text-box: trim-both cap alphabetic;
+    padding-block: 0.375rem;
+
+    &.vertical-text {
+      padding: 0.375rem;
+    }
+  }
+}
+
+.badge--on-sale {
+  background: rgb(var(--on-sale-badge-background));
+  color: rgb(var(--on-sale-badge-text));
+}
+
+.badge--sold-out {
+  background: rgb(var(--sold-out-badge-background));
+  color: rgb(var(--sold-out-badge-text));
+}
+
+.badge--custom {
+  background: rgb(var(--custom-badge-background));
+  color: rgb(var(--custom-badge-text));
+}
+
+/* Badge list */
+
+.badge-list {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: start;
+  gap: 0.25rem;
+}
+
+.badge-list--column {
+  flex-direction: column;
+}
+
+/**
+ * -------------------------------------------------------------------------------------------------------------------
+ * PRICE LIST
+ * -------------------------------------------------------------------------------------------------------------------
+ */
+
+.price-list {
+  position: relative;
+  display: flex;
+  column-gap: 0.75rem;
+  flex-wrap: wrap;
+  align-items: flex-end;
+}
+
+/**
+ * -------------------------------------------------------------------------------------------------------------------
+ * QUANTITY SELECTOR
+ * -------------------------------------------------------------------------------------------------------------------
+ */
+
+.quantity-selector {
+  --quantity-selector-input-width: 3ch;
+  --tooltip-offset: calc(-1 * var(--quantity-selector-height) / 2 + 1rem);
+
+  display: inline-grid;
+  justify-self: start;
+  border: 1px solid currentColor;
+  grid-template-columns: 3rem auto 3rem;
+  grid-auto-columns: minmax(0, 1fr);
+  min-height: 2rem;
+  border-radius: var(--button-border-radius);
+  transition: border 0.2s ease;
+
+  &:focus-within:has(:focus-visible) {
+    outline: 2px solid #005fcb;
+    outline-offset: -1px;
+  }
+}
+
+.quantity-selector__button {
+  position: relative;
+  display: grid;
+  place-content: center;
+  min-height: 100%;
+
+  & svg {
+    transition: opacity 0.1s ease;
+  }
+
+  &[disabled] svg {
+    opacity: 0.4;
+  }
+}
+
+.quantity-selector__input {
+  appearance: textfield;
+  min-width: var(--quantity-selector-input-width);
+  width: var(--quantity-selector-character-count, 1ch);
+  background: transparent;
+  text-align: center;
+
+  &:focus {
+    outline: none;
+  }
+
+  &::-webkit-outer-spin-button,
+  &::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+}
+
+/* Line item variation */
+
+.quantity-selector--line-item {
+  grid-template-columns: 2.5rem auto 2.5rem;
+  border-color: rgb(var(--border-color));
+}
+
+/* Spinner */
+
+.quantity-selector:has(.icon-spinner) {
+  position: relative;
+
+  .icon-spinner {
+    --icon-max-width: 0.875rem;
+
+    z-index: 1;
+    position: absolute;
+    opacity: 0;
+    inset-block-start: calc(50% - (var(--icon-max-width) / 2));
+    inset-inline-start: calc(50% - (var(--icon-max-width) / 2));
+  }
+}
+
+/**
+ * -------------------------------------------------------------------------------------------------------------------
+ * RATING
+ * -------------------------------------------------------------------------------------------------------------------
+ */
+
+.rating-badge {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  column-gap: 0.375rem;
+  line-height: normal;
+}
+
+.rating-badge__stars {
+  display: flex;
+  column-gap: 0.125rem;
+}
+
+/**
+ * -------------------------------------------------------------------------------------------------------------------
+ * SOCIAL MEDIA
+ * -------------------------------------------------------------------------------------------------------------------
+ */
+
+.social-media {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: inherit;
+  gap: 1rem 2rem;
+}
+
+@media (--supports-hover) {
+  .social-media__item {
+    transition: opacity 0.2s ease;
+
+    &:hover ~ *, &:has(~ &:hover) {
+      opacity: 0.4;
+    }
+  }
+}
+
+/**
+ * -------------------------------------------------------------------------------------------------------------------
+ * META INFORMATION
+ * 
+ * This component is used to show a list of related content separated by a vertical line. It is used in the blog post
+ * but could be used on any other component
+ * -------------------------------------------------------------------------------------------------------------------
+ */
+
+.meta-information {
+  display: flex;
+  align-items: center;
+  column-gap: 0.75rem;
+  flex-wrap: wrap;
+
+  > *:not(.shape) ~ *::before {
+    content: '';
+    display: inline-block;
+    background: currentColor;
+    width: 1px;
+    height: 0.5625rem;
+    margin-inline-end: 0.75rem;
+  }
+}
+
+/**
+ * -------------------------------------------------------------------------------------------------------------------
+ * SHARE BUTTONS
+ * -------------------------------------------------------------------------------------------------------------------
+ */
+
+.share-buttons {
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+}
+
+.share-buttons--native:not([hidden]) + * {
+  display: none; /* Remove the non-native buttons when the browser supports native buttons */
+}
+
+@media (--supports-hover) {
+  .share-buttons__item {
+    transition: opacity 0.2s ease;
+
+    &:hover ~ *, &:has(~ &:hover) {
+      opacity: 0.4;
+    }
+  }
+}
+
+/**
+ * -------------------------------------------------------------------------------------------------------------------
+ * FADED LINKLIST
+ * 
+ * This class must be applied to a <ul> element, and allows to fade the siblings on hover
+ * -------------------------------------------------------------------------------------------------------------------
+ */
+
+@media (--supports-hover) {
+  .faded-linklist {
+    :where(a, button) {
+      display: block;
+      max-width: max-content;
+      transition: color 0.2s ease;
+      text-align: inherit;
+    }
+
+    li:hover ~ * > :where(a, button), li:has(~ li:hover) > :where(a, button) {
+      color: rgb(var(--text-color) / 0.6);
+    }
+  }
+}
+
+/**
+ * -------------------------------------------------------------------------------------------------------------------
+ * FIGURE WITH VERTICAL CAPTION
+ * -------------------------------------------------------------------------------------------------------------------
+ */
+
+.figure-with-vertical-caption {
+  > figcaption {
+    margin-inline: 1rem;
+  }
+}
+
+@media (--md) {
+  .figure-with-vertical-caption {
+    display: grid;
+    grid-auto-flow: column;
+    grid-template-columns: minmax(0, 1fr);
+    column-gap: 1rem;
+
+    .scrolling-content {
+      margin-block: calc(-1 * var(--container-gutter));
+    }
+  }
+}
+
+/**
+ * -------------------------------------------------------------------------------------------------------------------
+ * IS SCROLLABLE
+ * -------------------------------------------------------------------------------------------------------------------
+ */
+
+@media (pointer: fine) {
+  .is-scrollable[allow-drag] {
+    cursor: grab;
+  }
+
+  .is-scrollable[allow-drag]:active {
+    cursor: grabbing;
+    user-select: none;
+    scroll-snap-type: none; /* Make sure scroll-snap is deactivated while being active */
+  }
+}
+
+/**
+ * -------------------------------------------------------------------------------------------------------------------
+ * CUSTOM CURSOR (only provides the basic infrastructure)
+ * -------------------------------------------------------------------------------------------------------------------
+ */
+
+.custom-cursor {
+  display: none;
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 2;
+  pointer-events: none;
+  opacity: 0;
+  scale: 0.5;
+  visibility: hidden;
+  transition: opacity 0.1s ease, scale 0.1s ease, visibility 0.1s ease;
+
+  @media (--supports-hover) {
+    display: block;
+    
+    &.is-visible {
+      opacity: 1;
+      scale: 1;
+      visibility: visible;
+    }
+
+    :has(> &:not([for-links])),
+    :has(> &[for-links]) a {
+      cursor: none;
+    }
+  }
+}
+
+/**
+ * -------------------------------------------------------------------------------------------------------------------
+ * PLACEHOLDER SVG IMAGE (can be used for placeholder images generated with "placeholder_svg" Liquid tag
+ * -------------------------------------------------------------------------------------------------------------------
+ */
+
+.placeholder-svg {
+  display: block;
+  max-width: 100%;
+  height: 100%;
+}
+
+/**
+ * -------------------------------------------------------------------------------------------------------------------
+ * SPACER
+ * 
+ * NOTE: it is important for the spacer to use padding instead of margin, as margin might collapse in block context
+ *       and would be confusing for merchants.
+ * -------------------------------------------------------------------------------------------------------------------
+ */
+
+.spacer {
+  display: block !important;
+  padding-block-start: var(--spacer-mobile, 0px);
+}
+
+@media (--sm) {
+  .spacer {
+    padding-block-start: var(--spacer-desktop, 0px);
+  }
+}
+
+/**
+ * -------------------------------------------------------------------------------------------------------------------
+ * LOADING BAR (shows an overlay loading bar to show something is loading)
+ * -------------------------------------------------------------------------------------------------------------------
+ */
+
+.loading-bar {
+  z-index: 2000;
+  pointer-events: none;
+  transform-origin: var(--transform-origin-start);
+  background: #000000;
+  width: 100%;
+  height: 2px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  transform: scaleX(0);
+}
+
+@media screen and (min-width: 700px) {
+  .loading-bar {
+    height: 3px;
+  }
+}
+
+/**
+ * -------------------------------------------------------------------------------------------------------------------
+ * When focusing a field that is protected by captcha, Shopify dynamically adds a dynamic field. However, this cause
+ * an extra space due to gap, so we use this trick to prevent the problem.
+ * -------------------------------------------------------------------------------------------------------------------
+ */
+
+.h-captcha {
+  display: contents;
+}
+
+/**
+ * -------------------------------------------------------------------------------------------------------------------
+ * SPLIT LINES
+ * -------------------------------------------------------------------------------------------------------------------
+ */
+
+split-lines {
+  overflow-wrap: anywhere;
+}
+
+/**
+ * -------------------------------------------------------------------------------------------------------------------
+ * PRODUCT RERENDER
+ * 
+ * This component is used as a helper wrapper to re-render a product code. It is by default set as display: contents
+ * -------------------------------------------------------------------------------------------------------------------
+ */
+
+product-rerender {
+  display: contents;
+}

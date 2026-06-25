@@ -1,0 +1,137 @@
+.highlighted-heading {
+  display: block;
+  isolation: isolate; /* Allows to create its own stacking context */
+
+  .text-indent & {
+    display: inline;
+  }
+}
+
+/**
+ * This file controls how highlighted headings are rendered. The theme offers different effects that can be
+ * applied per heading. In HTML, we use a custom element to power the animation for some effect, so we use
+ * the `effect` attribute to apply the correct highlight effect
+ */
+
+.highlighted-heading[effect="italic"] em {
+  /* Make sure to NEVER change the display property here ; it must remains inline to prevent incorrect word break */
+  font-family: var(--heading-italic-font-family);
+  font-weight: var(--heading-italic-font-weight);
+  font-style: italic;
+  font-size: calc(100% + var(--heading-italic-font-size-multiplier));
+}
+
+/**
+ * The marker effect internally uses the <split-lines> component in JS to create one span per line. This is
+ * needed for us to be able to transform things properly
+ */
+
+.highlighted-heading:where([effect="marker"], [effect="tilted-marker"]) em {
+  --highlight-inline-padding: 8px;
+  --highlight-block-padding: 0.2em;
+
+  margin-inline: var(--highlight-inline-padding);
+  font-style: inherit;
+  text-indent: 0;
+
+  ::part(line) {
+    position: relative;
+  }
+
+  ::part(line)::before,
+  ::part(line)::after {
+    content: attr(data-content);
+    position: absolute;
+    overflow: hidden;    
+    width: calc(100% + var(--highlight-inline-padding) * 2);
+    clip-path: inset(0 100% 0 0);
+    inset-inline-start: calc(-1 * var(--highlight-inline-padding));
+    inset-block-start: 0;
+    text-indent: var(--highlight-inline-padding);
+    white-space: nowrap;
+    pointer-events: none;
+    text-align: start;
+
+    [dir="rtl"] & {
+      clip-path: inset(0 0 0 100%);
+    }
+  }
+
+  ::part(line)::before {
+    color: transparent;
+    background-color: rgb(var(--heading-highlight-accent-color));
+    transition: background 0.2s ease;
+  }
+
+  ::part(line)::after {
+    color: rgb(var(--heading-highlight-text-color));
+    transition: color 0.2s ease;
+  }
+
+  @supports (content: "x" / "y") {
+    ::part(line)::before, 
+    ::part(line)::after {
+      content: attr(data-content) / ""; /* The second parameter ensures that the content is not shown to screen readers to improve accessibility */
+    }
+  }
+
+  @supports (height: 1cap) {
+    --highlight-block-padding: min(0.2em, (1lh - 1cap) / 1.5);
+  }
+
+  /* For browsers supporting text-box-edge, we can adjust the marker to adjust exactly to the font alphabetic edges */
+  @supports (text-box: trim-both cap alphabetic) {
+    ::part(line), ::part(line)::before, ::part(line)::after {
+      text-box: trim-both cap alphabetic;
+      padding-block: var(--highlight-block-padding);
+    }
+  }
+
+  /* On browsers that do not support alphabetic edge, we try to manually add some padding to compensate */
+  @supports (height: 1cap) and (not (text-box: trim-both cap alphabetic)) {
+    ::part(line)::before {
+      height: 1cap;
+      inset-block-start: calc((1lh - 1cap) / 2 - var(--highlight-block-padding));
+      padding-block: var(--highlight-block-padding);
+    }
+  }
+}
+
+/**
+ * The circle and underline effects alos internally uses the <split-lines> component in JS to create one span per line. However, here it inserts
+ * a SVG that is being animated
+ */
+
+.highlighted-heading:where([effect*="circle"], [effect*="underline"]) em {
+  font-style: inherit;
+  text-indent: 0;
+
+  ::part(line) {
+    position: relative;
+  }
+
+  ::part(shape) {
+    position: absolute;
+    overflow: visible;
+    color: rgb(var(--heading-highlight-accent-color));
+    transition: color 0.2s ease;
+    pointer-events: none;
+  }
+
+  ::part(circle-shape) {
+    top: 50%;
+    left: 50%; /* Here we HAVE to use left due to the transform. Using logical properties will break it */
+    transform: translate(-50%, -50%);
+    width: 115%;
+    height: 1.2em;
+  }
+
+  ::part(underline-shape) {
+    --shape-compensation: min(0.5em, 20px);
+
+    width: calc(100% + var(--shape-compensation));
+    height: 0.15em;
+    inset-inline-start: calc(-1 * var(--shape-compensation) / 2);
+    inset-block-start: 100%;
+  }
+}

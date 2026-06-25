@@ -1,0 +1,73 @@
+/* Accessibility utilities */
+
+.sr-only, ::part(sr-only) {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+
+  /* Show focus ring on the label when a checkbox or radio is visually hidden */
+  &[type="checkbox"]:focus-visible + label,
+  &[type="radio"]:focus-visible + label {
+    outline: 2px solid Highlight;
+    outline: 2px solid -webkit-focus-ring-color;
+  }
+}
+
+/* Skip to content link */
+
+.skip-to-content:focus-visible {
+  z-index: 9999;
+  overflow: auto;
+  width: auto;
+  height: auto;
+  clip: auto;
+  padding: 6px 12px;
+  background: black;
+  color: white;
+  font-weight: bold;
+}
+
+/* Tap area utilities */
+
+.tap-area {
+  --tap-area-size: 2.25rem;
+
+  position: relative;
+
+  &::before {
+    content: '';
+    position: absolute;
+    width: var(--tap-area-size);
+    height: var(--tap-area-size);
+    top: calc(50% - var(--tap-area-size) / 2);
+    left: calc(50% - var(--tap-area-size) / 2);
+  }
+}
+
+.tap-area--sm {
+  --tap-area-size: 1rem;
+}
+
+.link-tap-area {
+  position: relative;
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: -4px 0;
+  }
+}
+
+/* Print utilities */
+
+@media (--print) {
+  .print\:hidden {
+    display: none;
+  }
+}

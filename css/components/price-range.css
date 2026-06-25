@@ -1,0 +1,148 @@
+/**
+ * -------------------------------------------------------------
+ * RANGE
+ * -------------------------------------------------------------
+ */
+
+.range {
+  --range-track-height: 2px;
+  --range-thumb-size: 6px;
+
+  appearance: none; /* Hides the slider so that custom slider can be made */
+  width: 100%; /* Specific width is required for Firefox. */
+  background: transparent; /* Otherwise white in Chrome */
+}
+
+.range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+}
+
+/* Chrome and Safari */
+
+.range::-webkit-slider-thumb {
+  position: relative;
+  box-sizing: content-box;
+  height: var(--range-thumb-size);
+  width: var(--range-thumb-size);
+  border-radius: 100%;
+  background: rgb(var(--background));
+  border: 2px solid rgb(var(--text-color));
+  cursor: pointer;
+  margin-block-start: calc(-1 * ((var(--range-thumb-size) + var(--range-track-height)) / 2));
+  z-index: 1;
+  box-shadow: none;
+}
+
+.range::-webkit-slider-runnable-track {
+  width: 100%;
+  height: var(--range-track-height);
+  cursor: pointer;
+  background: rgb(var(--text-color) / 0.12);
+  border: none;
+}
+
+/* Firefox */
+
+.range::-moz-range-thumb {
+  box-sizing: content-box;
+  height: var(--range-thumb-size);
+  width: var(--range-thumb-size);
+  border-radius: 100%;
+  border: 2px solid rgb(var(--text-color));
+  background: rgb(var(--background));
+  cursor: pointer;
+}
+
+.range::-moz-range-progress,
+.range::-moz-range-track {
+  width: 100%;
+  height: var(--range-track-height);
+  cursor: pointer;
+  border: none;
+}
+
+.range::-moz-range-progress {
+  background-color: rgba(var(--text-color));
+}
+
+.range::-moz-range-track {
+  background-color: rgb(var(--border-color));
+}
+
+/* On non-hover devices, we make the thumb bigger */
+
+@media not (--supports-hover) {
+  .range {
+    --range-thumb-size: 10px;
+  }
+}
+
+/* Range group (when using double range, we need to rely on some clever trick) */
+
+.range-group {
+  --range-track-height: 2px;
+
+  position: relative;
+  height: var(--range-track-height);
+  background: linear-gradient(to var(--transform-origin-end), rgb(var(--text-color) / 0.12) var(--range-min), rgb(var(--text-color)) var(--range-min), rgb(var(--text-color)) var(--range-max), rgb(var(--text-color) / 0.12) var(--range-max));
+}
+
+.range-group .range {
+  pointer-events: none;
+  height: var(--range-track-height);
+  vertical-align: top;
+}
+
+.range-group .range::-webkit-slider-runnable-track {
+  background: none;
+}
+
+.range-group .range::-webkit-slider-thumb {
+  pointer-events: auto;
+}
+
+.range-group .range::-moz-range-progress,
+.range-group .range::-moz-range-track {
+  background: none;
+}
+
+.range-group .range::-moz-range-thumb {
+  pointer-events: auto;
+}
+
+.range-group .range:last-child {
+  position: absolute;
+  inset-block-start: 0;
+  inset-inline-start: 0;
+}
+
+/**
+ * -------------------------------------------------------------
+ * PRICE RANGE
+ * -------------------------------------------------------------
+ */
+
+.price-range {
+  display: grid;
+  row-gap: 1.25rem;
+  padding-block-start: 0.25rem;
+}
+
+@media not (--supports-hover) {
+  /* On non-touch device the thumb are bigger so we need to adjust the spacing */
+  .price-range {
+    padding-block-start: 0.625rem;
+  }
+}
+
+/**
+ * -------------------------------------------------------------
+ * PRICE RANGE INPUT GROUP
+ * -------------------------------------------------------------
+ */
+
+.price-range__input-group {
+  display: flex;
+  column-gap: 1.25rem;
+  align-items: center;
+}

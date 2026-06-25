@@ -1,0 +1,56 @@
+/**
+ * -------------------------------------------------------------------------------------------------------------------
+ * ZOOM IMAGE
+ *
+ * Apply a zoom when a specific div is hovered zoom-image. To use it, you need to add a "group" class on the parent
+ * that will be triggering the effect, and add the "group-hover:zoom" (typically on the image) that will be zoomed. In
+ * order to prevent the image to go outside its edges, it is recommended to wrap the image around an "overflow-clip"
+ * -------------------------------------------------------------------------------------------------------------------
+ */
+
+@media (--supports-hover) {
+  .features--zoom-filter-image {
+    .zoom-image {
+      transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), filter 0.6s ease;
+      transform-origin: center;
+    }
+
+    .group:hover .group-hover\:zoom {
+      transform: scale(1.07) rotate(-1deg);
+      filter: brightness(1.1) contrast(1.05);
+    }
+  }
+
+  .features--zoom-image {
+    .zoom-image {
+      transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+      transform-origin: center;
+    }
+
+    .group:hover .group-hover\:zoom {
+      transform: scale(1.1);
+    }
+  }
+}
+
+/**
+ * -------------------------------------------------------------------------------------------------------------------
+ * REVEAL ON SCROLL
+ *
+ * We often need to reveal elements on scroll, or reveal items using an animation. To help this, the theme offer an
+ * helper that hide the items. This is only enabled when JS is enabled AND when the customers has not configured their
+ * system to reduce animation (JS animation such as reveal on scroll should not be enabled in such cases)
+ * -------------------------------------------------------------------------------------------------------------------
+ */
+
+@media (--motion-safe) {
+  [reveal-on-scroll="true"] {
+    opacity: 0;
+  }
+}
+
+@media (scripting: none) {
+  [reveal-on-scroll="true"] {
+    opacity: 1;
+  }
+}

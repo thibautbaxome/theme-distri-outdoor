@@ -1,0 +1,5 @@
+.collection-list {
+  display: grid;
+  grid: var(--collection-list-grid);
+  gap: var(--collection-list-gap);
+}

@@ -1,0 +1,66 @@
+.subheading {
+  font: var(--subheading-font-style) var(--subheading-font-weight) var(--subheading-font-size) / normal var(--subheading-font-family);
+  letter-spacing: var(--subheading-letter-spacing);
+  text-transform: var(--subheading-text-transform);
+
+  :lang(ar) & {
+    letter-spacing: 0; /* Arabic doesn't use letter spacing */
+  }
+}
+
+.subheading-xs {
+  font-size: calc(var(--subheading-font-size) - 1px);
+}
+
+/* Subheading badge */
+
+.subheading-badge {
+  display: flex;
+  max-width: max-content;
+  align-items: center;
+  padding: calc(var(--subheading-has-padding) * 0.3rem) calc(var(--subheading-has-padding) * 0.75rem);
+  border: var(--subheading-border);
+  background: rgb(var(--subheading-background));
+  color: rgb(var(--subheading-text-color));
+  border-radius: var(--subheading-border-radius);
+  white-space: break-spaces;
+  vertical-align: middle;
+  transition: all 0.2s ease-in-out;
+
+  :where(.prose :where(.max-w-xs, .max-w-sm, .max-w-md, .max-w-lg)) > & {
+    margin-inline: inherit; /* Small hack */
+  }
+}
+
+.subheading-badge--with-icon {
+  align-items: baseline;
+  
+  &::before {
+    content: '';
+    width: 0.5625rem;
+    height: 0.5625rem;
+    margin-inline-end: 0.75rem;
+    flex-shrink: 0;
+    background: currentColor;
+
+    @supports (height: 1cap) {
+      width: 1cap;
+      height: 1cap;
+    }
+
+    @container style(--subheading-text-transform: lowercase) {
+      width: 1ex;
+      height: 1ex;
+    }
+  }
+}
+
+.subheading-badge--icon-circle::before {
+  border-radius: 100%;
+}
+
+.subheading-badge--icon-diamond::before {
+  transform: translate(0, -1px) rotate(45deg);
+  width: 0.4375rem;
+  height: 0.4375rem;
+}

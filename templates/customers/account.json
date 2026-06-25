@@ -1,0 +1,19 @@
+{
+  "name": "Account",
+  "sections": {
+    "main": {
+      "type": "main-customers-account",
+      "blocks": {
+        "orders": {
+          "type": "orders"
+        }
+      },
+      "block_order": [
+        "orders"
+      ]
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

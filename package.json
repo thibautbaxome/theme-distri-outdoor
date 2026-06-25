@@ -1,0 +1,53 @@
+{
+  "watch": {
+    "css": {
+      "patterns": [
+        "css"
+      ],
+      "extensions": "css",
+      "runOnChangeOnly": true,
+      "silent": true
+    },
+    "js-theme": {
+      "patterns": [
+        "js/theme.js",
+        "js/common",
+        "js/sections"
+      ],
+      "runOnChangeOnly": true,
+      "silent": true
+    },
+    "js-deps": {
+      "patterns": [
+        "js/photoswipe.js",
+        "js/vendor.js"
+      ],
+      "runOnChangeOnly": true,
+      "silent": true
+    }
+  },
+  "scripts": {
+    "css": "lightningcss --nesting --custom-media --targets 'safari 14.1 or chrome 110 or firefox 115' css/theme.css -o assets/theme.css --bundle",
+    "js-theme": "esbuild js/theme.js --outdir=assets --bundle --format=esm --target=safari14.1 --external:vendor --external:photoswipe",
+    "js-deps": "esbuild js/vendor.js js/photoswipe.js --minify --bundle --format=esm --target=safari14.1 --out-extension:.js=.min.js --outdir=assets/",
+    "shopify": "shopify",
+    "build": "npm run js-theme & npm run js-deps & npm run css",
+    "dev": "npm install && npm run build && shopify theme dev --environment dev --allow-live & npm-watch",
+    "npm run serve": "shopify theme dev -s ax-project",
+    "profile": "shopify theme profile --environment ax-project",
+    "bundle": "npm run build && shopify theme package",
+    "check": "shopify theme check",
+    "deploy": "shopify theme push --environment ax-project --environment demo-snow --environment demo-sand",
+    "pull": "shopify theme pull -s ax-project",
+    "push": "shopify theme push -s ax-project"
+  },
+  "devDependencies": {
+    "lightningcss-cli": "^1.30.2",
+    "esbuild": "^0.25.10",
+    "focus-trap": "^7.6.5",
+    "ftdomdelegate": "^5.0.0",
+    "motion": "^12.23.22",
+    "npm-watch": "^0.13.0",
+    "photoswipe": "^5.4.4"
+  }
+}

@@ -1,0 +1,86 @@
+/**
+ * -----------------------------------------------------------------------------
+ * ITEM
+ * -----------------------------------------------------------------------------
+ */
+
+.offer-item {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  row-gap: 0.125rem;
+  padding: 1rem 1.25rem;
+  scroll-snap-align: center;
+  border-radius: min(4px, var(--button-border-radius));
+
+  & > img {
+    margin-block-end: 2px;
+  }
+}
+
+@media (--sm) {
+  .offer-item--lg {
+    padding: 2rem 1.5rem;
+  }
+}
+
+/**
+ * -----------------------------------------------------------------------------
+ * LIST
+ * -----------------------------------------------------------------------------
+ */
+
+.offer-list {
+  display: grid;
+  gap: 0.625rem;
+}
+
+.offer-list--stacked {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.offer-list--split {
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+}
+
+/**
+ * -----------------------------------------------------------------------------
+ * CAROUSEL
+ * -----------------------------------------------------------------------------
+ */
+
+.offer-carousel {
+  display: grid;
+  position: relative;
+  gap: 1rem;
+  padding-block: 1.25rem;
+}
+
+.offer-carousel__scroller {
+  display: grid;
+  grid-auto-flow: column;
+  grid-template-columns: none;
+  grid-auto-columns: 100%;
+  align-items: start;
+  scroll-snap-type: x mandatory;
+  scroll-snap-stop: always;
+
+  & > .offer-item {
+    padding-block: 0;
+  }
+}
+
+.offer-carousel--navigation-inline {
+  & > * {
+    grid-area: 1 / -1;
+  }
+
+  & > .scroll-marker-group--dots {
+    margin-inline-end: 1.25rem;
+    justify-self: end;
+    align-self: center;
+  }
+
+  & .offer-item {
+    padding-inline-end: 3.5rem; /* We add extra padding to ensure the content does not overlap with the navigation */
+  }
+}

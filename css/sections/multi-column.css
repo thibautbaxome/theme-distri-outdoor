@@ -1,0 +1,35 @@
+.multi-column {
+  display: grid;
+  grid: var(--multi-column-grid);
+  column-gap: var(--multi-column-column-gap);
+  row-gap: var(--multi-column-row-gap);
+}
+
+.multi-column__item {
+  position: relative; /* Needed for bordered variation */
+  container: multi-column-item / inline-size;
+  grid-column: span min(var(--multi-column-item-span, 1), var(--multi-column-column-count));
+
+  :where(figure, picture, video) {
+    width: 100%; /* Ensure the column media fits the whole width */
+  }
+}
+
+.multi-column__item--spacer {
+  min-height: 150px;
+}
+
+/* Internal border variation */
+
+.multi-column--bordered {
+  /* With the border we use the gap trick, and apply internal padding to the actual item. */
+
+  gap: 1px;
+  padding-block: 1px; /* Needed to ensure that the border is not cut when overflow */
+
+  .multi-column__item {
+    padding-block: var(--multi-column-row-gap);
+    padding-inline: var(--multi-column-column-gap);
+    outline: 1px solid rgb(var(--border-color));
+  }
+}

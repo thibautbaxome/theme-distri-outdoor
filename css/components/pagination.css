@@ -1,0 +1,35 @@
+.pagination {
+  --pagination-part-size: 1.75rem;
+
+  display: flex;
+  align-items: center;
+  column-gap: 1rem;
+  justify-self: center; /* Make sure it is centered in grid and flex context */
+}
+
+.pagination__link {
+  display: grid;
+  place-content: center;
+  position: relative;
+  width: var(--pagination-part-size);
+  height: var(--pagination-part-size);
+  border-radius: 100%;
+}
+
+.pagination__link[aria-current="page"] {
+  background: rgb(var(--text-color));
+  color: rgb(var(--background));
+}
+
+@media (--sm-max) {
+  /* When there are too many items on mobile, we reduce the gap to avoid horizontal scrolling */
+  .pagination:has(.pagination__link:nth-child(8)) {
+    column-gap: 4px;
+  }
+}
+
+@media (--sm) {
+  .pagination {
+    --pagination-part-size: 2.5rem;
+  }
+}

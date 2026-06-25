@@ -1,0 +1,451 @@
+:where(x-drawer, x-popover):not(:defined) {
+  display: none; /* Ensure all dialogs are fully hidden until defined via Shadow DOM */
+}
+
+/**
+ * -------------------------------------------------------------------------------------------------------------------
+ * DEFAULT STYLES SHARED BY MANY DIALOG ELEMENTS
+ * -------------------------------------------------------------------------------------------------------------------
+ */
+
+:where(.drawer, .drawer-popover, .modal, .popover) {
+  display: none;
+
+  &::part(base) {
+    z-index: 999;
+    box-sizing: inherit;
+  }
+
+  /* Having it on the header and footer is needed because of position sticky */
+  &::part(content), &::part(header), &::part(footer) {
+    /* We re-use the color of the color scheme by default */
+    background: rgb(var(--background));
+    background-image: var(--background-gradient);
+    color: rgb(var(--text-color));
+    border-color: rgb(var(--border-color));
+    box-sizing: inherit;
+    z-index: inherit;
+  }
+
+  &::part(close-button) {
+    position: absolute;
+    display: grid;
+    place-content: center;
+    width: 1.75rem;
+    height: 1.75rem;
+    border: none;
+    background: none;
+    color: currentColor;
+    cursor: pointer;
+
+    &::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 100%;
+      background: rgb(var(--text-color) / 0.08);
+      transition: transform 0.2s ease;
+    }
+
+    &:hover::before {
+      transform: scale(1.2);
+    }
+  }
+
+  &::part(overlay) {
+    position: fixed;
+    inset: 0;
+    min-height: 100lvh;
+    background: rgb(var(--page-overlay));
+    backdrop-filter: blur(var(--dialog-backdrop-blur));
+    pointer-events: auto;
+  }
+
+  &::part(icon) {
+    isolation: isolate;
+    display: block;
+  }
+}
+
+/**
+ * -------------------------------------------------------------------------------------------------------------------
+ * DRAWER
+ * -------------------------------------------------------------------------------------------------------------------
+ */
+
+.drawer {
+  /* We expose various CSS properties to easily allow components to override drawer spacing */
+  --drawer-header-padding-block: min(1.25rem, var(--container-gutter));
+  --drawer-header-padding-inline: min(1.25rem, var(--container-gutter));
+  --drawer-body-padding-block: min(2rem, var(--container-gutter));
+  --drawer-body-padding-inline: min(2rem, var(--container-gutter));
+  --drawer-footer-padding-block: min(2rem, var(--container-gutter));
+  --drawer-footer-padding-inline: min(2rem, var(--container-gutter));
+  --drawer-max-width: min(100vw - 2rem, 37.5rem); /* 600px */
+
+  &::part(base) {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+  }
+
+  &::part(content) {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    align-content: start;
+    max-width: var(--drawer-max-width);
+    pointer-events: auto;
+  }
+
+  &::part(header) {
+    --distance-to-bleed: var(--drawer-header-padding-inline);
+
+    display: grid;
+    text-align: center;
+    place-items: center;
+    padding: var(--drawer-header-padding-block) var(--drawer-header-padding-inline);
+    border-block-end: 1px solid rgb(var(--border-color));
+  }
+
+  &::part(close-button) {
+    position: relative;
+    grid-column: 1;
+    grid-row: 1;
+    justify-self: start;
+  }
+
+  &::part(body) {
+    --distance-to-bleed: var(--drawer-body-padding-inline);
+
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    flex: 1 1 auto;
+    padding: var(--drawer-body-padding-block) var(--drawer-body-padding-inline);
+    overflow-y: auto;
+    overscroll-behavior-y: contain;
+  }
+
+  &::part(footer) {
+    --distance-to-bleed: var(--drawer-footer-padding-inline);
+
+    border-block-start: 1px solid rgb(var(--border-color));
+    padding: var(--drawer-footer-padding-block) var(--drawer-footer-padding-inline);
+  }
+
+  & [slot="header"] {
+    grid-area: 1 / -1;
+  }
+}
+
+.drawer--narrow {
+  --drawer-max-width: min(100vw - 2rem, 32rem); /* 516px */
+}
+
+.drawer--no-bordered-header {
+  &::part(header) {
+    border: none;
+  }
+
+  &::part(body) {
+    padding-block-start: 0; /* We remove the padding when the header is unbordered, as it is already padded */
+  }
+}
+
+/**
+ * -------------------------------------------------------------------------------------------------------------------
+ * DRAWER POPOVER
+ * 
+ * The drawer popover is contextual to the drawer to show extra information
+ * -------------------------------------------------------------------------------------------------------------------
+ */
+
+.drawer-popover {
+  &::part(base) {
+    position: absolute;
+    inset-inline-start: 0;
+    inset-block-end: 0;
+    width: 100%;
+  }
+
+  &::part(overlay) {
+    backdrop-filter: none;
+    background: rgb(0 0 0 / 0.3);
+  }
+
+  &::part(header) {
+    display: grid;
+    place-items: center;
+    padding: 0.7rem 1rem;
+    text-align: center;
+    border-block-end: 1px solid rgb(var(--border-color));
+  }
+
+  &::part(close-button) {
+    grid-area: 1 / -1;
+    justify-self: start;
+    position: relative;
+  }
+
+  &::part(body) {
+    padding: 1.25rem;
+  }
+}
+
+@media (--sm) {
+  .drawer-popover {
+    &::part(header) {
+      padding: 0.9rem 1.25rem;
+    }
+  
+    &::part(body) {
+      padding: 2rem;
+    }
+  }
+}
+
+/**
+ * -------------------------------------------------------------------------------------------------------------------
+ * MODAL
+ * 
+ * A modal is close to a drawer, but typically opens at the middle of the screen, and requires less strict design. As
+ * a consequence it is up to the user to provide more style.
+ * 
+ * It also supports slotting an image.
+ * -------------------------------------------------------------------------------------------------------------------
+ */
+
+.modal {
+  /* We expose various CSS properties to easily allow components to override modal spacing */
+  --modal-content-margin: 1rem;
+  --modal-body-padding-block: 1.25rem;
+  --modal-body-padding-inline: 1.25rem;
+  --modal-content-width: 30rem; /* 480px */
+
+  &::part(base) {
+    display: grid;
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+  }
+
+  &::part(content) {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    max-height: 70vh;
+    margin: var(--modal-content-margin);
+    pointer-events: auto;
+    place-self: end stretch; /* By default the modal content is placed at the bottom and stretched on mobile */
+    box-shadow: 0 2px 4px 0px rgb(0 0 0 / 0.05);
+  }
+
+  &::part(body) {
+    display: grid;
+    align-items: safe center;
+    grid-template-columns: minmax(0, 1fr);
+    padding: var(--modal-body-padding-block) var(--modal-body-padding-inline);
+    overflow-y: auto;
+    overscroll-behavior-y: contain;
+  }
+
+  &::part(close-button) {
+    inset-block-start: 1rem;
+    inset-inline-end: 1rem;
+  }
+
+  [slot="image"] {
+    max-height: 200px;
+    object-fit: cover;
+    object-position: center;
+  }
+}
+
+.modal--lg {
+  --modal-content-width: 60rem;
+}
+
+.modal--no-overlay::part(overlay) {
+  display: none; /* Allow to create unobstrusive modal (ideal for small modal */
+}
+
+@media (--md-max) {
+  /* On mobile, if a modal has a slotted image, we want to make sure the close button is visible so we use the background color */
+  .modal:has([slot="image"])::part(close-button)::before {
+    background: rgb(var(--background));
+  }
+ }
+
+@media (--md) {
+  .modal {
+    --modal-content-margin: 1.75rem;
+    --modal-body-padding-block: 3rem;
+    --modal-body-padding-inline: 3rem;
+
+    &::part(content) {
+      display: grid;
+      grid-template-columns: minmax(0, var(--modal-content-width));
+      grid-auto-flow: column;
+      grid-auto-rows: minmax(0, 1fr);
+      place-self: center; /* By default, content is centered on desktop */
+    }
+
+    &::part(close-button) {
+      inset-block-start: 1.25rem;
+      inset-inline-end: 1.25rem;
+    }
+
+    [slot="image"] {
+      grid-column-end: -2;
+      width: 430px;
+      height: 100%;
+      max-height: none;
+    }
+  }
+
+  .modal--tight {
+    --modal-body-padding-block: 2rem;
+    --modal-body-padding-inline: 2rem;
+  }
+ }
+
+/**
+ * -------------------------------------------------------------------------------------------------------------------
+ * POPOVER
+ * 
+ * Layout is very different on mobile/tablet and desktop, so we scope the styles by breakpoint
+ * -------------------------------------------------------------------------------------------------------------------
+ */
+
+.popover {
+  --popover-padding-inline: 1.25rem;
+
+  @media (--md-max) {
+    &::part(base) {
+      position: relative;
+    }
+    
+    &::part(content) {
+      position: fixed;
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      inset-inline-start: 0;
+      inset-block-end: 0;
+      max-height: 70vh;
+      max-height: 70dvh;
+      z-index: 0;
+    }
+
+    &::part(header) {
+      position: sticky;
+      display: grid;
+      inset-block-start: 0;
+      align-items: center;
+      grid-template-columns: minmax(0, 1fr) auto;
+      column-gap: 1.5rem;
+      padding: 0.625rem var(--popover-padding-inline);
+      border-block-end: 1px solid rgb(var(--border-color));
+    }
+
+    &::part(close-button) {
+      position: relative;
+    }
+
+    &::part(body) {
+      padding: 0.625rem var(--popover-padding-inline);
+      overflow: auto;
+    }
+  }
+  
+  @media (--md) {
+    &::part(overlay),
+    &::part(header) {
+      display: none;
+    }
+
+    &::part(content) {
+      position: absolute;
+      inset-inline-start: 0;
+      inset-block-start: calc(100% + 0.5rem);
+      min-width: 9.5rem;
+      max-width: 15rem;
+      width: max-content;
+      max-height: 18.5rem;
+      overflow: auto;
+      padding: 0.75rem 1.25rem;
+      border: 1px solid rgb(var(--border-color));
+      box-shadow: 0px 2px 4px 0px rgb(0 0 0 / 0.05);
+    }
+
+    &[preferred-position="above"]::part(content) {
+      inset-block-start: auto;
+      inset-block-end: calc(100% + 0.5rem);
+    }
+
+    &[preferred-alignment="start"]::part(content) {
+      inset-inline-start: auto;
+      inset-inline-end: 0;
+    }
+
+    &[anchor-position*="right"]::part(content) {
+      left: calc(100% + var(--popover-anchor-inline-offset, 1rem));
+      right: auto;
+    }
+
+    &[anchor-position*="left"]::part(content) {
+      right: calc(100% + var(--popover-anchor-inline-offset, 1rem));
+      left: auto;
+    }
+
+    &[anchor-position*="top"]::part(content) {
+      bottom: var(--popover-anchor-block-offset, -3rem);
+      top: auto;
+    }
+
+    &[anchor-position*="bottom"]::part(content) {
+      top: var(--popover-anchor-block-offset, -3rem);
+      bottom: auto;
+    }
+  }
+
+  &::part(overlaid-close-button) {
+    position: absolute;
+    inset-block-start: 1.25rem;
+    inset-inline-end: 1.25rem;
+    z-index: 1;
+  }
+}
+
+.popover--w-full::part(content) {
+  max-width: none;
+  width: 100%;
+}
+
+.popover__divider {
+  margin-block: 1.75rem;
+}
+
+.popover__value-list {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.popover__value-option {
+  display: flex;
+  align-items: center;
+  column-gap: 0.625rem;
+  padding-block: 0.5rem;
+  text-align: start;
+}
+
+.popover__value-option[aria-selected="true"]::after,
+.popover__value-option:has(:checked)::after {
+  content: '';
+  background-image: url(./checkmark-inverted.svg);
+  background-repeat: no-repeat;
+  width: 11px;
+  height: 9px;
+}

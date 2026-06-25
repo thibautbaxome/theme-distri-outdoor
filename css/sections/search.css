@@ -1,0 +1,212 @@
+/**
+ * -------------------------------------------------------------------------------------------------------------
+ * MAIN PAGE SEARCH
+ * -------------------------------------------------------------------------------------------------------------
+ */
+
+.search-form {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: center;
+  column-gap: 0.625rem;
+  padding: 0.8rem 1.25rem;
+  border-width: 1px;
+  transition: border-color 0.2s ease;
+
+  & > * {
+    margin: 0;
+  }
+
+  &:focus-within {
+    border-color: currentColor;
+  }
+}
+
+.search-form__input {
+  font-size: 1.0625rem;
+  background: transparent;
+
+  &:focus {
+    outline: none;
+  }
+
+  &::-webkit-search-cancel-button {
+    display: none;
+  }
+}
+
+@media (--sm) {
+  .search-form {
+    padding: 1.2rem 1.75rem;
+  }
+}
+
+/**
+ * -------------------------------------------------------------------------------------------------------------
+ * SEARCH DRAWER
+ * -------------------------------------------------------------------------------------------------------------
+ */
+
+.drawer--search {
+  &::part(close-button) {
+    justify-self: end;
+  }
+
+  [slot="header"] {
+    width: 100%;
+    padding-inline-end: 2.5rem;
+  }
+}
+
+.search-drawer__input {
+  width: 100%;
+  font-size: var(--text-h7);
+  background: transparent;
+
+  &:focus {
+    outline: none;
+  }
+
+  &::-webkit-search-cancel-button {
+    display: none;
+  }
+}
+
+.search-drawer__product-carousel {
+  --distance-to-bleed: var(--drawer-body-padding-inline);
+  
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 200px;
+  gap: var(--product-list-row-gap) var(--product-list-column-gap);
+  padding-block: 1px;
+
+  @media (--sm) {
+    grid-auto-columns: 240px;
+  }
+}
+
+/**
+ * -------------------------------------------------------------------------------------------------------------
+ * PREDICTIVE SEARCH
+ * -------------------------------------------------------------------------------------------------------------
+ */
+
+.search-tabs {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  row-gap: 1.75rem;
+
+  .predictive-search__suggestions ~ & {
+    padding-block-start: 1.75rem;
+    border-block-start-width: 1px;
+  }
+
+  &::part(tab-list) {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: max-content;
+    column-gap: 1.5rem;
+    justify-content: start;
+    overflow: auto;
+    margin-inline: calc(-1 * var(--drawer-body-padding-inline));
+    padding-inline: var(--drawer-body-padding-inline);
+    scrollbar-width: none;
+  }
+
+  [slot="tab"]:not([aria-selected="true"]) {
+    color: rgb(var(--text-color) / 0.6);
+  }
+}
+
+.predictive-search__no-results {
+  display: grid;
+  justify-items: center;
+  align-content: center;
+  min-height: 100%;
+}
+
+.predictive-search__suggestions {
+  display: grid;
+  grid-auto-flow: column;
+  justify-content: start;
+  overflow-x: auto;
+  column-gap: 1.5rem;
+  margin-block-start: calc(-1 * var(--drawer-body-padding-block));
+  padding-block: 1rem;
+  white-space: nowrap;
+
+  mark {
+    background: none;
+    font-weight: bold;
+  }
+}
+
+.predictive-search__products {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--product-list-row-gap) var(--product-list-column-gap);
+  align-items: start;
+}
+
+.predictive-search__articles,
+.predictive-search__collections {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  row-gap: 1.5rem;
+}
+
+.predictive-search__item-result {
+  display: flex;
+  align-items: center;
+  column-gap: 0.75rem;
+
+  img {
+    width: 5rem;
+    flex-shrink: 0;
+  }
+}
+
+.predictive-search-link {
+  display: flex;
+  justify-content: space-between;
+  padding-block: 1rem;
+
+  svg {
+    opacity: 0;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+  }
+
+  span {
+    transition: transform 0.2s ease;
+  }
+
+  &:hover {
+    svg {
+      opacity: 1;
+      transform: translateX(-0.75rem);
+    }
+
+    span {
+      transform: translateX(0.75rem);
+    }
+  }
+}
+
+@media (--sm) {
+  .predictive-search__suggestions {
+    padding-block: 1.75rem;
+  }
+
+  .predictive-search-link {
+    padding-block: 1.25rem;
+  }
+
+  .predictive-search__item-result {
+    column-gap: 1.75rem;
+
+    img {
+      width: 10rem;
+    }
+  }
+}

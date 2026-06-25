@@ -1,0 +1,130 @@
+/**
+ * The content box is an abstraction used to show a content over a box with some specified spacing. It is often used with a background
+ * media being overlaid.
+ * 
+ * <div class="content-box">
+ *   <div class="content-box__background-media">
+ *     // media
+ *   </div>
+ * 
+ *   // Content
+ * </div>
+ * 
+ * The minimum height can be controlled by using the min-h-* utility classes
+ */
+
+.\@container\/content-box {
+  container: content-box / inline-size;
+}
+
+.content-box {
+  --content-box-spacing: max(1.5rem, var(--container-gutter));
+  --content-box-enable-transparent-header-compensation: 0;
+
+  /* We override the sticky offset when a sticky element is inside as we need to take into account on the internal spacing */
+  --sticky-inset-block-start: calc(var(--sticky-offset) + var(--content-box-spacing-block-start, var(--content-box-spacing)));
+
+  position: relative;
+  display: grid;
+  grid-template-rows: [full-start] calc(var(--content-box-spacing-block-start, var(--content-box-block-spacing, var(--content-box-spacing))) + var(--content-box-enable-transparent-header-compensation) * var(--header-height, 0px)) [inner-start] minmax(0, 1fr) [inner-end] var(--content-box-spacing-block-end, var(--content-box-block-spacing, var(--content-box-spacing))) [full-end];
+  grid-template-columns: [full-start] var(--content-box-spacing-inline-start, var(--content-box-inline-spacing, var(--content-box-spacing))) [inner-start] minmax(0, 1fr) [inner-end] var(--content-box-spacing-inline-end, var(--content-box-inline-spacing, var(--content-box-spacing))) [full-end];
+
+  @container content-box (width < 450px) {
+    --content-box-spacing: 1.5rem;
+  }
+
+  @container content-box (width < 250px) {
+    --content-box-spacing: 1rem;
+  }
+
+  & > * {
+    grid-area: inner-start / inner-start / inner-end / inner-end;
+    isolation: isolate; /* This create a new stacking context on each children, to ensure that overlays work correctly */
+  }
+
+  /* Most of the time, using the "column-span-full" or "row-span-full" should be preferred as it uses the native grid system. However,
+     there are cases where content is nested and not a direct children. In those cases, we have to use a bleed system based on negative
+     margins. */
+
+  .column-bleed {
+    margin-inline-start: calc(-1 * var(--content-box-spacing-inline-start, var(--content-box-inline-spacing, var(--content-box-spacing))));
+    margin-inline-end: calc(-1 * var(--content-box-spacing-inline-end, var(--content-box-inline-spacing, var(--content-box-spacing))));
+  }
+
+  .row-bleed {
+    margin-block-start: calc(-1 * var(--content-box-spacing-block-start, var(--content-box-block-spacing, var(--content-box-spacing))));
+    margin-block-end: calc(-1 * var(--content-box-spacing-block-end, var(--content-box-block-spacing, var(--content-box-spacing))));
+  }
+}
+
+.content-box__background-media {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-rows: minmax(0, 1fr);
+  grid-area: full-start / full-start / full-end / full-end;
+  height: 100%;
+  width: 100%;
+  align-items: stretch;
+
+  .content-box[class*="min-h-"]:not(.min-h-auto) & {
+    position: absolute;
+    inset: 0;
+  }
+
+  & > * {
+    width: 100%; /* Ensure the media stretches the whole width */
+    height: 100%;
+  }
+
+  img {
+    pointer-events: none; /* This ensure the image can't be clicked on iOS, as they are used as background. This improve user experience on mobile */
+  }
+
+  /* Hide content whenever a video media is playing */
+
+  &:has(video-media) {
+    & ~ * {
+      transition: opacity 0.2s ease-in-out, visibility 0.2s ease-in-out;
+    }
+
+    &:has(video-media[loaded]:not([autoplay], [playsinline])) {
+      pointer-events: auto;
+    }
+
+    &:has(video-media[loaded]:not([autoplay], [playsinline])) ~ * {
+      opacity: 0;
+      visibility: hidden;
+    }
+  }
+}
+
+@media (--md) {
+  .content-box__background-media {
+    .content-box[class*="md:min-h-"] & {
+      position: absolute;
+      inset: 0;
+    }
+  }
+}
+
+/* If the first section has a transparent header then we enable extra spacing to avoid text overlap */
+.shopify-section:first-child [allow-transparent-header] .content-box:first-child {
+  --content-box-enable-transparent-header-compensation: 1;
+}
+
+/**
+ * When the placement grid is used as a children of content-box, it uses subgrid
+ */
+
+.content-box .placement-grid {
+  grid-template-columns: subgrid;
+  grid-column: full-start / full-end;
+
+  & > * {
+    grid-column: inner-start / inner-end;
+  }
+
+  &.span-full > * {
+    grid-column: full-start / full-end;
+  }
+}

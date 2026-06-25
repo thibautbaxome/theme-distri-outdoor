@@ -1,0 +1,110 @@
+/**
+ * -------------------------------------------------------------------------------------------------
+ * BASE SLIDESHOW
+ * -------------------------------------------------------------------------------------------------
+ */
+
+.slideshow {
+  display: grid;
+  overflow: hidden;
+  background-color: rgb(var(--slideshow-background));
+}
+
+.slideshow__slide {
+  display: grid;
+  align-items: stretch;
+  grid-area: 1 / -1; /* This allows all the slides to be stacked on top of each other */
+  overflow: hidden; /* Needed for the various transitions */
+
+  img {
+    user-select: none;
+  }
+  
+  &:has(.min-h-auto) {
+    align-self: start; /* When the slides are auto-sized, the images should not be cropped */
+  }
+
+  &:not(.is-selected) {
+    visibility: hidden;
+  }
+
+  /* We add extra spacing to avoid overlapping with controls */
+  &:not(:only-child):has(.place-self-end-start, .place-self-end-center, .place-self-end) {
+    --content-box-spacing-block-end: 5rem;
+  }
+}
+
+.slideshow__split-media {
+  height: 100%;
+  width: 100%;
+}
+
+.slideshow[transition="fade"] {
+  isolation: isolate;
+
+  .slideshow__slide {
+    mix-blend-mode: plus-lighter; /* This allows to have better transition between slides */
+    will-change: opacity; /* Needed on Safari */
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .slideshow {
+    isolation: isolate;
+
+    .slideshow__slide {
+      mix-blend-mode: plus-lighter; /* This allows to have better transition between slides */
+    }
+  }
+}
+
+@media (--md-max) {
+  .slideshow__split-media > :last-child {
+    display: none;
+  }
+}
+
+@media (--md) {
+  .slideshow__split-media {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-rows: minmax(0, 1fr);
+  }
+}
+
+/**
+ * -------------------------------------------------------------------------------------------------
+ * CONTROLS
+ * -------------------------------------------------------------------------------------------------
+ */
+
+.slideshow__controls {
+  display: flex;
+  column-gap: 0.5rem;
+  align-items: center;
+  grid-area: 1 / -1;
+  place-self: end;
+  margin-inline-end: 1.25rem;
+  margin-block-end: 1.25rem;
+  z-index: 1;
+  color: rgb(var(--slideshow-controls-color));
+}
+
+.slideshow__autoplay-button {
+  display: grid;
+  place-content: center;
+  width: 1.5rem;
+  height: 1.5rem;
+
+  > * {
+    grid-area: 1 / -1;
+  }
+}
+
+@media (--sm) {
+  .slideshow__controls {
+    margin-inline-end: 1.75rem;
+    margin-block-end: 1.75rem;
+    column-gap: 1rem;
+  }
+}

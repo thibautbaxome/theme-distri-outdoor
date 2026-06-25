@@ -1,0 +1,38 @@
+.trust-icons {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  row-gap: 1.5rem;
+  padding-block: min(4rem, var(--section-vertical-spacing));
+  border-block-width: 1px;
+}
+
+.trust-icons__carousel {
+  display: grid;
+  grid: auto / auto-flow 100%;
+}
+
+.trust-icons__item {
+  padding-inline: 1.5rem;
+}
+
+@media (--sm) {
+  .trust-icons {
+    row-gap: 2rem;
+  }
+}
+
+@media (--md) {
+  .trust-icons {
+    padding-block: 0;
+  }
+
+  .trust-icons__carousel {
+    grid: auto / repeat(var(--trust-icons-item-count, 4), minmax(0, 1fr));
+    column-gap: 1px;
+  }
+
+  .trust-icons__item {
+    padding-block: min(4rem, var(--section-vertical-spacing));
+    box-shadow: 1px 0 rgb(var(--border-color));
+  }
+}

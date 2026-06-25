@@ -1,0 +1,38 @@
+.faq {
+  width: 100%;
+
+  .section-stack & {
+    /* Limit the width only when in a section stack */
+    max-width: 50rem;
+    margin-inline: inherit;
+  }
+}
+
+.faq__category {
+  display: flex;
+  align-items: center;
+  column-gap: 0.5rem;
+  margin-block-end: 1.25rem;
+
+  ~ .faq__category {
+    margin-block-start: 2.5rem;
+  }
+}
+
+.faq__content .accordion__content {
+  padding-inline-end: 1.25rem;
+}
+
+@media (--md) {
+  .faq__category {
+    column-gap: 1rem;
+
+    ~ .faq__category {
+      margin-block-start: 3rem;
+    }
+  }
+
+  .faq__content .accordion__content {
+    padding-inline-end: 2.5rem;
+  }
+}

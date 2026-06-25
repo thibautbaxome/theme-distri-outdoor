@@ -1,0 +1,138 @@
+.header__news-link {
+  .active {
+    position: relative;
+
+    &::after {
+      content: "";
+      position: absolute;
+      width: 0.25rem;
+      height: 0.25rem;
+      background: currentColor;
+      inset-block-start: 0;
+      inset-inline-end: calc(-0.25rem / 2);
+      border-radius: var(--rounded-full);
+    }
+  }
+}
+
+.modal--news {
+  &::part(content) {
+    place-self: start stretch;
+    margin-block-start: var(--modal-news-margin-block-start, 0);
+    margin-inline: 0;
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+
+  &::part(body) {
+    align-items: start;
+  }
+
+  &::part(overlay) {
+    display: none;
+  }
+}
+
+.news-modal__container {
+  display: grid;
+  gap: 1.25rem;
+}
+
+.news-modal__wrapper {
+  display: grid;
+  gap: 1.75rem;
+}
+
+.news-modal-button {
+  --news-modal-button-image-width: 5rem;
+
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.25rem;
+  width: 100%;
+  transition: opacity 0.3s 0.45s ease;
+
+  &::after {
+    content: "";
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    background: rgb(var(--on-sale-text));
+    inset-block-start: calc(50% - 3px);
+    inset-inline-end: 0;
+    border-radius: var(--rounded-full);
+  }
+
+  &.visited {
+    opacity: 0.5;
+
+    &::after {
+      display: none;
+    }
+  }
+}
+
+.news-modal-button__content {
+  display: grid;
+  justify-items: start;
+  text-align: start;
+  padding-inline-end: var(--modal-body-padding-inline);
+  gap: 0.625rem;
+  flex: 1;
+}
+
+.news-modal-button__image {
+  width: var(--news-modal-button-image-width);
+}
+
+.news-modal-panel {
+  z-index: 1;
+  position: absolute;
+  inset: 0;
+  padding: 0 var(--modal-body-padding-inline) var(--modal-body-padding-block);
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background: rgb(var(--background));
+  opacity: 0;
+  visibility: hidden;
+}
+
+.news-modal-panel__header {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 0.75rem;
+  padding-block: var(--modal-body-padding-block);
+}
+
+@media (--sm) {
+  .modal--news {
+    &::part(content) {
+      place-self: start end;
+      margin-inline-end: var(--modal-news-margin-inline-end, 0);
+    }
+  }
+
+  .news-modal-button {
+    --news-modal-button-image-width: 6.5rem;
+  }
+
+  .news-modal-button__content {
+    gap: 1rem;
+  }
+}
+
+@media (--md) {
+  .modal--news {
+    --modal-body-padding-block: 1.75rem;
+    --modal-body-padding-inline: 1.75rem;
+
+    &::part(close-button) {
+      inset-block-start: 1.25rem;
+      inset-inline-end: 1.25rem;
+    }
+  }
+}

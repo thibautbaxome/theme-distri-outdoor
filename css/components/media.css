@@ -1,0 +1,112 @@
+/**
+ * BASE MEDIA
+ */
+
+video-media, model-media {
+  display: block;
+  position: relative;
+  border-radius: inherit; /* Fix some issues with border radius on Safari */
+  aspect-ratio: var(--mobile-aspect-ratio, var(--aspect-ratio, auto));
+  width: 100%;
+}
+
+@media (--sm) {
+  video-media, model-media {
+    aspect-ratio: var(--aspect-ratio, auto);
+  }
+}
+
+/**
+ * VIDEO MEDIA
+ */
+
+video-media {
+  &[host] {
+    display: grid;
+    align-items: center;
+  }
+
+  &:not([autoplay], [loaded]) {
+    cursor: pointer;
+  }
+
+  & > :is(video, iframe, img) {
+    width: 100%;
+    height: 100%;
+    border-radius: inherit; /* Fix some issues with border radius on Safari */
+    transition: opacity 0.2s ease-in-out;
+  }
+
+  & > video[controls] {
+    pointer-events: auto; /* Make sure that videos with controls are always clickable */
+  }
+
+  /* The img selector targets the poster */
+  & > :is(video:not(:fullscreen), img) {
+    margin: 0 !important;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  & > :is(iframe, img) {
+    position: absolute;
+    inset: 0;
+  }
+
+  &:not([loaded]) > :is(video, iframe),
+  &[loaded] > img,
+  &[loaded]::part(play-button) {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  &[suspended] ~ * {
+    pointer-events: none; /* When the video has been suspended due to low-power mode, this will prevents the text to be clickable */
+  }
+
+  /* If a default play button is added, this is exposed through Shadow DOM */
+  &::part(play-button) {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    translate: -50% -50%;
+  }
+}
+
+video-media::part(play-button),
+.play-button {
+  display: inline-grid;
+  place-content: center;
+  background: rgb(255 255 255 / 0.2);
+  backdrop-filter: blur(10px);
+  width: 80px;
+  height: 80px;
+  border-radius: 100%;
+  z-index: 1;
+  will-change: scale;
+  transition: scale 0.2s ease-in-out, opacity 0.2s ease-in-out;
+
+  svg {
+    margin: 0;
+  }
+}
+
+video-media:hover::part(play-button),
+video-media:hover .play-button,
+.group:hover .group-hover\:scale {
+  scale: 1.1;
+}
+
+/**
+ * MODEL MEDIA
+ */
+
+model-media {
+  --default-aspect-ratio: 1;
+
+  model-viewer, .shopify-model-viewer-ui {
+    width: 100%;
+    height: 100%;
+    vertical-align: top; /* Needed because Shopify forces the viewer to be inline-block */
+  }
+}

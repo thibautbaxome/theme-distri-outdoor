@@ -1,0 +1,74 @@
+/**
+ * The big link abstraction is used on the links-with-image and featured-links section
+ */
+
+.big-link {
+  display: flex;
+  align-items: center;
+  column-gap: 1.5rem;
+  padding-block: 1.5rem;
+
+  .divide-y:not(.border-t, .border-b) > &:first-child {
+    padding-block-start: 0;
+  }
+
+  .divide-y:not(.border-t, .border-b) > &:last-child {
+    padding-block-end: 0;
+  }
+
+  & > * {
+    transition: opacity 0.2s ease-in-out, transform 0.2s ease-in-out !important;
+  }
+}
+
+.big-link--tight {
+  padding-block: 1.2rem;
+}
+
+.big-link__image {
+  width: 5rem;
+  flex-shrink: 0;
+}
+
+.big-link__arrow {
+  flex-shrink: 0;
+  margin-inline-start: auto;
+  opacity: 0;
+}
+
+@media (--supports-hover) {
+  .big-link--opacity:hover ~ .big-link--opacity > *, .big-link--opacity:has(~ .big-link--opacity:hover) > * {
+    opacity: 0.3;
+  }
+
+  .big-link--colors {
+    transition: background 0.2s ease-in-out, color 0.2s ease-in-out;
+
+    &:hover {
+      background: rgb(var(--big-link-background-hover));
+      color: rgb(var(--big-link-text-color-hover));
+    }
+  }
+
+  .big-link--colors:hover {
+    & > * {
+      transform: translateX(1.75rem);
+    }
+
+    & > .big-link__arrow {
+      opacity: 1;
+      transform: translateX(-3rem);
+    }
+  }
+}
+
+@media (--sm) {
+  .big-link {
+    column-gap: 2rem;
+    padding-block: 1.75rem;
+  }
+
+  .big-link__image {
+    width: 7.5rem;
+  }
+}

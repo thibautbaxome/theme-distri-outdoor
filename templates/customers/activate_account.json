@@ -1,0 +1,11 @@
+{
+  "name": "Activate account",
+  "sections": {
+    "main": {
+      "type": "main-customers-activate-account"
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

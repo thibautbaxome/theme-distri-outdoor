@@ -1,0 +1,331 @@
+/**
+ * -------------------------------------------------------------------------------------------------------------------
+ * SHOPIFY SECTION
+ * -------------------------------------------------------------------------------------------------------------------
+ */
+
+.shopify-section {
+  --section-disable-padding-collapsing: calc(1 - var(--section-enable-padding-collapsing, 0));
+
+  transition: top 0.2s ease-in-out;
+}
+
+.shopify-section:empty {
+  display: none; /* Allow to hide empty section */
+}
+
+/**
+ * The header can collapse on scroll. To ensure this works properly, we set a higher z-index for all the header group
+ * sections coming before the header itself, and reduce back the header itself and the next one
+ */
+
+.shopify-section-group-header-group {
+  position: relative;
+  z-index: 5;
+}
+
+.shopify-section--header {
+  z-index: 4;
+
+  & ~ .shopify-section-group-header-group {
+    z-index: 3;
+  }
+}
+
+/**
+ * -------------------------------------------------------------------------------------------------------------------
+ * SECTION SPACING
+ * -------------------------------------------------------------------------------------------------------------------
+ */
+
+.section-spacing {
+  /* Safari 14.1 does not support margin-block shorthand when using CSS variable */
+  padding-block-start: calc(var(--section-disable-padding-collapsing) * var(--section-vertical-spacing-block-start, var(--section-vertical-spacing)));
+  padding-block-end: var(--section-vertical-spacing-block-end, var(--section-vertical-spacing));
+
+  .shopify-section:has(&) {
+    scroll-margin-block-start: var(--sticky-area-height);
+  }
+
+  .shopify-section:first-child:has([allow-transparent-header]) & {
+    --section-vertical-spacing-block-start: calc(var(--section-vertical-spacing) + var(--header-height) - 16px);
+  }
+}
+
+.section-spacing--tight {
+  padding-block-start: min(3rem, var(--section-disable-padding-collapsing) * var(--section-vertical-spacing-block-start, var(--section-vertical-spacing)));
+  padding-block-end: min(3rem, var(--section-vertical-spacing-block-end, var(--section-vertical-spacing)));
+}
+
+.section-spacing--loose {
+  padding-block-start: calc((var(--section-disable-padding-collapsing) * var(--section-vertical-spacing-block-start, var(--section-vertical-spacing))) * 2.5);
+  padding-block-end: calc((var(--section-vertical-spacing-block-end, var(--section-vertical-spacing))) * 2.5);
+}
+
+/**
+ * -------------------------------------------------------------------------------------------------------------------
+ * SECTION HEADER
+ * 
+ * This component is used across different sections (such as collection list or blog posts) where the subheading/heading
+ * used at the start of a section can be combined with a button
+ * -------------------------------------------------------------------------------------------------------------------
+ */
+
+.section-header {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  row-gap: 1.8rem;
+  margin-inline: var(--container-gutter);
+  align-items: start;
+
+  :where(.container, .section-split) & {
+    margin-inline: 0; /* If already wraps in a container, we remove the margin */
+  }
+}
+
+.section-header__controls {
+  align-self: end;
+}
+
+@media (--sm) {
+  .section-header {
+    gap: 2rem;
+    grid-auto-flow: column;
+    grid-auto-columns: auto;
+
+    &.section-header--stack {
+      grid-auto-flow: row;
+    }
+  }
+}
+
+/**
+ * -------------------------------------------------------------------------------------------------------------------
+ * SECTION SPLIT
+ * 
+ * This component allows to create a two columns layout, which is typically either used to split a 
+ * media with content, or split a textual content.
+ * -------------------------------------------------------------------------------------------------------------------
+ */
+
+.section-split {
+  --distance-to-bleed: var(--container-gutter);
+  
+  display: flow-root;
+}
+
+.section-split__column {
+  padding: var(--section-vertical-spacing) var(--container-gutter);
+}
+
+.section-split__column--image {
+  padding-block: calc(var(--section-disable-padding-collapsing, 1) * var(--container-gutter)) var(--container-gutter);
+}
+
+.section-split__column--flushed {
+  padding: 0 !important;
+}
+
+@media (--md-max) {
+  .section-split__column {
+    &:where(:first-child) {
+      padding-block-end: var(--section-stack-row-gap);
+    }
+  
+    &:where(:last-child) {
+      padding-block-start: var(--section-stack-row-gap);
+    }
+  }
+
+  .section-split__column:not(.section-split__column--flushed) + .section-split__column {
+    padding-block-start: 0;
+  }
+}
+
+@media (--md) {
+  .section-split {
+    display: grid;
+    grid-template-columns: var(--section-split-grid-template-columns, repeat(2, minmax(0, 1fr)));
+    align-items: start;
+    reading-flow: grid-columns;
+  }
+
+  .section-split:has(.section-split__column--image) {
+    align-items: center;
+
+    .section-split__column:not(.section-split__column--image) {
+      padding-block: var(--container-gutter);
+    }
+  }
+
+  .section-split__column--image {
+    align-self: stretch;
+  }
+
+  .section-split--reverse .section-split__column:first-child {
+    order: 2;
+  }
+
+  .section-split:not(.section-split--reverse) .section-split__column--image:first-child,
+  .section-split--reverse .section-split__column--image:last-child {
+    padding-inline-end: 0;
+  }
+
+  .section-split:not(.section-split--reverse) .section-split__column--image:last-child,
+  .section-split--reverse .section-split__column--image:first-child {
+    padding-inline-start: 0;
+  }
+}
+
+/**
+ * -------------------------------------------------------------------------------------------------------------------
+ * SECTION STACK. This component allows to create a stacked layout for section content and its associated header. It
+ * set-up the common space. 
+ * -------------------------------------------------------------------------------------------------------------------
+ */
+
+.section-stack {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  row-gap: var(--section-stack-row-gap);
+}
+
+.section-stack--tight {
+  row-gap: min(2rem, var(--section-stack-row-gap));
+}
+
+/**
+ * -------------------------------------------------------------------------------------------------------------------
+ * PADDING COLLAPSING RULES.
+ *
+ * By default, the theme adds top and bottom padding to each section. However, when two consecutive sections are added,
+ * this cause double padding, which is unwanted. The theme therefore adds a set of rules to merge padding. To do that,
+ * you can set the --section-enable-padding-collapsing to 1 for a given section, its top padding will be removed so that
+ * it is effectively blended with the previous section.
+ * 
+ * The theme automatically calculates a CSS property called "--section-has-same-background-as-previous-section" that is
+ * set to 1 if the section has the same background as the previous section. This can be used to determine the rule
+ * -------------------------------------------------------------------------------------------------------------------
+**/
+
+/* Rule 1: two consecutive section that are not split will have their padding collapse if same background */
+
+:where(.shopify-section:has(.section-split, .section-spacing) + .shopify-section:has(.section-spacing)) {
+  --section-enable-padding-collapsing: var(--section-has-same-background-as-previous-section, 0);
+}
+
+/* Rule 2: when a section is preceeded by a split section with padded image, we have to reduce the spacing by --container-gutter
+           (which is the space applied around the image) */
+:where(.shopify-section:has(.section-split__column--image):not(:has(.section-split__column--flushed)) + .shopify-section) {
+  --section-vertical-spacing-block-start: calc(var(--section-vertical-spacing) - var(--container-gutter) * var(--section-has-same-background-as-previous-section, 0));
+}
+
+@media (--sm-max) {
+  /* Rule 3: on mobile only, two consecutive spaced section have collapsed padding if same background */
+  :where(.shopify-section:has(.section-spacing) + .shopify-section:has(.section-spacing)) {
+    --section-enable-padding-collapsing: var(--section-has-same-background-as-previous-section, 0);
+  }
+
+  /* Rule 4: on mobile only, when a split section is preceeded by another split section we remove the spacing on padded image */
+  .shopify-section:has(.section-split) + .shopify-section:has(.section-split) {
+    --section-enable-padding-collapsing: var(--section-has-same-background-as-previous-section, 0);
+  }
+}
+
+@media (--sm) {
+  /* Rule 5: when a section is preceeded by a section split section with a flushed image, padding collapsing is turned off */
+  :where(.shopify-section:has(.section-split__column--flushed) + .shopify-section:has(.section-spacing)) {
+    --section-enable-padding-collapsing: 0;
+  }
+}
+
+/**
+ * -------------------------------------------------------------------------------------------------------------------
+ * CONTAINER (credits here: https://mobile.twitter.com/ChallengesCss/status/1469270181205749771)
+ * -------------------------------------------------------------------------------------------------------------------
+ */
+
+.container {
+  --container-gutter-context: var(--container-gutter);
+  --distance-to-bleed: max(var(--container-gutter-context), 50% - var(--container-max-width) / 2);
+
+  /* Safari 14.1 does not support margin-inline shorthand when using CSS variable */
+  margin-inline-start: max(var(--container-gutter-context), 50% - var(--container-max-width) / 2);
+  margin-inline-end: max(var(--container-gutter-context), 50% - var(--container-max-width) / 2);
+}
+
+.container--narrow {
+  --container-gutter-context: min(1.75rem, var(--container-gutter));
+}
+
+/**
+ * -------------------------------------------------------------------------------------------------------------------
+ * STACK
+ *
+ * This component allows to create lightweight reusable "stack". This should only be used for simple pieces of UX that
+ * share the same spacing on both mobile and desktop. It is not intended for complex stacked layout. If you attempt to
+ * create complex layout you should create a distinct component.
+ * -------------------------------------------------------------------------------------------------------------------
+ */
+
+/* The v-stack allows to lay down items on the block axis. It uses default alignment and justification that matches
+   the most default use case */
+   
+.v-stack {
+  display: grid;
+  align-content: start;
+  justify-items: inherit; /* This allows to inherit alignment when nesting v-stack */
+  grid-template-columns: minmax(0, 1fr); /* Prevent grid blowout */
+}
+
+/* The h-stack allows to lay down items on the inline axis. It uses default alignment that matches the most default use case */
+.h-stack {
+  display: flex;
+  align-items: center;
+  justify-content: inherit; /* This allows to inherit alignment when nesting h-stack */
+}
+
+/**
+ * -------------------------------------------------------------------------------------------------------------------
+ * BLEED (the full-bleed utility allows to bleed without compensate by padding). For this to work, the parent must
+ * define a "--distance-to-bleed" for this to work. The container automatically set this, which means this will work
+ * out of the box in the context of the container
+ * -------------------------------------------------------------------------------------------------------------------
+ */
+
+.bleed, .full-bleed, ::part(bleed), ::part(full-bleed) {
+  /* Safari 14.1 does not support margin-inline shorthand when using CSS variable */
+  margin-inline-start: calc(-1 * var(--distance-to-bleed));
+  margin-inline-end: calc(-1 * var(--distance-to-bleed));
+}
+
+.bleed, ::part(bleed) {
+  /* Safari 14.1 does not support padding-inline shorthand when using CSS variable */
+  padding-inline-start: var(--distance-to-bleed);
+  padding-inline-end: var(--distance-to-bleed);
+  scroll-padding-inline: var(--distance-to-bleed);
+}
+
+@media (--sm) {
+  .sm\:unbleed {
+    margin-inline: 0;
+    padding-inline: 0;
+    scroll-padding-inline: 0;
+  }
+}
+
+@media (--md) {
+  .md\:unbleed {
+    margin-inline: 0;
+    padding-inline: 0;
+    scroll-padding-inline: 0;
+  }
+}
+
+@media (--lg) {
+  .lg\:unbleed {
+    margin-inline: 0;
+    padding-inline: 0;
+    scroll-padding-inline: 0;
+  }
+}

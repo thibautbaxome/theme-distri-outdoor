@@ -1,0 +1,111 @@
+/**
+ * -------------------------------------------------------------------------------------------------------------------
+ * BLOG POST CARD
+ * -------------------------------------------------------------------------------------------------------------------
+ */
+
+.blog-post-card {
+  position: relative;
+  display: grid;
+  align-content: start;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 0;
+}
+
+.blog-post-card__content {
+  padding-inline: var(--blog-post-card-padding-inline);
+}
+
+.blog-post-card__image-container {
+  margin-block-end: 1rem;
+}
+
+@supports (grid-template-rows: subgrid) {
+  .blog-post-card:not(.blog-post-card--horizontal) {
+    grid-template-rows: subgrid;
+    grid-row: span 2;
+  }
+}
+
+@media (--md) {
+  .blog-post-card__image-container {
+    margin-block-end: 1.5rem;
+  }
+
+  .blog-post-card--horizontal {
+    display: flex;
+    column-gap: 2rem;
+
+    .blog-post-card__image-container {
+      width: 200px;
+      margin-block-end: 0;
+      flex-shrink: 0;
+    }
+  }
+}
+
+@media (--lg) {
+  .blog-post-card--horizontal {
+    column-gap: 3rem;
+
+    .blog-post-card__image-container {
+      width: 280px;
+    }
+  }
+}
+
+/**
+ * -------------------------------------------------------------------------------------------------------------------
+ * BLOG POST LIST
+ * -------------------------------------------------------------------------------------------------------------------
+ */
+
+.blog-post-list {
+  display: grid;
+  grid: var(--blog-post-list-grid);
+  gap: var(--blog-post-list-gap);
+
+  @media not (--supports-hover) {
+    scroll-snap-type: x mandatory;
+  }
+}
+
+.blog-post-list__highlighted-article {
+  grid-column: 1 / -1;
+}
+
+.blog-post-list__newsletter {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  align-items: center;
+  min-height: 100%;
+
+  .blog-post-list__newsletter-inner {
+    min-height: 100%;
+    padding: var(--container-gutter);
+  }
+
+  @media (--sm) {
+    @supports (grid-template-rows: subgrid) {
+      grid-template-rows: subgrid;
+      grid-row: span 2;
+
+      .blog-post-list__newsletter-inner {
+        grid-row: span 1;
+      }
+    }
+  }
+}
+
+@media (--md) {
+  .blog-post-list--with-horizontal-separator {
+    .blog-post-card {
+      border-block-start-width: 1px;
+      padding-block-start: 2rem;
+    }
+
+    .blog-post-card {
+      padding-block-start: 3rem;
+    }
+  }
+}

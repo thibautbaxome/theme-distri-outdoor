@@ -1,0 +1,72 @@
+.accordion {
+  --accordion-block-padding: 0.875rem;
+  --accordion-inline-padding: 0;
+
+  display: block;
+  box-sizing: content-box; /* Allows borders to not mess with animation */
+  justify-self: stretch; /* Ensure it stretchs when embedded in grid and flex context */
+  box-shadow: 0 1px 0 rgb(var(--border-color)), 0 1px 0 rgb(var(--border-color)) inset;
+  text-align: start;
+  transition: color 0.2s ease;
+}
+
+.accordion__summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  column-gap: 0.75rem;
+  padding: var(--accordion-block-padding) var(--accordion-inline-padding);
+  transition: color 0.2s ease;
+
+  img, svg {
+    margin: 0;
+  }
+
+  .icon-accordion-arrow, .icon-accordion-small-arrow {
+    transition: transform 0.3s ease-in-out;
+    flex-shrink: 0;
+
+    .accordion.is-open & {
+      transform: rotate(180deg);
+    }
+  }
+}
+
+.accordion__content {
+  padding-block-end: var(--accordion-block-padding);
+  padding-inline: var(--accordion-inline-padding);
+}
+
+@media (--sm) {
+  .accordion {
+    --accordion-block-padding: 1.25rem;
+  }
+
+  .accordion--large {
+    --accordion-block-padding: 1.65rem;
+  }
+}
+
+/**
+ * -------------------------------------------------------------------------------------------------------------------
+ * SECONDARY BG VARIATION
+ * 
+ * When used with the secondary background, we adapt the layout of each accordion
+ * -------------------------------------------------------------------------------------------------------------------
+ */
+
+.accordion.bg-secondary {
+  --accordion-inline-padding: 1rem;
+
+  box-shadow: none;
+
+  & + .accordion {
+    margin-block-start: 0.25rem;
+  }
+}
+
+@media (--sm) {
+  .accordion.bg-secondary {
+    --accordion-inline-padding: 1.75rem;
+  }
+}

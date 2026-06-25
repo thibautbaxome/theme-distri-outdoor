@@ -1,0 +1,27 @@
+.shopify-challenge__container,
+.shopify-policy__container,
+.shopify-email-marketing-confirmation__container {
+  max-width: 48rem;
+  padding-block: var(--section-vertical-spacing);
+}
+
+.shopify-challenge__container {
+  display: grid;
+  gap: 1rem;
+
+  & > form {
+    display: contents;
+  }
+}
+
+.shopify-email-marketing-confirmation__container {
+  text-align: center;
+}
+
+.shopify-policy__title {
+  margin-block-end: var(--section-stack-row-gap);
+
+  h1 {
+    font: inherit;
+  }
+}

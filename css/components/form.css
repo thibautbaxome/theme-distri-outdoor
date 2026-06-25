@@ -1,0 +1,441 @@
+/**
+ Example usage of all the components defined in this page:
+
+ // Standard form
+
+ <form class="form">
+  <div class="fieldset">
+    {%- render 'input', name: 'first_name', label: 'First name' -%}
+    {%- render 'input', name: 'last_name', label: 'Last name' -%}
+
+    <div class="fieldset-row">
+      {%- render 'input', name: 'city', label: 'City' -%}
+      {%- render 'input', name: 'zip_code', label: 'Zip code' -%}
+    </div>
+
+    {%- render 'checkbox', name: 'default', label: 'Set as default' -%}
+  </div>
+
+  {%- render 'button', type: 'submit', content: 'Submit' -%}
+ </form>
+
+ // Short form with just an email and button
+ <form class="form-row">
+   {%- render 'input', type: 'email', name: 'email', label: 'Email' -%}
+   {%- render 'button', type: 'submit', content: 'Submit' -%}
+ </form>
+ */
+
+/**
+ * FORM
+ *
+ * The form base component is used to wrap a list of inputs (typically wrapped in a fieldset) and a button (typically
+ * a submit button. You can edit the default variables in the "variables.css".
+ *
+ * The form row is variation that is typically used when we have only two fields (like a newsletter form) to show it
+ * in a more compact way.
+ */
+
+.form {
+  display: grid;
+  align-content: start;
+  row-gap: var(--form-gap);
+}
+
+.form-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--fieldset-gap);
+
+  & > .form-control {
+    flex: 1 0 var(--fieldset-row-control-width, 12rem);
+  }
+
+  & > button {
+    flex-shrink: 0;
+  }
+}
+
+/**
+ * FIELDSET
+ *
+ * The fieldset is an abstraction that wrap a list of form controls. This setup the gap between each fields.
+ */
+
+.fieldset {
+  display: grid;
+  gap: var(--fieldset-gap);
+}
+
+.fieldset--tight {
+  gap: 0.5rem;
+}
+
+/**
+ * FIELDSET ROW
+ *
+ * The fieldset row allows to create a sub-row within a fieldset. It reuses the same gap as the parent, but will
+ * lay out the fields in the same row if there is enough space to fit them all
+ */
+
+.fieldset-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
+  gap: inherit;
+}
+
+/**
+ * FORM CONTROL
+ *
+ * The form control wrap an input and an associated label. This is the building block of a form. The label can
+ * either be floating or as a block.
+ */
+
+.form-control {
+  position: relative;
+  display: grid;
+  gap: var(--form-control-gap);
+}
+
+/**
+ * CHECKBOX CONTROL
+ *
+ * Checkbox control is similar to a "form-control" but is used to wrap a checkbox with its associated label.
+ */
+
+.checkbox-control {
+  text-align: start;
+  
+  .checkbox, .radio {
+    margin-inline-end: var(--checkbox-control-gap);
+  }
+
+  .fieldset & {
+    margin-block-start: 0.25rem; /* When inside a fieldset we increase a bit the spacing between other controls */
+  }
+}
+
+/**
+ * INPUT
+ *
+ * Input represents fields that accept a text, such as a standard input or a textarea.
+ *
+ * For a given component, you can also override the following variables to change the appearance of an input:
+ *
+ * --input-background: the background of the input, defaults to transparent
+ * --input-text-color: the color of the input, defaults to the page text color
+ */
+
+.input, .textarea, .select {
+  width: 100%;
+  appearance: none;
+  padding: var(--input-padding-block) var(--input-padding-inline);
+  border: 1px solid rgb(var(--input-text-color) / calc(var(--has-transparent-background, 0) * 0.85 + 0.15));
+  border-radius: var(--input-border-radius);
+  background: rgb(var(--input-background, transparent));
+  color: rgb(var(--input-text-color, var(--text-color)));
+  text-align: start;
+  text-transform: var(--input-text-transform);
+  vertical-align: top;
+}
+
+.textarea {
+  border-radius: min(12px, var(--input-border-radius)); /* High value for textarea looks bad so we limit it */
+}
+
+.input:focus, .textarea:focus, .select:focus-visible {
+  border-color: currentColor;
+  outline: none;
+}
+
+.select ~ svg, .select > svg {
+  position: absolute;
+  inset-block-start: calc(50% - (9px / 2)); /* 7px is the height of the chevron */
+  inset-inline-end: calc(var(--input-padding-inline) + 1px); /* extra px compensates the border */
+  pointer-events: none;
+}
+
+.select:has(option[value=""]:checked) {
+  color: rgb(var(--text-color) / 0.7);
+}
+
+/**
+ * FORM LABEL
+ *
+ * In order to remain accessible, most of the label are floating inside the input, which allows to save space but
+ * still have the label always visible (contrary to standard placeholder).
+ */
+
+.floating-label {
+  position: absolute;
+  height: 100%;
+  padding-block: var(--input-padding-block);
+  inset-block-start: 0;
+  inset-inline-start: var(--input-padding-inline);
+  border: 1px solid transparent; /* Allows to take into account the field border */
+  z-index: 1;
+  color: rgb(var(--input-text-color, var(--text-color)) / calc(var(--has-transparent-background, 0) * 0.3 + 0.7));
+  transition: transform 0.15s ease-in-out;
+  transform-origin: var(--transform-origin-start) top;
+  pointer-events: none;
+
+  /* When it is an input or select (not a textarea) input can often be combined with a button and have their height increased, so
+     we use flexbox to center them */
+  .input ~ & {
+    display: flex;
+    align-items: center;
+  }
+
+  :-webkit-autofill ~ & {
+    color: black; /* Make sure the input can remains visible even when the browser set up the autofill background */
+  }
+}
+
+:is(.input, .textarea):focus,
+:is(.input, .textarea):not(:placeholder-shown),
+:is(.input, .textarea, .select):-webkit-autofill,
+.select:not(:has(option[value=""]:checked)) {
+  &:has(~ .floating-label) {
+    padding-block: calc(1.6 * var(--input-padding-block)) calc(0.4 * var(--input-padding-block));
+  }
+
+  & ~ .floating-label {
+    transform: scale(0.65) translateY(calc(-0.4 * var(--input-padding-block)));
+  }
+}
+
+/* This allows to have focus ring when the label contains directly an input */
+label:focus-within:has(:focus-visible) {
+  outline: 5px auto Highlight;
+  outline: 5px auto -webkit-focus-ring-color;
+}
+
+/**
+ * INPUT PREFIX
+ *
+ * This component allows to add an element (such as a currency symbol) before the input itself
+ */
+
+.input-prefix {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex: 1 0 0;
+  min-width: 0; /* Required for Firefox */
+  padding: 0.625rem 1rem;
+  border-radius: min(0.625rem, var(--button-border-radius));
+  border: 1px solid rgb(var(--text-color) / 0.12);
+
+  &:focus-within {
+    border-color: rgb(var(--text-color));
+    box-shadow: inset 0 0 0 1px rgb(var(--text-color));
+  }
+
+  & > .field {
+    padding: 0;
+    background: transparent;
+    appearance: textfield;
+    min-width: 0;
+    width: 100%;
+    margin-inline-start: 0.625rem;
+    border: none;
+    text-align: end;
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  & > .field::-webkit-outer-spin-button,
+  & > .field::-webkit-inner-spin-button {
+    appearance: none;
+    margin: 0;
+  }
+}
+
+/**
+ * INPUT ICON
+ *
+ * Input icon is an icon embedded inside an input (for instance, a magnifying glass appearing inside a search input).
+ * This component should not be abused and used too much, as it can cause accessibility issues.
+ */
+
+.input-icon {
+  position: absolute;
+  inset-inline-end: var(--input-padding-inline);
+  inset-block-start: var(--input-padding-block);
+  transition: opacity 0.2s ease-in-out, visibility 0.2s ease-in-out;
+
+  .form-control:has(:focus-within) + &.hide-on-focus {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+/**
+ * CHECKBOX
+ */
+
+.checkbox {
+  position: relative;
+  appearance: none;
+  width: var(--checkbox-size);
+  height: var(--checkbox-size);
+  vertical-align: middle;
+  background: rgb(var(--text-color) / 0.15) url(./checkmark.svg) no-repeat center / 0;
+  border-radius: 2px;
+  transition: background-color 0.2s ease-in-out, border-color 0.2s ease-in-out;
+
+  @supports (height: 1cap) {
+    vertical-align: calc(0.5cap - 0.5 * var(--checkbox-size));
+  }
+
+  &:checked {
+    background-color: rgb(var(--accent));
+    background-size: 10px 8px;
+    background-blend-mode: difference;
+
+    & ~ label {
+      opacity: 1;
+    }
+  }
+
+  &:disabled, &:disabled ~ label {
+    opacity: 0.5;
+    cursor: default;
+  }
+
+  &:not(:disabled, :checked) ~ label {
+    opacity: 0.7;
+  }
+
+  & ~ label {
+    transition: 0.2s ease-in-out;
+  }
+}
+
+/**
+ * RADIO
+ */
+
+.radio {
+  --radio-size: 0.625rem;
+
+  position: relative;
+  appearance: none;
+  width: var(--radio-size);
+  height: var(--radio-size);
+  vertical-align: calc(0.5cap - 0.5 * var(--radio-size));
+  background: transparent;
+  border-radius: 100%;
+  border: 1px solid rgb(var(--text-color) / 0.3);
+  transition: background-color 0.1s ease-in-out, border-color 0.1s ease-in-out;
+
+  &:checked {
+    background-color: rgb(var(--accent));
+    border-color: rgb(var(--text-color));
+  }
+
+  &:disabled, &:disabled ~ label {
+    opacity: 0.5;
+    cursor: default;
+  }
+}
+
+/**
+ * INPUT WITH CONNECTED SUBMIT
+ *
+ * This component allows to create an input with an associated connected submit, which can be useful
+ * for very small forms (such as a newsletter form). On mobile, depending on the design, the button
+ * will appear at the bottom
+ */
+
+.input-with-connected-submit {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+@media (--sm) {
+  .input-with-connected-submit {
+    flex-direction: row;
+    gap: 0;
+
+    .form-control {
+      flex-grow: 1;
+    }
+
+    .input {
+      border-inline-end-width: 0;
+      border-end-end-radius: 0;
+      border-start-end-radius: 0;
+      min-height: 100%; /* Needed to make sure the input is the same height as the button */
+    }
+
+    .button {
+      border-start-start-radius: 0;
+      border-end-start-radius: 0;
+    }
+
+    /* In Arabic, some fields like email must be treated as LTR, so for those use cases we need to invert */
+    [dir="rtl"] & .input[dir="ltr"] {
+      border-inline-start-width: 0;
+      border-inline-end-width: 1px;
+    }
+  }
+}
+
+/**
+ * INPUT LINK
+ *
+ * Allows to position a link inside an input, which can be useful for instance for a password reset form. This
+ * however must be used sparingly as it can cause accessibility issues.
+ */
+
+.input-link {
+  position: absolute !important;
+  inset-block-start: calc(50% - 0.5lh);
+  inset-inline-end: var(--input-padding-inline);
+}
+
+/**
+ * SWITCH
+ *
+ * The switch is a specialized kind of checkbox that usually shows as a toggle element.
+ */
+
+.switch {
+  --switch-height: 1rem;
+  --switch-width: 2rem;
+  --switch-padding: 0.15rem;
+  --switch-toggle-size: 12px;
+
+  display: grid;
+  align-items: center;
+  appearance: none;
+  height: var(--switch-height);
+  width: var(--switch-width);
+  padding-inline: var(--switch-padding);
+  align-self: center;
+  border-radius: var(--rounded-full);
+  background: rgb(var(--text-color) / 0.15);
+  transition: background 0.2s ease-in-out;
+
+  &::after {
+    content: '';
+    width: var(--switch-toggle-size);
+    height: var(--switch-toggle-size);
+    background: rgb(var(--background));
+    border-radius: var(--rounded-full);
+    transition: transform 0.2s ease-in-out;
+    box-shadow: 0 1px 1px rgb(0 0 0 / 0.2);
+  }
+
+  &:checked {
+    background: rgb(var(--accent));
+
+    &::after {
+      transform: translateX(calc(var(--transform-logical-flip) * (var(--switch-width) - var(--switch-toggle-size) - var(--switch-padding) * 2)));
+    }
+  }
+}

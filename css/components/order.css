@@ -1,0 +1,146 @@
+/**
+ * ------------------------------------------------------------------------------------------
+ * ORDER
+ * ------------------------------------------------------------------------------------------
+ */
+
+ /* The table has a few visual differences compared to standard table */
+
+.order-summary {
+  td {
+    padding: 0.5rem 0;
+    border-block-width: 0;
+  }
+
+  tr:first-child td {
+    padding-block-start: 1.5rem;
+    border-block-start-width: 1px;
+  }
+
+  tr:last-child td {
+    padding-block-end: 1.5rem;
+    border-block-end-width: 1px;
+  }
+
+  td:nth-child(2) {
+    min-width: 50px; /* Target the quantity */
+  }
+
+  td:nth-child(3) {
+    min-width: 100px; /* Target the price */
+  }
+}
+
+.order-totals {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 0.8rem 1.5rem;
+}
+
+@media (--sm-max) {
+  .order-summary :is(td:nth-child(2), td:nth-child(3)) {
+    display: none; /* Hide quantity and line price on mobile */
+  }
+}
+
+@media (--sm) {
+  .order-summary {
+    td {
+      padding-block: 0.75rem;
+    }
+  
+    tr:first-child td {
+      padding-block-start: 2rem;
+    }
+  
+    tr:last-child td {
+      padding-block-end: 2rem;
+    }
+  }
+  
+  .order-totals {
+    max-width: 25rem;
+    margin-inline-start: auto;
+  }
+}
+
+/**
+ * ------------------------------------------------------------------------------------------
+ * LINE ITEM
+ * ------------------------------------------------------------------------------------------
+ */
+
+.line-item {
+  display: flex;
+  flex-direction: row;
+  column-gap: 1rem;
+  align-items: center;
+}
+
+.line-item__media {
+  flex: 0 0 5rem;
+  min-width: 0;
+}
+
+.line-item__info-with-line-price {
+  display: flex;
+  flex-grow: 1;
+  align-items: start;
+  justify-content: space-between;
+}
+
+.line-item__error-container {
+  margin-block-start: 0.375rem;
+}
+
+.line-item__remove-button {
+  display: flex;
+  align-items: center;
+  column-gap: 0.25rem;
+
+  .text-xs {
+    position: relative;
+    top: 1px; /* Some pixel adjustment */
+  }
+}
+
+@media (--sm) {
+  .line-item {
+    column-gap: 1.5rem;
+  }
+
+  .line-item__media {
+    flex-basis: 5.5rem;
+  }
+}
+
+@media (--supports-hover) {
+  .line-item__remove-button {
+    opacity: 0;
+    transition: opacity 0.2s ease-in-out;
+
+    .line-item:hover & {
+      opacity: 0.5;
+    }
+
+    .line-item:hover &:hover {
+      opacity: 1;
+    }
+  }
+}
+
+/**
+ * ------------------------------------------------------------------------------------------
+ * DISCOUNT BADGE
+ * ------------------------------------------------------------------------------------------
+ */
+
+.discount-badge {
+  display: flex;
+  column-gap: 0.5rem;
+  align-items: center;
+  justify-self: baseline;
+  padding: 0.375rem;
+  background: rgb(var(--text-color));
+  color: rgb(var(--background));
+}

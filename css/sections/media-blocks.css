@@ -1,0 +1,19 @@
+.media-blocks {
+  display: grid;
+  grid: var(--media-blocks-grid);
+  gap: var(--media-blocks-gap);
+  align-items: center;
+
+  .section-spacing & {
+    padding-block: 1px /* Ensure it is not cut when overflow */
+  }
+}
+
+.media-blocks__item {
+  display: block;
+  height: 100%;
+}
+
+.media-blocks__item--bordered {
+  outline: 1px solid rgb(var(--border-color));
+}

@@ -1,0 +1,662 @@
+/**
+ * -------------------------------------------------------------------------------------------------------------------
+ * PRODUCT CARD
+ * -------------------------------------------------------------------------------------------------------------------
+ */
+
+.product-card {
+  --product-card-inner-padding: 1rem;
+
+  display: grid;
+  position: relative; /* This is important to prevent overflow issue when products are in carousel ; never remove! */
+  grid-template-columns: minmax(0, 1fr);
+  row-gap: 0;
+  scroll-snap-align: start;
+  overflow-wrap: anywhere; /* Ensure it works for long words such as German words */
+  isolation: isolate;
+}
+
+.product-card--bordered {
+  /* Trick to simulate border collapse */
+  outline: 1px solid rgb(var(--border-color));
+
+  .product-list:has(&) {
+    --product-list-card-border-width: 1px;
+    
+    gap: 1px;
+    padding-block: 1px; /* Ensure the outside border is not cut when cards are inside a carousel */
+  }
+}
+
+.product-card__figure {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  align-items: start;
+  grid-row: 1;
+  grid-column: 1 / -1;
+
+  .badge-list {
+    position: absolute;
+    z-index: 1;
+    padding: var(--product-card-inner-padding);
+  }
+}
+
+.product-card__media {
+  position: relative;
+  display: block;
+  min-height: 100%;
+  overflow: hidden;
+  isolation: isolate; /* Needed for mix-blend-mode to work on secondary image */
+}
+
+.product-card__image {
+  margin-inline: auto;
+  object-fit: contain;
+  object-position: center;
+  transition: opacity 0.2s cubic-bezier(0.4, 0, 0.2, 1), transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.product-card__image--secondary {
+  position: absolute;
+  display: none; /* Make sure it is not loaded on touch devices */
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  inset-block-start: 0;
+  inset-inline-start: 0;
+
+  @media (--supports-hover) {
+    display: block;
+    opacity: 0;
+    mix-blend-mode: plus-lighter;
+  }
+}
+
+@media (--supports-hover) {
+  .product-card__image--secondary {
+    transform: scale(1.05);
+  }
+
+  .product-card__figure:has(.product-card__image--secondary):hover {
+    .product-card__image--primary {
+      opacity: 0;
+      transform: scale(1.05);
+    }
+
+    .product-card__image--secondary {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+}
+
+.product-card__info {
+  padding: var(--product-card-inner-padding);
+
+  .product-card--info-outside.product-card--blends & {
+    /* We remove the horizontal spacing ONLY when the gap between cards is superior to 8px */
+    padding-block-end: 0;
+  }
+
+  .product-card--info-outside.product-card--blends &.product-card__info--flush {
+    padding-inline: 0;
+  }
+
+  .product-card__swatch-list {
+    grid-area: auto;
+    margin: 0;
+  }
+}
+
+.product-card__swatch-list {
+  grid-row: 1;
+  grid-column: 1 / -1;
+  margin: var(--product-card-inner-padding);
+  z-index: 1; /* This is needed, do not remove */
+}
+
+@media (--sm-max) {
+  .product-card__swatch-list {
+    .color-swatch {
+      --swatch-width: 0.875rem;
+      --swatch-height: 0.875rem;
+    }
+    
+    .color-swatch--rectangle {
+      --swatch-width: 1.2rem;
+    }
+  }
+}
+
+@media (--sm) {
+  .product-card {
+    --product-card-inner-padding: 1rem;
+  }
+}
+
+@media (--2xl) {
+  .product-card {
+    --product-card-inner-padding: 1.5rem;
+  }
+}
+
+/**
+ * -------------------------------------------------------------------------------------------------------------------
+ * QUICK BUY
+ * -------------------------------------------------------------------------------------------------------------------
+ */
+
+.product-card__quick-buy {
+  position: absolute;
+  inset-inline-end: 0;
+  inset-block-end: 0;
+  padding: max(1rem, var(--product-card-inner-padding));
+  z-index: 2;
+
+  @media (--supports-hover) {
+    width: 100%;
+    inset-inline: 0 auto;
+    transform: translateY(6px);
+    opacity: 0;
+    transition: opacity 0.15s ease-in-out, transform 0.15s ease-in-out;
+
+    .product-card--info-inside:hover &,
+    .product-card--info-outside .product-card__figure:hover & {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
+
+@media (--supports-hover) {
+  .product-card:focus-within {
+    .product-card__quick-buy {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .product-card__figure:hover:has(.product-card__image--secondary) {
+    .product-card__image--primary {
+      opacity: 0;
+      transform: scale(1.05);
+    }
+
+    .product-card__image--secondary {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+}
+
+@media (--supports-touch) {
+  .product-card__quick-buy--top-mobile {
+    padding: var(--product-card-inner-padding);
+    inset-block: 0 auto;
+  }
+}
+
+.modal--quick-buy {
+  --modal-content-margin: 0px;
+  --modal-content-width: 61.25rem;
+
+  &::part(body) {
+    position: relative;
+  }
+}
+
+.quick-buy {
+  .product-info {
+    position: relative;
+    padding-inline: 0;
+    margin: 0 !important;
+    inset-block-start: 0 !important;
+  }
+}
+
+.quick-buy__product-image {
+  width: 6.25rem;
+  flex-shrink: 0;
+}
+
+@media (--md-max) {
+  .quick-buy__info {
+    margin-trim: block;
+
+    [data-block-type="vendor"],
+    [data-block-type="title"],
+    [data-block-type="badges"],
+    [data-block-type="price"],
+    [data-block-type="rating"],
+    [data-block-type="separator"] {
+      display: none;
+    }
+
+    /* This tries to simulate margin-trim */
+    &:has(.product-info__block-item:first-child:where([data-block-type="vendor"], [data-block-type="title"], [data-block-type="badges"], [data-block-type="price"], [data-block-type="rating"], [data-block-type="separator"])) {
+      .product-info__block-list {
+        margin-block-start: calc(-1 * var(--product-block-item-margin));
+      }
+    }
+  }
+}
+
+@media (--md) {
+  .modal--quick-buy {
+    &::part(body) {
+      padding: 0;
+    }
+  }
+
+  .quick-buy {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    .product-gallery {
+      margin: 0;
+    }
+  }
+
+  .quick-buy__info {
+    padding: 3rem;
+  }
+}
+
+/**
+ * -------------------------------------------------------------------------------------------------------------------
+ * FLOATING SIZE SELECTOR
+ * -------------------------------------------------------------------------------------------------------------------
+ */
+
+.product-card__floating-size-selector {
+  --selector-layout-gap: 0.25rem;
+  --selector-grid-max-column-count: 6;
+  --selector-item-min-width: 50px;
+  --selector-gap-count: calc(var(--selector-grid-max-column-count) - 1);
+  --selector-total-gap-width: calc(var(--selector-gap-count) * var(--selector-layout-gap));
+  --selector-item-max-width: calc((100% - var(--selector-total-gap-width)) / var(--selector-grid-max-column-count));
+
+  position: absolute;
+  display: grid;
+  inset-block-end: 0;
+  grid-template-columns: repeat(auto-fit, minmax(max(var(--selector-item-min-width), var(--selector-item-max-width)), 1fr));
+  gap: var(--selector-layout-gap);
+  padding: var(--product-card-inner-padding);
+  width: 100%;
+  transform: translateY(6px);
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.15s ease-in-out, visibility 0.15s ease-in-out, transform 0.15s ease-in-out;
+
+  .product-card__figure:hover & {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+}
+
+.floating-size-selector__button {
+  --button-background: var(--button-text-primary);
+  --button-text-color: var(--button-background-primary);
+  --button-border-color: var(--border-color);
+  --button-padding-inline: 0px;
+
+  transition: color 0.2s ease-in-out, background-color 0.2s ease-in-out, border-color 0.2s ease-in-out;
+
+  @media (--supports-hover) {
+    &:hover {
+      --button-background: var(--button-background-primary);
+      --button-text-color: var(--button-text-primary);
+      --button-border-color: var(--button-background-primary);
+    }
+  }
+
+  &.is-disabled {
+    --button-text-color: var(--button-background-primary) / 0.5;
+
+    text-decoration: line-through;
+    text-decoration-color: rgb(var(--button-text-color));
+    pointer-events: none;
+  }
+}
+
+/**
+ * -------------------------------------------------------------------------------------------------------------------
+ * INFO OUTSIDE VARIATION
+ * 
+ * In this variation, the info is displayed outside the image (typical layout), so we setup a subgrid to allow doing 
+ * complex positioning easier
+ * -------------------------------------------------------------------------------------------------------------------
+ */
+
+.product-card--info-outside {
+  .product-card__info {
+    padding-block-start: 1rem;
+  }
+}
+
+/**
+ * -------------------------------------------------------------------------------------------------------------------
+ * INFO INSIDE VARIATION
+ * 
+ * In this variation, the info is displayed on top of the image.
+ * -------------------------------------------------------------------------------------------------------------------
+ */
+
+.product-card--info-inside {
+  .product-card__info {
+    grid-column: 1 / -1;
+    grid-row: 1 / span 2;
+    z-index: 1;
+    pointer-events: none; /* The whole card must be clickable */
+  }
+}
+
+/**
+ * -------------------------------------------------------------------------------------------------------------------
+ * PRODUCT LIST
+ * -------------------------------------------------------------------------------------------------------------------
+ */
+
+.product-list {
+  --product-list-default-column-count: 2;
+  --product-list-total-gap-width: calc((var(--product-list-column-count, var(--product-list-default-column-count)) - 1) * (var(--product-list-column-gap) + var(--product-list-card-border-width, 0px)));
+  --product-list-card-width: calc((100% - var(--product-list-total-gap-width)) / var(--product-list-column-count, var(--product-list-default-column-count)));
+
+  display: grid;
+  grid: auto-flow dense / repeat(auto-fit, minmax(0, max(var(--product-list-card-min-width, 0px), var(--product-list-card-width))));
+  align-items: stretch;
+  justify-content: safe start;
+  column-gap: var(--product-list-column-gap);
+  row-gap: var(--product-list-row-gap);
+  reading-flow: grid-rows;
+
+  @supports (grid-template-rows: subgrid) {
+    & > * {
+      grid-template-rows: subgrid;
+      grid-row: span var(--product-card-row-count);
+    }
+  }
+}
+
+.product-list:has(.product-card--info-outside):not(:has(.product-card--blends)) {
+  --product-list-row-gap: var(--product-list-column-gap);
+}
+
+.product-list--padded {
+  padding-inline: var(--product-list-padding-inline);
+}
+
+/* Scroll variation */
+
+.product-list--carousel {
+  grid: auto / auto-flow var(--product-list-card-width);
+
+  &:has(.product-card__swatch-list) {
+    padding-block-end: 5px; /* We add some spacing to ensure the carousel is not cut */
+  }
+
+  @supports (grid-template-rows: subgrid) {
+    .floating-controls-container &:has(.product-card--info-outside) {
+      display: grid;
+      grid-template-rows: subgrid;
+      grid-row: 1 / span var(--product-card-row-count);
+    }
+  }
+}
+
+.product-card--highlight {
+  grid-column: span 2; /* A highlighted card will take two columns on mobile */
+}
+
+@media (--sm-max) {
+  .product-list--carousel {
+    --product-list-card-width: min(300px, 65%);
+  }
+
+  .sm-max\:product-list--carousel {
+    grid: auto / auto-flow var(--product-list-card-width);
+  }
+}
+
+@media (--md-max) {
+  .md-max\:product-list--carousel {
+    grid: auto / auto-flow var(--product-list-card-width);
+  }
+}
+
+@media (--sm) {
+  .product-list {
+    --product-list-card-min-width: 10rem; /* 160px ; cards can't go below this width desktop */
+    --product-list-default-column-count: 2;
+
+    @supports (grid-template-rows: subgrid) {
+      .product-card--highlight {
+        grid-row: span calc(var(--product-card-row-count) * 2);
+
+        .product-card__figure {
+          grid-row: 1 / span max(2, var(--product-card-row-count) * 2 - 1);
+        }
+
+        .product-card__media, .product-card__image {
+          height: 100%;
+        }
+      }
+    }
+  }
+
+  .product-list--spotlight {
+    grid: auto / auto-flow 100%;
+    justify-content: safe start;
+    scroll-snap-type: x mandatory;
+
+    .product-card {
+      scroll-snap-align: start;
+      scroll-snap-stop: always;
+    }
+
+    .product-card__info {
+      .product-card--info-outside.product-card--blends & {
+        padding-inline: 0;
+      }
+    }
+
+    &:has(.product-card__swatch-list) {
+      padding-block-end: 5px; /* We add some spacing to ensure the carousel is not cut */
+    }
+  }
+
+  .sm\:product-list--carousel {
+    grid: auto / auto-flow var(--product-list-card-width);
+  }
+}
+
+@media (--md) {
+  .product-list {
+    --product-list-default-column-count: 4;
+  }
+
+  .product-card--highlight {
+    grid-area: span 2 / span 2; /* A highlighted card will take two rows and two columns */
+  }
+
+  .md\:product-list--carousel {
+    grid: auto / auto-flow var(--product-list-card-width);
+  }
+
+  @supports (grid-template-rows: subgrid) {
+    .product-card--highlight {
+      grid-area: span calc(var(--product-card-row-count) * 2) / span 2; /* A highlighted card will take two rows and two columns */
+    }
+  }
+}
+
+/**
+ * -------------------------------------------------------------------------------------------------------------------
+ * PRODUCT LIST PROMO BLOCK
+ * -------------------------------------------------------------------------------------------------------------------
+ */
+
+.product-list__promo {
+  grid-column: 1 / -1; /* Ensure the promo block fill the whole row on mobile */
+}
+
+@media (--sm-max) {
+  .product-list__promo {
+    &:not(:last-child) {
+      margin-block-end: calc(-1 * var(--product-list-row-gap) + var(--product-list-column-gap));
+    }
+    
+    .content-box__background-media {
+      position: relative !important;
+    }
+  }
+}
+
+@media (--sm) {
+  .product-list__promo {
+    grid-column: span var(--product-list-promo-column-span);
+    grid-row: span var(--product-list-promo-row-span);
+  }
+
+  @supports (grid-template-rows: subgrid) {
+    .product-list__promo {
+      display: grid;
+      grid-row: span calc(var(--product-card-row-count) * var(--product-list-promo-row-span));
+      gap: 0;
+    }
+
+    .product-list:has(.product-card--info-outside) {
+      .product-list__promo .content-box {
+        grid-row: span calc(var(--product-card-row-count) * var(--product-list-promo-row-span) - 1);
+      }
+    }
+
+    .product-list:has(.product-card--info-inside) {
+      .product-list__promo .content-box {
+        grid-row: span calc(var(--product-card-row-count) * var(--product-list-promo-row-span));
+      }
+    }
+  }
+}
+
+/**
+ * On collection pages, the layout can be changed, so we have to switch the CSS properties manually
+ */
+
+@media (--sm-max) {
+  .product-list[mobile-items-per-row="1"] {
+    --product-list-column-count: 1;
+  }
+
+  .product-list[mobile-items-per-row="2"] {
+    --product-list-column-count: 2;
+  }
+
+  .product-list[mobile-items-per-row="3"] {
+    --product-list-column-count: 3;
+    --product-list-row-gap: var(--product-list-column-gap); /* As all info is hidden we use the same gap */
+
+    .product-list__promo,
+    .product-card__figure .badge-list,
+    .product-card__info,
+    .product-card__quick-buy {
+      display: none; /* We don't have enough space to show info on 3 items per row */
+    }
+
+    /** Can't be highlighted */
+    .product-card--highlight {
+      grid-column: span 1;
+    }
+  }
+}
+
+@media (--sm) {
+  .product-list[desktop-layout="thumbnails"] {
+    --product-card-row-count: 1;
+    --product-list-column-count: 5;
+    --product-list-card-min-width: 5rem;
+    --product-list-row-gap: var(--product-list-column-gap); /* As all info is hidden we use the same gap */
+
+    /* We have to remove quite a lot of info in thumbnails mode */
+    .product-list__promo,
+    .product-card__figure .badge-list,
+    .product-card__info,
+    .product-card__quick-buy,
+    .product-card__floating-size-selector {
+      display: none;
+    }
+
+    /* They can't be highlighted neither */
+    .product-card--highlight {
+      grid-row-start: span var(--product-card-row-count); 
+      grid-row-end: auto;
+      grid-column: span 1;
+    }
+  }
+}
+
+@media (--md) {
+  .product-list[desktop-layout="thumbnails"] {
+    --product-list-column-count: 6;
+  }
+}
+
+@media (--lg) {
+  .product-list[desktop-layout="thumbnails"] {
+    --product-list-column-count: 7;
+  }
+}
+
+/**
+ * -------------------------------------------------------------------------------------------------------------------
+ * PRODUCT LIST INTRO BLOCK
+ * -------------------------------------------------------------------------------------------------------------------
+ */
+
+.product-list__intro-block {
+  grid-column: 1 / -1;
+  grid-row: span var(--product-card-row-count);
+  scroll-snap-align: start;
+
+  @supports (grid-template-rows: subgrid) {
+    .product-list--carousel & {
+      display: grid;
+      grid-template-rows: subgrid;
+      gap: 0;
+    }
+  }
+}
+
+@media (--md-max) {
+  .product-list__intro-block {
+    @supports (grid-template-rows: subgrid) {
+      .md-max\:product-list--carousel & {
+        display: grid;
+        grid-template-rows: subgrid;
+        gap: 0;
+      }
+    }
+  }
+}
+
+@media (--md) {
+  .product-list__intro-block {
+    position: sticky;
+    inset-inline-start: 0;
+    grid-column: span 1;
+    z-index: 1;
+
+    @supports (grid-template-rows: subgrid) {
+      display: grid;
+      grid-template-rows: subgrid;
+      gap: 0;
+    }
+  }
+
+  .product-list--carousel:has(.product-list__intro-block), .md\:product-list--carousel:has(.product-list__intro-block) {
+    scroll-padding-inline-start: calc((100vw - var(--container-gutter) * 2 - var(--product-list-total-gap-width)) / var(--product-list-column-count) + var(--product-list-column-gap));
+  }
+}

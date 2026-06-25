@@ -1,0 +1,187 @@
+.timeline {
+  /* Scroll shadow variables */
+  --scroll-shadow-size: 56px;
+  --scroll-shadow-left: linear-gradient(to right, rgb(var(--background)) 20%, transparent 100%);
+  --scroll-shadow-right: linear-gradient(to left, rgb(var(--background)) 20%, transparent 100%);
+  --scroll-shadow-top: linear-gradient(to bottom, rgb(var(--background)) 20%, transparent 100%);
+  --scroll-shadow-bottom: linear-gradient(to top, rgb(var(--background)) 20%, transparent 100%);
+  --scroll-shadow-margin: 0 0 1px 0;
+
+  /* Section variables */
+  --timeline-inner-padding: var(--container-gutter);
+
+  display: flow-root;
+}
+
+.timeline__content-with-nav {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-rows: auto minmax(0, 1fr);
+}
+
+.timeline__nav {
+  position: relative;
+  display: flex;
+  column-gap: 1.75rem;
+  align-items: center;
+  height: 100%;
+  padding: var(--timeline-inner-padding) var(--container-gutter);
+  white-space: nowrap;
+  border-block-end-width: 1px;
+}
+
+.timeline__image-list,
+.timeline__content-list {
+  display: grid;
+
+  & > * {
+    grid-area: 1 / -1;
+  }
+
+  & > :not(.is-selected) {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+.timeline__content-list {
+  position: relative;
+  padding: var(--timeline-inner-padding);
+}
+
+.timeline__image-list {
+  isolation: isolate;
+  overflow: hidden;
+}
+
+.timeline__image {
+  mix-blend-mode: plus-lighter;
+}
+
+.timeline__content {
+  display: grid;
+  row-gap: 1.5rem;
+  grid-template-columns: minmax(0, 1fr);
+  align-content: start;
+}
+
+.timeline--with-spacing {
+  .timeline__image-list {
+    margin: var(--timeline-inner-padding);
+    margin-block-start: 0;
+  }
+}
+
+@media (--md) {
+  .timeline {
+    --scroll-shadow-size: 96px;
+    --timeline-inner-padding: min(2.8rem, var(--container-gutter));
+
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .timeline--reverse .timeline__image-list {
+    order: -1;
+  }
+
+  .timeline__content-with-nav {
+    height: calc(50vw * var(--timeline-aspect-ratio));
+  }
+
+  .timeline__content-list {
+    align-items: center;
+    align-content: safe center;
+    padding-inline: var(--timeline-inner-padding);
+    overflow-y: auto;
+    overscroll-behavior-y: contain;
+  }
+
+  .timeline__content {
+    align-content: stretch;
+  }
+
+  /* Variation with spacing */
+
+  .timeline:not(.timeline--with-spacing) {
+    .timeline__content-with-nav--top-nav {
+      .timeline__nav {
+        padding-block: 1.5rem; /* We limit the height */
+      }
+    }
+  }
+
+  .timeline--with-spacing { 
+    .timeline__content-with-nav {
+      height: calc(50vw * var(--timeline-aspect-ratio) + var(--timeline-inner-padding));
+    }
+
+    .timeline__content-with-nav--top-nav {
+      .timeline__nav {
+        border-block-end: none;
+      }
+    }
+
+    .timeline__image-list {
+      margin: var(--timeline-inner-padding);
+      margin-inline-start: 0;
+    }
+  }
+
+  /* Variation with the left nav */
+
+  .timeline__content-with-nav--left-nav {
+    --scroll-shadow-margin: 0 1px 0 0;
+
+    grid-template-columns: auto minmax(0, 1fr);
+    grid-template-rows: minmax(0, 1fr);
+
+    scroll-shadow::part(s) {
+      transform: scale(-1); /* We have to remove the transform applied at the nav level */
+    }
+
+    .timeline__nav {
+      padding-block: 2rem;
+      writing-mode: vertical-rl;
+      overflow-wrap: break-word;
+      transform: scale(-1);
+      overscroll-behavior: auto contain;
+      overflow: hidden auto;
+
+      .link-reversed {
+        background-size: 1px 0;
+        background-position-x: left;
+        background-position-y: top;
+
+        &[aria-current="true"] {
+          background-size: 1px 100%;
+        }
+
+        @media (--supports-hover) {
+          &:not([aria-current="true"]):hover {
+            background-size: 1px 100%;
+            background-position-y: bottom;
+          }
+        }
+      }
+    }
+
+    .timeline__content-list {
+      align-content: stretch;
+    }
+
+    .timeline__content {
+      height: 100%;
+      align-items: center;
+      grid-auto-rows: auto minmax(0, 1fr);
+    }
+  }
+}
+
+@media (--xl) {
+  .timeline__content-with-nav--left-nav {
+    .timeline__nav {
+      padding-block: 2.8rem;
+    }
+  }
+}

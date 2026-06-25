@@ -1,0 +1,6 @@
+[environments.dev]
+password = "emoxa"
+theme = "TO-REPLACE"
+path = "./dist"
+store = "XXXXX"
+store-password = "emoxa"

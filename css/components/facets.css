@@ -1,0 +1,115 @@
+/**
+ * Facets are used in the context of collection and search pages to narrow down the results based on certain criteria.
+ */
+
+ /**
+ * -------------------------------------------------------------------------------------------------------------------
+ * DRAWER FACETS
+ * -------------------------------------------------------------------------------------------------------------------
+ */
+
+.drawer--facets {
+  &::part(body) {
+    padding-block-start: 0.5rem;
+  }
+}
+
+/**
+ * -------------------------------------------------------------------------------------------------------------------
+ * FACETS
+ * -------------------------------------------------------------------------------------------------------------------
+ */
+
+.facets {
+  /* There are various adjustments made on the accordions */
+  .accordion__summary {
+    min-height: 56px;
+  }
+
+  &:not(:has(.active-facets)) .accordion:first-of-type {
+    box-shadow: 0 1px 0 rgb(var(--border-color));
+  }
+
+  .accordion:last-of-type {
+    box-shadow: 0 1px 0 rgb(var(--border-color)) inset;
+  }
+
+  &:has(.accordion.is-open) :where(.accordion:not(.is-open) .accordion__summary, .facets__availability-control .subheading) {
+    color: rgb(var(--text-color) / 0.6);
+  }
+
+  .accordion__content {
+    padding-inline-start: 0.75rem;
+  }
+}
+
+.facets__availability-control {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.25rem 0;
+  box-shadow: 0 1px 0 rgb(var(--border-color)), 0 1px 0 rgb(var(--border-color)) inset;
+
+  .subheading {
+    transition: color 0.2s ease;
+  }
+}
+
+/**
+ * -------------------------------------------------------------------------------------------------------------------
+ * ACTIVE FACETS
+ * -------------------------------------------------------------------------------------------------------------------
+ */
+
+.active-facets {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1.5rem 0;
+
+  .collection__results & {
+    /* When embedded into the collection toolbar we change the layout */
+    padding-block: 2rem;
+    padding-inline: min(1.75rem, var(--container-gutter));
+    justify-content: safe center;
+    text-align: center;
+    border-block-start-width: 1px;
+  }
+
+  .collection__sidebar & {
+    padding-block-start: 0;
+  }
+}
+
+.removable-facet {
+  display: flex;
+  align-items: center;
+  column-gap: 0.5rem;
+  padding: 0.25rem 0.5rem;
+  border-width: 1px;
+
+  a {
+    transition: rotate 0.2s ease-in-out;
+
+    &:hover {
+      rotate: 90deg;
+    }
+  }
+}
+
+.facets-clear-all {
+  margin-inline-start: 0.75rem;
+
+  .drawer--facets & {
+    display: none; /* We hide the button in the drawer, as there is already a Clear all button */
+  }
+}
+
+@media (--md) {
+  /* We hide the facets in the collection results if we have the sidebar */
+
+  .collection__sidebar ~ .collection__results .active-facets {
+    display: none;
+  }
+}

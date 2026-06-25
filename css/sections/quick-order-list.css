@@ -1,0 +1,219 @@
+/**
+ * ---------------------------------------------------------------------------------------------------------
+ * QUICK ORDER LIST TABLE
+ * ---------------------------------------------------------------------------------------------------------
+ */
+
+.quick-order-list__table-head {
+  th {
+    padding-block: 0.625rem;
+  }
+}
+
+.quick-order-list__table-body {
+  tr:first-child :is(td, th) {
+    padding-block-start: 1.25rem;
+  }
+
+  tr:last-child :is(td, th) {
+    padding-block-end: 1.25rem;
+  }
+
+  td {
+    padding-block: 0.75rem;
+    padding-inline: 0.5rem;
+
+    &:last-child {
+      padding-inline-end: 0;
+    }
+  }
+
+  th {
+    padding-block: 0.75rem;
+    padding-inline: 0 0.5rem;
+  }
+
+  &:has(.quick-order-list__table-paginate-row) {
+    tr:nth-last-child(2) :is(td, th) {
+      padding-block-end: 1.25rem;
+    }
+
+    tr:last-child :is(td, th) {
+      padding-block: 1.25rem;
+    }
+  }
+}
+
+.quick-order-list__table-foot {
+  td {
+    padding-block-start: 1.5rem;
+  }
+}
+
+.popover--quick-order-list-info {
+  &::part(header) {
+    border-block-end: none;
+  }
+
+  &::part(body) {
+    padding-block-end: 2.25rem;
+  }
+}
+
+@media (--sm-max) {
+  .quick-order-list__table-body {
+    td {
+      vertical-align: top;
+    }
+  }
+
+  .quick-order-list__table-foot {
+    tr {
+     display: flex;
+      flex-direction: column-reverse;
+    }
+
+    .button {
+      width: 100%;
+    }
+  }
+}
+
+@media (--sm) {
+  .quick-order-list__table-head {
+    th {
+      padding-block: 1rem;
+    }
+  }
+
+  .quick-order-list__table-body {
+    tr:first-child :is(td, th) {
+      padding-block-start: 0.75rem;
+    }
+
+    tr:last-child :is(td, th) {
+      padding-block-end: 0.75rem;
+    }
+
+    td, th {
+      padding-block: 0.375rem;
+    }
+
+    &:has(.quick-order-list__table-paginate-row) {
+      tr:nth-last-child(2) :is(td, th) {
+        padding-block-end: 0.75rem;
+      }
+
+      tr:last-child :is(td, th) {
+        padding-block: 1.5rem;
+      }
+    }
+  }
+
+  .quick-order-list__table-foot {
+    td:first-child {
+      white-space: nowrap;
+    }
+  }
+
+  .quick-order-list__quantity-actions {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+    align-items: center;
+    column-gap: 0.625rem;
+  }
+
+  .quick-order-list__remove-variant {
+    justify-self: start;
+    margin-inline-start: 0.625rem;
+  }
+}
+
+/* ---------------------------------------------------------------------------------------------------------
+* QUANTITY BREAKS POPOVER
+* ---------------------------------------------------------------------------------------------------------
+ */
+
+.quick-order-list__quantity-actions {
+  position: relative;
+
+  .text-with-icon {
+    --text-with-icon-gap: 0.375rem;
+
+    white-space: nowrap;
+  }
+}
+
+.popover--quantity-breaks {
+  &::part(header) {
+    border-block-end: none;
+  }
+
+  &::part(body) {
+    padding-block-end: 2.25rem;
+  }
+}
+
+.quantity-breaks-list__item {
+  padding-block: 0.5rem;
+}
+
+@media (--sm) {
+  .popover--quantity-breaks {
+    &::part(header) {
+      padding-inline: 0;
+    }
+
+    &::part(content) {
+      padding: 0.625rem 1rem;
+    }
+
+    &::part(body) {
+      padding: 0;
+    }
+  }
+
+  .quantity-breaks-list__item {
+    padding-block: 0.375rem;
+
+    &.quantity-breaks-list__item--rules {
+      padding-block-end: 0.625rem;
+    }
+  }
+}
+
+@media (--md) {
+  .popover--quantity-breaks {
+    --popover-anchor-inline-offset: 1rem;
+
+    &::part(content) {
+      inset-block-start: 0;
+      inset-inline-start: 0;
+      transform: translateX(calc(var(--transform-logical-flip) * (-100% - 0.75rem))); /* 0.75rem to create gap between popover and icon */
+     }
+
+    &::part(body) {
+      padding: 0;
+    }
+  }
+}
+
+/**
+ * ---------------------------------------------------------------------------------------------------------
+ * QUANTITY SELECTOR
+ * ---------------------------------------------------------------------------------------------------------
+ */
+
+.quick-order-list {
+  .quantity-selector {
+    border-color: rgb(var(--border-color));
+  }
+}
+
+@media (--sm) {
+  .quick-order-list {
+    .quantity-selector {
+      min-height: 2.8125rem;
+    }
+  }
+}

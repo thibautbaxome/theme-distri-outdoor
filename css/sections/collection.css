@@ -1,0 +1,187 @@
+/**
+ * -------------------------------------------------------------------------------------------------------------------
+ * COLLECTION BANNER
+ *
+ * Section used on collection page that appears before the collection content.
+ * -------------------------------------------------------------------------------------------------------------------
+ */
+
+.collection-quick-navigation {
+  display: grid;
+  grid-auto-flow: column;
+  justify-content: safe center;
+  align-items: start;
+  padding-block-start: 3px; /* Needed to ensure that the border on the selected item is not clipped */
+  column-gap: 1.5rem;
+}
+
+.collection-quick-navigation--padded {
+  padding-block: 2.375rem 2rem;
+}
+
+.collection-quick-navigation__item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  row-gap: 0.625rem;
+  max-width: 8rem;
+  text-align: center;
+
+  &.is-selected > .rounded-full {
+    outline: 1px solid currentColor;
+    outline-offset: 2px;
+  }
+
+  img {
+    min-width: 80px;
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    object-position: center;
+  }
+}
+
+@media (--sm) {
+  .collection-quick-navigation {
+    column-gap: 3rem;
+  }
+}
+
+/**
+ * -------------------------------------------------------------------------------------------------------------------
+ * COLLECTION/SEARCH
+ *
+ * CSS properties exposed by the collection to be overridden outside the component:
+ *
+ * --collection-sidebar-width: the width of the sidebar filtering (if any)
+ * --collection-gap: the gap to use that separate the filters with the content
+ * -------------------------------------------------------------------------------------------------------------------
+ */
+
+.collection {
+  --collection-sidebar-width: 18.5rem;
+
+  padding-block-end: min(4rem, var(--section-vertical-spacing));
+}
+
+.collection__toolbar {
+  display: flex;
+  column-gap: 1rem;
+  align-items: center;
+  justify-content: space-between;
+  border-block-start-width: 1px;
+  padding-block: 1.25rem;
+  padding-inline: min(1.75rem, var(--container-gutter));
+}
+
+.collection__resource-tab-list {
+  &::part(tablist) {
+    display: grid;
+    grid-auto-flow: column;
+    justify-items: start;
+    column-gap: 1.5rem;
+  }
+}
+
+.collection__toolbar-linklist {
+  display: flex;
+  position: absolute;
+  flex-wrap: wrap;
+  justify-content: safe center;
+  column-gap: 1.25rem;
+  row-gap: 0.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+
+  @media (--sm) {
+    column-gap: 2.5rem;
+  }
+}
+
+.collection__layout-selector {
+  display: grid;
+
+  label {
+    opacity: 0.3;
+    transition: opacity 0.2s ease;
+
+    :checked + & {
+      opacity: 1;
+    }
+  }
+}
+
+.collection__inner {
+  display: grid;
+  align-items: start;
+  grid-template-columns: minmax(0, 1fr);
+  row-gap: 2rem;
+}
+
+.collection__results {
+  /* This allows to add external padding only when the spacing are small or higher */
+  padding-inline: var(--product-list-padding-inline);
+}
+
+.collection__sidebar {
+  display: none; /* Sidebar is hidden on mobile and tablet */
+}
+
+.collection__floating-button {
+  position: fixed;
+  display: grid;
+  justify-items: center;
+  inset-block-end: 1rem;
+  inset-inline: 1rem;
+  transform: translateY(20px);
+  opacity: 0;
+  visibility: hidden;
+  z-index: 2;
+  transition: opacity 0.2s ease-in, visibility 0.2s ease-in, transform 0.2s ease-in;
+
+  &.is-visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0px);
+  }
+
+  .button {
+    max-width: 24rem;
+  }
+}
+
+@media (--sm-max) {
+  .collection__toolbar .vertically-separated-list {
+    margin-inline-start: auto;
+  }
+}
+
+@media (--sm) {
+  .collection__toolbar {
+    padding-block: 1.8rem;
+  }
+
+  .collection__inner {
+    row-gap: 3rem;
+  }
+}
+
+@media (--md) {
+  .collection {
+    .pagination {
+      grid-column-end: -1;
+    }
+  }
+
+  .collection__sidebar {
+    position: sticky;
+    display: grid;
+    grid-column-end: -2; /* Position the sidebar (if any) on the left part */
+    grid-template-columns: minmax(0, 1fr);
+    row-gap: 1.5rem;
+    top: calc(var(--sticky-area-height) + 20px);
+    width: var(--collection-sidebar-width);
+    margin-block-start: 1.5rem;
+    margin-inline: min(var(--container-gutter), 1.75rem);
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "name": "Cart",
+  "sections": {
+    "main": {
+      "type": "main-cart",
+      "blocks": {
+        "totals": {
+          "type": "totals"
+        },
+        "cart_note": {
+          "type": "cart_note"
+        },
+        "checkout_button": {
+          "type": "checkout_button"
+        },
+        "payment_methods": {
+          "type": "payment_methods"
+        }
+      },
+      "block_order": [
+        "totals",
+        "cart_note",
+        "checkout_button",
+        "payment_methods"
+      ]
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

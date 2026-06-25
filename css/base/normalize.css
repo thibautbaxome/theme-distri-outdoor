@@ -1,0 +1,199 @@
+*, ::before, ::after {
+  box-sizing: border-box;
+  border-width: 0;
+  border-style: solid;
+  border-color: rgb(var(--border-color));
+}
+
+html {
+  line-height: 1.5;
+  -webkit-text-size-adjust: none;
+  text-size-adjust: none;
+  tab-size: 4;
+  scroll-padding-top: calc(var(--sticky-area-height) + 20px);
+  interpolate-size: allow-keywords;
+}
+
+body {
+  position: relative; /* allow to have absolute element have a root */
+  margin: 0;
+  background: rgb(var(--page-background));
+  font: var(--text-font-style) var(--text-font-weight) var(--text-base) / var(--text-line-height) var(--text-font-family);
+  text-transform: var(--text-transform);
+  letter-spacing: var(--text-letter-spacing);
+}
+
+hr {
+  height: 0;
+  border-top-width: 1px;
+  justify-self: stretch; /* When used in a grid */
+}
+
+hr.horizontal-separator {
+  width: 1px;
+  height: 100%;
+  border-width: 0 0 0 1px;
+}
+
+a {
+  color: inherit;
+  text-decoration: inherit;
+}
+
+b, strong {
+  font-weight: bolder;
+}
+
+code, kbd, samp, pre {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  font-size: 1em;
+}
+
+table {
+  text-indent: 0;
+  border-color: inherit;
+  border-collapse: collapse;
+}
+
+button, input, optgroup, select, textarea {
+  font-family: inherit;
+  font-size: 100%;
+  font-weight: inherit;
+  font-style: inherit;
+  line-height: inherit;
+  text-transform: inherit;
+  color: inherit;
+  margin: 0;
+  padding: 0;
+}
+
+input[type="submit"] {
+  cursor: pointer;
+}
+
+select {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+button, [type='button'], [type='reset'], [type='submit'] {
+  appearance: button;
+  background-color: transparent;
+  background-image: none;
+}
+
+button, label, summary, [role="button"], [type="checkbox"], [type="radio"], [type="submit"] {
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+  cursor: pointer;
+}
+
+::-webkit-inner-spin-button, ::-webkit-outer-spin-button {
+  height: auto;
+}
+
+[type='search'] {
+  appearance: textfield;
+  outline-offset: -2px;
+}
+
+summary {
+  list-style-type: none;
+}
+
+summary::-webkit-details-marker {
+  display: none;
+}
+
+blockquote, dl, dd, h1, h2, h3, h4, h5, h6, hr, figure, p, pre {
+  margin: 0;
+}
+
+fieldset {
+  margin: 0;
+  padding: 0;
+}
+
+legend {
+  padding: 0;
+}
+
+ul, ol, menu {
+  margin: 0;
+  padding: 0;
+}
+
+textarea {
+  resize: vertical;
+  field-sizing: content;
+  min-height: calc(var(--textarea-min-rows, 4) * 1lh + var(--input-padding-block, 0px) * 2);
+}
+
+input::placeholder, textarea::placeholder {
+  opacity: 1;
+  color: rgb(var(--text-color) / 0.5);
+}
+
+[type='date'] {
+  min-height: 3rem; /* Needed for iOS */
+}
+
+:disabled {
+  cursor: default !important;
+}
+
+picture, img, svg, video, canvas, audio, iframe, embed, object {
+  display: block;
+}
+
+img {
+  color: transparent; /* Allows to hide the Alt tag when using lazy-loading while the image is loading */
+  max-width: 100%;
+  max-height: 100%;
+  height: auto; /* This is needed as soon as we specify the height in the HTML, to ensure images are not stretched */
+  object-fit: cover;
+  object-position: center;
+}
+
+picture {
+  height: inherit;
+  width: inherit;
+}
+
+picture source {
+  display: contents; /* Must always be replaced content */
+}
+
+picture img, figure img {
+  height: inherit; /* Ensure the height set on picture is properly inherited by img */
+  width: inherit;
+}
+
+[role="img"] svg {
+  display: initial;
+}
+
+video {
+  max-width: 100%;
+  height: auto;
+}
+
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-group(*) {
+    animation-duration: 0s;
+  }
+}
+
+/* Normalize some of our custom elements */
+
+height-observer {
+  display: block;
+}

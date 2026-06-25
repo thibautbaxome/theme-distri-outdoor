@@ -1,0 +1,582 @@
+/**
+ * -------------------------------------------------------------------------------------------------------------------
+ * GENERAL
+ * -------------------------------------------------------------------------------------------------------------------
+ */
+
+.header {
+  --header-show-transparent-logo: 0;
+  --header-padding-block: 1.25rem;
+  --header-padding-inline: min(1.75rem, var(--container-gutter));
+  --header-column-gap: 1.25rem;
+  --header-nav-icon-gap: 1.5rem;
+
+  display: grid;
+  grid: var(--header-grid);
+  position: relative;
+  align-items: center;
+  justify-content: safe center;
+  column-gap: var(--header-column-gap);
+  padding-block: var(--header-padding-block);
+  padding-inline: var(--header-padding-inline);
+  transition: background 0.2s ease-in-out, color 0.2s ease-in-out;
+}
+
+/* Implementation note: when the header becomes hidden on scroll, we have to hide the whole section, not just the header,
+   to ensure that the section cannot block clicks */
+
+.shopify-section--header {
+  transition: transform 0.2s ease-in-out, visibility 0.2s ease-in-out;
+}
+
+.shopify-section--header:has(.header.is-hidden) {
+  transform: translateY(-100%);
+  visibility: hidden;
+}
+
+/* If the first section allows the transparent header, we show the header as transparent */
+
+:root:has(.shopify-section:first-child [allow-transparent-header]):not(:has(.shopify-section--header ~ .shopify-section-group-header-group)) .header {
+  margin-block-end: calc(-1 * var(--header-height, 0px));
+
+  &:not(.is-solid, :has([open])) {
+    --header-show-transparent-logo: 1;
+
+    --background: 0 0 0 / 0;
+    --background-gradient: initial;
+    --border-color: 0 0 0 / 0;
+    --text-color: var(--header-transparent-header-text-color, var(--header-non-transparent-text-color));
+  }
+}
+
+@media (--md) {
+  .header {
+    --header-padding-block: 1.4rem;
+    --header-nav-icon-gap: 1rem;
+    --header-column-gap: 2.5rem;
+  }
+}
+
+/**
+ * -------------------------------------------------------------------------------------------------------------------
+ * DOT
+ * -------------------------------------------------------------------------------------------------------------------
+ */
+
+.header__active-dot {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  inset-block-start: -2px;
+  inset-inline-end: -2px;
+  border-radius: 100%;
+  background: currentColor;
+  pointer-events: none;
+}
+
+/**
+ * -------------------------------------------------------------------------------------------------------------------
+ * LOGO
+ * -------------------------------------------------------------------------------------------------------------------
+ */
+
+.header__logo {
+  position: relative;
+  grid-area: logo;
+  justify-self: start;
+}
+
+.header__logo-image {
+  width: var(--header-logo-width);
+  height: auto;
+  max-width: 100%;
+  opacity: calc(1 - var(--header-show-transparent-logo));
+  transition: opacity 0.2s ease-in-out;
+}
+
+.header__logo-image:only-of-type {
+  --header-show-transparent-logo: 0; /* We force the main logo if there is no transparent logo */
+}
+
+.header__logo-image--transparent {
+  position: absolute;
+  inset-block-start: 0;
+  inset-inline-start: 0;
+  opacity: var(--header-show-transparent-logo);
+  pointer-events: none;
+}
+
+.header__logo-text {
+  font-size: 1rem;
+}
+
+/**
+ * -------------------------------------------------------------------------------------------------------------------
+ * PRIMARY NAV
+ * -------------------------------------------------------------------------------------------------------------------
+ */
+
+.header__primary-nav {
+  display: flex;
+  grid-area: primary-nav;
+  align-items: center;
+  flex-wrap: wrap;
+  column-gap: var(--header-nav-icon-gap);
+
+  .link-reversed {
+    padding-block: 2px;
+    background-position-y: bottom;
+  }
+}
+
+/* In this mode, the dropdown menu is displayed in a sidebar instead of a dropdown. We therefore restrict the width
+   of the menu so that the sidebar can properly overlap it */
+.header__primary-nav--open-menu-in-sidebar {
+  max-width: calc(480px - 2 * var(--header-padding-inline));
+}
+
+.header__hamburger {
+  display: grid;
+  row-gap: 3px;
+
+  & > * {
+    width: 1rem;
+    height: var(--icon-stroke-width, 1px);
+    background: currentColor;
+    transition: transform 0.2s ease;
+    transform-origin: calc(50% + (2 * var(--icon-stroke-width, 1px) - 2px));
+  }
+
+  [aria-expanded="true"] & {
+    & > *:first-child {
+      transform: translateY(calc(var(--icon-stroke-width, 1px) * 2)) rotate(45deg);
+    }
+
+    & > *:last-child {
+      transform: translateY(calc(-1 * var(--icon-stroke-width, 1px) * 2)) rotate(-45deg);
+    }
+  }
+}
+
+@media (--md) {
+  .header__primary-nav {
+    column-gap: 1.5rem; /* On desktop, the primary nav always hold the links menu so we increase the spacing */
+    row-gap: 0.625rem;
+  }
+}
+
+/**
+ * -------------------------------------------------------------------------------------------------------------------
+ * PRIMARY NAV
+ * -------------------------------------------------------------------------------------------------------------------
+ */
+
+.header__secondary-nav {
+  display: flex;
+  grid-area: secondary-nav;
+  align-items: center;
+  justify-self: end;
+  column-gap: var(--header-nav-icon-gap);
+}
+
+.header__secondary-nav-separator {
+  margin-inline: 0.25rem;
+  width: 1px;
+  height: 10px;
+  border: none;
+  background: rgb(var(--text-color) / 0.3);
+  transition: background 0.2s ease-in-out;
+}
+
+/**
+ * -------------------------------------------------------------------------------------------------------------------
+ * HEADER MENU
+ * -------------------------------------------------------------------------------------------------------------------
+ */
+
+.header__dropdown-menu {
+  display: none;
+  position: absolute;
+  width: max-content;
+  max-width: 15rem;
+  inset-block-start: 100%;
+  padding-block: 1.2rem;
+  outline: 1px solid rgb(var(--border-color));
+  outline-offset: -1px;
+
+  &[open] {
+    display: block;
+  }
+
+  li {
+    position: relative;
+  }
+
+  a {
+    display: grid;
+    grid-auto-flow: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.4rem 1.75rem;
+
+    &:where(:hover, :has(~ [open])) .icon-chevron-right {
+      transform: translateX(4px);
+    }
+  }
+
+  .icon-chevron-right {
+    justify-self: end;
+    transition: transform 0.2s ease;
+  }
+
+  &:has(.header__dropdown-menu) a {
+    grid-template-columns: minmax(0, 1fr) 1.5rem;
+  }
+}
+
+/* Handle the second level of dropdown-menu */
+.header__dropdown-menu .header__dropdown-menu {
+  inset-block-start: -1.2rem;
+  inset-inline-start: calc(100% - 1px);
+
+  a {
+    grid-template-columns: auto; /* Those can never have sub-menus so we simplify the layout */
+  }
+}
+
+/**
+ * -------------------------------------------------------------------------------------------------------------------
+ * MANAGED ACCOUNT
+ * -------------------------------------------------------------------------------------------------------------------
+ */
+
+shopify-account {
+  --shopify-account-font-heading: var(--heading-font-family);
+  --shopify-account-font-heading-weight: var(--heading-font-weight);
+  --shopify-account-font-body: var(--text-font-family);
+  --shopify-account-font-body-weight: var(--text-font-weight);
+  --shopify-account-radius-button: var(--button-border-radius);
+  --shopify-account-radius-input: var(--input-border-radius);
+  --shopify-account-radius-dialog: 0;
+  --shopify-account-color-background: rgb(var(--default-color-scheme-background));
+  --shopify-account-color-text: rgb(var(--default-color-scheme-text-color));
+  --shopify-account-signed-in-avatar-color-background: rgb(var(--text-color));
+  --shopify-account-signed-in-avatar-color-text: rgb(from rgb(var(--text-color)) calc(255 - r) calc(255 - g) calc(255 - b));
+  --shopify-account-signed-in-avatar-size: 24px;
+  --shopify-account-avatar-size: none;
+
+  display: block;
+}
+
+/**
+ * -------------------------------------------------------------------------------------------------------------------
+ * MENU PROMO
+ * 
+ * The menu promo showcase products and images for the main menu. It is displayed in both the mega-menu and drawer
+ * menu, depending on where it is embedded
+ * -------------------------------------------------------------------------------------------------------------------
+ */
+
+.menu-promo {
+  --overlay: 0 0 0 / 0.1; /* Set the overlay when blocks are set in stretch mode */
+
+  flex-grow: 1;
+  overflow-x: auto;
+}
+
+.menu-promo__carousel {
+  display: flex;
+  column-gap: var(--menu-promo-block-column-gap);
+  height: 100%;
+}
+
+.menu-promo__item {
+  scroll-snap-align: start;
+}
+
+/**
+ * Promo blocks with spacing
+ */
+
+.menu-promo--with-spacing {
+  .menu-promo__item {
+    flex: 1 1 auto;
+    min-width: 220px;
+    width: 305px;
+    max-width: max-content;
+  }
+
+  /* With spacing we enforce a height on the image */
+  img {
+    height: 275px;
+    width: auto;
+    object-fit: cover;
+  }
+}
+
+/**
+ * Promo blocks without spacing
+ */
+
+.menu-promo--without-spacing {
+  --menu-promo-block-min-width: 290px;
+  --menu-promo-block-max-width: 420px;
+
+  /* If we have 4 promo blocks or more, we allow them to fill the container fully */
+  &:has(.menu-promo__item:nth-child(4)) {
+    --menu-promo-block-max-width: calc(1px * infinity);
+  }
+
+  .menu-promo__item {
+    --maximum-space: calc(100vw - var(--menu-promo-block-column-gap) * 2);
+
+    flex: none;
+    width: clamp(var(--menu-promo-block-min-width), (var(--maximum-space) - (var(--menu-promo-blocks-count) - 1) * var(--menu-promo-block-column-gap)) / var(--menu-promo-blocks-count), var(--menu-promo-block-max-width));
+  }
+}
+
+@media (--xl) {
+  .menu-promo--without-spacing {
+    --menu-promo-block-min-width: 310px;
+  }
+}
+
+/**
+ * -------------------------------------------------------------------------------------------------------------------
+ * MEGA MENU
+ * -------------------------------------------------------------------------------------------------------------------
+ */
+
+.mega-menu {
+  --mega-menu-padding-inline: 1.75rem;
+  --mega-menu-padding-block-start: 1.75rem;
+  --mega-menu-padding-block-end: 3.5rem;
+  --mega-menu-navigation-max-width: 800px;
+
+  position: absolute;
+  display: none; /* Mega menu are always turned off by default */
+  align-items: start;
+  max-height: calc(100vh - var(--sticky-area-height) - 48px);
+  overflow-y: auto;
+  grid-auto-flow: column;
+  column-gap: clamp(3rem, 5vw, 5rem);
+  width: 100%;
+  inset-block-start: 100%;
+  inset-inline-start: 0;
+  padding-inline: var(--mega-menu-padding-inline);
+  padding-block: var(--mega-menu-padding-block-start) var(--mega-menu-padding-block-end);
+
+  &[open] {
+    display: grid;
+  }
+
+  &:has(.menu-promo--without-spacing) {
+    --mega-menu-padding-block-end: 1.75rem;
+  }
+
+  &:has(.menu-promo__item:nth-child(3)) {
+    --mega-menu-navigation-max-width: 600px;
+  }
+
+  &:has(.menu-promo__item:nth-child(4)) {
+    --mega-menu-navigation-max-width: 480px;
+  }
+
+  &::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    inset-block-start: calc(var(--announcement-bar-height, 0px) + var(--header-height, 0px) + var(--countdown-condensed-height, 0px));
+    background: rgb(var(--page-overlay));
+    z-index: -1;
+    mix-blend-mode: plus-lighter;
+    pointer-events: none;
+
+    @supports(position-anchor: auto) {
+      position-anchor: auto;
+      inset-block: anchor(end) auto;
+      height: 100%;
+    }
+  }
+
+  .link-reversed {
+    padding-block: 0;
+  }
+}
+
+.mega-menu__navigation {
+  display: flex;
+  column-gap: clamp(1.5rem, 5vw, 5rem);
+  row-gap: 1.5rem;
+  flex-wrap: wrap;
+  max-width: var(--mega-menu-navigation-max-width);
+
+  &:only-of-type {
+    max-width: none; /* If there are no promo blocks we allow links to take the full width */
+  }
+}
+
+.mega-menu__linklist {
+  display: flex;
+  flex-direction: column;
+  row-gap: 0.6rem;
+  column-gap: clamp(1.5rem, 3vw, 3rem);
+  max-width: 165px; /* Ensure that very long links goes over multiple lines */
+}
+
+/* Adaption of the menu promo when embedded inside a mega-menu */
+
+.mega-menu {
+  &:not(:has(.mega-menu__navigation)) .menu-promo__carousel {
+    justify-content: safe center;
+  }
+
+  &:has(.menu-promo) {
+    padding-inline-end: 0;
+  }
+
+  &:has(.menu-promo--without-spacing) {
+    padding-block-end: 0;
+  }
+
+  &:has(.menu-promo--without-spacing:only-of-type) {
+    padding: 0;
+  }
+
+  .menu-promo:not(.menu-promo--without-spacing) .menu-promo__carousel {
+    padding-inline-end: var(--mega-menu-padding-inline);
+  }
+
+  .menu-promo--without-spacing {
+    padding-block-end: var(--menu-promo-block-column-gap);
+    padding-inline: var(--menu-promo-block-column-gap);
+    max-height: inherit;
+    align-self: stretch;
+  }
+}
+
+/**
+ * -------------------------------------------------------------------------------------------------------------------
+ * MENU DRAWER
+ * -------------------------------------------------------------------------------------------------------------------
+ */
+
+.menu-drawer {
+  --menu-drawer-padding-inline: 1.5rem;
+
+  display: none; /* It is hidden by default */
+
+  &::part(overlay) {
+    content: "";
+    position: fixed;
+    inset: 0;
+    inset-block-start: var(--sticky-area-height);
+    background: rgb(var(--page-overlay));
+    backdrop-filter: blur(var(--dialog-backdrop-blur));
+    z-index: -1;
+    pointer-events: auto;
+  }
+
+  &::part(content) {
+    display: grid;
+    position: absolute;
+    grid-auto-rows: minmax(0, 1fr);
+    inset-block-start: 100%;
+    inset-inline-start: 0;
+    width: 100%;
+    max-width: 480px;
+    height: calc(100vh - var(--menu-offset-top, 0px));
+    border-block-start: 1px solid rgb(var(--border-color));
+    background: inherit;
+    color: inherit;
+    overflow: clip;
+  
+    @supports (height: 100dvh) {
+      height: calc(100dvh - var(--menu-offset-top, 0px));
+    }
+  }
+}
+
+.menu-drawer__panel {
+  display: none; /* Panel are hidden unless they have the is-visible attribute */
+  flex-direction: column;
+  height: 100%;
+  grid-area: 1 / -1; /* Ensure all panels overlap */
+  visibility: hidden; /* Ensure clicks do not go through */
+
+  &.is-visible {
+    display: flex;
+    visibility: visible;
+  }
+}
+
+.menu-drawer__panel-header {
+  position: sticky;
+  display: flex;
+  align-items: center;
+  inset-block-start: 0;
+  padding-inline: var(--header-padding-inline);
+  min-height: var(--header-height);
+  box-shadow: 0 1px rgb(var(--border-color));
+}
+
+.menu-drawer__panel-body {
+  flex-grow: 1;
+  padding: 2.2rem var(--menu-drawer-padding-inline);
+  overflow-y: auto;
+}
+
+.menu-drawer__separator {
+  margin-block: 2rem;
+}
+
+.menu-drawer__footer-item {
+  padding: 1rem var(--menu-drawer-padding-inline);
+  border-block-start-width: 1px;
+
+  .social-media {
+    --icon-max-width: 1.125rem;
+  }
+
+  .social-media:has(> :nth-child(3)) {
+    justify-content: space-between;
+  }
+}
+
+/* Adaption of sub-components in the context of menu drawer */
+
+.menu-drawer {
+  .menu-promo {
+    margin-inline: calc(-1 * var(--menu-drawer-padding-inline));
+  }
+
+  .menu-promo__carousel {
+    padding-inline: var(--menu-drawer-padding-inline);
+    scroll-padding-inline: var(--menu-drawer-padding-inline);
+  }
+
+  .menu-promo__item {
+    width: 210px;
+  }
+}
+
+/**
+ * -------------------------------------------------------------------------------------------------------------------
+ * MENU DRAWER (DROPDOWN SIDEBAR VARIATION)
+ * -------------------------------------------------------------------------------------------------------------------
+ */
+
+.menu-drawer--dropdown-sidebar {
+  &::part(content) {
+    inset-block-start: 0; /* In this mode we want the drawer to be on top of the main header */
+    border: none;
+  }
+}
+
+.menu-drawer__dropdown-sidebar-level {
+  display: none; /* Hidden by default */
+
+  &.is-visible {
+    display: block;
+  }
+}

@@ -1,0 +1,64 @@
+.modal--age-verifier {
+  --container-max-width: 30.25rem;
+  --input-padding-block: 0.9125rem;
+
+  z-index: 1000;
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  padding: 1rem;
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgb(var(--page-overlay));
+    backdrop-filter: blur(var(--dialog-backdrop-blur));
+  }
+
+  &[open] {
+    display: block;
+  }
+
+  @supports (height: 100dvh) {
+    width: 100dvw;
+    height: 100dvh;
+  }
+
+  hr {
+    --border-color: var(--text-color) / 0.05;
+  }
+}
+
+.age-verifier__content {
+  display: grid;
+  place-content: safe center;
+  height: 100%;
+  width: 100%;
+  overflow: auto;
+  margin-inline: auto;
+  padding: 1.5rem;
+  background-color: rgb(var(--background) / 0.9);
+  backdrop-filter: blur(var(--dialog-backdrop-blur));
+  isolation: isolate;
+}
+
+.age-verifier__input-group {
+  display: grid;
+  grid: auto / repeat(3, minmax(0, 1fr));
+  gap: 0.75rem;
+
+  .input::placeholder {
+    opacity: 0.6;
+    color: rgb(var(--text-color));
+  }
+}
+
+@media (--sm) {
+  .modal--age-verifier {
+    --input-padding-block: 1.35rem;
+  }
+}

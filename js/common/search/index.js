@@ -1,0 +1,1 @@
+export {PredictiveSearch} from './predictive-search';

@@ -1,0 +1,31 @@
+.announcement-bar {
+  display: flex;
+  align-items: center;
+  justify-content: safe center;
+  text-align: center;
+  column-gap: 0.75rem;
+  padding: 0.7rem var(--container-gutter);
+  padding-block: 0.7rem;
+}
+
+.announcement-bar__message-list {
+  display: grid;
+  place-items: center;
+  flex-grow: 1;
+  max-width: 35rem;
+
+  > * {
+    grid-area: 1 / -1;
+  }
+
+  > *:not(.is-selected) {
+    visibility: hidden;
+  }
+}
+
+@media (--sm) {
+  .announcement-bar {
+    column-gap: 2.5rem;
+    padding-block: 0.8rem;
+  }
+}

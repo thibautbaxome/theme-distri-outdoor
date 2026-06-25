@@ -1,0 +1,124 @@
+@property --before-after-cursor-position {
+  syntax: "<length-percentage>";
+  inherits: true;
+  initial-value: 0%;
+}
+
+.before-after {
+  --before-after-content-margin: 1.25rem;
+  --before-after-cursor-size: 2.5rem;
+
+  position: relative;
+  user-select: none;
+  touch-action: pan-x pan-y;
+  -webkit-touch-callout: none;
+}
+
+.before-after, .before-after__image {
+  display: grid;
+
+  & > * {
+    grid-area: 1 / -1;
+  }
+}
+
+.before-after__image--after {
+  z-index: 1; /* Ensure it is always over in case merchant re-order the blocks */
+}
+
+.before-after__content {
+  margin: var(--before-after-content-margin);
+  isolation: isolate;
+  transition: opacity 0.15s ease;
+
+  .is-dragging & {
+    opacity: 0;
+  }
+}
+
+.before-after__content--padded {
+  padding: 4px;
+}
+
+.before-after__cursor {
+  position: relative;
+  display: grid;
+  filter: drop-shadow(0px 2px 4px rgb(0 0 0 / 0.05));
+  pointer-events: auto;
+  z-index: 1;
+
+  &::before {
+    content: '';
+    position: absolute;
+    background: rgb(var(--before-after-cursor-background));
+    z-index: -1;
+  }
+
+  & svg {
+    width: var(--before-after-cursor-size);
+    height: var(--before-after-cursor-size);
+  }
+}
+
+/* Horizontal variation */
+
+.before-after--horizontal {
+  cursor: ew-resize;
+
+  /* We clip the after image horizontally */
+
+  .before-after__image--after {
+    clip-path: inset(0 0 0 var(--before-after-cursor-position, 0%));
+
+    [dir="rtl"] & {
+      clip-path: inset(0 var(--before-after-cursor-position, 0%) 0 0);
+    }
+  }
+
+  /* The cursor is set up along the vertical line to clip horizontally */
+
+  .before-after__cursor {
+    place-items: center start;
+    justify-self: start;
+    inset-inline-start: calc(var(--before-after-cursor-position, 0%) - var(--before-after-cursor-size) / 2);
+
+    &::before {
+      height: 100%;
+      width: 0.125rem;
+      inset-inline-start: calc(var(--before-after-cursor-size) / 2);
+    }
+  }
+}
+
+/* Vertical variation */
+
+.before-after--vertical {
+  cursor: ns-resize;
+
+  /* We clip the after image vertically */
+
+  .before-after__image--after {
+    clip-path: inset(var(--before-after-cursor-position, 0%) 0 0 0);
+  }
+
+  /* The cursor is set up along the horizontal line to clip vertically */
+
+  .before-after__cursor {
+    place-items: start center;
+    align-self: start;
+    inset-block-start: calc(var(--before-after-cursor-position, 0%) - var(--before-after-cursor-size) / 2);
+
+    &::before {
+      height: 0.125rem;
+      width: 100%;
+      inset-block-start: calc(var(--before-after-cursor-size) / 2);
+    }
+  }
+}
+
+@media (--md) {
+  .before-after {
+    --before-after-content-margin: 1.5rem;
+    --before-after-cursor-size: 4.25rem;
+  }
+}

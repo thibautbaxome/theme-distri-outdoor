@@ -1,0 +1,516 @@
+/* 
+ * Prose
+ * 
+ * This element is used throughout the theme to set spacing between common elements (heading, paragaphs...). It aims to provide
+ * a consistent spacing between elements and ensure that the content remains readable. It comes with two variations: a standard
+ * one and a "compact" one. The compact one is used for elements that require less spacing, such as narrow cards.
+ */
+
+.prose {
+  --prose-default-spacing: 1.5rem;
+  --prose-heading-spacing: clamp(0px, 1.2em, 2.75rem);
+  --prose-subheading-spacing: 2.5rem;
+  --prose-button-spacing: 1.5rem;
+  --prose-media-spacing: 1.75rem;
+  --prose-blockquote-spacing: calc(var(--prose-default-spacing) * 3.5) calc(var(--prose-default-spacing) * 2);
+  --prose-adjacent-heading-spacing: 1em;
+  --prose-combination-display-heading-paragraph-spacing: 1.5rem;
+  --prose-combination-subheading-heading-spacing: 1.75rem;
+  --prose-combination-subheading-paragraph-spacing: 1.5rem;
+
+  @media (--md) {
+    --prose-default-spacing: 2rem;
+    --prose-heading-spacing: clamp(0px, 1em, 3.5rem);
+    --prose-subheading-spacing: 2.5rem;
+    --prose-button-spacing: 2rem;
+    --prose-media-spacing: 2.5rem;
+    --prose-adjacent-heading-spacing: 1em;
+    --prose-combination-display-heading-paragraph-spacing: 2rem;
+    --prose-combination-subheading-heading-spacing: 2rem;
+    --prose-combination-subheading-paragraph-spacing: 1.5rem;
+  }
+}
+
+.prose--compact {
+  --prose-default-spacing: 1rem;
+  --prose-heading-spacing: 1rem;
+  --prose-subheading-spacing: 1rem;
+  --prose-button-spacing: 1rem;
+  --prose-media-spacing: 1.25rem;
+  --prose-adjacent-heading-spacing: 0.5em;
+  --prose-combination-display-heading-paragraph-spacing: 1rem;
+  --prose-combination-subheading-heading-spacing: 1rem;
+  --prose-combination-subheading-paragraph-spacing: 1rem;
+
+  @media (--md) {
+    --prose-default-spacing: 1.25rem;
+    --prose-heading-spacing: 1.5rem;
+    --prose-subheading-spacing: 1.5rem;
+    --prose-button-spacing: 1.25rem;
+    --prose-media-spacing: 1.5rem;
+    --prose-adjacent-heading-spacing: 0.5em;
+    --prose-combination-display-heading-paragraph-spacing: 1.75rem;
+    --prose-combination-subheading-heading-spacing: 1.25rem;
+    --prose-combination-subheading-paragraph-spacing: 1rem;
+  }
+}
+
+.prose {
+  display: block;
+  margin-trim: block;
+  width: 100%; /* Needed, do not remove */
+  overflow-wrap: anywhere; /* Allow long words to wrap */
+
+  .vertical-text:not(:first-child) {
+    margin-inline-start: var(--prose-heading-spacing);
+  }
+
+  /* Some hacks to emulate margin-trim until this is properly supported by Chrome */
+
+  & > :first-child, & > div:first-child > :first-child, & > style:first-child + *, & > meta:first-child + * {
+    margin-block-start: 0;
+  }
+
+  & > :last-child, & > div:last-child > :last-child {
+    margin-block-end: 0;
+  }
+
+  /**
+   * --------------------------------------------------------------------------------------------------
+   * First, we apply spacing to HTML bare elements using :where, which lowers the specificity of the selector.
+   * --------------------------------------------------------------------------------------------------
+   */
+
+  :where(p, div):empty {
+    display: none;
+  }
+
+  :where(p, ol, ul, form, hr, table, .accordion) {
+    margin-block-start: var(--prose-default-spacing);
+  }
+
+  :where(h1, h2, h3, h4, h5, h6, .display-xl, .display-l, .display-m, .h1, .h2, .h3, .h4, .h5, .h6, .h7) {
+    margin-block-start: var(--prose-heading-spacing);
+  }
+
+  /* The img selector tries to only target images that have not been set as floating to not conflict with the RTE */
+  :where(:where(img, picture, figure, video, object, svg):not([style*="float: left"], [style*="float: right"], .icon)) {
+    margin-block: var(--prose-media-spacing);
+  }
+
+  /* The spacing is already being applied to the figure or picture */
+  :where(figure, picture) :where(img, svg, video) {
+    margin-block: 0;
+  }
+
+  /* Ensure link are set to inline-block to allow spacing */
+  :where(.link, .link-reversed, .link-faded) {
+    display: inline-block;
+  }
+
+  /* We make the figure and the figcaption behave as a table to allow the caption to not grow larger than the containing image */
+  :where(figure:has(> img)) {
+    display: table;
+
+    figcaption {
+      display: table-caption;
+      caption-side: bottom;
+    }
+  }
+
+  /* Style the blockquote as per the theme rule */
+
+  :where(blockquote) {
+    position: relative;
+    margin-block: var(--prose-blockquote-spacing);
+    font-size: var(--text-h5);
+
+    &::before {
+      content: '';
+      position: absolute;
+      background-image: var(--quotation-mark-svg);
+      background-size: 100%;
+      background-repeat: no-repeat;
+      width: 42px;
+      height: 39px;
+      margin-inline-start: -2px;
+      margin-block-start: -18px;
+      opacity: 0.1;
+    }
+  }
+
+  /* Give some default style to the iframe of YouTube and Vimeo videos */
+  :where(iframe[src*="youtube"], iframe[src*="youtu.be"], iframe[src*="vimeo"]) {
+    aspect-ratio: 16/9;
+    width: 100%;
+    height: auto;
+  }
+
+  :where(br) {
+    margin-block: 0 !important; /* Avoid the issue documented here: https://bugzilla.mozilla.org/show_bug.cgi?id=1621387 */
+  }
+
+  /**
+   * --------------------------------------------------------------------------------------------------
+   * Then, we apply spacing to HTML elements using :where for class elements
+   * --------------------------------------------------------------------------------------------------
+   */
+
+  :where(.subheading) {
+    margin-block-start: var(--prose-subheading-spacing);
+  }
+
+  :where(.icon, .link) {
+    margin-block-start: var(--prose-default-spacing);
+  }
+
+  :where(button, .button-group, .button) {
+    margin-block-start: var(--prose-button-spacing);
+  }
+
+  :where(picture img) {
+    margin-inline: inherit; /* Ensure the parent alignment is inherited */
+  }
+
+  /**
+   * --------------------------------------------------------------------------------------------------
+   * Set the spacing for adjacent elements
+   * --------------------------------------------------------------------------------------------------
+   */
+
+  /* Set the spacing when a heading is followed by another heading */
+  :where(h1, h2, h3, h4, h5, h6, .display-xl, .display-l, .display-m, .h1, .h2, .h3, .h4, .h5, .h6, .h7) + :where(h1, h2, h3, h4, h5, h6, .display-xl, .display-l, .display-m, .h1, .h2, .h3, .h4, .h5, .h6, .h7),
+  :where(h1, h2, h3, h4, h5, h6, .display-xl, .display-l, .display-m, .h1, .h2, .h3, .h4, .h5, .h6, .h7) + :where(:has(h1, h2, h3, h4, h5, h6, .display-xl, .display-l, .display-m, .h1, .h2, .h3, .h4, .h5, .h6, .h7)) :where(h1, h2, h3, h4, h5, h6, .display-xl, .display-l, .display-m, .h1, .h2, .h3, .h4, .h5, .h6, .h7):first-child {
+    margin-block-start: var(--prose-adjacent-heading-spacing);
+  }
+
+  /* Set the spacing when a subheading is followed by a heading */
+  :where(.subheading) + :where(h1, h2, h3, h4, h5, h6, .display-xl, .display-l, .display-m, .h1, .h2, .h3, .h4, .h5, .h6, .h7) {
+    margin-block-start: min(0.8em, var(--prose-combination-subheading-heading-spacing));
+  }
+
+  /* Set the spacing when a subheading or icon is following by icon */
+  :where(.subheading, .icon) + :where(h1, h2, h3, h4, h5, h6, .display-xl, .display-l, .display-m, .h1, .h2, .h3, .h4, .h5, .h6, .h7, .subheading, .icon) {
+    margin-block-start: var(--prose-combination-subheading-heading-spacing);
+  }
+
+  /* Set the spacing when a display heading is followed by a paragraph */
+  :where(.display-xl, .display-l, .display-m) + :where(p:not(.display-xl, .display-l, .display-m, .h1, .h2, .h3, .h4, .h5, .h6, .h7)) {
+    margin-block-start: var(--prose-combination-display-heading-paragraph-spacing);
+  }
+
+  /* Set the spacing when a subheading is followed by a paragraph */
+  :where(.subheading, .subheading-badge) + :where(p:not(.display-xl, .display-l, .display-m, .h1, .h2, .h3, .h4, .h5, .h6, .h7)) {
+    margin-block-start: var(--prose-combination-subheading-paragraph-spacing);
+  }
+
+  /* When an element follows a blockquote or media, we remove the spacing on the next element */
+  :where(blockquote) + *,
+  :where(blockquote) + * > :first-child,
+  :where(:where(img, picture, figure, video, object, svg):not([style*="float: left"], [style*="float: right"], .icon)) + *,
+  :where(:where(img, picture, figure, video, object, svg):not([style*="float: left"], [style*="float: right"], .icon)) + * > :first-child {
+    margin-block-start: 0;
+  }
+}
+
+/* Justification */
+
+.prose-justify-start,
+.prose-justify-left {
+  text-align: start;
+
+  :where(& > *) {
+    margin-inline: 0 auto;
+  }
+}
+
+.prose-justify-center {
+  text-align: center;
+
+  :where(& > *) {
+    margin-inline: auto;
+  }
+
+  .button-group {
+    justify-content: safe center;
+  }
+
+  .vertical-text {
+    justify-self: center;
+  }
+}
+
+.prose-justify-end,
+.prose-justify-right {
+  text-align: end;
+
+  :where(& > *) {
+    margin-inline: auto 0;
+  }
+
+  .button-group {
+    justify-content: end;
+  }
+
+  .vertical-text {
+    justify-self: end;
+  }
+}
+
+@media (--sm) {
+  .sm\:prose-justify-start,
+  .sm\:prose-justify-left {
+    text-align: start;
+
+    :where(& > *) {
+      margin-inline: 0 auto;
+    }
+  }
+  
+  .sm\:prose-justify-center {
+    text-align: center;
+    
+    :where(& > *) {
+      margin-inline: auto;
+    }
+
+    .button-group {
+      justify-content: end;
+    }
+  }
+  
+  .sm\:prose-justify-end,
+  .sm\:prose-justify-right {
+    text-align: end;
+    
+    :where(& > *) {
+      margin-inline: auto 0;
+    }
+
+    .button-group {
+      justify-content: end;
+    }
+  }
+}
+
+@media (--md) {
+  .prose {
+    :where(blockquote)::before {
+      width: 62px;
+      height: 57px;
+      margin-block-start: -26px;
+    }
+  }
+
+  .md\:prose-justify-start,
+  .md\:prose-justify-left {
+    text-align: start;
+    
+    :where(& > *) {
+      margin-inline: 0 auto;
+    }
+  }
+  
+  .md\:prose-justify-center {
+    text-align: center;
+    
+    :where(& > *) {
+      margin-inline: auto;
+    }
+  }
+  
+  .md\:prose-justify-end,
+  .md\:prose-justify-right {
+    text-align: end;
+
+    :where(& > *) {
+      margin-inline: auto 0;
+    }
+  }
+}
+
+/* Link */
+
+.link, .prose a:not(.display-xl, .display-l, .display-m, .h1, .h2, .h3, .h4, .h5, .h6, .h7, .button) {
+  position: relative;
+  text-decoration: none;
+  background: linear-gradient(to right, currentColor, currentColor) left min(100%, 1.35em) / 100% 1px no-repeat;
+  transition: color 0.3s ease-in-out, background-size 0.3s ease-in-out;
+  background-position-y: 100%;
+  background-position-x: var(--transform-origin-start);
+
+  @media (--supports-hover) {
+    &:not([aria-current="true"]):hover {
+      background-size: 0% 1px;
+      background-position-x: var(--transform-origin-end);
+    }
+  }
+}
+
+.link-reversed {
+  text-decoration: none;
+  background: linear-gradient(to right, currentColor, currentColor) left min(100%, 1.35em) / 100% 1px no-repeat;
+  transition: background-size 0.2s ease-in-out;
+  background-size: 0 1px;
+  background-position-y: 100%;
+  background-position-x: var(--transform-origin-end);
+
+  &[aria-current="true"], &[aria-selected="true"], &:has(+ [open]) {
+    background-size: 100% 1px;
+  }
+
+  @media (--supports-hover) {
+    &:not([aria-current="true"], [aria-selected="true"]):hover {
+      background-size: 100% 1px;
+      background-position-x: var(--transform-origin-start);
+    }
+  }
+}
+
+.link-faded {
+  color: rgb(var(--text-color) / 0.6);
+  transition: color 0.2s ease-in-out;
+
+  &[aria-current="true"] {
+    color: rgb(var(--text-color));
+  }
+
+  @media (--supports-hover) {
+    &:hover {
+      color: rgb(var(--text-color));
+    }
+  }
+}
+
+.link-faded-reverse {
+  transition: color 0.2s ease-in-out;
+
+  @media (--supports-hover) {
+    &:hover {
+      color: rgb(var(--text-color) / 0.6);
+    }
+  }
+}
+
+.link-faded.link-reversed {
+  transition: background-size 0.2s ease-in-out, color 0.2s ease-in-out;
+}
+
+/* Tables */
+
+table {
+  width: 100%;
+}
+
+table caption {
+  text-align: inherit;
+  margin-block-end: 0.5rem;
+}
+
+:where(.table) {
+  th {
+    text-align: start;
+  }
+  
+  td:where(:not(:empty)) {
+    border-block-width: 1px;
+  }
+  
+  th, td {
+    padding: 0.75rem 0.25rem;
+  
+    &:first-child {
+      padding-inline-start: 0.5rem;
+    }
+  
+    &:last-child {
+      padding-inline-end: 0.5rem;
+      text-align: end;
+    }
+  }
+  
+  tr[onclick] {
+    cursor: pointer;
+    transition: background 0.2s ease-in-out;
+  
+    &:hover {
+      background: rgb(var(--text-color) / 0.03);
+    }
+  }
+  
+  tfoot td {
+    padding-block: 0.8rem 0;
+    border: none;
+  }
+  
+  tfoot tr:first-child td {
+    padding-block-start: 1.65rem;
+  }
+
+  @media (--sm) {
+    th, td {
+      padding: 1.25rem 0.5rem;
+  
+      &:first-child {
+        padding-inline-start: 1rem;
+      }
+    
+      &:last-child {
+        padding-inline-end: 1rem;
+      }
+    }
+  }
+}
+
+/* Small table variation */
+
+.table--sm {
+  :where(td, th) {
+    padding: 0.5rem;
+  }
+}
+
+/* Reduce spacing table variation */
+
+.table--remove-trailing-space {
+  th:first-child, td:first-child {
+    padding-inline-start: 0;
+  }
+
+  th:last-child, td:last-child {
+    padding-inline-end: 0;
+  }
+}
+
+/** Prose tables have a slightly different layout */
+.prose table {
+  thead {
+    background: rgb(var(--text-color));
+    color: rgb(var(--background));
+  }
+
+  th, td {
+    padding: 0.6rem 1rem;
+  }
+
+  th {
+    font-weight: var(--text-font-weight);
+  }
+
+  td {
+    text-align: center;
+  }
+
+  tbody tr {
+    border-block: 1px solid rgb(var(--border-color));
+  }
+
+  thead + tbody tr:first-child {
+    border-block-start: none;
+  }
+
+  tbody th {
+    text-align: start;
+    background: rgb(var(--text-color) / 0.04);
+  }
+}

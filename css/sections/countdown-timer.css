@@ -1,0 +1,197 @@
+/**
+ * -----------------------------------------------------------------------------
+ * CONDENSED COUNTDOWN (this section is used on the header group)
+ * -----------------------------------------------------------------------------
+ */
+
+.countdown-condensed {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  column-gap: 2rem;
+  row-gap: 1rem;
+  padding-block: 0.875rem;
+
+  .button, .link {
+    flex-shrink: 0;
+  }
+}
+
+.countdown-condensed__content-with-timer {
+  display: contents;
+}
+
+.countdown-condensed__content-wrapper {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem 1rem;
+}
+
+.countdown-condensed__timer {
+  display: flex;
+  align-items: center;
+  column-gap: 0.5rem;
+  flex-shrink: 0;
+  justify-content: safe center;
+}
+
+.countdown-condensed__timer-item {
+  display: grid;
+  justify-items: center;
+  align-items: baseline;
+  column-gap: 0.25rem;
+}
+
+.countdown-condensed__unit-short {
+  display: none;
+}
+
+.countdown-condensed__timer--inline {
+  .countdown-condensed__timer-item {
+    display: flex;
+  }
+}
+
+@media (--sm) {
+  .countdown-condensed__content-wrapper {
+    column-gap: 1.5rem;
+  }
+
+  .countdown-condensed__content-with-timer :is(.button, .link):not(.button--connect-with-heading),
+  .countdown-condensed__content-with-timer ~ .button--connect-with-heading {
+    display: none;
+  }
+}
+
+@media (--sm-max) {
+  .countdown-condensed__content-with-timer :is(.button, .link) {
+    display: none;
+  }
+
+  :where(.countdown-condensed:has(.button, .link)) .countdown-condensed__content-with-timer {
+    display: flex;
+    flex-direction: column;
+    row-gap: 0.25rem;
+  }
+}
+
+/*
+ * Center variation
+ */
+
+@media (--sm-max) {
+  .countdown-condensed--center:not(:has(.button, .link)) {
+    flex-direction: column;
+    row-gap: 0.35rem;
+    justify-content: safe center;
+  }
+}
+
+@media (--sm) {
+  .countdown-condensed--center {
+    justify-content: safe center;
+  }
+}
+
+/*
+ * Split variation
+ */
+
+.countdown-condensed--split {
+  justify-content: space-between;
+}
+
+@media (--sm-max) {
+  .countdown-condensed--split .countdown-condensed__timer--inline,
+  .countdown-condensed:has(.button, .link) .countdown-condensed__timer--inline {
+    .countdown-condensed__unit {
+      display: none;
+    }
+
+    .countdown-condensed__unit-short {
+      display: block;
+    }
+  }
+}
+
+/**
+ * -----------------------------------------------------------------------------
+ * COUNTDOWN (this is the main section)
+ * -----------------------------------------------------------------------------
+ */
+
+.countdown__timer {
+  container: countdown-timer / inline-size;
+  display: flex;
+  justify-content: safe center;
+  column-gap: 1.5rem;
+  width: 100%;
+  max-width: 48rem;
+}
+
+.countdown__timer--bordered {
+  border-block-width: 1px;
+  padding-block: 1.5rem;
+}
+
+.countdown__timer-item {
+  display: grid;
+  justify-items: center;
+  gap: 0.25rem 0.25rem;
+}
+
+.countdown__timer-flip {
+  display: grid !important;
+  white-space: nowrap;
+  letter-spacing: 0 !important;
+  text-align: center;
+
+  &[animate] {
+    width: auto;
+    grid-template-columns: 1ch 1ch;
+  }
+}
+
+.countdown__timer-flip::part(digit) {
+  overflow: hidden;
+  vertical-align: bottom;
+}
+
+@media (--md) {
+  .countdown__timer {
+    column-gap: 2rem;
+  }
+
+  .countdown__timer--bordered {
+    padding-block: 3rem;
+  }
+
+  .countdown__timer-item {
+    gap: 0.5rem 0.75rem;
+  }
+}
+
+@media (--lg) {
+  .countdown__timer {
+    column-gap: 3rem;
+  }
+}
+
+/* When the countdown timer is sufficiently wide, we change a bit the layout */
+
+@container countdown-timer (width > 900px) {
+  .countdown__timer-item {
+    grid-auto-flow: column;
+    align-items: baseline;
+    
+    @supports (text-box: trim-both cap alphabetic) {
+      align-items: start;
+      
+      .countdown__timer-flip {
+        text-box: trim-both cap alphabetic;
+      }
+    }
+  }
+}

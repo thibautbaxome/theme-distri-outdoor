@@ -1,0 +1,19 @@
+{
+  "name": "Blog post",
+  "sections": {
+    "blog-post-banner": {
+      "type": "blog-post-banner"
+    },
+    "main": {
+      "type": "main-article"
+    },
+    "blog-post-prev-next": {
+      "type": "blog-post-prev-next"
+    }
+  },
+  "order": [
+    "blog-post-banner",
+    "main",
+    "blog-post-prev-next"
+  ]
+}

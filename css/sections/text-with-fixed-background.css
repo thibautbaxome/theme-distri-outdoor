@@ -1,0 +1,8 @@
+.text-with-fixed-background__title-block {
+  max-width: 40rem;
+}
+
+.text-with-fixed-background__content-block {
+  max-width: 30rem;
+  padding: calc(var(--has-filled-background, 0) * var(--container-gutter));
+}

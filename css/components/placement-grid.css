@@ -1,0 +1,67 @@
+/** 
+  The placement grid is an abstraction to be used as a child of the grid box, to help positioning elements onto a grid. It is
+  usually not used by itself, but instead as a children of another grid element, such as "content-box" abstraction.
+ **/
+
+.placement-grid {
+  display: grid;
+  grid-template-rows: auto;
+  row-gap: 1.5rem;
+
+  /**
+   * If we have a child that align at the center, for it to visually appears centered, we have to ensure that first
+   * and last row are of the same size. This is why we are using a different grid-template-rows
+   */
+
+  &:has(> :where(.align-self-center, .place-self-center, .place-self-center-start, .place-self-center-end)) {
+    grid-template-rows: 1fr auto 1fr;
+  }
+
+  & > :where(.align-self-start, .place-self-start, .place-self-start-center, .place-self-start-end) {
+    grid-row: 1;
+  }
+
+  & > :where(.align-self-center, .place-self-center, .place-self-center-start, .place-self-center-end) {
+    grid-row: 2;
+  }
+
+  & > :where(.align-self-end, .place-self-end, .place-self-end-center, .place-self-end-start) {
+    grid-row: 3;
+  }
+
+  @media (--sm) {
+    &:has(> :where(.sm\:align-self-center, .sm\:place-self-center, .sm\:place-self-center-start, .sm\:place-self-center-end)) {
+      grid-template-rows: 1fr auto 1fr;
+    }
+
+    & > :where(.sm\:align-self-start, .sm\:place-self-start, .sm\:place-self-start-center, .sm\:place-self-start-end) {
+      grid-row: 1;
+    }
+  
+    & > :where(.sm\:align-self-center, .sm\:place-self-center, .sm\:place-self-center-start, .sm\:place-self-center-end) {
+      grid-row: 2;
+    }
+  
+    & > :where(.sm\:align-self-end, .sm\:place-self-end, .sm\:place-self-end-center, .sm\:place-self-end-start) {
+      grid-row: 3;
+    }
+  }
+
+  @media (--md) {
+    &:has(> :where(.md\:align-self-center, .md\:place-self-center, .md\:place-self-center-start, .md\:place-self-center-end)) {
+      grid-template-rows: 1fr auto 1fr;
+    }
+
+    & > :where(.md\:align-self-start, .md\:place-self-start, .md\:place-self-start-center, .md\:place-self-start-end) {
+      grid-row: 1;
+    }
+  
+    & > :where(.md\:align-self-center, .md\:place-self-center, .md\:place-self-center-start, .md\:place-self-center-end) {
+      grid-row: 2;
+    }
+  
+    & > :where(.md\:align-self-end, .md\:place-self-end, .md\:place-self-end-center, .md\:place-self-end-start) {
+      grid-row: 3;
+    }
+  }
+}

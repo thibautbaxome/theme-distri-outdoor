@@ -1,0 +1,15 @@
+{
+  "name": "Blog",
+  "sections": {
+    "blog-banner": {
+      "type": "blog-banner"
+    },
+    "main": {
+      "type": "main-blog"
+    }
+  },
+  "order": [
+    "blog-banner",
+    "main"
+  ]
+}

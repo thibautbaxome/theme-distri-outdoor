@@ -1,0 +1,12 @@
+.links-with-image-carousel {
+  display: grid;
+
+  & > * {
+    grid-area: 1 / -1;
+  }
+
+  & > :not(.is-selected) {
+    opacity: 0;
+    visibility: hidden;
+  }
+}

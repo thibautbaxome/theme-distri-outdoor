@@ -1,0 +1,43 @@
+/* Border utilities */
+
+.border {
+  border: 1px solid rgb(var(--border-color));
+}
+
+.border-x {
+  border-inline: 1px solid rgb(var(--border-color));
+}
+
+.border-y {
+  border-block: 1px solid rgb(var(--border-color));
+}
+
+.border-t {
+  border-block-start: 1px solid rgb(var(--border-color));
+}
+
+.border-b {
+  border-block-end: 1px solid rgb(var(--border-color));
+}
+
+/* Divide utilities */
+
+.divide-x > :not([hidden], .custom-cursor) ~ :not([hidden], .custom-cursor) {
+  border-inline-start-width: 1px;
+}
+
+.divide-y > :not([hidden], .custom-cursor) ~ :not([hidden], .custom-cursor) {
+  border-block-start-width: 1px;
+}
+
+/* Outline utilities */
+
+.outline {
+  outline: 1px solid rgb(var(--border-color));
+}
+
+/* Round utilities */
+
+.rounded-full {
+  border-radius: var(--rounded-full);
+}

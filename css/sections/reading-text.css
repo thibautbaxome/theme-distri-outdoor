@@ -1,0 +1,29 @@
+.shopify-section--reading-text {
+  overflow: clip; /* Safari has an odd bug where without clipping, content will show outside despite being clipped by clip-path */
+}
+
+.reading-text {
+  display: block;
+  min-height: calc(100vh + var(--reading-text-scroll-height, 0px) - var(--sticky-area-height));
+  padding-inline: var(--container-gutter);
+  background: rgb(var(--reading-text-overlay));
+  isolation: isolate;
+}
+
+.reading-text__inner {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-rows: minmax(0, 1fr);
+  position: sticky;
+  inset-block-start: var(--sticky-area-height);
+  min-height: calc(100dvh - var(--sticky-area-height));
+  padding-block: min(var(--section-vertical-spacing), 3rem);
+
+  ::part(letter) {
+    white-space: pre-wrap;
+  }
+  
+  ::part(letter), .button {
+    opacity: var(--reading-text-initial-opacity, 0.2); /* By default, all letters have a reduced opacity, and are revealed on scroll in JS */
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "name": "Register",
+  "sections": {
+    "main": {
+      "type": "main-customers-register",
+      "blocks": {
+        "fields": {
+          "type": "fields"
+        }
+      },
+      "block_order": [
+        "fields"
+      ]
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

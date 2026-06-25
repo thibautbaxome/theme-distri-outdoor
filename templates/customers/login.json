@@ -1,0 +1,19 @@
+{
+  "name": "Login",
+  "sections": {
+    "main": {
+      "type": "main-customers-login",
+      "blocks": {
+        "fields": {
+          "type": "fields"
+        }
+      },
+      "block_order": [
+        "fields"
+      ]
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

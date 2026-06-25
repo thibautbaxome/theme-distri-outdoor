@@ -1,0 +1,44 @@
+.shape {
+  width: var(--shape-size, 1rem);
+  height: var(--shape-size, 1rem);
+  background: currentColor;
+
+  @supports (height: 1cap) {
+    width: var(--shape-size, 1cap);
+    height: var(--shape-size, 1cap);
+  }
+}
+
+.shape--circle {
+  border-radius: 100%;
+}
+
+.shape--diamond {
+  transform: scale(0.8) rotate(45deg);
+}
+
+/* Because the shapes are heavy and rarely used, they are loaded in the "clip-blob.css" file on demand */
+
+.clip-circle {
+  clip-path: circle(50%);
+}
+
+.clip-blob-1 {
+  clip-path: polygon(var(--clip-path--blob-1));
+}
+
+.clip-blob-2 {
+  clip-path: polygon(var(--clip-path--blob-2));
+}
+
+.clip-blob-3 {
+  clip-path: polygon(var(--clip-path--blob-3));
+}
+
+.clip-blob-4 {
+  clip-path: polygon(var(--clip-path--blob-4));
+}
+
+.clip-blob-5 {
+  clip-path: polygon(var(--clip-path--blob-5));
+}

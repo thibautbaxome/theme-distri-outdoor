@@ -1,0 +1,42 @@
+.gift-card {
+  position: relative;
+  display: grid;
+  align-content: center;
+  max-width: 26rem;
+  height: 100%;
+  margin-inline: auto;
+  text-align: center;
+  grid-template-columns: minmax(0, 1fr);
+  row-gap: var(--section-stack-row-gap); /* We enforce minimum spacing between items */
+}
+
+.gift-card__code {
+  --padding-compensation-ratio: 1;
+
+  text-align: center;
+  color: rgb(var(--text-color) / 0.7);
+  font-size: 0.8125rem;
+  text-transform: uppercase;
+}
+
+.gift-card__action-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+
+  .button {
+    flex: 1 0 auto;
+  }
+}
+
+.gift-card__pass-cards {
+  display: flex;
+  justify-content: safe center;
+  align-items: center;
+  gap: 2rem;
+  width: 100%;
+}
+
+.gift-card__qr-code {
+  width: 120px;
+}

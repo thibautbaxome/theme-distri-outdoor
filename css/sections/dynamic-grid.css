@@ -1,0 +1,106 @@
+@keyframes cell-horizontal-parallax {
+  from {
+    transform: translateX(calc(-1 * var(--offset-amount)));
+  }
+
+  to {
+    transform: translateX(var(--offset-amount));
+  }
+}
+
+@keyframes cell-vertical-parallax {
+  from {
+    transform: translateY(calc(-1 * var(--offset-amount)));
+  }
+
+  to {
+    transform: translateY(var(--offset-amount));
+  }
+}
+
+.shopify-section--dynamic-grid {
+  position: relative;
+  overflow-x: hidden;
+  view-timeline: --dynamic-grid block; /* Set up the context for view timeline */
+
+  @supports (overflow: clip) {
+    overflow-x: clip;
+  }
+
+  &:first-child:has([allow-transparent-header]) .dynamic-grid {
+    margin-block-start: var(--header-height, 0px);
+  }
+}
+
+.dynamic-grid {
+  --dynamic-grid-column-count: 8;
+  --dynamic-grid-cell-size: calc((100vw - var(--container-gutter-context, 0px) * 2) / var(--dynamic-grid-column-count) - var(--dynamic-grid-gap) * (var(--dynamic-grid-column-count) - 1) / var(--dynamic-grid-column-count));
+
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(var(--dynamic-grid-column-count), minmax(0, 1fr));
+  grid-template-rows: repeat(var(--dynamic-grid-explicit-row-count), var(--dynamic-grid-cell-size)) max-content;
+  gap: var(--dynamic-grid-gap);
+
+  &.editor-is-selected::before {
+    /* Create grid using repeating linear gradients */
+    content: '';
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background-image: 
+      repeating-linear-gradient(rgb(200 200 200 / 0.2) 0, rgb(200 200 200 / 0.2) var(--dynamic-grid-cell-size), transparent var(--dynamic-grid-cell-size), transparent calc(var(--dynamic-grid-cell-size) + max(1px, var(--dynamic-grid-gap)))),
+      repeating-linear-gradient(90deg,rgb(200 200 200 / 0.2) 0, rgb(200 200 200 / 0.2) var(--dynamic-grid-cell-size), transparent var(--dynamic-grid-cell-size), transparent calc(var(--dynamic-grid-cell-size) + max(1px, var(--dynamic-grid-gap))));
+    background-repeat: no-repeat;
+    background-size: 100% calc(var(--dynamic-grid-cell-size) * var(--dynamic-grid-explicit-row-count) + max(1px, var(--dynamic-grid-gap)) * (var(--dynamic-grid-explicit-row-count) - 1));
+  }
+}
+
+.dynamic-grid__cell {
+  position: relative;
+  align-self: start;
+  grid-area: var(--dynamic-grid-grid-area);
+  inset-inline-start: var(--dynamic-grid-horizontal-adjustment);
+  inset-block-start: var(--dynamic-grid-vertical-adjustment);
+  isolation: isolate;
+  transition: opacity 0.2s ease-in-out, background-color 0.2s ease-in-out;
+
+  @supports (view-timeline-name: --foo) {
+    --offset-amount: calc(var(--parallax-speed) * 10 / 2 * 1vmin);
+  
+    animation: linear cell-horizontal-parallax forwards;
+    animation-timeline: --dynamic-grid;
+    animation-range: cover 0% cover 100%;
+  
+    &[data-parallax-direction="vertical"] {
+      animation-name: cell-vertical-parallax;
+    }
+  }
+
+  &.editor-is-selected, &:has(.editor-is-selected) {
+    background-color: rgb(0 0 0 / 0.05);
+    outline: 2px dashed grey;
+  }
+
+  figure {
+    max-width: 100%;
+    width: 100%;
+    object-fit: cover;
+    object-position: center;
+    transition: opacity 0.2s ease;
+
+    video {
+      width: 100%;
+    }
+
+    .dynamic-grid.editor-is-selected &:not(.editor-is-selected) {
+      opacity: 0.6;
+    }
+  }
+}
+
+@media (--md) {
+  .dynamic-grid {
+    --dynamic-grid-column-count: 16; /* On desktop we switch to a 16-column layout */
+  }
+}

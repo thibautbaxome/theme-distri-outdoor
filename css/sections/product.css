@@ -1,0 +1,472 @@
+/**
+ * -------------------------------------------------------------------------------------------------------------------
+ * PRODUCT LAYOUT
+ *
+ * CSS properties exposed by the gallery to be overridden outside the component:
+ *
+ * --product-grid: the grid shorthand declaration
+ * --product-gap: the gap between gallery and info
+ * -------------------------------------------------------------------------------------------------------------------
+ */
+
+.product {
+  display: grid;
+  grid: var(--product-grid, auto-flow / minmax(0, 1fr));
+  align-items: start;
+  gap: 2.25rem;
+  padding-block-end: var(--section-vertical-spacing);
+}
+
+@media (--md) {
+  .product {
+    gap: 0rem;
+  }
+
+  .product-info {
+    padding-inline-start: 3rem;
+  }
+}
+
+/**
+ * -------------------------------------------------------------------------------------------------------------------
+ * PRODUCT GALLERY
+ *
+ * CSS properties exposed by the gallery to be overridden outside the component:
+ *
+ * --product-gallery-gap: the gap between the image list and controls (thumbnails or dots)
+ *
+ * --product-gallery-carousel-grid: the grid declaration for the carousel
+ * --product-gallery-carousel-gap: the gap to use between each images inside the carousel
+ * --product-gallery-carousel-scroll-snap-type: the scroll snap type to use based on the carousel configuration
+ *
+ * --product-gallery-thumbnail-list-grid-auto-flow: the flow to use for the thumbnails ("column" by default)
+ * -------------------------------------------------------------------------------------------------------------------
+ */
+
+.product-gallery {
+  --product-gallery-thumbnail-list-gap: 0.5rem;
+  --product-gallery-thumbnail-size: 3.625rem;
+
+  position: relative;
+  display: grid;
+  align-self: start;
+  gap: var(--product-gallery-gap);
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.product-gallery__image-list {
+  position: relative;
+  display: grid;
+  grid-auto-rows: max-content;
+  grid-template-columns: minmax(0, 1fr);
+  width: 100%;
+  row-gap: var(--product-gallery-gap); /* Separate the images and AR button */
+}
+
+.product-gallery__carousel {
+  position: relative;
+  display: grid;
+  grid: var(--product-gallery-carousel-grid, auto / auto-flow 100%);
+  align-items: start;
+  gap: var(--product-gallery-carousel-gap, 0.25rem);
+  scroll-snap-type: var(--product-gallery-carousel-scroll-snap-type, x mandatory);
+
+  [allow-transparent-header] & {
+    padding-inline: 0;
+  }
+}
+
+.product-gallery__media > * {
+  width: 100%; /* Make sure the media fills the whole box */
+}
+
+.product-gallery__cursor.is-half-start svg {
+  transform: rotate(180deg);
+}
+
+.product-gallery__controls-floating {
+  .scroll-marker-group {
+    --scroll-marker-group-inset-block-end: 1.5rem;
+
+    position: absolute;
+    inset-block-end: var(--scroll-marker-group-inset-block-end);
+    left: 50%;
+    width: var(--scroll-marker-group-width, 50%);
+    transform: translateX(-50%);
+  }
+
+  .scroll-marker-group--counter {
+    --scroll-marker-group-width: auto;
+  }
+
+  .scroll-marker-group--counter {
+    --scroll-marker-group-inset-block-end: 1rem;
+  }
+}
+
+.product-gallery__thumbnail-list {
+  --distance-to-bleed: var(--container-gutter);
+  --container-gutter-context: var(--product-gallery-gap);
+
+  position: relative;
+  max-width: 100%;
+
+  &.container {
+    --distance-to-bleed: var(--product-gallery-gap);
+  }
+
+  [allow-transparent-header] & {
+    .scroll-marker-group--thumbnails {
+      padding-inline: var(--product-gallery-gap);
+    }
+  }
+}
+
+.product-gallery__thumbnail-scroller {
+  --distance-to-bleed: var(--product-gallery-thumbnail-list-gap);
+
+  position: relative;
+  display: grid;
+  align-items: start;
+  grid-auto-columns: var(--product-gallery-thumbnail-size);
+  grid-auto-flow: var(--product-gallery-thumbnail-list-grid-auto-flow, column);
+  gap: var(--product-gallery-thumbnail-list-gap);
+  grid-template-columns: none;
+  scroll-snap-type: both mandatory;
+  max-height: var(--product-gallery-thumbnail-list-max-height, none);
+  padding-block-end: 6px; /* padding added to show current thumbnail indicator */
+  margin-block-end: -6px; /* margin added to remove padding block end */
+  overscroll-behavior: contain;
+  overflow: auto;
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+.product-gallery__media-badge {
+  position: absolute;
+  inset-block-end: 0;
+  inset-inline-start: 0;
+}
+
+.product-zoom-button {
+  --product-gallery-zoom-button-position: min(5%, 0.5rem);
+
+  position: absolute;
+  display: grid;
+  grid-auto-flow: column;
+  align-items: center;
+  inset-block-end: 8px;
+  inset-inline-end: -12px;
+  overflow: hidden;
+
+  .icon {
+    padding: 0.75rem;
+  }
+
+  @media (--supports-hover) {
+    &:hover {
+      .product-zoom-button__label {
+        width: auto;
+      }
+    }
+  }
+}
+
+.product-zoom-button__label {
+  width: 0;
+  font: var(--button-font);
+  letter-spacing: var(--button-letter-spacing);
+  text-transform: var(--button-text-transform);
+  transition: width 0.3s ease;
+}
+
+.view-in-space-button {
+  margin-block-start: var(--container-gutter);
+}
+
+.view-in-space-button[data-shopify-xr-hidden] {
+  display: none; /* Ensure the XR button is hidden on non-compatible devices */
+}
+
+@media (--sm) {
+  .product-gallery__controls-floating {
+    .scroll-marker-group {
+      --scroll-marker-group-inset-block-end: 2.5rem;
+    }
+
+    .scroll-marker-group--counter {
+      --scroll-marker-group-inset-block-end: 1.75rem;
+    }
+
+    .scroll-marker-group--thumbnails {
+      --scroll-marker-group-inset-block-end: 1.75rem;
+      --scroll-marker-group-width: 100%;
+
+      left: 0;
+      padding-inline: 1.75rem;
+      transform: none;
+    }
+
+    .product-gallery__thumbnail-list {
+      display: flex;
+      position: absolute;
+      inset-block-end: 0;
+      align-items: flex-end;
+      height: 100%;
+      width: 75%;
+      padding-block-end: 1.75rem;
+      pointer-events: none;
+
+      .scroll-marker {
+        pointer-events: all;
+      }
+    }
+
+    .scroll-marker-group--thumbnails {
+      z-index: 1;
+      position: sticky;
+      inset-block-end: calc(1.75rem - 6px); /* 6px corresponds to the padding added to visually highlight the CSS element indicating the current slide. */
+    }
+  }
+
+  .product-zoom-button {
+    inset-block-end: min(5%, 1.75rem);
+    inset-inline-end: min(5%, 1.75rem);
+  }
+}
+
+@media (--md) {
+  .product-gallery {
+    position: sticky;
+    inset-block-start: var(--header-height);
+
+    [allow-transparent-header] & {
+      margin-inline-start: calc(-1 * var(--container-gutter));
+      inset-block-start: 0;
+    }
+
+    .modal--quick-buy & {
+      inset-block-start: 0;
+    }
+  }
+
+  .product-gallery__thumbnail-list {
+    [allow-transparent-header] & {
+      padding-inline-start: var(--product-gallery-gap);
+
+      .scroll-marker-group--thumbnails {
+        padding-inline: 0;
+      }
+    }
+  }
+
+  .product-gallery__controls-floating {
+    [allow-transparent-header] & {
+      .scroll-marker-group--thumbnails {
+        padding-inline: 1.75rem;
+      }
+    }
+  }
+}
+
+/**
+ * -------------------------------------------------------------------------------------------------------------------
+ * PRODUCT INFO
+ * -------------------------------------------------------------------------------------------------------------------
+ */
+
+.product-info {
+  --distance-to-bleed: min(1.75rem, var(--container-gutter));
+  --product-block-item-margin: 1.75rem;
+
+  width: 100%;
+  margin-inline: auto;
+}
+
+/* Setup the space between items */
+
+.product-info__block-list {
+  & > *:not(:nth-child(1 of :not(:empty))) {
+    margin-block-start: var(--product-block-item-margin);
+  }
+
+  & > *:not(:last-child) {
+    margin-block-end: var(--product-block-item-margin);
+  }
+}
+
+.product-info__block-item {
+  /* Hide a block if all its children are hidden or if it is empty */
+  &:empty {
+    display: none;
+  }
+
+  /* Negative spacing for some specific blocks */
+  &:is([data-block-type="title"]) {
+    --product-block-item-margin: -0.5rem;
+  }
+
+  /* Medium spacing */
+  &:is([data-block-type="badges"], [data-block-type="vendor"], [data-block-type="sku"], [data-block-type="price"]) {
+    --product-block-item-margin: 1.25rem;
+  }
+}
+
+@media (--md) {
+  .product-info {
+    position: sticky;
+    max-width: calc(32rem + var(--product-block-item-margin) * 2);
+    inset-block-start: calc(var(--sticky-area-height) + 20px);
+    margin-block: 0;
+    z-index: 1; /* Needed to ensure that popovers are on top of other sections */
+
+    [allow-transparent-header] & {
+      margin-block-start: calc(var(--header-height) + 4rem);
+    }
+  }
+}
+
+/**
+ * -------------------------------------------------------------------------------------------------------------------
+ * VARIANT PICKER
+ * -------------------------------------------------------------------------------------------------------------------
+ */
+
+.variant-picker {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  row-gap: var(--product-block-item-margin);
+}
+
+.variant-picker__option {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  row-gap: var(--form-control-gap);
+}
+
+.variant-picker__option-info {
+  display: flex;
+  column-gap: 2rem;
+  align-items: baseline;
+  flex-wrap: wrap;
+}
+
+@media (scripting: none) {
+  .variant-picker__option {
+    display: none;
+  }
+}
+
+/**
+ * -------------------------------------------------------------------------------------------------------------------
+ * BUY BUTTONS
+ * -------------------------------------------------------------------------------------------------------------------
+ */
+
+.buy-buttons {
+  display: grid;
+  row-gap: 0.625rem;
+
+  .quantity-selector {
+    min-height: 100%;
+  }
+
+  .collapse-quantity-selector .quantity-selector {
+    border-inline-end: none;
+  }
+}
+
+/**
+ * -------------------------------------------------------------------------------------------------------------------
+ * PAYMENT INSTALMENT TERMS
+ * -------------------------------------------------------------------------------------------------------------------
+ */
+
+.payment-terms shopify-payment-terms {
+  display: block;
+  padding: 1rem;
+  background: rgb(var(--background-secondary));
+}
+
+/**
+ * -------------------------------------------------------------------------------------------------------------------
+ * PRODUCT COUNTDOWN
+ * -------------------------------------------------------------------------------------------------------------------
+ */
+
+.product-countdown {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  grid-auto-columns: min-content;
+  grid-auto-flow: column;
+  column-gap: 2.5rem;
+  align-items: center;
+  padding: 1rem 1.25rem;
+  border-radius: min(4px, var(--button-border-radius));
+}
+
+/**
+ * -------------------------------------------------------------------------------------------------------------------
+ * PRODUCT PICKUP AVAILABILITY
+ * -------------------------------------------------------------------------------------------------------------------
+ */
+
+.drawer--pickup-availability {
+  --drawer-header-padding-block: min(2rem, var(--container-gutter));
+  --drawer-header-padding-inline: min(2rem, var(--container-gutter));
+
+  &::part(header) {
+    text-align: start;
+    justify-items: start;
+  }
+
+  &::part(close-button) {
+    grid-column: 2;
+    margin-inline-start: auto;
+    align-self: start;
+  }
+}
+
+/**
+ * -------------------------------------------------------------------------------------------------------------------
+ * STICKY ADD TO CART
+ * -------------------------------------------------------------------------------------------------------------------
+ */
+
+.product-sticky-add-to-cart {
+  position: fixed;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  grid-auto-flow: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem 1rem 1rem;
+  border-width: 1px;
+  inset-inline-end: 1.75rem;
+  inset-block-end: 1.75rem;
+  width: min(100%, 40rem);
+  z-index: 2;
+  box-shadow: 0 2px 4px 0 rgb(0 0 0 / 0.05);
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.2s ease-in-out, visibility 0.2s ease-in-out;
+
+  &.is-visible {
+    visibility: visible;
+    opacity: 1;
+  }
+}
+
+@media (--sm-max) {
+  .product-sticky-add-to-cart {
+    inset-inline-start: 0;
+    inset-block-end: 0;
+    padding: 1rem;
+    border: none;
+    background: transparent;
+    box-shadow: none;
+  }
+}

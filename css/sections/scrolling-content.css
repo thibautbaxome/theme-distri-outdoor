@@ -1,0 +1,115 @@
+.shopify-section--scrolling-content > * {
+  /* The width: 102% allows to stretch the section to ensure it goes edge to edge even when rotated */
+  position: relative;
+  z-index: 1;
+  transform: rotate(var(--scrolling-content-rotation)) translateX(calc(var(--transform-logical-flip) * -1%));
+  transform-origin: left;
+  width: 102%;
+}
+
+.scrolling-content {
+  --scrolling-content-calculated-gap: var(--scrolling-content-gap, 2ch);
+
+  position: relative;
+  display: block;
+  text-align: start;
+  white-space: nowrap;
+  user-select: none;
+  overflow: hidden;
+
+  &[direction="end-to-start"] {
+    text-align: end;
+  }
+
+  &::part(scroller) {
+    display: flex;
+    width: max-content;
+    margin-inline: inherit; /* Allows to have the bleed inheriting */
+  }
+
+  @supports (overflow: clip) {
+    overflow: clip visible;
+  }
+}
+
+.scrolling-content__item {
+  display: grid;
+  grid-auto-flow: column;
+  align-items: center;
+  gap: var(--scrolling-content-calculated-gap);
+  width: max-content;
+  padding-inline-end: var(--scrolling-content-calculated-gap);
+}
+
+.scrolling-content__text {
+  display: flex;
+  column-gap: min(0.8em, 2rem);
+  align-items: center;
+
+  a {
+    text-decoration: underline;
+    text-underline-position: under;
+    text-decoration-thickness: min(3px, 0.1em);
+  }
+}
+
+.scrolling-content__text-icon {
+  height: 1em;
+  width: auto;
+}
+
+/**
+ * Vertical variation
+ */
+
+.scrolling-content--vertical {
+  .scrolling-content__item {
+    justify-items: center;
+    grid-auto-flow: row;
+    padding-inline-end: 0;
+    padding-block-end: var(--scrolling-content-calculated-gap);
+  }
+
+  @supports (overflow: clip) {
+    overflow: visible clip;
+  }
+}
+
+@media (--sm) {
+  .sm\:scrolling-content--vertical {
+    .scrolling-content__item {
+      justify-items: center;
+      grid-auto-flow: row;
+      padding-inline-end: 0;
+      padding-block-end: var(--scrolling-content-calculated-gap);
+    }
+  
+    @supports (overflow: clip) {
+      overflow: visible clip;
+    }
+  }
+}
+
+@media (--md) {
+  .md\:scrolling-content--vertical {
+    .scrolling-content__item {
+      justify-items: center;
+      grid-auto-flow: row;
+      padding-inline-end: 0;
+      padding-block-end: var(--scrolling-content-calculated-gap);
+    }
+  
+    @supports (overflow: clip) {
+      overflow: visible clip;
+    }
+  }
+}
+
+/* When the scrolling content is used in the context of the prose (this is used in different section) we end up with extra margin
+   which mess with the layout. To goes around this, we ensure all elements don't have margin, and we re-add it on the container */
+
+.prose {
+  .scrolling-content__text > * {
+    margin-block-start: 0 !important; /* Remove potential margin */
+  }
+}

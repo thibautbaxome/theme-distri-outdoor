@@ -1,0 +1,19 @@
+/* Opacity utilities (useful to reveal things in JS) */
+
+.opacity-0 {
+  opacity: 0;
+}
+
+/* Clip path utilities */
+
+.clip-inset {
+  clip-path: inset(0);
+  margin-block-start: -1px; /* This is a hack to fix a rounding issue in Chrome and Safari, where depending on the height of the clipped
+                               box, a 1px line can be visible */
+}
+
+/* Mix blend mode plus lighter is useful when transitioning between images, as it gives a fade look */
+
+.mix-blend-plus-lighter {
+  mix-blend-mode: plus-lighter;
+}

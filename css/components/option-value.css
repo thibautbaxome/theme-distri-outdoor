@@ -1,0 +1,292 @@
+/**
+ * -------------------------------------------------------------------------------------------------------------------
+ * COLOR SWATCH COMPONENT
+ * -------------------------------------------------------------------------------------------------------------------
+ */
+
+.color-swatch {
+  --swatch-width: 2rem;
+  --swatch-height: 2rem;
+  --swatch-selected-border-size: 2px;
+  --swatch-selected-border-offset: 3px;
+  --swatch-disabled-strike-color: rgb(var(--border-color));
+  --swatch-disabled-icon-size: 0.75rem;
+
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: var(--swatch-width);
+  height: var(--swatch-height);
+  background: content-box var(--swatch-background) no-repeat center/cover;
+
+  &.is-disabled::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: url('data:image/svg+xml,<svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 1L9 9M9 1L1 9" stroke="black" stroke-width="1.5"/></svg>'), linear-gradient(to right, rgb(255 255 255 / 0.5), rgb(255 255 255 / 0.5));
+    background-repeat: no-repeat, no-repeat;
+    background-size: var(--swatch-disabled-icon-size), 100%;
+    background-position: center;
+    border-radius: inherit;
+  }
+
+  :disabled + & {
+    display: none;
+  }
+
+  :checked + &, &.is-selected {
+    --swatch-disabled-strike-color: currentColor;
+
+    outline: var(--swatch-selected-border-size) solid currentColor;
+    outline-offset: var(--swatch-selected-border-offset);
+
+    /* The indicator is only for rectangle and square swatches */
+    .color-swatch__indicator {
+      position: absolute;
+      width: 100%;
+      height: var(--swatch-selected-border-size);
+      inset-block-end: -4px;
+      background: currentColor;
+    }
+  }
+}
+
+.color-swatch--circle {
+  border-radius: 100%;
+}
+
+.color-swatch--square,
+.color-swatch--rectangle {
+  --swatch-height: 2rem;
+  --swatch-width: 2rem;
+  --swatch-disabled-icon-size: 0.75rem;
+
+  border: none;
+
+  :checked + &, &.is-selected {
+    outline: none; /* For the swatch and rectangle we use a different strategy */
+  }
+}
+
+.color-swatch--rectangle {
+  --swatch-height: 1.5rem;
+  --swatch-width: 4rem;
+  --swatch-disabled-icon-size: 0.5rem;
+}
+
+.color-swatch--sm {
+  --swatch-width: 1rem;
+  --swatch-height: 1rem;
+  --swatch-disabled-icon-size: 0.5rem;
+  --swatch-selected-border-offset: 2px;
+}
+
+.color-swatch--square.color-swatch--sm {
+  --swatch-height: 1rem;
+  --swatch-width: 1rem;
+}
+
+.color-swatch--rectangle.color-swatch--sm {
+  --swatch-height: 0.75rem;
+  --swatch-width: 1.75rem;
+  --swatch-disabled-icon-size: 0.375rem;
+}
+
+.color-swatch--white {
+  box-shadow: 0 0 0 1px rgb(var(--border-color)) inset;
+}
+
+.color-swatch--tight {
+  --swatch-height: 1.25rem;
+  --swatch-width: 1.25rem;
+
+  box-shadow: 0 0 0 2px rgb(var(--background));
+
+  & ~ & {
+    margin-inline-start: -0.875rem;
+  }
+
+  & + .color-swatch__view-more {
+    height: 1.25rem;
+    padding-inline: 0.375rem;
+    margin-inline-start: -0.875rem;
+    border-width: 1px;
+    background: rgb(var(--background));
+    align-content: center;
+    border-radius: 20px;
+    font-size: 0.625rem;
+    z-index: 1;
+    box-shadow: 0 0 0 2px rgb(var(--background));
+  }
+}
+
+
+/**
+ * -------------------------------------------------------------------------------------------------------------------
+ * BLOCK SWATCH COMPONENT
+ * -------------------------------------------------------------------------------------------------------------------
+ */
+
+.block-swatch {
+  --swatch-border-size: 1px;
+  --swatch-padding: 0.5625rem 1.125rem;
+  --swatch-disabled-strike-color: rgb(var(--text-color) / 0.3);
+
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: safe center;
+  column-gap: 0.65rem;
+  padding: var(--swatch-padding);
+  min-width: 3.5rem;
+  border-width: var(--swatch-border-size);
+  border-radius: var(--input-border-radius);
+  color: rgb(var(--text-color) / 0.65);
+
+  &.is-disabled {
+    color: rgb(var(--text-color) / 0.5);
+    border-color: rgb(var(--border-color) / 0.5);
+    text-decoration: line-through;
+    text-decoration-color: var(--swatch-disabled-strike-color);
+  }
+
+  :disabled + & {
+    display: none;
+  }
+
+  :checked + &, &.is-selected {
+    --swatch-disabled-strike-color: currentColor;
+
+    color: var(--text-color);
+    border-color: currentColor;
+    box-shadow: 0 0 0 1px currentColor inset;
+
+    &.block-swatch--fill {
+      background: rgb(var(--text-color));
+      border-color: rgb(var(--text-color));
+      box-shadow: 0 0 0 1px rgb(var(--text-color)) inset;
+      color: rgb(var(--background));
+    }
+  }
+
+  :focus-visible + & {
+    outline-offset: 2px;
+  }
+}
+
+.block-swatch__color {
+  width: 1em;
+  height: 1em;
+  background: var(--swatch-background) center / cover;
+}
+
+@media (--sm) {
+  .block-swatch {
+    min-width: 4rem;
+  }
+}
+
+/**
+ * -------------------------------------------------------------------------------------------------------------------
+ * THUMBNAIL SWATCH COMPONENT
+ * 
+ * This component is different in a sense that it uses the image and its ratio to determine the size of the thumbnail.
+ * It is typically used in product pages or in collection pages
+ * -------------------------------------------------------------------------------------------------------------------
+ */
+
+.thumbnail-swatch {
+  --thumbnail-size: 3.5rem;
+  --thumbnail-disabled-strike-color: rgb(var(--border-color));
+  --swatch-disabled-icon-size: 30%;
+
+  position: relative;
+  display: block;
+  width: var(--thumbnail-size);
+  height: auto;
+  border-block-end: 2px solid transparent;
+  padding-block-end: 2px;
+
+  :checked + &, &.is-selected {
+    border-color: currentColor;
+  }
+
+  &.is-disabled::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    background: url('data:image/svg+xml,<svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 1L9 9M9 1L1 9" stroke="black" stroke-width="1"/></svg>'), linear-gradient(to right, rgb(255 255 255 / 0.5), rgb(255 255 255 / 0.5));
+    background-repeat: no-repeat, no-repeat;
+    background-size: var(--swatch-disabled-icon-size), 100%;
+    background-position: center;
+    border-radius: inherit;
+  }
+
+  :disabled + & {
+    display: none;
+  }
+
+  & > img {
+    height: 100%;
+  }
+
+  :focus-visible + & {
+    outline-offset: 2px;
+  }
+}
+
+.thumbnail-swatch--sm {
+  --thumbnail-size: 2.5rem;
+}
+
+@media (--sm) {
+  .thumbnail-swatch {
+    --thumbnail-size: 4.5rem;
+  }
+
+  .thumbnail-swatch--sm {
+    --thumbnail-size: 3.5rem;
+  }
+}
+
+/**
+ * -------------------------------------------------------------------------------------------------------------------
+ * IMAGE FILTER COMPONENT
+ * 
+ * This component is used exclusively for collection and search filters, and shows an uncropped image along the
+ * option value name.
+ * -------------------------------------------------------------------------------------------------------------------
+ */
+
+.image-filter-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 0.5fr));
+  gap: 1px;
+}
+
+.image-filter {
+  display: flex;
+  padding: 1rem;
+  margin: -1px;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  row-gap: 0.5rem;
+  border-width: 1px;
+  z-index: 0;
+  transition: border-color 0.15s ease-in-out, z-index 0.15s linear 0.15s;
+
+  :checked + &, &.is-selected {
+    border-color: currentColor;
+    z-index: 1;
+    transition-delay: 0s;
+  }
+}
+
+.image-filter__image {
+  width: 32px;
+  object-fit: contain;
+}

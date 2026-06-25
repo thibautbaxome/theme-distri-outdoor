@@ -1,0 +1,19 @@
+.logo-list {
+  display: grid;
+  grid: var(--logo-list-grid);
+  gap: var(--logo-list-gap);
+  justify-content: var(--logo-list-justify-content);
+  padding-block: 1px; /* This allows to take into account the border that is added with a box-shadow on items */
+}
+
+.logo-list__item {
+  display: grid;
+  place-content: center;
+  padding: var(--logo-item-padding-block) var(--logo-item-padding-inline);
+  background: rgb(var(--logo-item-background));
+  box-shadow: 1px 0 0 0 rgb(var(--logo-item-border-color)), 
+    0 1px 0 0 rgb(var(--logo-item-border-color)), 
+    1px 1px 0 0 rgb(var(--logo-item-border-color)), 
+    1px 0 0 0 rgb(var(--logo-item-border-color)) inset, 
+    0 1px 0 0 rgb(var(--logo-item-border-color)) inset;
+}

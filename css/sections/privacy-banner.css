@@ -1,0 +1,5 @@
+@media (--sm) {
+  .modal--privacy-banner::part(content) {
+    place-self: end;
+  }
+}

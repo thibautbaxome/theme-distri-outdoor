@@ -1,0 +1,23 @@
+{
+  "name": "Collections list",
+  "sections": {
+    "main": {
+      "type": "main-list-collections",
+      "blocks": {
+        "collection-card": {
+          "type": "collection-card",
+          "static": true,
+          "settings": {
+            "color_scheme": "scheme-3",
+            "collection": "{{ closest.collection }}",
+            "title": "{{ closest.collection.title }}",
+            "image": "{{ closest.collection.image }}"
+          }
+        }
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

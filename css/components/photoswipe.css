@@ -1,0 +1,192 @@
+/**
+ * -------------------------------------------------------------------------------------------------------------------
+ * PHOTOSWIPE
+ *
+ * This code is the base CSS for making PhotoSwipe works (the zoom feature). It is using a reduced CSS compared to the
+ * original file, as we don't use all features of PhotoSwipe.
+ * -------------------------------------------------------------------------------------------------------------------
+ */
+
+.pswp {
+  --pswp-bg: var(--background);
+  --pswp-root-z-index: 100000;
+
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: var(--pswp-root-z-index);
+  display: none;
+  touch-action: none;
+  outline: 0;
+  opacity: 0.003;
+  contain: layout style size;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+
+  &:focus {
+    outline: 0;
+  }
+}
+
+.pswp--open {
+  display: block;
+}
+
+.pswp img {
+  max-width: none;
+}
+
+.pswp, .pswp__bg {
+  transform: translateZ(0);
+  will-change: opacity;
+}
+
+.pswp__bg {
+  opacity: 0.005;
+  background: rgb(var(--pswp-bg));
+}
+
+.pswp, .pswp__scroll-wrap {
+  overflow: hidden;
+}
+
+.pswp__scroll-wrap,
+.pswp__bg,
+.pswp__container,
+.pswp__item,
+.pswp__img,
+.pswp__zoom-wrap {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  max-height: none;
+}
+
+.pswp__img,
+.pswp__zoom-wrap {
+  width: auto;
+  height: auto;
+}
+
+.pswp--click-to-zoom.pswp--zoom-allowed .pswp__img {
+  cursor: zoom-in;
+}
+
+.pswp--click-to-zoom.pswp--zoomed-in .pswp__img {
+  cursor: grab;
+}
+
+.pswp--click-to-zoom.pswp--zoomed-in .pswp__img:active {
+  cursor: grabbing;
+}
+
+/* :active to override grabbing cursor */
+.pswp--no-mouse-drag.pswp--zoomed-in .pswp__img,
+.pswp--no-mouse-drag.pswp--zoomed-in .pswp__img:active,
+.pswp__img {
+  cursor: zoom-out;
+}
+
+/* Prevent selection and tap highlights */
+.pswp__container,
+.pswp__img,
+.pswp__button,
+.pswp__counter {
+  user-select: none;
+}
+
+.pswp__item {
+  z-index: 1; /* z-index for fade transition */
+  overflow: hidden;
+}
+
+.pswp__hidden {
+  display: none !important;
+}
+
+
+/* PhotoSwipe UI */
+
+/* class pswp__hide-on-close is applied to elements that should hide (for example fade out) when PhotoSwipe is closed
+   and show (for example fade in) when PhotoSwipe is opened */
+
+.pswp .pswp__hide-on-close {
+  opacity: 0.005;
+  will-change: opacity;
+  transition: opacity 0.3s cubic-bezier(0.4, 0, 0.22, 1), transform 0.3s cubic-bezier(0.4, 0, 0.22, 1);
+  transform: translateY(15px);
+  transition-delay: 0s;
+  z-index: 10; /* always overlap slide content */
+  pointer-events: none; /* hidden elements should not be clickable */
+}
+
+/* class pswp--ui-visible is added when opening or closing transition starts */
+
+.pswp--ui-visible .pswp__hide-on-close {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0.3s;
+  pointer-events: auto;
+}
+
+.pswp__top-bar {
+  height: 100%;
+  pointer-events: none !important; /* allow events to pass through top bar itself */
+}
+
+.pswp__button {
+  position: absolute;
+  pointer-events: auto;
+  transition: transform 0.2s ease-in-out;
+
+  @media (--supports-hover) {
+    &:not([disabled]):hover {
+      color: color-mix(in srgb, rgb(var(--text-color)) 8%, rgb(var(--background)));
+
+      &::before {
+        transform: scale(1.2);
+        background: rgb(var(--text-color));
+      }
+    }
+  }
+}
+
+.pswp__button--close-button {
+  inset-block-start: 1.75rem;
+  inset-inline-end: 1.75rem;
+
+  @media (--supports-hover) {
+    .icon {
+      transition: rotate 0.3s ease-in-out;
+    }
+
+    &:not([disabled]):hover {
+      .icon {
+        rotate: 90deg;
+      }
+    }
+  }
+}
+
+.pswp__button--previous-button {
+  inset-block-start: calc(50% - (var(--button-size) / 2));
+  inset-inline-start: var(--container-gutter);
+}
+
+.pswp__button--next-button {
+  inset-block-start: calc(50% - (var(--button-size) / 2));
+  inset-inline-end: var(--container-gutter);
+}
+
+.pswp__preloader {
+  display: none;
+}
+
+@media (--sm) {
+  .pswp__top-bar {
+    column-gap: 1.125rem;
+  }
+}

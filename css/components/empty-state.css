@@ -1,0 +1,38 @@
+/**
+ * -------------------------------------------------------------------------------------------------------------------
+ * EMPTY STATE
+ * -------------------------------------------------------------------------------------------------------------------
+ */
+
+.empty-state {
+  display: grid;
+  position: relative;
+  text-align: center;
+  place-items: center;
+  padding-block: 7.5rem;
+
+  &::before {
+    content: attr(data-background-text);
+    position: absolute;
+    inset-block-start: 50%;
+    inset-inline-start: 50%;
+    transform: translate(-50%, -50%);
+    line-height: 1;
+    letter-spacing: -0.04em;
+    font-size: min(22rem, 40vw);
+    opacity: 0.1;
+    text-box: trim-both cap alphabetic;
+  }
+}
+
+@media (--md) {
+  .empty-state {
+    padding-block: 12.5rem;
+  }
+}
+
+@media (--lg) {
+  .empty-state:not(.empty-state--sm) {
+    padding-block: 17.5rem;
+  }
+}

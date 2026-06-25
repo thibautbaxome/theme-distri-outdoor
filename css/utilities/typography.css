@@ -1,0 +1,362 @@
+/* Font size utilities */
+
+.text-xxs {
+  font-size: 10px;
+}
+
+.text-xs {
+  font-size: var(--text-xs);
+}
+
+.text-sm {
+  font-size: var(--text-sm);
+}
+
+.text-base {
+  font-size: var(--text-base);
+}
+
+.text-lg {
+  font-size: var(--text-lg);
+}
+
+.heading, .display-xl, .display-l, .display-m, .h1, .h2, .h3, .h4, .h5, .h6, .h7, .prose :where(h1, h2, h3, h4, h5, h6) {
+  display: block;
+  font-family: var(--heading-font-family);
+  font-weight: var(--heading-font-weight);
+  font-style: var(--heading-font-style);
+  letter-spacing: var(--heading-letter-spacing);
+  text-transform: var(--heading-text-transform);
+  line-height: var(--heading-line-height);
+  overflow-wrap: anywhere; /* For heading, we ensure to cut them if too long */
+  -webkit-font-smoothing: antialiased; /* Gives better result on OSX for headings */
+}
+
+.display-xl {
+  font-size: var(--text-display-xl);
+}
+
+.display-l {
+  font-size: var(--text-display-l);
+}
+
+.display-m {
+  font-size: var(--text-display-m);
+}
+
+.h1, :where(.prose h1) {
+  font-size: var(--text-h1);
+}
+
+.h2, :where(.prose h2) {
+  font-size: var(--text-h2);
+}
+
+.h3, :where(.prose h3) {
+  font-size: var(--text-h3);
+}
+
+.h4, :where(.prose h4) {
+  font-size: var(--text-h4);
+  line-height: calc(var(--heading-line-height) + 0.1); /* We slightly increase line height of smaller headings */
+}
+
+.h5, :where(.prose h5) {
+  font-size: var(--text-h5);
+  line-height: calc(var(--heading-line-height) + 0.1); /* We slightly increase line height of smaller headings */
+}
+
+.h6, :where(.prose h6) {
+  font-size: var(--text-h6);
+  line-height: calc(var(--heading-line-height) + 0.1); /* We slightly increase line height of smaller headings */
+}
+
+.h7 {
+  font-size: var(--text-h7);
+  line-height: calc(var(--heading-line-height) + 0.1); /* We slightly increase line height of smaller headings */
+}
+
+@media (--sm) {
+  .sm\:text-xxs {
+    font-size: 10px;
+  }
+
+  .sm\:text-xs {
+    font-size: var(--text-xs);
+  }
+
+  .sm\:text-sm {
+    font-size: var(--text-sm);
+  }
+
+  .sm\:text-base {
+    font-size: var(--text-base);
+  }
+
+  .sm\:text-lg {
+    font-size: var(--text-lg);
+  }
+
+  .sm\:display-xl {
+    font-size: var(--text-display-xl);
+  }
+
+  .sm\:display-l {
+    font-size: var(--text-display-l);
+  }
+
+  .sm\:display-m {
+    font-size: var(--text-display-m);
+  }
+
+  .sm\:h1 {
+    font-size: var(--text-h1);
+  }
+
+  .sm\:h2 {
+    font-size: var(--text-h2);
+  }
+
+  .sm\:h3 {
+    font-size: var(--text-h3);
+  }
+
+  .sm\:h4 {
+    font-size: var(--text-h4);
+  }
+
+  .sm\:h5 {
+    font-size: var(--text-h5);
+  }
+
+  .sm\:h6 {
+    font-size: var(--text-h6);
+  }
+
+  .sm\:h7 {
+    font-size: var(--text-h7);
+  }
+}
+
+@media (--lg) {
+  /* On large screens, large heading are so big that we reduce a bit the line height */
+  .display-l, .display-xl, .sm\:display-l, .sm\:display-xl {
+    line-height: calc(var(--heading-line-height) - 0.1);
+  }
+}
+
+/* Caption */
+
+figcaption {
+  text-align: start;
+  margin-block-start: 0.625rem !important;
+  font-size: var(--text-sm);
+}
+
+/* Font weight utilities */
+
+.medium {
+  font-weight: var(--text-font-medium-weight);
+}
+
+.bold {
+  font-weight: var(--text-font-bold-weight);
+}
+
+/* Text transform utilities */
+
+.uppercase {
+  text-transform: uppercase;
+}
+
+.lowercase {
+  text-transform: lowercase;
+}
+
+/* List utilities */
+
+:where(ol, ul):not(.unstyled-list) {
+  list-style-position: outside;
+  margin-inline-start: 1em;
+
+  li {
+    margin-block-start: 0;
+    padding-inline-start: 1ch;
+  }
+
+  :where(ol, ul) {
+    margin-block-start: 0 !important;
+  }
+}
+
+.unstyled-list {
+  list-style: none;
+}
+
+/* Writing mode utilities */
+
+.vertical-text {
+  writing-mode: vertical-rl;
+  margin-block: 0;
+  transform: scale(-1);
+  overflow-wrap: break-word;
+
+  :lang(ja, zh, ko) & {
+    text-orientation: upright;
+    transform: none;
+  }
+}
+
+@media (--sm) {
+  .sm\:vertical-text {
+    writing-mode: vertical-rl;
+    margin-block: 0;
+    transform: scale(-1);
+    overflow-wrap: break-word;
+
+    :lang(ja, zh, ko) & {
+      text-orientation: upright;
+      transform: none;
+    }
+  }
+}
+
+@media (--md) {
+  .md\:vertical-text {
+    writing-mode: vertical-rl;
+    margin-block: 0;
+    transform: scale(-1);
+    overflow-wrap: break-word;
+
+    :lang(ja, zh, ko) & {
+      text-orientation: upright;
+      transform: none;
+    }
+  }
+}
+
+/* Text decoration utilities */
+
+.line-through {
+  text-decoration: line-through;
+}
+
+/* Whitespace utilities */
+
+.whitespace-pre-wrap {
+  white-space: pre-wrap;
+}
+
+/* Break utilities */
+
+.break-all {
+  word-break: break-all;
+}
+
+.hyphenate {
+  hyphens: auto;
+}
+
+/* Truncate/line clamp utilities */
+
+.truncate-text {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  max-width: var(--truncate-text-max-width, 100%);
+}
+
+.line-clamp {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: var(--line-clamp-count, 2);
+  overflow: hidden;
+}
+
+/* Text wrap utilities */
+
+.text-balance {
+  text-wrap: balance;
+}
+
+/* Indent utilities */
+
+.text-indent {
+  --text-indent-size: 1em;
+
+  text-indent: var(--text-indent-size);
+}
+
+.text-indent--circle, .text-indent--square, .text-indent--diamond {
+  --text-indent-icon-size: 0.6em;
+
+  text-indent: 0;
+
+  &::before {
+    content: '';
+    margin-inline-end: calc(var(--text-indent-size) - var(--text-indent-icon-size));
+    display: inline-block;
+    flex-shrink: 0;
+    width: var(--text-indent-icon-size);
+    height: var(--text-indent-icon-size);
+    background: currentColor;
+  }
+
+  @supports (height: 1cap) {
+    --text-indent-icon-size: 1cap;
+  }
+
+  @container style(--text-transform: lowercase) or style(--heading-text-transform: lowercase) {
+    --text-indent-icon-size: 1ex;
+  }
+}
+
+.text-indent--circle::before {
+  border-radius: 100%;
+}
+
+.text-indent--diamond::before {
+  transform: rotate(45deg);
+
+  @supports (height: 1cap) {
+    margin-inline-end: calc(var(--text-indent-size) - var(--text-indent-icon-size) * 0.75);
+    width: calc(var(--text-indent-icon-size) * 0.75);
+    height: calc(var(--text-indent-icon-size) * 0.75);
+    translate: 0 calc(-1 * var(--text-indent-icon-size) * 0.15);
+  }
+}
+
+.text-indent--arrow {
+  display: flex;
+  align-items: center;
+  column-gap: calc(var(--text-indent-size) - 1cap);
+  text-indent: 0;
+  
+  svg {
+    height: 1cap;
+  }
+
+  @supports (height: 1lh) {
+    svg {
+      position: relative;
+      align-self: start;
+      inset-block-start: calc((1lh - 1cap) / 2);
+    }
+  }
+}
+
+@media (--sm) {
+  .text-indent {
+    --text-indent-size: 1.2em;
+  }
+}
+
+/** Trim utilities */
+
+.trim-start {
+  text-box: trim-start cap alphabetic;
+}
+
+.trim-end {
+  text-box: trim-end cap alphabetic;
+}

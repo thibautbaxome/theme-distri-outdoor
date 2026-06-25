@@ -1,0 +1,14 @@
+{
+  "name": "Collections list page",
+  "sections": {
+    "main": {
+      "type": "main-list-collections",
+      "settings": {
+        "collections_to_show": "selected"
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}
