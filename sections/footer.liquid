@@ -176,6 +176,11 @@
     <hr class="separator full-bleed">
 
     <div class="footer__aside">
+      {%- comment -%} Logo de marque Distri-Outdoor (CDN Shopify Files) {%- endcomment -%}
+      <a href="{{ routes.root_url }}" class="footer__logo" aria-label="{{ shop.name }}">
+        <img src="https://cdn.shopify.com/s/files/1/0901/9496/8959/files/distri-outdoor-principal.svg?v=1782390047" alt="{{ shop.name }}" width="604" height="130" class="footer__logo-image">
+      </a>
+
       {%- liquid
         assign show_locale_selector = false
         assign show_country_selector = false

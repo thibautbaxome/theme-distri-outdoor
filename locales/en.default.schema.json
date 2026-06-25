@@ -426,7 +426,15 @@
       "button_size_desktop": "Size (tablet and desktop)",
       "form_category": "Forms",
       "input_uppercase": "Uppercase inputs",
-      "input_uppercase_info": "Uppercase inputs can be harder to use for users."
+      "input_uppercase_info": "Uppercase inputs can be harder to use for users.",
+      "heading_display_weight": "Display weight",
+      "heading_display_weight_info": "Weight applied to large display headings and H1. Other headings (H2–H7) keep the font weight set above.",
+      "subheading_custom_font": "Custom font",
+      "subheading_custom_font_info": "Use a self-hosted font (served from your theme assets) for subheadings, when the font you need is not in the Shopify library. The weight, style and size still come from the font picker above.",
+      "subheading_custom_font_options": {
+        "none": "None (use font above)",
+        "jetbrains_mono": "JetBrains Mono"
+      }
     },
     "heading_effect": {
       "name": "Heading effect",

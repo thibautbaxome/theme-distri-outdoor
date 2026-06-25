@@ -419,6 +419,21 @@
         "default": 1
       },
       {
+        "type": "select",
+        "id": "heading_display_font_weight",
+        "label": "t:theme_settings.typography.heading_display_weight",
+        "info": "t:theme_settings.typography.heading_display_weight_info",
+        "options": [
+          { "value": "400", "label": "400" },
+          { "value": "500", "label": "500" },
+          { "value": "600", "label": "600" },
+          { "value": "700", "label": "700" },
+          { "value": "800", "label": "800" },
+          { "value": "900", "label": "900" }
+        ],
+        "default": "900"
+      },
+      {
         "type": "header",
         "content": "t:theme_settings.typography.subheadings_category"
       },
@@ -428,6 +443,17 @@
         "label": "t:theme_settings.typography.font",
         "info": "t:theme_settings.typography.font_info",
         "default": "helvetica_n4"
+      },
+      {
+        "type": "select",
+        "id": "subheading_custom_font",
+        "label": "t:theme_settings.typography.subheading_custom_font",
+        "info": "t:theme_settings.typography.subheading_custom_font_info",
+        "options": [
+          { "value": "none", "label": "t:theme_settings.typography.subheading_custom_font_options.none" },
+          { "value": "jetbrains_mono", "label": "t:theme_settings.typography.subheading_custom_font_options.jetbrains_mono" }
+        ],
+        "default": "none"
       },
       {
         "type": "range",
@@ -462,7 +488,7 @@
       {
         "type": "range",
         "min": -5,
-        "max": 10,
+        "max": 40,
         "step": 0.5,
         "unit": "%",
         "id": "subheading_letter_spacing",

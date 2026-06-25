@@ -426,7 +426,15 @@
       "button_size_desktop": "Taille (tablette et desktop)",
       "form_category": "Formulaires",
       "input_uppercase": "Mettre les champs de formulaire en majuscule",
-      "input_uppercase_info": "Les champs en majuscule peuvent etre complexes à utiliser pour les clients."
+      "input_uppercase_info": "Les champs en majuscule peuvent etre complexes à utiliser pour les clients.",
+      "heading_display_weight": "Graisse des gros titres",
+      "heading_display_weight_info": "Graisse appliquée aux grands titres (display) et au H1. Les autres titres (H2 à H7) conservent la graisse définie ci-dessus.",
+      "subheading_custom_font": "Police personnalisée",
+      "subheading_custom_font_info": "Utilise une police auto-hébergée (servie depuis les assets du thème) pour les sous-titres, lorsque la police voulue n'est pas dans la librairie Shopify. La graisse, le style et la taille proviennent toujours du sélecteur de police ci-dessus.",
+      "subheading_custom_font_options": {
+        "none": "Aucune (utiliser la police ci-dessus)",
+        "jetbrains_mono": "JetBrains Mono"
+      }
     },
     "heading_effect": {
       "name": "Effet des titres",

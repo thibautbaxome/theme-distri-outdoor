@@ -146,3 +146,8 @@
     }
   }
 }
+/* Logo de marque Distri-Outdoor dans le pied de page */
+.footer__logo-image {
+  width: clamp(150px, 16vw, 190px);
+  height: auto;
+}

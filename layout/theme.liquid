@@ -16,6 +16,11 @@
     {%- if settings.favicon -%}
       <link rel="shortcut icon" href="{{ settings.favicon | image_url: width: 96 }}">
       <link rel="apple-touch-icon" href="{{ settings.favicon | image_url: width: 180 }}">
+    {%- else -%}
+      {%- comment -%} Favicon de marque (pastille, CDN Shopify Files) : SVG pour les navigateurs modernes, PNG en repli (Safari) + apple-touch-icon. {%- endcomment -%}
+      <link rel="icon" type="image/svg+xml" href="https://cdn.shopify.com/s/files/1/0901/9496/8959/files/distri-outdoor-pastille.svg?v=1782389422">
+      <link rel="icon" type="image/png" sizes="512x512" href="https://cdn.shopify.com/s/files/1/0901/9496/8959/files/distri-outdoor-pastille.png?v=1782391521">
+      <link rel="apple-touch-icon" href="https://cdn.shopify.com/s/files/1/0901/9496/8959/files/distri-outdoor-pastille.png?v=1782391521">
     {%- endif -%}
 
     {%- unless settings.heading_font.system? -%}
@@ -25,6 +30,11 @@
     {%- unless settings.text_font.system? -%}
       <link rel="preload" href="{{ settings.text_font | font_url }}" as="font" type="font/woff2" crossorigin>
     {%- endunless -%}
+
+    {%- comment -%} Marque Distri-Outdoor : police mono (eyebrows/sous-titres) hébergée sur le CDN Shopify Files. {%- endcomment -%}
+    {%- if settings.subheading_custom_font == 'jetbrains_mono' -%}
+      <link rel="preload" href="https://cdn.shopify.com/s/files/1/0901/9496/8959/files/jetbrains-mono-v24-latin.woff2?v=1782379223" as="font" type="font/woff2" crossorigin>
+    {%- endif -%}
 
     {%- render 'social-meta-tags' -%}
     {%- render 'microdata-schema' -%}

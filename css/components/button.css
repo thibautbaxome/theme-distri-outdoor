@@ -55,7 +55,25 @@
 .button--outline {
   background: transparent;
   color: rgb(var(--button-text-color));
-  border-color: rgb(var(--button-text-color));
+  border: 1.5px solid rgb(var(--text-color) / 0.3); /* Direction artistique : filet gris chaud, texte = couleur du schéma */
+}
+
+@media (--supports-hover) {
+  /* DA : bouton principal — survol plus clair + halo, état pressé plus foncé */
+  .button:not(.button--outline):hover:not([aria-busy="true"]) {
+    filter: brightness(1.08);
+    box-shadow: 0 6px 18px -6px rgb(var(--button-background) / 0.55);
+  }
+
+  /* DA : bouton secondaire — filet corten + léger fond corten au survol */
+  .button--outline:hover:not([aria-busy="true"]) {
+    border-color: rgb(var(--heading-highlight-accent-color));
+    background: rgb(var(--heading-highlight-accent-color) / 0.1);
+  }
+}
+
+.button:not(.button--outline):active {
+  filter: brightness(0.92);
 }
 
 .button--sm {

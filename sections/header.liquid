@@ -97,7 +97,10 @@
           {{- section.settings.transparent_logo | image_url: width: section.settings.transparent_logo.width | image_tag: sizes: sizes, widths: widths, class: 'header__logo-image header__logo-image--transparent' -}}
         {%- endif -%}
       {%- else -%}
-        <p class="header__logo-text heading">{{ shop.name }}</p>
+        {%- comment -%} Logo de marque Distri-Outdoor (CDN Shopify Files). Version charbon par défaut, version crème quand l'en-tête est transparent. Remplaçable par un logo défini dans les réglages. {%- endcomment -%}
+        <span class="sr-only">{{ shop.name }}</span>
+        <img src="https://cdn.shopify.com/s/files/1/0901/9496/8959/files/distri-outdoor-principal.svg?v=1782390047" alt="{{ shop.name }}" width="604" height="130" class="header__logo-image header__logo-image--brand">
+        <img src="https://cdn.shopify.com/s/files/1/0901/9496/8959/files/distri-outdoor-sombre.svg?v=1782390047" alt="" aria-hidden="true" width="604" height="130" class="header__logo-image header__logo-image--transparent header__logo-image--brand">
       {%- endif -%}
     {%- endcapture -%}
 

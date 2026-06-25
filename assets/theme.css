@@ -494,8 +494,24 @@ height-observer {
 
 .button--outline {
   color: rgb(var(--button-text-color));
-  border-color: rgb(var(--button-text-color));
+  border: 1.5px solid rgb(var(--text-color) / .3);
   background: none;
+}
+
+@media screen and (pointer: fine) {
+  .button:not(.button--outline):hover:not([aria-busy="true"]) {
+    filter: brightness(1.08);
+    box-shadow: 0 6px 18px -6px rgb(var(--button-background) / .55);
+  }
+
+  .button--outline:hover:not([aria-busy="true"]) {
+    border-color: rgb(var(--heading-highlight-accent-color));
+    background: rgb(var(--heading-highlight-accent-color) / .1);
+  }
+}
+
+.button:not(.button--outline):active {
+  filter: brightness(.92);
 }
 
 .button--sm {
@@ -6326,6 +6342,11 @@ product-rerender {
   }
 }
 
+.footer__logo-image {
+  width: clamp(150px, 16vw, 190px);
+  height: auto;
+}
+
 .gift-card {
   text-align: center;
   align-content: center;
@@ -6453,6 +6474,16 @@ product-rerender {
 
 .header__logo-text {
   font-size: 1rem;
+  font-weight: var(--heading-display-font-weight);
+  text-transform: none;
+}
+
+.header__logo-dot {
+  color: rgb(var(--accent));
+}
+
+.header__logo-image--brand {
+  width: clamp(132px, 13vw, 168px);
 }
 
 .header__primary-nav {
@@ -10224,6 +10255,10 @@ shopify-account {
   overflow-wrap: anywhere;
   -webkit-font-smoothing: antialiased;
   display: block;
+}
+
+.display-xl, .display-l, .display-m, .h1, .prose :where(h1) {
+  font-weight: var(--heading-display-font-weight);
 }
 
 .display-xl {

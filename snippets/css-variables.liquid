@@ -40,6 +40,12 @@ note that this may have impact on different places.
       echo heading_font_bold | font_face: font_display: 'fallback'
     endif
 
+    # Display weight (large headings & H1) — see --heading-display-font-weight
+    assign heading_font_display = settings.heading_font | font_modify: 'weight', settings.heading_display_font_weight
+    if heading_font_display
+      echo heading_font_display | font_face: font_display: 'fallback'
+    endif
+
     if heading_font_italic_override
       echo heading_font_italic_override | font_face: font_display: 'fallback'
     endif
@@ -63,6 +69,17 @@ note that this may have impact on different places.
       echo text_font_bold_italic | font_face: font_display: 'fallback'
     endif
   -%}
+
+  {%- comment -%} Brand font hosted on the Shopify Files CDN (not in the Shopify font library), exposed to the subheading "custom font" setting. {%- endcomment -%}
+  {%- if settings.subheading_custom_font == 'jetbrains_mono' -%}
+    @font-face {
+      font-family: 'JetBrains Mono';
+      font-style: normal;
+      font-weight: 400 500;
+      font-display: fallback;
+      src: url('https://cdn.shopify.com/s/files/1/0901/9496/8959/files/jetbrains-mono-v24-latin.woff2?v=1782379223') format('woff2');
+    }
+  {%- endif -%}
 
   :root {
     /* Container */
@@ -109,7 +126,7 @@ note that this may have impact on different places.
      */
 
     /* Font properties */
-    --subheading-font-family: {{ settings.subheading_font.family }}, {{ settings.subheading_font.fallback_families }};
+    --subheading-font-family: {% if settings.subheading_custom_font == 'jetbrains_mono' %}'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace{% else %}{{ settings.subheading_font.family }}, {{ settings.subheading_font.fallback_families }}{% endif %};
     --subheading-font-weight: {{ settings.subheading_font.weight }};
     --subheading-font-style: {{ settings.subheading_font.style }};
     --subheading-font-size: {{ settings.subheading_font_size | minus: 1 | divided_by: 16.0 }}rem;
@@ -117,6 +134,7 @@ note that this may have impact on different places.
     --subheading-letter-spacing: {% if language_code == 'ar' %}0{% else %}{{ settings.subheading_letter_spacing | divided_by: 100.0 }}{% endif %}em;
     --heading-font-family: {{ settings.heading_font.family }}, {{ settings.heading_font.fallback_families }};
     --heading-font-weight: {{ settings.heading_font.weight }};
+    --heading-display-font-weight: {{ settings.heading_display_font_weight }};
     --heading-font-style: {{ settings.heading_font.style }};
     --heading-text-transform: {{ settings.heading_text_transform }};
     --heading-letter-spacing: {% if language_code == 'ar' %}0{% else %}{{ settings.heading_letter_spacing | divided_by: 100.0 }}{% endif %}em;

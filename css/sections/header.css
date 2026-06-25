@@ -108,6 +108,17 @@
 
 .header__logo-text {
   font-size: 1rem;
+  font-weight: var(--heading-display-font-weight); /* DA : logotype en Fraunces 900 */
+  text-transform: none;
+}
+
+.header__logo-dot {
+  color: rgb(var(--accent)); /* DA : point médian braise du logotype */
+}
+
+/* Logo de marque (image CDN) quand aucun logo n'est défini dans les réglages */
+.header__logo-image--brand {
+  width: clamp(132px, 13vw, 168px);
 }
 
 /**

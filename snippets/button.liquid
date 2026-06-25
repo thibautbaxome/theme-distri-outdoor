@@ -52,7 +52,7 @@ itself (or the link), and remove it once finished. The theme will automatically 
     if style != 'link'
       if style == 'outline'
         if text_color == blank or text_color == 'rgba(0,0,0,0)'
-          echo '--button-text-color: var(--button-background-primary);'
+          echo '--button-text-color: var(--text-color);'
         else
           echo '--button-text-color: ' | append: text_color.rgb | append: ';'
         endif

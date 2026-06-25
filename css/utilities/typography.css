@@ -32,6 +32,11 @@
   -webkit-font-smoothing: antialiased; /* Gives better result on OSX for headings */
 }
 
+/* Display headings & H1 can use a heavier weight than smaller headings (--heading-display-font-weight) */
+.display-xl, .display-l, .display-m, .h1, .prose :where(h1) {
+  font-weight: var(--heading-display-font-weight);
+}
+
 .display-xl {
   font-size: var(--text-display-xl);
 }

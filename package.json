@@ -32,7 +32,7 @@
     "js-deps": "esbuild js/vendor.js js/photoswipe.js --minify --bundle --format=esm --target=safari14.1 --out-extension:.js=.min.js --outdir=assets/",
     "shopify": "shopify",
     "build": "npm run js-theme & npm run js-deps & npm run css",
-    "dev": "npm install && npm run build && shopify theme dev --environment dev --allow-live & npm-watch",
+    "dev": "npm install && npm run build && { npm-watch & W=$!; trap 'kill $W 2>/dev/null' INT TERM EXIT; shopify theme dev --environment dev --allow-live; }",
     "npm run serve": "shopify theme dev -s nv1sva-q3",
     "profile": "shopify theme profile --environment nv1sva-q3",
     "bundle": "npm run build && shopify theme package",
