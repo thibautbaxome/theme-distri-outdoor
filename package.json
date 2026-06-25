@@ -33,13 +33,13 @@
     "shopify": "shopify",
     "build": "npm run js-theme & npm run js-deps & npm run css",
     "dev": "npm install && npm run build && shopify theme dev --environment dev --allow-live & npm-watch",
-    "npm run serve": "shopify theme dev -s ax-project",
-    "profile": "shopify theme profile --environment ax-project",
+    "npm run serve": "shopify theme dev -s nv1sva-q3",
+    "profile": "shopify theme profile --environment nv1sva-q3",
     "bundle": "npm run build && shopify theme package",
     "check": "shopify theme check",
-    "deploy": "shopify theme push --environment ax-project --environment demo-snow --environment demo-sand",
-    "pull": "shopify theme pull -s ax-project",
-    "push": "shopify theme push -s ax-project"
+    "deploy": "shopify theme push --environment nv1sva-q3 --environment demo-snow --environment demo-sand",
+    "pull": "shopify theme pull -s nv1sva-q3",
+    "push": "shopify theme push -s nv1sva-q3"
   },
   "devDependencies": {
     "lightningcss-cli": "^1.30.2",
