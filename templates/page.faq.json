@@ -3,40 +3,80 @@
   "sections": {
     "faq": {
       "type": "faq",
+      "settings": {
+        "color_scheme": "scheme-1",
+        "layout": "stacked",
+        "subheading": "Besoin d'aide ?",
+        "title": "Questions fréquentes",
+        "content": "<p>Vous ne trouvez pas votre réponse ? Écrivez-nous via la page Contact.</p>",
+        "button_text": "Nous contacter",
+        "button_url": "/pages/contact",
+        "button_style": "outline"
+      },
       "blocks": {
-        "item-1": {
+        "cat-livraison": {
           "type": "category",
           "settings": {
-            "title": "Order"
+            "title": "Commande & livraison"
           }
         },
-        "item-2": {
+        "q-livraison-zone": {
           "type": "question",
           "settings": {
-            "question": "Do you ship overseas?",
-            "answer": "<p>Yes, we ship all over the world. Shipping costs will apply, and will be added at checkout. We run discounts and promotions all year, so stay tuned for exclusive deals.</p>"
+            "question": "Livrez-vous partout en France ?",
+            "answer": "<p>Oui, nous livrons en France métropolitaine. Les frais de port sont calculés et affichés au moment du paiement.</p>"
           }
         },
-        "item-3": {
+        "q-livraison-delai": {
           "type": "question",
           "settings": {
-            "question": "How long will it take to get my orders?",
-            "answer": "<p>It depends on where you are. Orders processed here will take 5-7 business days to arrive. Overseas deliveries can take anywhere from 7-16 days. Delivery details will be provided in your confirmation email.</p>"
+            "question": "Quels sont les délais de livraison ?",
+            "answer": "<p>Les commandes sont expédiées sous 48h ouvrées. Comptez ensuite quelques jours ouvrés pour la réception selon le transporteur. Un suivi vous est communiqué par e-mail.</p>"
           }
         },
-        "item-4": {
+        "cat-produits": {
+          "type": "category",
+          "settings": {
+            "title": "Produits & garantie"
+          }
+        },
+        "q-france": {
           "type": "question",
           "settings": {
-            "question": "Any question?",
-            "answer": "<p>You can contact us through our contact page! We will be happy to assist you.</p>"
+            "question": "Vos braseros sont-ils fabriqués en France ?",
+            "answer": "<p>Nos braseros BRAZIR sont fabriqués en France et garantis 5 ans. Pour les autres gammes, la fabrication varie selon le fabricant : l'information figure sur chaque fiche produit.</p>"
+          }
+        },
+        "q-modulable": {
+          "type": "question",
+          "settings": {
+            "question": "Puis-je personnaliser mon brasero ?",
+            "answer": "<p>Oui. Vous choisissez la taille, la forme et les accessoires de cuisson (grille, plancha, four à pizza, housse…) directement sur la fiche produit.</p>"
+          }
+        },
+        "cat-aide": {
+          "type": "category",
+          "settings": {
+            "title": "Aide"
+          }
+        },
+        "q-contact": {
+          "type": "question",
+          "settings": {
+            "question": "Une autre question ?",
+            "answer": "<p>Contactez-nous via la page Contact : notre équipe vous répond du lundi au vendredi.</p>"
           }
         }
       },
       "block_order": [
-        "item-1",
-        "item-2",
-        "item-3",
-        "item-4"
+        "cat-livraison",
+        "q-livraison-zone",
+        "q-livraison-delai",
+        "cat-produits",
+        "q-france",
+        "q-modulable",
+        "cat-aide",
+        "q-contact"
       ]
     }
   },

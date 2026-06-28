@@ -6,7 +6,16 @@
       "disabled": true
     },
     "contact-form": {
-      "type": "contact"
+      "type": "contact",
+      "settings": {
+        "color_scheme": "scheme-1",
+        "layout": "stacked",
+        "subheading": "Contact",
+        "title": "Une question ? Écrivez-nous",
+        "heading_size": "h2",
+        "content": "<p>Notre équipe vous répond du lundi au vendredi. Remplissez le formulaire ci-dessous, nous revenons vers vous au plus vite.</p>",
+        "show_social_media": true
+      }
     }
   },
   "order": [
