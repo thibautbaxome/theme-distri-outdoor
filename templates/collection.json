@@ -2,14 +2,33 @@
   "name": "Collection",
   "sections": {
     "banner": {
-      "type": "collection-banner"
+      "type": "collection-banner",
+      "settings": {
+        "color_scheme": "scheme-4",
+        "background_color_scheme": "scheme-4",
+        "layout": "background",
+        "show_description": true,
+        "collection_title_size": "display-m",
+        "content_position": "place-self-end-start",
+        "image_size": "md"
+      }
     },
     "main": {
-      "type": "main-collection"
+      "type": "main-collection",
+      "settings": {
+        "color_scheme": "scheme-1",
+        "products_per_page": 24,
+        "products_per_row_mobile": 2,
+        "products_per_row_desktop": 4,
+        "filter_layout": "sidebar",
+        "show_sort_by": true,
+        "show_filters": true,
+        "show_filter_group_name": true,
+        "show_filter_values_count": true,
+        "open_filters_by_default": false,
+        "swatch_selector_size": "lg"
+      }
     }
   },
-  "order": [
-    "banner",
-    "main"
-  ]
+  "order": ["banner", "main"]
 }

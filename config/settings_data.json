@@ -175,7 +175,8 @@
 			"button_text_font": "body",
 			"button_letter_spacing": 0,
 			"input_uppercase": false,
-			"color_swatch_shape": "circle"
+			"color_swatch_shape": "circle",
+			"color_swatch_config": "Corten:#B65A30\nNoir:#1B1714\nInox:#BFC4C9\nArgent:#BFC4C9\nVert:#3C6E47\nGris:#8C8C8C\nBleu:#2F5C8F\nRouge:#B23A2A"
 		}
 	}
 }

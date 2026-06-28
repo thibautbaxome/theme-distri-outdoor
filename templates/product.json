@@ -4,52 +4,101 @@
     "main": {
       "type": "main-product",
       "blocks": {
-        "vendor": {
-          "type": "vendor"
-        },
         "title": {
-          "type": "title"
+          "type": "title",
+          "settings": {
+            "heading_tag": "h1"
+          }
         },
         "badges": {
           "type": "badges"
         },
         "price": {
-          "type": "price"
+          "type": "price",
+          "settings": {
+            "show_taxes_notice": false
+          }
         },
-        "rating": {
-          "type": "rating"
+        "reassurance": {
+          "type": "liquid",
+          "settings": {
+            "liquid": "{%- assign fr = product.metafields.custom.fabrique_en_france.value -%}{%- assign garantie = product.metafields.custom.garantie.value -%}{%- if fr or garantie != blank -%}<div style='display:flex;flex-wrap:wrap;gap:.5rem;margin-block-start:.75rem'>{%- if fr -%}<span style='display:inline-flex;align-items:center;gap:.4em;padding:.4em .8em;font-size:.8rem;letter-spacing:.04em;border:1px solid rgb(var(--text-color) / .25);border-radius:var(--button-border-radius,4px)'>Fabriqué en France</span>{%- endif -%}{%- if garantie != blank -%}<span style='display:inline-flex;align-items:center;gap:.4em;padding:.4em .8em;font-size:.8rem;letter-spacing:.04em;border:1px solid rgb(var(--text-color) / .25);border-radius:var(--button-border-radius,4px)'>Garantie {{ garantie }}</span>{%- endif -%}</div>{%- endif -%}"
+          }
         },
-        "payment_terms": {
-          "type": "payment_terms"
+        "separator_1": {
+          "type": "separator"
         },
-        "separator": {
+        "variant_picker": {
+          "type": "variant_picker",
+          "settings": {
+            "selector_style": "block",
+            "swatch_selector_style": "swatch",
+            "swatch_selector_size": "lg",
+            "separate_options": true,
+            "hide_sold_out_variants": false
+          }
+        },
+        "buy_buttons": {
+          "type": "buy_buttons",
+          "settings": {
+            "show_quantity_selector": true,
+            "show_payment_button": true,
+            "atc_button_style": "solid"
+          }
+        },
+        "complementary": {
+          "type": "complementary_products",
+          "settings": {
+            "title": "Complétez votre installation",
+            "products_count": 4
+          }
+        },
+        "separator_2": {
           "type": "separator"
         },
         "description": {
           "type": "description"
         },
-        "variant_picker": {
-          "type": "variant_picker"
+        "specs": {
+          "type": "liquid",
+          "settings": {
+            "liquid": "{%- assign marque = product.metafields.custom.marque.value -%}{%- assign matiere = product.metafields.custom.matiere.value -%}{%- assign garantie = product.metafields.custom.garantie.value -%}{%- if marque != blank or matiere != blank or garantie != blank -%}<div style='margin-block-start:1.5rem'><p class='subheading text-subdued' style='margin-block-end:.5rem'>Caractéristiques</p><dl style='display:grid;grid-template-columns:minmax(6rem,auto) 1fr;gap:.5rem 1.5rem;margin:0'>{%- if marque != blank -%}<dt style='font-weight:600;margin:0'>Marque</dt><dd style='margin:0'>{{ marque }}</dd>{%- endif -%}{%- if matiere != blank -%}<dt style='font-weight:600;margin:0'>Matière</dt><dd style='margin:0'>{{ matiere }}</dd>{%- endif -%}{%- if garantie != blank -%}<dt style='font-weight:600;margin:0'>Garantie</dt><dd style='margin:0'>{{ garantie }}</dd>{%- endif -%}</dl></div>{%- endif -%}"
+          }
         },
-        "buy_buttons": {
-          "type": "buy_buttons"
-        },
-        "pickup_availability": {
-          "type": "pickup_availability"
+        "livraison": {
+          "type": "accordion",
+          "settings": {
+            "title": "Livraison & retours",
+            "content": "<p>Expédition sous 48h ouvrées. Livraison suivie partout en France métropolitaine. Retours acceptés sous 14 jours.</p>",
+            "icon": "none",
+            "uppercase_title": false
+          }
         }
       },
       "block_order": [
-        "vendor",
         "title",
         "badges",
         "price",
-        "rating",
-        "payment_terms",
-        "separator",
-        "description",
+        "reassurance",
+        "separator_1",
         "variant_picker",
-        "buy_buttons"
-      ]
+        "buy_buttons",
+        "complementary",
+        "separator_2",
+        "description",
+        "specs",
+        "livraison"
+      ],
+      "settings": {
+        "color_scheme": "scheme-1",
+        "content_alignment": "left",
+        "desktop_media_layout": "carousel",
+        "desktop_carousel_controls": "thumbnails_under",
+        "mobile_controls": "dots",
+        "enable_image_zoom": true,
+        "show_sticky_add_to_cart": true,
+        "product_media_size": 50
+      }
     },
     "related-products": {
       "type": "related-products",
@@ -58,10 +107,15 @@
           "type": "_section-header",
           "static": true,
           "settings": {
-            "title": "Related products",
-            "content": ""
+            "subheading": "À découvrir",
+            "title": "Vous aimerez aussi",
+            "content": "",
+            "heading_size": "h2"
           }
         }
+      },
+      "settings": {
+        "color_scheme": "scheme-1"
       }
     }
   },

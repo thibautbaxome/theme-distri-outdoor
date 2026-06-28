@@ -1,0 +1,15 @@
+{
+  "_comment": "Backup avant délier+renommer l'option Couleur (Black->Noir). Pour restaurer : re-lier l'option à shopify.color-pattern et re-mapper les valeurs aux métaobjets ci-dessous (Corten=338118672767, Black/Noir=336355524991).",
+  "date": "refonte Distri-Outdoor",
+  "linkedMetafield": { "namespace": "shopify", "key": "color-pattern" },
+  "metaobjects": { "Corten": "gid://shopify/Metaobject/338118672767", "Black": "gid://shopify/Metaobject/336355524991" },
+  "products": [
+    { "id": "gid://shopify/Product/14984967881087", "title": "BRAZIR S", "couleurOption": "gid://shopify/ProductOption/17336671830399", "values": { "Corten": "gid://shopify/ProductOptionValue/9377039057279", "Black": "gid://shopify/ProductOptionValue/9377039090047" } },
+    { "id": "gid://shopify/Product/14994009129343", "title": "BRAZIR M", "couleurOption": "gid://shopify/ProductOption/17347702096255", "values": { "Black": "gid://shopify/ProductOptionValue/9400035246463", "Corten": "gid://shopify/ProductOptionValue/9400035279231" } },
+    { "id": "gid://shopify/Product/14994010440063", "title": "BRAZIR XL", "couleurOption": "gid://shopify/ProductOption/17347709075839", "values": { "Corten": "gid://shopify/ProductOptionValue/9400052908415", "Black": "gid://shopify/ProductOptionValue/9400052941183" } },
+    { "id": "gid://shopify/Product/15603994263935", "title": "BRAZIR L", "couleurOption": "gid://shopify/ProductOption/18111951274367", "values": { "Corten": "gid://shopify/ProductOptionValue/11392080478591", "Black": "gid://shopify/ProductOptionValue/11392080445823" } },
+    { "id": "gid://shopify/Product/15604042498431", "title": "Brasero 1500", "couleurOption": "gid://shopify/ProductOption/18112251789695", "values": { "Corten": "gid://shopify/ProductOptionValue/11392888209791", "Black": "gid://shopify/ProductOptionValue/11392888242559" } },
+    { "id": "gid://shopify/Product/15604043645311", "title": "Remorque", "couleurOption": "gid://shopify/ProductOption/18112276889983", "values": { "Corten": "gid://shopify/ProductOptionValue/11392957219199", "Black": "gid://shopify/ProductOptionValue/11392957251967" } },
+    { "id": "gid://shopify/Product/15227051377023", "title": "Poignée", "couleurOption": "gid://shopify/ProductOption/17614868578687", "values": { "Black": "gid://shopify/ProductOptionValue/9950105239935", "Corten": "gid://shopify/ProductOptionValue/9950105272703" } }
+  ]
+}
