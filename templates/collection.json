@@ -40,10 +40,19 @@
         "open_filters_by_default": false,
         "swatch_selector_size": "lg"
       }
+    },
+    "collection-faq": {
+      "type": "collection-faq",
+      "settings": {
+        "color_scheme": "scheme-1",
+        "title": "Questions fréquentes",
+        "heading_size": "h3"
+      }
     }
   },
   "order": [
     "banner",
-    "main"
+    "main",
+    "collection-faq"
   ]
 }
