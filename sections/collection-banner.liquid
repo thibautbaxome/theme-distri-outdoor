@@ -105,7 +105,7 @@
           {%- endif -%}
         </div>
 
-        <div class="color-scheme color-scheme--{{ section.settings.background_color_scheme.id }} section-split__column align-self-stretch">
+        <div class="section-split__column align-self-stretch">
           <div class="content-box min-h-{{ section.settings.image_size }}">
             <div class="span-full {{ section.settings.content_position }}">
               <div class="prose prose-justify-{{ section.settings.content_position | split: '-' | last }} {{ section.settings.content_position }}">
@@ -274,7 +274,7 @@
       "id": "background_color_scheme",
       "label": "t:sections.collection_banner.background_color_scheme",
       "default": "scheme-3",
-      "visible_if": "{{ section.settings.layout != 'plain' }}"
+      "visible_if": "{{ section.settings.layout == 'background' }}"
     },
     {
       "type": "image_picker",
