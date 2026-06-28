@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "hero": {
@@ -6,12 +15,13 @@
         "slide_main": {
           "type": "_slideshow-image-slide",
           "settings": {
-            "image": "shopify://shop_images/Capture_d_ecran_2026-03-25_a_14.42.13.jpg",
             "color_scheme": "scheme-4",
+            "image": "shopify://shop_images/Gemini_Generated_Image_g0gqdgg0gqdgg0gq.png",
+            "slide_link": "",
             "content_max_width": 1100,
             "mobile_content_position": "place-self-end",
             "desktop_content_position": "sm:place-self-end-start",
-            "overlay_color": "#1B1714",
+            "overlay_color": "#1b1714",
             "overlay_opacity": 35
           },
           "blocks": {
@@ -19,31 +29,41 @@
               "type": "subheading",
               "settings": {
                 "text": "Spécialiste de l'extérieur"
-              }
+              },
+              "blocks": {}
             },
             "slide_heading": {
               "type": "heading",
               "settings": {
                 "text": "Votre extérieur à portée de main",
-                "heading_size": "display-l",
+                "heading_size": "display-m",
                 "html_tag": "h1",
                 "indent": "none",
-                "highlight_effect": "default"
-              }
+                "highlight_effect": "default",
+                "highlight_accent_color": "",
+                "highlight_text_color": ""
+              },
+              "blocks": {}
             },
             "slide_text": {
               "type": "rich-text",
               "settings": {
-                "text": "<p>Une sélection de produits français de qualité pour vos espaces extérieurs.</p>"
-              }
+                "text": "<p>Une sélection de produits français de qualité pour vos espaces extérieurs.</p>",
+                "content_width": "sm"
+              },
+              "blocks": {}
             },
             "slide_btn": {
               "type": "button",
               "settings": {
                 "text": "Découvrir la boutique",
                 "url": "/collections/braseros-kamados-borne",
-                "style": "solid"
-              }
+                "open_in_new_tab": false,
+                "style": "solid",
+                "background": "",
+                "text_color": ""
+              },
+              "blocks": {}
             }
           },
           "block_order": [
@@ -53,13 +73,14 @@
             "slide_btn"
           ]
         },
-        "controls": {
+        "slideshow-controls": {
           "type": "_slideshow-controls",
           "static": true,
           "settings": {
             "controls_style": "line",
-            "controls_color": "#F3ECE1"
-          }
+            "controls_color": "#ffffff"
+          },
+          "blocks": {}
         }
       },
       "block_order": [
@@ -67,16 +88,73 @@
       ],
       "settings": {
         "allow_transparent_header": true,
-        "image_size": "lg",
+        "image_size": "md",
         "transition_type": "fade",
         "autoplay": false,
+        "pause_auto_rotate_on_hover": false,
         "cycle_speed": 6,
-        "background": "#1B1714"
+        "background": "#1b1714"
       }
     },
     "univers": {
       "type": "collection-list",
       "blocks": {
+        "u1": {
+          "type": "collection-card",
+          "settings": {
+            "color_scheme": "",
+            "collection": "braseros",
+            "title": "Braseros",
+            "heading_tag": "h4",
+            "button_text": "",
+            "button_style": "outline",
+            "overlay_color": "#000000",
+            "overlay_opacity": 20
+          },
+          "blocks": {}
+        },
+        "u2": {
+          "type": "collection-card",
+          "settings": {
+            "color_scheme": "",
+            "collection": "kamados",
+            "title": "Kamados",
+            "heading_tag": "h4",
+            "button_text": "",
+            "button_style": "outline",
+            "overlay_color": "#000000",
+            "overlay_opacity": 20
+          },
+          "blocks": {}
+        },
+        "u3": {
+          "type": "collection-card",
+          "settings": {
+            "color_scheme": "",
+            "collection": "borne-anti-moustique",
+            "title": "Anti-moustique",
+            "heading_tag": "h4",
+            "button_text": "",
+            "button_style": "outline",
+            "overlay_color": "#000000",
+            "overlay_opacity": 20
+          },
+          "blocks": {}
+        },
+        "u4": {
+          "type": "collection-card",
+          "settings": {
+            "color_scheme": "",
+            "collection": "accessoires",
+            "title": "Accessoires",
+            "heading_tag": "h4",
+            "button_text": "",
+            "button_style": "outline",
+            "overlay_color": "#000000",
+            "overlay_opacity": 20
+          },
+          "blocks": {}
+        },
         "section-header": {
           "type": "_section-header",
           "static": true,
@@ -84,33 +162,15 @@
             "subheading": "La boutique",
             "title": "Nos univers",
             "content": "<p>Braseros, kamados, mobilier, anti-moustiques : tout pour vivre dehors.</p>",
-            "heading_size": "h2",
-            "text_alignment": "center"
-          }
-        },
-        "u1": {
-          "type": "collection-card",
-          "settings": {
-            "collection": "braseros"
-          }
-        },
-        "u2": {
-          "type": "collection-card",
-          "settings": {
-            "collection": "kamados"
-          }
-        },
-        "u3": {
-          "type": "collection-card",
-          "settings": {
-            "collection": "borne-anti-moustique"
-          }
-        },
-        "u4": {
-          "type": "collection-card",
-          "settings": {
-            "collection": "accessoires"
-          }
+            "button_text": "",
+            "button_link": "",
+            "button_style": "outline",
+            "text_alignment": "center",
+            "heading_size": "h3",
+            "title_icon": "none",
+            "show_scrolling_title": false
+          },
+          "blocks": {}
         }
       },
       "block_order": [
@@ -122,7 +182,11 @@
       "settings": {
         "color_scheme": "scheme-1",
         "items_per_row": 4,
-        "stack_on_mobile": true
+        "stack_on_mobile": true,
+        "add_horizontal_spacing": true,
+        "content_position": "inside",
+        "column_spacing": "sm",
+        "image_size": "sm"
       }
     },
     "carousel_braseros": {
@@ -132,10 +196,10 @@
           "type": "collection",
           "settings": {
             "collection": "braseros",
+            "products_count": 6,
             "title": "Nos braseros",
             "content": "<p>La gamme BRAZIR, fabriquée en France.</p>",
-            "link": "/collections/braseros",
-            "products_count": 6
+            "link": "/collections/braseros"
           }
         }
       },
@@ -144,39 +208,10 @@
       ],
       "settings": {
         "color_scheme": "scheme-1",
+        "stack_products_mobile": false,
+        "stack_products_desktop": false,
         "products_per_row_mobile": "2",
         "products_per_row_desktop": 4,
-        "stack_products_desktop": false,
-        "stack_products_mobile": false,
-        "tabs_alignment": "start",
-        "tabs_icon": "none",
-        "show_view_all_button": true,
-        "show_scrolling_bar": true
-      }
-    },
-    "carousel_accessoires": {
-      "type": "featured-collections",
-      "blocks": {
-        "c1": {
-          "type": "collection",
-          "settings": {
-            "collection": "accessoires-braseros",
-            "title": "Les accessoires",
-            "content": "<p>Grilles, plancha, four à pizza, housses…</p>",
-            "link": "/collections/accessoires-braseros",
-            "products_count": 8
-          }
-        }
-      },
-      "block_order": [
-        "c1"
-      ],
-      "settings": {
-        "color_scheme": "scheme-1",
-        "products_per_row_mobile": "2",
-        "products_per_row_desktop": 4,
-        "stack_products_desktop": false,
-        "stack_products_mobile": false,
         "tabs_alignment": "start",
         "tabs_icon": "none",
         "show_view_all_button": true,
@@ -189,20 +224,26 @@
         "sub": {
           "type": "subheading",
           "settings": {
-            "text": "Notre concept"
+            "text": "Notre concept",
+            "position": "top_left"
           }
         },
         "h": {
           "type": "heading",
           "settings": {
             "text": "Des produits qui créent des moments",
-            "heading_tag": "h2"
+            "heading_tag": "h2",
+            "position": "top_left",
+            "highlight_effect": "default",
+            "highlight_accent_color": "",
+            "highlight_text_color": ""
           }
         },
         "rt": {
           "type": "richtext",
           "settings": {
-            "text": "<p>Chez Distri-Outdoor, nous sélectionnons des produits français de qualité pour vos espaces extérieurs. Notre objectif : allier durabilité, design et convivialité, et transformer chaque terrasse ou jardin en un lieu de partage.</p>"
+            "text": "<p>Chez Distri-Outdoor, nous sélectionnons des produits français de qualité pour vos espaces extérieurs. Notre objectif : allier durabilité, design et convivialité, et transformer chaque terrasse ou jardin en un lieu de partage.</p>",
+            "position": "bottom_left"
           }
         },
         "btn": {
@@ -210,7 +251,10 @@
           "settings": {
             "text": "La boutique",
             "url": "/collections/catalogue",
-            "style": "solid"
+            "position": "bottom_left",
+            "style": "solid",
+            "background": "",
+            "text_color": ""
           }
         }
       },
@@ -222,7 +266,18 @@
       ],
       "settings": {
         "color_scheme": "scheme-1",
-        "primary_image": "shopify://shop_images/DSC0028.jpg"
+        "content_position": "start",
+        "content_percentage_width": 50,
+        "overlay_color": "#000000",
+        "overlay_opacity": 20,
+        "add_media_spacing": false,
+        "autoplay_video": true,
+        "primary_image": "shopify://shop_images/DSC0028.jpg",
+        "secondary_media_width": 60,
+        "secondary_media_mobile_width": 60,
+        "show_secondary_media_on_mobile": true,
+        "secondary_media_alignment": "place-self-center",
+        "secondary_media_shape": "none"
       }
     },
     "modularite": {
@@ -231,6 +286,7 @@
         "m1": {
           "type": "item",
           "settings": {
+            "icon": "none",
             "title": "Choisissez la taille",
             "heading_tag": "h3",
             "content": "<p>Du compact à l’XL, selon votre espace.</p>"
@@ -239,6 +295,7 @@
         "m2": {
           "type": "item",
           "settings": {
+            "icon": "none",
             "title": "Choisissez la forme",
             "heading_tag": "h3",
             "content": "<p>Rond, carré, octogonal, hexagonal.</p>"
@@ -247,6 +304,7 @@
         "m3": {
           "type": "item",
           "settings": {
+            "icon": "none",
             "title": "Ajoutez vos accessoires",
             "heading_tag": "h3",
             "content": "<p>Grilles, plancha, four à pizza, housse…</p>"
@@ -264,8 +322,43 @@
         "title": "Un brasero qui vous ressemble",
         "content": "<p>Composez le vôtre : la taille, la forme, puis les accessoires de cuisson.</p>",
         "heading_tag": "h2",
+        "text_alignment": "center",
         "items_per_row_desktop": 3,
-        "stack_on_mobile": true
+        "stack_on_mobile": true,
+        "separator_style": "horizontal",
+        "icon_position": "stacked",
+        "icon_width": 36,
+        "mobile_icon_width": 32,
+        "item_text_alignment": "left"
+      }
+    },
+    "carousel_accessoires": {
+      "type": "featured-collections",
+      "blocks": {
+        "c1": {
+          "type": "collection",
+          "settings": {
+            "collection": "accessoires-braseros",
+            "products_count": 8,
+            "title": "Les accessoires",
+            "content": "<p>Grilles, plancha, four à pizza, housses…</p>",
+            "link": "/collections/accessoires-braseros"
+          }
+        }
+      },
+      "block_order": [
+        "c1"
+      ],
+      "settings": {
+        "color_scheme": "scheme-1",
+        "stack_products_mobile": false,
+        "stack_products_desktop": false,
+        "products_per_row_mobile": "2",
+        "products_per_row_desktop": 4,
+        "tabs_alignment": "start",
+        "tabs_icon": "none",
+        "show_view_all_button": true,
+        "show_scrolling_bar": true
       }
     },
     "faq": {
@@ -275,28 +368,40 @@
           "type": "question",
           "settings": {
             "question": "Livrez-vous partout en France ?",
-            "answer": "<p>Oui, nous livrons en France métropolitaine. Les frais de port sont calculés au paiement.</p>"
+            "answer": "<p>Oui, nous livrons en France métropolitaine. Les frais de port sont calculés au paiement.</p>",
+            "icon": "none",
+            "icon_width": 24,
+            "mobile_icon_width": 20
           }
         },
         "q2": {
           "type": "question",
           "settings": {
             "question": "Vos braseros sont-ils fabriqués en France ?",
-            "answer": "<p>Oui, les braseros BRAZIR sont fabriqués en France et garantis 5 ans.</p>"
+            "answer": "<p>Oui, les braseros BRAZIR sont fabriqués en France et garantis 5 ans.</p>",
+            "icon": "none",
+            "icon_width": 24,
+            "mobile_icon_width": 20
           }
         },
         "q3": {
           "type": "question",
           "settings": {
             "question": "Puis-je personnaliser mon brasero ?",
-            "answer": "<p>Oui : la taille, la forme et les accessoires de cuisson se choisissent sur chaque fiche produit.</p>"
+            "answer": "<p>Oui : la taille, la forme et les accessoires de cuisson se choisissent sur chaque fiche produit.</p>",
+            "icon": "none",
+            "icon_width": 24,
+            "mobile_icon_width": 20
           }
         },
         "q4": {
           "type": "question",
           "settings": {
             "question": "Proposez-vous la location ?",
-            "answer": "<p>Oui, louez un brasero pour vos événements. Découvrez nos services sur la page Location.</p>"
+            "answer": "<p>Oui, louez un brasero pour vos événements. Découvrez nos services sur la page Location.</p>",
+            "icon": "none",
+            "icon_width": 24,
+            "mobile_icon_width": 20
           }
         }
       },
@@ -308,8 +413,12 @@
       ],
       "settings": {
         "color_scheme": "scheme-1",
+        "layout": "stacked",
+        "accordion_style": "border",
+        "question_style": "text",
         "subheading": "FAQ",
         "title": "Questions fréquentes",
+        "title_tag": "h3",
         "content": "",
         "button_text": "Toutes les questions",
         "button_url": "/pages/faq",
@@ -320,10 +429,16 @@
       "type": "newsletter",
       "settings": {
         "color_scheme": "scheme-4",
+        "image_position": "split",
+        "image_size": "md",
+        "add_image_spacing": false,
+        "icon": "envelope",
         "title": "Restez informé",
         "heading_tag": "h2",
         "button_text": "S'inscrire",
-        "privacy_policy_text": "En vous inscrivant, vous acceptez notre politique de confidentialité."
+        "privacy_policy_text": "En vous inscrivant, vous acceptez notre politique de confidentialité.",
+        "overlay_color": "#000000",
+        "overlay_opacity": 20
       }
     }
   },

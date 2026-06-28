@@ -1,5 +1,13 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
-  "name": "Product",
   "sections": {
     "main": {
       "type": "main-product",
@@ -11,7 +19,8 @@
           }
         },
         "badges": {
-          "type": "badges"
+          "type": "badges",
+          "settings": {}
         },
         "price": {
           "type": "price",
@@ -26,23 +35,24 @@
           }
         },
         "separator_1": {
-          "type": "separator"
+          "type": "separator",
+          "settings": {}
         },
         "variant_picker": {
           "type": "variant_picker",
           "settings": {
+            "hide_sold_out_variants": false,
+            "separate_options": true,
             "selector_style": "block",
             "swatch_selector_style": "swatch",
-            "swatch_selector_size": "lg",
-            "separate_options": true,
-            "hide_sold_out_variants": false
+            "swatch_selector_size": "lg"
           }
         },
         "buy_buttons": {
           "type": "buy_buttons",
           "settings": {
-            "show_quantity_selector": true,
             "show_payment_button": true,
+            "show_quantity_selector": true,
             "atc_button_style": "solid"
           }
         },
@@ -54,10 +64,12 @@
           }
         },
         "separator_2": {
-          "type": "separator"
+          "type": "separator",
+          "settings": {}
         },
         "description": {
-          "type": "description"
+          "type": "description",
+          "settings": {}
         },
         "specs": {
           "type": "liquid",
@@ -70,8 +82,8 @@
           "settings": {
             "title": "Livraison & retours",
             "content": "<p>Expédition sous 48h ouvrées. Livraison suivie partout en France métropolitaine. Retours acceptés sous 14 jours.</p>",
-            "icon": "none",
-            "uppercase_title": false
+            "uppercase_title": false,
+            "icon": "none"
           }
         }
       },
@@ -91,13 +103,13 @@
       ],
       "settings": {
         "color_scheme": "scheme-1",
+        "show_sticky_add_to_cart": true,
+        "product_media_size": 50,
         "content_alignment": "left",
         "desktop_media_layout": "carousel",
         "desktop_carousel_controls": "thumbnails_under",
         "mobile_controls": "dots",
-        "enable_image_zoom": true,
-        "show_sticky_add_to_cart": true,
-        "product_media_size": 50
+        "enable_image_zoom": true
       }
     },
     "related-products": {
