@@ -55,6 +55,9 @@ no need to manually pass the section as it is globally available)
         if block.type == 'accordion' and next_block.type == 'accordion'
           assign block_group_class = 'accordion-group'
           assign block_group_name = 'accordion-group'
+        elsif block.type == 'caracteristiques' and next_block.type == 'accordion'
+          assign block_group_class = 'accordion-group'
+          assign block_group_name = 'accordion-group'
         elsif block.type == 'description' and block.settings.collapse_content and product.description != blank and next_block.type == 'accordion'
           assign block_group_class = 'accordion-group'
           assign block_group_name = 'accordion-group'
@@ -82,6 +85,47 @@ no need to manually pass the section as it is globally available)
         {%- case block.type -%}
           {%- when '@app' -%}
             {%- render block -%}
+
+          {%- when 'caracteristiques' -%}
+            {%- liquid
+              assign co_marque = product.metafields.custom.marque.value
+              assign co_matiere = product.metafields.custom.matiere.value
+              assign co_garantie = product.metafields.custom.garantie.value
+            -%}
+            {%- if co_marque != blank or co_matiere != blank or co_garantie != blank -%}
+              {%- capture caracteristiques_content -%}
+                <dl style="display: grid; grid-template-columns: minmax(6rem, auto) 1fr; gap: 0.4rem 1.5rem; margin: 0;">
+                  {%- if co_marque != blank -%}<dt style="font-weight: 600; margin: 0;">Marque</dt><dd style="margin: 0;">{{ co_marque }}</dd>{%- endif -%}
+                  {%- if co_matiere != blank -%}<dt style="font-weight: 600; margin: 0;">Matière</dt><dd style="margin: 0;">{{ co_matiere }}</dd>{%- endif -%}
+                  {%- if co_garantie != blank -%}<dt style="font-weight: 600; margin: 0;">Garantie</dt><dd style="margin: 0;">{{ co_garantie }}</dd>{%- endif -%}
+                </dl>
+              {%- endcapture -%}
+              {%- render 'accordion', title: block.settings.title, content: caracteristiques_content, uppercase_title: block.settings.uppercase_title, open: block.settings.open -%}
+            {%- endif -%}
+
+          {%- when 'reassurance' -%}
+            {%- liquid
+              assign re_fr = product.metafields.custom.fabrique_en_france.value
+              assign re_garantie = product.metafields.custom.garantie.value
+            -%}
+            {%- if re_fr or re_garantie != blank -%}
+              <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
+                {%- if re_fr -%}<span style="display: inline-flex; align-items: center; padding: 0.4em 0.8em; font-size: 0.8rem; letter-spacing: 0.04em; border: 1px solid rgb(var(--text-color) / 0.25); border-radius: var(--button-border-radius, 4px);">Fabriqué en France</span>{%- endif -%}
+                {%- if re_garantie != blank -%}<span style="display: inline-flex; align-items: center; padding: 0.4em 0.8em; font-size: 0.8rem; letter-spacing: 0.04em; border: 1px solid rgb(var(--text-color) / 0.25); border-radius: var(--button-border-radius, 4px);">Garantie {{ re_garantie }}</span>{%- endif -%}
+              </div>
+            {%- endif -%}
+
+          {%- when 'product_faq' -%}
+            {%- assign faq_items = product.metafields.custom.faq.value -%}
+            {%- if faq_items != blank -%}
+              {%- if block.settings.title != blank -%}
+                <p class="subheading text-subdued" style="margin-block: 1rem 0.5rem;">{{ block.settings.title }}</p>
+              {%- endif -%}
+              {%- for faq_item in faq_items -%}
+                {%- capture faq_answer -%}<p>{{ faq_item.answer.value }}</p>{%- endcapture -%}
+                {%- render 'accordion', title: faq_item.question.value, content: faq_answer, prose_content: true -%}
+              {%- endfor -%}
+            {%- endif -%}
 
           {%- when 'vendor' -%}
             {%- if product != blank -%}

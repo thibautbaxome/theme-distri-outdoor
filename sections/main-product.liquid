@@ -249,6 +249,32 @@
       "type": "@app"
     },
     {
+      "type": "caracteristiques",
+      "name": "Caractéristiques",
+      "limit": 1,
+      "settings": [
+        { "type": "text", "id": "title", "label": "Titre", "default": "Caractéristiques" },
+        { "type": "checkbox", "id": "open", "label": "Ouvert par défaut", "default": true },
+        { "type": "checkbox", "id": "uppercase_title", "label": "Titre en majuscules", "default": false }
+      ]
+    },
+    {
+      "type": "reassurance",
+      "name": "Badges réassurance",
+      "limit": 1,
+      "settings": [
+        { "type": "paragraph", "content": "Affiche « Fabriqué en France » et la garantie selon les métachamps du produit (custom.fabrique_en_france, custom.garantie)." }
+      ]
+    },
+    {
+      "type": "product_faq",
+      "name": "FAQ produit",
+      "limit": 1,
+      "settings": [
+        { "type": "text", "id": "title", "label": "Titre", "default": "Questions fréquentes" }
+      ]
+    },
+    {
       "type": "vendor",
       "name": "t:sections.main_product.blocks.vendor.name",
       "limit": 1

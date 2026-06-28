@@ -35,10 +35,8 @@
           }
         },
         "reassurance": {
-          "type": "liquid",
-          "settings": {
-            "liquid": "{%- assign fr = product.metafields.custom.fabrique_en_france.value -%}{%- assign garantie = product.metafields.custom.garantie.value -%}{%- if fr or garantie != blank -%}<div style='display:flex;flex-wrap:wrap;gap:.5rem;margin-block-start:.75rem'>{%- if fr -%}<span style='display:inline-flex;align-items:center;gap:.4em;padding:.4em .8em;font-size:.8rem;letter-spacing:.04em;border:1px solid rgb(var(--text-color) / .25);border-radius:var(--button-border-radius,4px)'>Fabriqué en France</span>{%- endif -%}{%- if garantie != blank -%}<span style='display:inline-flex;align-items:center;gap:.4em;padding:.4em .8em;font-size:.8rem;letter-spacing:.04em;border:1px solid rgb(var(--text-color) / .25);border-radius:var(--button-border-radius,4px)'>Garantie {{ garantie }}</span>{%- endif -%}</div>{%- endif -%}"
-          }
+          "type": "reassurance",
+          "settings": {}
         },
         "separator_zkTWtF": {
           "type": "separator",
@@ -83,9 +81,11 @@
           "settings": {}
         },
         "specs": {
-          "type": "liquid",
+          "type": "caracteristiques",
           "settings": {
-            "liquid": "{%- assign marque = product.metafields.custom.marque.value -%}{%- assign matiere = product.metafields.custom.matiere.value -%}{%- assign garantie = product.metafields.custom.garantie.value -%}{%- if marque != blank or matiere != blank or garantie != blank -%}<div style='margin-block-start:1.5rem'><p class='subheading text-subdued' style='margin-block-end:.5rem'>Caractéristiques</p><dl style='display:grid;grid-template-columns:minmax(6rem,auto) 1fr;gap:.5rem 1.5rem;margin:0'>{%- if marque != blank -%}<dt style='font-weight:600;margin:0'>Marque</dt><dd style='margin:0'>{{ marque }}</dd>{%- endif -%}{%- if matiere != blank -%}<dt style='font-weight:600;margin:0'>Matière</dt><dd style='margin:0'>{{ matiere }}</dd>{%- endif -%}{%- if garantie != blank -%}<dt style='font-weight:600;margin:0'>Garantie</dt><dd style='margin:0'>{{ garantie }}</dd>{%- endif -%}</dl></div>{%- endif -%}"
+            "title": "Caractéristiques",
+            "open": true,
+            "uppercase_title": false
           }
         },
         "livraison": {
@@ -109,9 +109,9 @@
           }
         },
         "faq_block": {
-          "type": "liquid",
+          "type": "product_faq",
           "settings": {
-            "liquid": "{%- assign faq = product.metafields.custom.faq.value -%}{%- if faq != blank -%}<div style='margin-block-start:2rem'><p class='subheading text-subdued' style='margin-block-end:1rem'>Questions fréquentes</p>{%- for item in faq -%}<details style='border-top:1px solid rgb(var(--text-color) / .15);padding:.9rem 0'><summary style='cursor:pointer;font-weight:600'>{{ item.question.value }}</summary><div class='prose' style='margin-block-start:.6rem'><p>{{ item.answer.value }}</p></div></details>{%- endfor -%}</div>{%- endif -%}"
+            "title": "Questions fréquentes"
           }
         }
       },
