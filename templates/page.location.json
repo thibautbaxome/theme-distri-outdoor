@@ -1,0 +1,120 @@
+{
+  "name": "Location",
+  "sections": {
+    "hero": {
+      "type": "text-with-media",
+      "blocks": {
+        "sub": {
+          "type": "subheading",
+          "settings": {
+            "text": "Location"
+          }
+        },
+        "h": {
+          "type": "heading",
+          "settings": {
+            "text": "Louer un brasero à portée de main",
+            "heading_tag": "h1"
+          }
+        },
+        "rt": {
+          "type": "richtext",
+          "settings": {
+            "text": "<p>Pour vos anniversaires, événements d'entreprise ou week-ends entre amis, louez un brasero BRAZIR M : une cuisson au feu de bois, en plancha ou en grill, pour 30 à 40 personnes.</p>"
+          }
+        },
+        "btn": {
+          "type": "button",
+          "settings": {
+            "text": "Demander un devis",
+            "url": "/pages/contact",
+            "style": "solid"
+          }
+        }
+      },
+      "block_order": [
+        "sub",
+        "h",
+        "rt",
+        "btn"
+      ],
+      "settings": {
+        "color_scheme": "scheme-1",
+        "primary_image": "shopify://shop_images/DSC0028.jpg"
+      }
+    },
+    "infos": {
+      "type": "text-with-icons",
+      "blocks": {
+        "zone": {
+          "type": "item",
+          "settings": {
+            "title": "Zone & livraison",
+            "heading_tag": "h3",
+            "content": "<p>Retrait gratuit sur rendez-vous près de Vienne. Livraison jusqu'à 60 km (Lyon sud, Nord-Isère, Vallée du Rhône) : 100 € TTC.</p>"
+          }
+        },
+        "tarifs": {
+          "type": "item",
+          "settings": {
+            "title": "Tarifs & conditions",
+            "heading_tag": "h3",
+            "content": "<p>150 € TTC la journée ou le week-end. Caution de 1 000 € par chèque (non encaissé, restitué au retour du matériel en bon état). Paiement CB, virement, chèque ou espèces.</p>"
+          }
+        },
+        "creneaux": {
+          "type": "item",
+          "settings": {
+            "title": "Créneaux & réservation",
+            "heading_tag": "h3",
+            "content": "<p>Retrait dès le vendredi après-midi, retour le lundi matin, horaires flexibles. 2 braseros disponibles à la location.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "zone",
+        "tarifs",
+        "creneaux"
+      ],
+      "settings": {
+        "color_scheme": "scheme-6",
+        "subheading": "Pratique",
+        "title": "Comment ça marche",
+        "content": "",
+        "heading_tag": "h2",
+        "items_per_row_desktop": 3,
+        "stack_on_mobile": true
+      }
+    },
+    "cta": {
+      "type": "rich-text",
+      "blocks": {
+        "h": {
+          "type": "heading",
+          "settings": {
+            "text": "Réservez votre brasero",
+            "heading_tag": "h2"
+          }
+        },
+        "rt": {
+          "type": "richtext",
+          "settings": {
+            "text": "<p>Pour réserver un brasero ou obtenir un devis personnalisé, remplissez le formulaire ci-dessous.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "h",
+        "rt"
+      ],
+      "settings": {
+        "color_scheme": "scheme-1"
+      }
+    }
+  },
+  "order": [
+    "hero",
+    "infos",
+    "cta"
+  ]
+}
