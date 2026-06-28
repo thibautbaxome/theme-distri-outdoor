@@ -7,9 +7,30 @@
 ## Principe directeur
 On donne aux moteurs (classiques **et** génératifs) des blocs **factuels, structurés, attribuables** (schema.org) et **cohérents** (entité claire, prudence « Fabriqué en France »). Les IA citent ce qu'elles peuvent extraire et vérifier facilement : FAQ, specs, définitions, comparatifs.
 
-## Déjà fait (couche meta — rappel)
+## ✅ État de réalisation (2026-06-28)
+
+**Couche meta (déployée, additif — champs qui étaient vides) :**
 - 45 meta descriptions produit (= `short_description`) · 9 meta descriptions collection.
-- JSON-LD : Organization enrichi (adresse Vienne, contact, areaServed FR), structured_data produit (Shopify), breadcrumbs, WebSite+SearchAction, **FAQPage** (sections FAQ home + page FAQ), OG/Twitter.
+- JSON-LD : Organization enrichi (adresse Vienne, contact, areaServed FR, **sameAs Facebook + Instagram**), structured_data produit (Shopify), breadcrumbs, WebSite+SearchAction, FAQPage, OG/Twitter.
+
+**Chantier 1 — FAQ produit : ✅ FAIT.** Métachamp `custom.faq` (JSON) sur **les 45 produits** + accordéons visibles (bloc `liquid` dans `product.json`) + **JSON-LD FAQPage** (`snippets/microdata-schema.liquid`).
+
+**Chantier 2 — Collections : ✅ FAIT.** 9 **descriptions visibles** (bannière) + métachamp collection `custom.faq` (6 collections) + section `sections/collection-faq.liquid` (dans `collection.json`) + FAQPage collection. ⚠️ *Les descriptions visibles de collection étaient vides → ajout additif ; à confirmer « garder/vider ».*
+
+**Wave 2 meta : ✅ FAIT** (sauf 1 point) — `alt` des 44 images en avant (étaient vides) ; suffixe `– Distri-Outdoor` dans les `<title>` (`layout/theme.liquid`) ; sameAs FB/IG. ❌ *Non fait : marque réelle (BRAZIR…) dans le `structured_data` produit — Shopify le génère depuis `product.vendor` (= « DISTRI-OUTDOOR »), surcharge impossible sans changer le vendor → décision data client.*
+
+**Chantier 3 — Réécriture des descriptions : ❌ ANNULÉ.** Incident : 12 corps de fiches phares avaient été réécrits en prod par malentendu (« go » compris pour les corps au lieu des meta). **Tout a été restauré à l'identique** depuis le texte capturé en début de session. **Règle actée : on ne touche plus aux corps de fiche produit** (meta uniquement). Les 33 autres n'avaient pas été touchées.
+
+**Chantier 4 — Blog : ✅ FAIT.** 3 guides publiés dans le blog « Infos » (additif), avec maillage interne vers les collections + schéma Article (Shopify) :
+- `quel-brasero-choisir` — « Quel brasero choisir ? Le guide complet »
+- `corten-ou-thermolaque-brasero` — « Acier corten ou thermolaqué… »
+- `borne-anti-moustique-comment-ca-marche` — « Borne anti-moustique : comment ça marche… »
+
+**Reste possible (non lancé) :** alt sur les images secondaires (au-delà de l'image en avant), `seo.title` data-level par produit, plus d'articles de blog, lien du blog dans le menu/footer.
+
+---
+
+### Détail initial du plan (conservé pour référence)
 
 ---
 

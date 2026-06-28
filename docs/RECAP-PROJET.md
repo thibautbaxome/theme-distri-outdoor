@@ -34,8 +34,13 @@
 
 ## 5. SEO / GEO
 - **Audit** : meta descriptions et `seo.title` vides sur 100 % des produits, `alt` images vides, meta descriptions collections vides, JSON-LD Organization maigre. Bases OK : structured_data produit (Shopify), breadcrumbs, WebSite+SearchAction, **FAQPage** déjà émis, OG/Twitter complets.
-- **Déployé** : **45 meta descriptions produit** (= `short_description`), **9 meta descriptions collection**, **JSON-LD Organization enrichi** (description, email/contactPoint, areaServed FR, adresse Vienne 38200) — utile pour le SEO local et les moteurs génératifs (GEO).
-- **Reste (wave 2)** : `alt` des images produit/collection, `seo.title` avec suffixe marque, `sameAs` réseaux sociaux dans l'Organization.
+- **Couche meta déployée** : 45 meta descriptions produit (= `short_description`), 9 meta descriptions collection, JSON-LD Organization enrichi (description, contactPoint, areaServed FR, adresse Vienne 38200, **sameAs FB/Instagram**), `alt` des 44 images en avant, suffixe `– Distri-Outdoor` dans les `<title>`.
+- **FAQ (GEO #1)** : métachamp `custom.faq` (JSON) sur **les 45 produits** + **6 collections**, rendus en accordéons + **JSON-LD FAQPage** (produit et collection).
+- **Collections** : 9 descriptions visibles (bannière) + section `collection-faq`.
+- **Blog** : 3 guides publiés (quel brasero choisir, corten vs thermolaqué, borne anti-moustique) avec maillage interne + schéma Article.
+- **⚠️ Incident & règle** : 12 corps de fiches produit réécrits par malentendu, puis **restaurés à l'identique**. Règle actée : **on ne touche plus aux corps de fiche produit** (meta uniquement).
+- **Non fait** : marque réelle dans le `structured_data` produit (dépend de `product.vendor`, décision client) ; `alt` des images secondaires ; `seo.title` data-level.
+- Architecture FAQ détaillée : voir [docs/PLAN-SEO-GEO.md](PLAN-SEO-GEO.md).
 
 ## Règles & garde-fous (transverses)
 - **Respecter le thème** : pas d'override, pas de variable CSS dupliquée — on configure les réglages natifs, on étend proprement si besoin.
@@ -48,7 +53,10 @@
 - `origin/main` → thème **preview** via l'intégration GitHub (le push déploie sur la preview, pas sur la prod).
 
 ## Reste à faire / pistes
-- SEO wave 2 (alt images, seo.title, sameAs).
+- Confirmer : garder ou vider les descriptions visibles de collection (ajout additif).
+- Marque réelle dans le `structured_data` produit (décision sur `product.vendor`).
+- `alt` des images secondaires, `seo.title` data-level, plus d'articles de blog, lien blog dans le menu/footer.
 - Page Location : intégration du formulaire (côté client).
 - QA finale transverse (mobile, panier, recherche, 404) — déjà passée une première fois.
 - Config front des sections (en cours côté client via l'éditeur Shopify).
+- **Push** des commits thème en attente vers `origin/main` (rendus FAQ, sections, schémas, titres).
