@@ -58,7 +58,7 @@
     "product_card_info_horizontal_alignment": "start",
     "product_card_title_max_lines": 0,
     "product_card_show_color_swatches": true,
-    "product_card_swatches_position": "outside",
+    "product_card_swatches_position": "inside",
     "product_card_swatches_placement": "place-self-end",
     "product_card_show_rating": false,
     "product_card_badges_placement": "place-self-start",

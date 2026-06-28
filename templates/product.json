@@ -15,7 +15,13 @@
         "title": {
           "type": "title",
           "settings": {
-            "heading_tag": "h1"
+            "heading_tag": "h4"
+          }
+        },
+        "text_XH7DqQ": {
+          "type": "text",
+          "settings": {
+            "text": "<p>{{ product.metafields.custom.short_description.value }}</p>"
           }
         },
         "badges": {
@@ -34,7 +40,7 @@
             "liquid": "{%- assign fr = product.metafields.custom.fabrique_en_france.value -%}{%- assign garantie = product.metafields.custom.garantie.value -%}{%- if fr or garantie != blank -%}<div style='display:flex;flex-wrap:wrap;gap:.5rem;margin-block-start:.75rem'>{%- if fr -%}<span style='display:inline-flex;align-items:center;gap:.4em;padding:.4em .8em;font-size:.8rem;letter-spacing:.04em;border:1px solid rgb(var(--text-color) / .25);border-radius:var(--button-border-radius,4px)'>Fabriqué en France</span>{%- endif -%}{%- if garantie != blank -%}<span style='display:inline-flex;align-items:center;gap:.4em;padding:.4em .8em;font-size:.8rem;letter-spacing:.04em;border:1px solid rgb(var(--text-color) / .25);border-radius:var(--button-border-radius,4px)'>Garantie {{ garantie }}</span>{%- endif -%}</div>{%- endif -%}"
           }
         },
-        "separator_1": {
+        "separator_zkTWtF": {
           "type": "separator",
           "settings": {}
         },
@@ -44,16 +50,25 @@
             "hide_sold_out_variants": false,
             "separate_options": true,
             "selector_style": "block",
-            "swatch_selector_style": "swatch",
-            "swatch_selector_size": "lg"
+            "swatch_selector_style": "block_swatch",
+            "swatch_selector_size": "lg",
+            "block_selector_style": "outline",
+            "variant_image_options": "",
+            "size_chart_page": ""
           }
         },
         "buy_buttons": {
           "type": "buy_buttons",
           "settings": {
-            "show_payment_button": true,
+            "show_payment_button": false,
+            "show_gift_card_recipient": true,
             "show_quantity_selector": true,
-            "atc_button_style": "solid"
+            "add_quantity_selector_spacing": true,
+            "atc_button_style": "solid",
+            "atc_button_background": "",
+            "atc_button_text_color": "",
+            "payment_button_background": "",
+            "payment_button_text_color": ""
           }
         },
         "complementary": {
@@ -67,10 +82,6 @@
           "type": "separator",
           "settings": {}
         },
-        "description": {
-          "type": "description",
-          "settings": {}
-        },
         "specs": {
           "type": "liquid",
           "settings": {
@@ -80,36 +91,54 @@
         "livraison": {
           "type": "accordion",
           "settings": {
+            "title": "Description",
+            "content": "{{ product.description }}",
+            "uppercase_title": false,
+            "icon": "none",
+            "page": ""
+          }
+        },
+        "accordion_xhdtRj": {
+          "type": "accordion",
+          "settings": {
             "title": "Livraison & retours",
             "content": "<p>Expédition sous 48h ouvrées. Livraison suivie partout en France métropolitaine. Retours acceptés sous 14 jours.</p>",
             "uppercase_title": false,
-            "icon": "none"
+            "icon": "none",
+            "page": ""
           }
         }
       },
       "block_order": [
         "title",
+        "text_XH7DqQ",
         "badges",
         "price",
         "reassurance",
-        "separator_1",
+        "separator_zkTWtF",
         "variant_picker",
         "buy_buttons",
         "complementary",
         "separator_2",
-        "description",
         "specs",
-        "livraison"
+        "livraison",
+        "accordion_xhdtRj"
       ],
       "settings": {
         "color_scheme": "scheme-1",
+        "allow_transparent_header": false,
+        "transparent_header_use_primary_colors": false,
+        "add_top_spacing": true,
         "show_sticky_add_to_cart": true,
         "product_media_size": 50,
         "content_alignment": "left",
         "desktop_media_layout": "carousel",
         "desktop_carousel_controls": "thumbnails_under",
         "mobile_controls": "dots",
-        "enable_image_zoom": true
+        "enable_media_autoplay": false,
+        "enable_video_looping": true,
+        "enable_image_zoom": true,
+        "max_image_zoom_level": 3
       }
     },
     "related-products": {
@@ -122,12 +151,25 @@
             "subheading": "À découvrir",
             "title": "Vous aimerez aussi",
             "content": "",
-            "heading_size": "h2"
-          }
+            "button_text": "",
+            "button_link": "",
+            "button_style": "outline",
+            "text_alignment": "left",
+            "heading_size": "h2",
+            "title_icon": "none",
+            "show_scrolling_title": false
+          },
+          "blocks": {}
         }
       },
       "settings": {
-        "color_scheme": "scheme-1"
+        "color_scheme": "scheme-1",
+        "stack_products": true,
+        "recommendations_count": 4,
+        "products_per_row_mobile": "1",
+        "products_per_row_desktop": 4,
+        "show_view_all_button": true,
+        "show_scrolling_bar": true
       }
     }
   },
