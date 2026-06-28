@@ -52,16 +52,22 @@ no need to manually pass the section as it is globally available)
 
         assign allow_block_group = true
 
-        if block.type == 'accordion' and next_block.type == 'accordion'
-          assign block_group_class = 'accordion-group'
-          assign block_group_name = 'accordion-group'
-        elsif block.type == 'caracteristiques' and next_block.type == 'accordion'
-          assign block_group_class = 'accordion-group'
-          assign block_group_name = 'accordion-group'
-        elsif block.type == 'description' and block.settings.collapse_content and product.description != blank and next_block.type == 'accordion'
-          assign block_group_class = 'accordion-group'
-          assign block_group_name = 'accordion-group'
-        elsif block.type == 'accordion' and next_block.type == 'description' and next_block.settings.collapse_content and product.description != blank 
+        assign cur_accordion_like = false
+        assign next_accordion_like = false
+
+        if block.type == 'accordion' or block.type == 'caracteristiques'
+          assign cur_accordion_like = true
+        elsif block.type == 'description' and block.settings.collapse_content and product.description != blank
+          assign cur_accordion_like = true
+        endif
+
+        if next_block.type == 'accordion' or next_block.type == 'caracteristiques'
+          assign next_accordion_like = true
+        elsif next_block.type == 'description' and next_block.settings.collapse_content and product.description != blank
+          assign next_accordion_like = true
+        endif
+
+        if cur_accordion_like and next_accordion_like
           assign block_group_class = 'accordion-group'
           assign block_group_name = 'accordion-group'
         else
