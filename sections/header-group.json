@@ -7,10 +7,29 @@
     },
     "header": {
       "type": "header",
+      "blocks": {
+        "shop_mega": {
+          "type": "mega_menu",
+          "settings": {
+            "menu_item": "Shop",
+            "mega_menu_justify_content": "justify-between",
+            "promo_heading_tag": "h6",
+            "promo_text_alignment": "left",
+            "promo_1_product": "brazir-xl-la-brasero-modulable",
+            "promo_2_product": "kamado-convivial",
+            "promo_3_product": "borne-anti-moustiques"
+          }
+        }
+      },
+      "block_order": [
+        "shop_mega"
+      ],
       "settings": {
         "logo": "{{ shop.brand.logo }}",
         "menu": "main-menu-v2",
-        "drawer_menu": "main-menu-v2"
+        "drawer_menu": "main-menu-v2",
+        "desktop_dropdown_menu_style": "below",
+        "menu_open_trigger": "hover"
       }
     }
   },
