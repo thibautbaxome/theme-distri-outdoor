@@ -8,29 +8,29 @@
         "item-1": {
           "type": "item",
           "settings": {
-            "title": "Worldwide delivery",
-            "content": "Receive your order anywhere in the world."
+            "title": "Spécialiste de l'outdoor",
+            "content": "Braseros, kamados, anti-moustiques & mobilier."
           }
         },
         "item-2": {
           "type": "item",
           "settings": {
-            "title": "Fast shipping",
-            "content": "Super fast shipping in 48 hours."
+            "title": "Livraison en France",
+            "content": "Expédition suivie sous 48h ouvrées."
           }
         },
         "item-3": {
           "type": "item",
           "settings": {
-            "title": "Customer service",
-            "content": "We are available from monday to friday to answer your questions."
+            "title": "Conseils d'experts",
+            "content": "Une équipe à votre écoute du lundi au vendredi."
           }
         },
         "item-4": {
           "type": "item",
           "settings": {
-            "title": "Secure payment",
-            "content": "Your payment information is processed securely."
+            "title": "Paiement sécurisé",
+            "content": "Vos transactions sont protégées."
           }
         }
       },
@@ -52,27 +52,43 @@
           "settings": {
             "image": "{{shop.brand.logo}}",
             "image_width": 150,
-            "heading_size": "h3"
+            "heading_size": "h3",
+            "title": "Newsletter",
+            "content": "<p>Recevez nos nouveautés et offres exclusives.</p>",
+            "disclaimer_text": "<p>En vous inscrivant, vous acceptez notre politique de confidentialité.</p>"
           }
         },
         "links": {
           "type": "links",
           "settings": {
-            "menu": "footer",
-            "show_menu_title": true
+            "menu": "footer-boutique",
+            "menu_title": "Boutique",
+            "show_menu_title": true,
+            "collapse_on_mobile": true
+          }
+        },
+        "links_infos": {
+          "type": "links",
+          "settings": {
+            "menu": "footer-infos",
+            "menu_title": "Informations",
+            "show_menu_title": true,
+            "collapse_on_mobile": true
           }
         },
         "text": {
           "type": "text",
           "settings": {
-            "title": "About",
-            "content": "<p>Use this text area to tell your customers about your brand and vision. You can change it in the theme editor.</p>"
+            "title": "À propos",
+            "content": "<p>Distri-Outdoor, votre spécialiste de l'extérieur : braseros-planchas, kamados, bornes anti-moustiques et mobilier de jardin. Une sélection exigeante pour transformer chaque terrasse en lieu de partage.</p>",
+            "enable_follow_on_shop": true
           }
         }
       },
       "block_order": [
         "newsletter",
         "links",
+        "links_infos",
         "text"
       ]
     }

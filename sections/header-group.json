@@ -8,7 +8,9 @@
     "header": {
       "type": "header",
       "settings": {
-        "logo": "{{ shop.brand.logo }}"
+        "logo": "{{ shop.brand.logo }}",
+        "menu": "main-menu-v2",
+        "drawer_menu": "main-menu-v2"
       }
     }
   },
