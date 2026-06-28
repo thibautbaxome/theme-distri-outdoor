@@ -94,11 +94,19 @@
     {%- when 'split' -%}
       <div class="section-split">
         <div class="section-split__column section-split__column--image section-split__column--flushed">
-          {{- image | image_url: width: image.width | image_tag: sizes: '(max-width: 699px) 100vw, 50vw', widths: '300,400,500,600,800,1000,1200,1400,1600,1800,2000', class: 'size-full' -}}
+          {%- if section.settings.image_size == 'auto' -%}
+            {{- image | image_url: width: image.width | image_tag: sizes: '(max-width: 699px) 100vw, 50vw', widths: '300,400,500,600,800,1000,1200,1400,1600,1800,2000', class: 'size-full' -}}
+          {%- else -%}
+            <div class="content-box min-h-{{ section.settings.image_size }} h-full">
+              <div class="content-box__background-media">
+                {{- image | image_url: width: image.width | image_tag: sizes: '(max-width: 699px) 100vw, 50vw', widths: '300,400,500,600,800,1000,1200,1400,1600,1800,2000', class: 'size-full' -}}
+              </div>
+            </div>
+          {%- endif -%}
         </div>
-  
-        <div class="section-split__column align-self-stretch">
-          <div class="content-box min-h-full">
+
+        <div class="color-scheme color-scheme--{{ section.settings.background_color_scheme.id }} section-split__column align-self-stretch">
+          <div class="content-box min-h-{{ section.settings.image_size }}">
             <div class="span-full {{ section.settings.content_position }}">
               <div class="prose prose-justify-{{ section.settings.content_position | split: '-' | last }} {{ section.settings.content_position }}">
                 <h1 class="{{ section.settings.collection_title_size }}">{{ collection.title }}</h1>
