@@ -27,7 +27,7 @@
         "shop_mega": {
           "type": "mega_menu",
           "settings": {
-            "menu_item": "Shop",
+            "menu_item": "Boutique",
             "mega_menu_justify_content": "justify-center",
             "stretch_promo_blocks": true,
             "promo_column_gap": "0px",
