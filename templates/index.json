@@ -213,7 +213,7 @@
         "products_per_row_mobile": "2",
         "products_per_row_desktop": 4,
         "tabs_alignment": "start",
-        "tabs_icon": "none",
+        "tabs_icon": "circle",
         "show_view_all_button": true,
         "show_scrolling_bar": true
       }
@@ -356,7 +356,7 @@
         "products_per_row_mobile": "2",
         "products_per_row_desktop": 4,
         "tabs_alignment": "start",
-        "tabs_icon": "none",
+        "tabs_icon": "circle",
         "show_view_all_button": true,
         "show_scrolling_bar": true
       }
@@ -412,9 +412,9 @@
         "q4"
       ],
       "settings": {
-        "color_scheme": "scheme-1",
+        "color_scheme": "scheme-6",
         "layout": "stacked",
-        "accordion_style": "border",
+        "accordion_style": "background",
         "question_style": "text",
         "subheading": "FAQ",
         "title": "Questions fréquentes",
@@ -428,13 +428,13 @@
     "newsletter": {
       "type": "newsletter",
       "settings": {
-        "color_scheme": "scheme-4",
+        "color_scheme": "scheme-1",
         "image_position": "split",
         "image_size": "md",
         "add_image_spacing": false,
         "icon": "envelope",
         "title": "Restez informé",
-        "heading_tag": "h2",
+        "heading_tag": "h3",
         "button_text": "S'inscrire",
         "privacy_policy_text": "En vous inscrivant, vous acceptez notre politique de confidentialité.",
         "overlay_color": "#000000",
