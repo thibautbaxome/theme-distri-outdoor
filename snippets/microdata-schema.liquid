@@ -160,13 +160,10 @@ managed at the theme level.
         "areaServed": "FR",
         "availableLanguage": "French"
       }
-      {%- if shop.brand.metafields.social_links.size > 0 -%}
-        ,"sameAs": [
-          {%- for social_link in shop.brand.metafields.social_links -%}
-            {{- social_link.last.value | json -}}{%- unless forloop.last -%},{%- endunless -%}
-          {%- endfor -%}
-        ]
-      {%- endif -%}
+      ,"sameAs": [
+        "https://www.facebook.com/people/Distri-Outdoor/61568598725291/",
+        "https://www.instagram.com/distri_outdoor/"
+      ]
     }
   ]
   </script>
