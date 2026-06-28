@@ -1,5 +1,5 @@
 {%- comment -%}
-  FAQ de collection : lit le métachamp custom.faq (JSON) de la collection et l'affiche en accordéons.
+  FAQ de collection : lit le métachamp custom.faq (liste de métaobjets faq_item) et l'affiche en accordéons.
   Le schéma FAQPage correspondant est injecté dans snippets/microdata-schema.liquid.
 {%- endcomment -%}
 
@@ -16,8 +16,8 @@
         <div class="prose">
           {%- for item in faq -%}
             <details style="border-top: 1px solid rgb(var(--text-color) / 0.15); padding: 1rem 0;">
-              <summary style="cursor: pointer; font-weight: 600;">{{ item.question }}</summary>
-              <div style="margin-block-start: 0.6rem;"><p>{{ item.answer }}</p></div>
+              <summary style="cursor: pointer; font-weight: 600;">{{ item.question.value }}</summary>
+              <div style="margin-block-start: 0.6rem;"><p>{{ item.answer.value }}</p></div>
             </details>
           {%- endfor -%}
         </div>

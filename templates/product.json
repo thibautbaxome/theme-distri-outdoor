@@ -111,7 +111,7 @@
         "faq_block": {
           "type": "liquid",
           "settings": {
-            "liquid": "{%- assign faq = product.metafields.custom.faq.value -%}{%- if faq != blank -%}<div style='margin-block-start:2rem'><p class='subheading text-subdued' style='margin-block-end:1rem'>Questions fréquentes</p>{%- for item in faq -%}<details style='border-top:1px solid rgb(var(--text-color) / .15);padding:.9rem 0'><summary style='cursor:pointer;font-weight:600'>{{ item.question }}</summary><div class='prose' style='margin-block-start:.6rem'><p>{{ item.answer }}</p></div></details>{%- endfor -%}</div>{%- endif -%}"
+            "liquid": "{%- assign faq = product.metafields.custom.faq.value -%}{%- if faq != blank -%}<div style='margin-block-start:2rem'><p class='subheading text-subdued' style='margin-block-end:1rem'>Questions fréquentes</p>{%- for item in faq -%}<details style='border-top:1px solid rgb(var(--text-color) / .15);padding:.9rem 0'><summary style='cursor:pointer;font-weight:600'>{{ item.question.value }}</summary><div class='prose' style='margin-block-start:.6rem'><p>{{ item.answer.value }}</p></div></details>{%- endfor -%}</div>{%- endif -%}"
           }
         }
       },

@@ -33,10 +33,10 @@ managed at the theme level.
         {%- for item in faq_data -%}
           {
             "@type": "Question",
-            "name": {{ item.question | json }},
+            "name": {{ item.question.value | json }},
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": {{ item.answer | json }}
+              "text": {{ item.answer.value | json }}
             }
           }{%- unless forloop.last -%},{%- endunless -%}
         {%- endfor -%}
