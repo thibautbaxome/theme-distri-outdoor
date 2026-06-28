@@ -15,20 +15,26 @@
         "sub": {
           "type": "subheading",
           "settings": {
-            "text": "Location"
+            "text": "Location",
+            "position": "top_left"
           }
         },
         "h": {
           "type": "heading",
           "settings": {
             "text": "Louer un brasero à portée de main",
-            "heading_tag": "h1"
+            "heading_tag": "h1",
+            "position": "top_left",
+            "highlight_effect": "default",
+            "highlight_accent_color": "",
+            "highlight_text_color": ""
           }
         },
         "rt": {
           "type": "richtext",
           "settings": {
-            "text": "<p>Pour vos anniversaires, événements d'entreprise ou week-ends entre amis, louez un brasero BRAZIR M : une cuisson au feu de bois, en plancha ou en grill, pour 30 à 40 personnes.</p>"
+            "text": "<p>Pour vos anniversaires, événements d'entreprise ou week-ends entre amis, louez un brasero BRAZIR M : une cuisson au feu de bois, en plancha ou en grill, pour 30 à 40 personnes.</p>",
+            "position": "bottom_left"
           }
         },
         "btn": {
@@ -36,7 +42,10 @@
           "settings": {
             "text": "Demander un devis",
             "url": "/pages/contact",
-            "style": "solid"
+            "position": "bottom_left",
+            "style": "solid",
+            "background": "",
+            "text_color": ""
           }
         }
       },
@@ -48,7 +57,18 @@
       ],
       "settings": {
         "color_scheme": "scheme-1",
-        "primary_image": "shopify://shop_images/DSC0028.jpg"
+        "content_position": "start",
+        "content_percentage_width": 50,
+        "overlay_color": "#000000",
+        "overlay_opacity": 20,
+        "add_media_spacing": false,
+        "autoplay_video": true,
+        "primary_image": "shopify://shop_images/DSC0028.jpg",
+        "secondary_media_width": 60,
+        "secondary_media_mobile_width": 60,
+        "show_secondary_media_on_mobile": true,
+        "secondary_media_alignment": "place-self-center",
+        "secondary_media_shape": "none"
       }
     },
     "infos": {
@@ -57,6 +77,7 @@
         "zone": {
           "type": "item",
           "settings": {
+            "icon": "none",
             "title": "Zone & livraison",
             "heading_tag": "h3",
             "content": "<p>Retrait gratuit sur rendez-vous près de Vienne. Livraison jusqu'à 60 km (Lyon sud, Nord-Isère, Vallée du Rhône) : 100 € TTC.</p>"
@@ -65,6 +86,7 @@
         "tarifs": {
           "type": "item",
           "settings": {
+            "icon": "none",
             "title": "Tarifs & conditions",
             "heading_tag": "h3",
             "content": "<p>150 € TTC la journée ou le week-end. Caution de 1 000 € par chèque (non encaissé, restitué au retour du matériel en bon état). Paiement CB, virement, chèque ou espèces.</p>"
@@ -73,6 +95,7 @@
         "creneaux": {
           "type": "item",
           "settings": {
+            "icon": "none",
             "title": "Créneaux & réservation",
             "heading_tag": "h3",
             "content": "<p>Retrait dès le vendredi après-midi, retour le lundi matin, horaires flexibles. 2 braseros disponibles à la location.</p>"
@@ -90,39 +113,50 @@
         "title": "Comment ça marche",
         "content": "",
         "heading_tag": "h2",
+        "text_alignment": "center",
         "items_per_row_desktop": 3,
-        "stack_on_mobile": true
+        "stack_on_mobile": true,
+        "separator_style": "horizontal",
+        "icon_position": "stacked",
+        "icon_width": 36,
+        "mobile_icon_width": 32,
+        "item_text_alignment": "left"
       }
     },
-    "cta": {
-      "type": "rich-text",
+    "1782655618e46a7273": {
+      "type": "apps",
       "blocks": {
-        "h": {
-          "type": "heading",
+        "forms_inline_M3ytYh": {
+          "type": "shopify://apps/forms/blocks/inline/8744a304-fcb1-4347-b211-bb6b4759a76a",
           "settings": {
-            "text": "Réservez votre brasero",
-            "heading_tag": "h2"
-          }
-        },
-        "rt": {
-          "type": "richtext",
-          "settings": {
-            "text": "<p>Pour réserver un brasero ou obtenir un devis personnalisé, remplissez le formulaire ci-dessous.</p>"
+            "form_id": "550451",
+            "text_color": "#202020",
+            "button_background_color": "#202020",
+            "button_label_color": "#FFFFFF",
+            "links_color": "#1878B9",
+            "errors_color": "#E02229",
+            "text_alignment": "center",
+            "form_alignment": "center",
+            "padding_top": 0,
+            "padding_bottom": 24,
+            "padding_right": 0,
+            "padding_left": 0
           }
         }
       },
       "block_order": [
-        "h",
-        "rt"
+        "forms_inline_M3ytYh"
       ],
       "settings": {
-        "color_scheme": "scheme-1"
+        "color_scheme": "",
+        "add_vertical_spacing": true,
+        "add_horizontal_spacing": true
       }
     }
   },
   "order": [
     "hero",
     "infos",
-    "cta"
+    "1782655618e46a7273"
   ]
 }

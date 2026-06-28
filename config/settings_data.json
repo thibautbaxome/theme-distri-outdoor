@@ -73,6 +73,31 @@
     "cart_icon": "tote_bag",
     "favicon": "shopify://shop_images/distri-outdoor-pastille_b004e80c-78a7-46ce-b80a-c599165cecf6.svg",
     "content_for_index": [],
+    "blocks": {
+      "13768625480086291342": {
+        "type": "shopify://apps/forms/blocks/forms/8744a304-fcb1-4347-b211-bb6b4759a76a",
+        "disabled": false,
+        "settings": {}
+      },
+      "15037621279992766403": {
+        "type": "shopify://apps/alma-widget/blocks/app-embed/4f38fc15-ea4e-44b3-96e0-0c0f2daa413f",
+        "disabled": false,
+        "settings": {
+          "merchantId": "",
+          "badgeDisplayedOnProduct": true,
+          "badgeDisplayedOnCart": true,
+          "testMode": false,
+          "customStyleProduct": "",
+          "customStyleCart": "",
+          "productPositionSelector": "",
+          "cartPositionSelector": "",
+          "quantityPositionSelector": "",
+          "dynamicCartPriceSelector": "",
+          "badgePlans": "",
+          "featureFlags": ""
+        }
+      }
+    },
     "color_schemes": {
       "scheme-1": {
         "settings": {
