@@ -13,12 +13,14 @@
       "type": "collection-banner",
       "settings": {
         "color_scheme": "scheme-4",
-        "background_color_scheme": "scheme-4",
-        "layout": "background",
+        "allow_transparent_header": false,
+        "layout": "split",
         "show_description": true,
-        "collection_title_size": "display-m",
+        "collection_title_size": "h3",
         "content_position": "place-self-end-start",
-        "image_size": "md"
+        "background_color_scheme": "scheme-2",
+        "image_size": "xs",
+        "quick_navigation_menu": ""
       }
     },
     "main": {
@@ -28,6 +30,8 @@
         "products_per_page": 24,
         "products_per_row_mobile": 2,
         "products_per_row_desktop": 4,
+        "show_product_card_size_selector": true,
+        "quick_links_menu": "",
         "filter_layout": "sidebar",
         "show_sort_by": true,
         "show_filters": true,
