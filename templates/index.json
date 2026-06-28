@@ -84,7 +84,7 @@
             "subheading": "La boutique",
             "title": "Nos univers",
             "content": "<p>Braseros, kamados, mobilier, anti-moustiques : tout pour vivre dehors.</p>",
-            "heading_size": "display-m",
+            "heading_size": "h2",
             "text_alignment": "center"
           }
         },
@@ -125,17 +125,17 @@
         "stack_on_mobile": true
       }
     },
-    "carousel": {
+    "carousel_braseros": {
       "type": "featured-collections",
       "blocks": {
         "c1": {
           "type": "collection",
           "settings": {
-            "collection": "braseros-et-accessoires",
-            "title": "Nos braseros & accessoires",
-            "content": "<p>La gamme et tout ce qui va avec.</p>",
-            "link": "/collections/braseros-et-accessoires",
-            "color_scheme": ""
+            "collection": "braseros",
+            "title": "Nos braseros",
+            "content": "<p>La gamme BRAZIR, fabriquée en France.</p>",
+            "link": "/collections/braseros",
+            "products_count": 6
           }
         }
       },
@@ -143,15 +143,44 @@
         "c1"
       ],
       "settings": {
-        "color_scheme": "scheme-2",
-        "layout": "tabbed",
-        "stack_products": true,
-        "products_count": 8,
+        "color_scheme": "scheme-1",
         "products_per_row_mobile": "2",
         "products_per_row_desktop": 4,
+        "stack_products_desktop": false,
+        "stack_products_mobile": false,
         "tabs_alignment": "start",
         "tabs_icon": "none",
-        "tabs_show_view_all_button": true
+        "show_view_all_button": true,
+        "show_scrolling_bar": true
+      }
+    },
+    "carousel_accessoires": {
+      "type": "featured-collections",
+      "blocks": {
+        "c1": {
+          "type": "collection",
+          "settings": {
+            "collection": "accessoires-braseros",
+            "title": "Les accessoires",
+            "content": "<p>Grilles, plancha, four à pizza, housses…</p>",
+            "link": "/collections/accessoires-braseros",
+            "products_count": 8
+          }
+        }
+      },
+      "block_order": [
+        "c1"
+      ],
+      "settings": {
+        "color_scheme": "scheme-1",
+        "products_per_row_mobile": "2",
+        "products_per_row_desktop": 4,
+        "stack_products_desktop": false,
+        "stack_products_mobile": false,
+        "tabs_alignment": "start",
+        "tabs_icon": "none",
+        "show_view_all_button": true,
+        "show_scrolling_bar": true
       }
     },
     "concept": {
@@ -239,6 +268,54 @@
         "stack_on_mobile": true
       }
     },
+    "faq": {
+      "type": "faq",
+      "blocks": {
+        "q1": {
+          "type": "question",
+          "settings": {
+            "question": "Livrez-vous partout en France ?",
+            "answer": "<p>Oui, nous livrons en France métropolitaine. Les frais de port sont calculés au paiement.</p>"
+          }
+        },
+        "q2": {
+          "type": "question",
+          "settings": {
+            "question": "Vos braseros sont-ils fabriqués en France ?",
+            "answer": "<p>Oui, les braseros BRAZIR sont fabriqués en France et garantis 5 ans.</p>"
+          }
+        },
+        "q3": {
+          "type": "question",
+          "settings": {
+            "question": "Puis-je personnaliser mon brasero ?",
+            "answer": "<p>Oui : la taille, la forme et les accessoires de cuisson se choisissent sur chaque fiche produit.</p>"
+          }
+        },
+        "q4": {
+          "type": "question",
+          "settings": {
+            "question": "Proposez-vous la location ?",
+            "answer": "<p>Oui, louez un brasero pour vos événements. Découvrez nos services sur la page Location.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "q1",
+        "q2",
+        "q3",
+        "q4"
+      ],
+      "settings": {
+        "color_scheme": "scheme-1",
+        "subheading": "FAQ",
+        "title": "Questions fréquentes",
+        "content": "",
+        "button_text": "Toutes les questions",
+        "button_url": "/pages/faq",
+        "button_style": "outline"
+      }
+    },
     "newsletter": {
       "type": "newsletter",
       "settings": {
@@ -253,9 +330,11 @@
   "order": [
     "hero",
     "univers",
-    "carousel",
+    "carousel_braseros",
     "concept",
     "modularite",
+    "carousel_accessoires",
+    "faq",
     "newsletter"
   ]
 }
