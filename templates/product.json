@@ -80,14 +80,6 @@
           "type": "separator",
           "settings": {}
         },
-        "specs": {
-          "type": "caracteristiques",
-          "settings": {
-            "title": "Caractéristiques",
-            "open": true,
-            "uppercase_title": false
-          }
-        },
         "livraison": {
           "type": "accordion",
           "settings": {
@@ -96,6 +88,14 @@
             "uppercase_title": false,
             "icon": "none",
             "page": ""
+          }
+        },
+        "specs": {
+          "type": "caracteristiques",
+          "settings": {
+            "title": "Caractéristiques",
+            "open": false,
+            "uppercase_title": false
           }
         },
         "accordion_xhdtRj": {
@@ -126,8 +126,8 @@
         "buy_buttons",
         "complementary",
         "separator_2",
-        "specs",
         "livraison",
+        "specs",
         "accordion_xhdtRj",
         "faq_block"
       ],
