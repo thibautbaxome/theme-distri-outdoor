@@ -232,7 +232,7 @@
           "type": "heading",
           "settings": {
             "text": "Des produits qui créent des moments",
-            "heading_tag": "h2",
+            "heading_tag": "h3",
             "position": "top_left",
             "highlight_effect": "default",
             "highlight_accent_color": "",
@@ -272,12 +272,12 @@
         "overlay_opacity": 20,
         "add_media_spacing": false,
         "autoplay_video": true,
-        "primary_image": "shopify://shop_images/DSC0028.jpg",
+        "primary_image": "shopify://shop_images/DSC04167_jpg_cfaef5cf-06b6-4f94-9558-74b464065f5d.webp",
         "secondary_media_width": 60,
         "secondary_media_mobile_width": 60,
         "show_secondary_media_on_mobile": true,
-        "secondary_media_alignment": "place-self-center",
-        "secondary_media_shape": "none"
+        "secondary_media_alignment": "place-self-center-start",
+        "secondary_media_shape": "blob-2"
       }
     },
     "modularite": {
@@ -286,27 +286,27 @@
         "m1": {
           "type": "item",
           "settings": {
-            "icon": "none",
+            "icon": "picto-measure",
             "title": "Choisissez la taille",
-            "heading_tag": "h3",
+            "heading_tag": "h5",
             "content": "<p>Du compact à l’XL, selon votre espace.</p>"
           }
         },
         "m2": {
           "type": "item",
           "settings": {
-            "icon": "none",
+            "icon": "picto-pyramide",
             "title": "Choisissez la forme",
-            "heading_tag": "h3",
+            "heading_tag": "h5",
             "content": "<p>Rond, carré, octogonal, hexagonal.</p>"
           }
         },
         "m3": {
           "type": "item",
           "settings": {
-            "icon": "none",
+            "icon": "picto-fork-knife",
             "title": "Ajoutez vos accessoires",
-            "heading_tag": "h3",
+            "heading_tag": "h5",
             "content": "<p>Grilles, plancha, four à pizza, housse…</p>"
           }
         }
@@ -321,7 +321,7 @@
         "subheading": "Modulable",
         "title": "Un brasero qui vous ressemble",
         "content": "<p>Composez le vôtre : la taille, la forme, puis les accessoires de cuisson.</p>",
-        "heading_tag": "h2",
+        "heading_tag": "h3",
         "text_alignment": "center",
         "items_per_row_desktop": 3,
         "stack_on_mobile": true,
