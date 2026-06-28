@@ -15,7 +15,7 @@
         "slide_main": {
           "type": "_slideshow-image-slide",
           "settings": {
-            "color_scheme": "scheme-4",
+            "color_scheme": "scheme-7",
             "image": "shopify://shop_images/Gemini_Generated_Image_g0gqdgg0gqdgg0gq.png",
             "slide_link": "",
             "content_max_width": 1100,
@@ -25,13 +25,6 @@
             "overlay_opacity": 35
           },
           "blocks": {
-            "slide_sub": {
-              "type": "subheading",
-              "settings": {
-                "text": "Spécialiste de l'extérieur"
-              },
-              "blocks": {}
-            },
             "slide_heading": {
               "type": "heading",
               "settings": {
@@ -67,7 +60,6 @@
             }
           },
           "block_order": [
-            "slide_sub",
             "slide_heading",
             "slide_text",
             "slide_btn"
@@ -87,7 +79,7 @@
         "slide_main"
       ],
       "settings": {
-        "allow_transparent_header": true,
+        "allow_transparent_header": false,
         "image_size": "md",
         "transition_type": "fade",
         "autoplay": false,
