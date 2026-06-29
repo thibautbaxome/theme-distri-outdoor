@@ -62,6 +62,11 @@
     {{ content_for_header }}
 
     {{- 'theme.css' | asset_url | stylesheet_tag: preload: true -}}
+
+    {%- comment -%} Fond produit fondu sur la couleur de la page (images sur fond blanc) {%- endcomment -%}
+    <style>
+      .product-card__media { mix-blend-mode: multiply; }
+    </style>
   </head>
 
   {% liquid
