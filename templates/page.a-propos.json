@@ -77,7 +77,7 @@
         "durabilite": {
           "type": "item",
           "settings": {
-            "icon": "picto-happy",
+            "icon": "picto-leaf",
             "title": "Durabilité",
             "heading_tag": "h5",
             "content": "<p>Des matériaux qui durent — acier corten, céramique, inox alimentaire — pensés pour résister aux saisons et vous accompagner des années.</p>"
@@ -86,7 +86,7 @@
         "design": {
           "type": "item",
           "settings": {
-            "icon": "picto-sparkle",
+            "icon": "picto-star",
             "title": "Design",
             "heading_tag": "h5",
             "content": "<p>Des produits aussi beaux qu'efficaces, qui s'intègrent avec élégance à votre terrasse comme à votre jardin.</p>"
@@ -95,7 +95,7 @@
         "convivialite": {
           "type": "item",
           "settings": {
-            "icon": "picto-drink",
+            "icon": "picto-chef",
             "title": "Convivialité",
             "heading_tag": "h5",
             "content": "<p>Cuisiner au feu de bois, profiter des soirées d'été à l'abri des moustiques : nos équipements sont faits pour rassembler.</p>"
