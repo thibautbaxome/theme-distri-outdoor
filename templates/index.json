@@ -88,6 +88,35 @@
         "background": "#1b1714"
       }
     },
+    "carousel_braseros": {
+      "type": "featured-collections",
+      "blocks": {
+        "c1": {
+          "type": "collection",
+          "settings": {
+            "collection": "braseros",
+            "products_count": 6,
+            "title": "Nos braseros",
+            "content": "<p>La gamme BRAZIR, fabriquée en France.</p>",
+            "link": "/collections/braseros"
+          }
+        }
+      },
+      "block_order": [
+        "c1"
+      ],
+      "settings": {
+        "color_scheme": "scheme-1",
+        "stack_products_mobile": false,
+        "stack_products_desktop": false,
+        "products_per_row_mobile": "2",
+        "products_per_row_desktop": 4,
+        "tabs_alignment": "start",
+        "tabs_icon": "circle",
+        "show_view_all_button": true,
+        "show_scrolling_bar": true
+      }
+    },
     "univers": {
       "type": "collection-list",
       "blocks": {
@@ -179,35 +208,6 @@
         "content_position": "inside",
         "column_spacing": "sm",
         "image_size": "sm"
-      }
-    },
-    "carousel_braseros": {
-      "type": "featured-collections",
-      "blocks": {
-        "c1": {
-          "type": "collection",
-          "settings": {
-            "collection": "braseros",
-            "products_count": 6,
-            "title": "Nos braseros",
-            "content": "<p>La gamme BRAZIR, fabriquée en France.</p>",
-            "link": "/collections/braseros"
-          }
-        }
-      },
-      "block_order": [
-        "c1"
-      ],
-      "settings": {
-        "color_scheme": "scheme-1",
-        "stack_products_mobile": false,
-        "stack_products_desktop": false,
-        "products_per_row_mobile": "2",
-        "products_per_row_desktop": 4,
-        "tabs_alignment": "start",
-        "tabs_icon": "circle",
-        "show_view_all_button": true,
-        "show_scrolling_bar": true
       }
     },
     "concept": {
@@ -393,7 +393,12 @@
           }
         }
       },
-      "block_order": ["sub", "h", "rt", "btn"],
+      "block_order": [
+        "sub",
+        "h",
+        "rt",
+        "btn"
+      ],
       "settings": {
         "color_scheme": "scheme-2",
         "content_position": "end",
@@ -493,8 +498,8 @@
   },
   "order": [
     "hero",
-    "univers",
     "carousel_braseros",
+    "univers",
     "concept",
     "modularite",
     "carousel_accessoires",
