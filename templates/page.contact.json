@@ -22,6 +22,7 @@
         "subheading": "Contact",
         "title": "Une question ? Écrivez-nous",
         "heading_size": "h2",
+        "html_tag": "h1",
         "content": "<p>Notre équipe vous répond du lundi au vendredi. Remplissez le formulaire ci-dessous, nous revenons vers vous au plus vite.</p>",
         "show_social_media": true
       }

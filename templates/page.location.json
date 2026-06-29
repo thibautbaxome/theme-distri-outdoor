@@ -24,6 +24,7 @@
           "settings": {
             "text": "Louer un brasero à portée de main",
             "heading_tag": "h3",
+            "html_tag": "h1",
             "position": "top_left",
             "highlight_effect": "default",
             "highlight_accent_color": "",

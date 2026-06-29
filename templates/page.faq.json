@@ -16,6 +16,7 @@
         "layout": "stacked",
         "subheading": "Besoin d'aide ?",
         "title": "Questions fréquentes",
+        "html_tag": "h1",
         "content": "<p>Vous ne trouvez pas votre réponse ? Écrivez-nous via la page Contact.</p>",
         "button_text": "Nous contacter",
         "button_url": "/pages/contact",

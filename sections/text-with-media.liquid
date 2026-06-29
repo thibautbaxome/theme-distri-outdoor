@@ -80,13 +80,14 @@
               {%- render 'subheading', content: block.settings.text, block: block -%}
 
             {%- when 'heading' -%}
-              {%- render 'heading', 
-                content: block.settings.text, 
-                highlight_effect: block.settings.highlight_effect, 
-                highlight_accent_color: block.settings.highlight_accent_color, 
-                highlight_text_color: block.settings.highlight_text_color, 
+              {%- render 'heading',
+                content: block.settings.text,
+                html_tag: block.settings.html_tag,
+                highlight_effect: block.settings.highlight_effect,
+                highlight_accent_color: block.settings.highlight_accent_color,
+                highlight_text_color: block.settings.highlight_text_color,
                 style: block.settings.heading_tag,
-                block: block 
+                block: block
               -%}
 
             {%- when 'button' -%}
@@ -536,6 +537,43 @@
             }
           ],
           "default": "h1"
+        },
+        {
+          "type": "select",
+          "id": "html_tag",
+          "label": "t:blocks.heading.html_tag",
+          "info": "t:blocks.heading.html_tag_info",
+          "options": [
+            {
+              "value": "p",
+              "label": "Paragraph"
+            },
+            {
+              "value": "h1",
+              "label": "H1"
+            },
+            {
+              "value": "h2",
+              "label": "H2"
+            },
+            {
+              "value": "h3",
+              "label": "H3"
+            },
+            {
+              "value": "h4",
+              "label": "H4"
+            },
+            {
+              "value": "h5",
+              "label": "H5"
+            },
+            {
+              "value": "h6",
+              "label": "H6"
+            }
+          ],
+          "default": "p"
         },
         {
           "type": "select",

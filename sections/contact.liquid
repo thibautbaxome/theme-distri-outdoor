@@ -13,7 +13,7 @@
         
         <div class="prose prose-justify-{{ text_alignment }}">
           {%- render 'subheading', content: section.settings.subheading -%}
-          {%- render 'heading', content: section.settings.title, balance_text: true, style: section.settings.heading_size, html_tag: 'h2' -%}
+          {%- render 'heading', content: section.settings.title, balance_text: true, style: section.settings.heading_size, html_tag: section.settings.html_tag -%}
 
           <div class="max-w-sm">
             {{- section.settings.content -}}
@@ -223,6 +223,43 @@
         {
           "value": "h7",
           "label": "XX-Small"
+        }
+      ],
+      "default": "h2"
+    },
+    {
+      "type": "select",
+      "id": "html_tag",
+      "label": "t:blocks.heading.html_tag",
+      "info": "t:blocks.heading.html_tag_info",
+      "options": [
+        {
+          "value": "p",
+          "label": "Paragraph"
+        },
+        {
+          "value": "h1",
+          "label": "H1"
+        },
+        {
+          "value": "h2",
+          "label": "H2"
+        },
+        {
+          "value": "h3",
+          "label": "H3"
+        },
+        {
+          "value": "h4",
+          "label": "H4"
+        },
+        {
+          "value": "h5",
+          "label": "H5"
+        },
+        {
+          "value": "h6",
+          "label": "H6"
         }
       ],
       "default": "h2"

@@ -18,6 +18,11 @@ Renders a single blog post
 {%- enddoc -%}
 
 <a href="{{ article.url }}" class="blog-post-card {% if horizontal %}blog-post-card--horizontal{% endif %} group snap-start" {% if settings.stagger_blog_posts and reveal != false %}reveal-on-scroll="true"{% endif %} {{ block.shopify_attributes }}>
+  {%- comment -%} Cartes article au format carré (cohérence avec les cartes produit). La variante horizontale garde son image latérale. {%- endcomment -%}
+  {%- assign card_image_class = 'w-full zoom-image group-hover:zoom' -%}
+  {%- unless horizontal -%}
+    {%- assign card_image_class = card_image_class | append: ' size-full object-cover aspect-square' -%}
+  {%- endunless -%}
   {%- if article -%}
     {%- if article.image != blank -%}
       {%- liquid
@@ -35,12 +40,12 @@ Renders a single blog post
       -%}
 
       <div class="blog-post-card__image-container overflow-hidden">
-        {{- image | image_url: width: image.width | image_tag: loading: loading_strategy, sizes: sizes, widths: '300,400,500,600,800,1000,1200,1400', class: 'w-full zoom-image group-hover:zoom' -}}
+        {{- image | image_url: width: image.width | image_tag: loading: loading_strategy, sizes: sizes, widths: '300,400,500,600,800,1000,1200,1400', class: card_image_class -}}
       </div>
     {%- endif -%}
   {%- else -%}
     <div class="blog-post-card__image-container overflow-hidden">
-      {{- placeholder_image | placeholder_svg_tag: 'w-full zoom-image group-hover:zoom' -}}
+      {{- placeholder_image | placeholder_svg_tag: card_image_class -}}
     </div>
   {%- endif -%}
 

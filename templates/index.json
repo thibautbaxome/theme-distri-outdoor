@@ -225,6 +225,7 @@
           "settings": {
             "text": "Des produits qui créent des moments",
             "heading_tag": "h3",
+            "html_tag": "h2",
             "position": "top_left",
             "highlight_effect": "default",
             "highlight_accent_color": "",
@@ -401,6 +402,7 @@
           "settings": {
             "text": "Une passion devenue métier",
             "heading_tag": "h3",
+            "html_tag": "h2",
             "position": "top_left",
             "highlight_effect": "default",
             "highlight_accent_color": "",
