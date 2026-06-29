@@ -3,13 +3,26 @@
   "name": "Overlay group",
   "sections": {
     "cart-drawer": {
-      "type": "cart-drawer"
+      "type": "cart-drawer",
+      "settings": {
+        "cross_sell_title": "Vous aimerez aussi"
+      }
     },
     "search-drawer": {
-      "type": "search-drawer"
+      "type": "search-drawer",
+      "settings": {
+        "popular_searches_title": "Recherches populaires",
+        "featured_products_title": "Produits en vedette"
+      }
     },
     "newsletter-popup": {
-      "type": "newsletter-popup"
+      "type": "newsletter-popup",
+      "settings": {
+        "title": "Inscrivez-vous à notre newsletter",
+        "content": "Recevez nos nouveautés, conseils outdoor et offres exclusives directement dans votre boîte mail.",
+        "button_text": "S'inscrire",
+        "conditions": "En vous inscrivant, vous acceptez notre politique de confidentialité."
+      }
     }
   },
   "order": [
