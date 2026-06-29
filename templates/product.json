@@ -55,25 +55,13 @@
             "size_chart_page": ""
           }
         },
-        "buy_buttons": {
-          "type": "buy_buttons",
+        "accessory_bundle": {
+          "type": "accessory_bundle",
           "settings": {
-            "show_payment_button": false,
-            "show_gift_card_recipient": true,
-            "show_quantity_selector": true,
-            "add_quantity_selector_spacing": true,
-            "atc_button_style": "solid",
-            "atc_button_background": "",
-            "atc_button_text_color": "",
-            "payment_button_background": "",
-            "payment_button_text_color": ""
-          }
-        },
-        "complementary": {
-          "type": "complementary_products",
-          "settings": {
-            "title": "Complétez votre installation",
-            "products_count": 3
+            "accessories_heading": "Complétez votre installation",
+            "button_label": "Ajouter au panier",
+            "show_total": true,
+            "show_quantity_selector": true
           }
         },
         "separator_2": {
@@ -123,8 +111,7 @@
         "reassurance",
         "separator_zkTWtF",
         "variant_picker",
-        "buy_buttons",
-        "complementary",
+        "accessory_bundle",
         "separator_2",
         "livraison",
         "specs",
@@ -136,7 +123,7 @@
         "allow_transparent_header": false,
         "transparent_header_use_primary_colors": false,
         "add_top_spacing": true,
-        "show_sticky_add_to_cart": true,
+        "show_sticky_add_to_cart": false,
         "product_media_size": 50,
         "content_alignment": "left",
         "desktop_media_layout": "carousel",

@@ -1,0 +1,285 @@
+{%- doc -%}
+Configurateur « pack » : bouton d'ajout au panier du produit principal + accessoires
+complémentaires (métachamp Search & Discovery) à cocher, chacun avec son sélecteur de taille/options.
+Tout est ajouté au panier en une requête via les items[] du <product-form> natif.
+
+@param {object} product - le produit principal
+@param {object} block - le bloc (settings: accessories_heading, button_label, show_total, show_quantity_selector)
+@param {string} product_form_id - l'ID du form produit principal (pour récupérer la variante sélectionnée)
+{%- enddoc -%}
+
+{%- liquid
+  assign sel = product.selected_or_first_available_variant
+  assign comp = product.metafields.shopify--discovery--product_recommendation.complementary_products.value
+  assign bundle_form_id = product_form_id | append: '-bundle'
+
+  assign option_names = ''
+  for o in product.options_with_values
+    assign option_names = option_names | append: o.name
+    unless forloop.last
+      assign option_names = option_names | append: ','
+    endunless
+  endfor
+-%}
+
+<product-form>
+  <form action="{{ routes.cart_add_url }}" method="post" id="{{ bundle_form_id }}" novalidate>
+    <accessory-bundle
+      class="accessory-bundle v-stack gap-5"
+      data-locale="{{ request.locale.iso_code | default: 'fr' }}"
+      data-currency="{{ cart.currency.iso_code }}"
+      data-sold-out="{{ 'product.general.sold_out_button' | t }}"
+      data-option-names="{{ option_names | escape }}"
+    >
+      <script type="application/json" data-main-variant>{{ sel | json }}</script>
+
+      {%- comment -%} Produit principal — items[0] {%- endcomment -%}
+      <input type="hidden" name="items[0][id]" value="{{ sel.id }}" data-main-id>
+
+      {%- if comp != blank -%}
+        <div class="accessory-bundle__list v-stack gap-3">
+          {%- if block.settings.accessories_heading != blank -%}
+            <p class="bold">{{ block.settings.accessories_heading }}</p>
+          {%- endif -%}
+
+          {%- for acc in comp -%}
+            {%- liquid
+              assign i = forloop.index
+              assign acc_sel = acc.selected_or_first_available_variant
+            -%}
+            <div class="accessory-bundle__item" data-accessory>
+              <label class="accessory-bundle__head">
+                <input type="checkbox" class="accessory-bundle__check" data-toggle>
+                {%- if acc.featured_media != blank -%}
+                  {{ acc.featured_media | image_url: width: 120 | image_tag: loading: 'lazy', class: 'accessory-bundle__img', width: 56, height: 56 }}
+                {%- endif -%}
+                <span class="accessory-bundle__info v-stack">
+                  <span class="accessory-bundle__title">{{ acc.title }}</span>
+                  <span class="text-subdued text-sm" data-row-price>
+                    {%- if acc.price_varies -%}dès {{ acc.price_min | money }}{%- else -%}{{ acc.price_min | money }}{%- endif -%}
+                  </span>
+                </span>
+              </label>
+
+              <div class="accessory-bundle__options" data-options hidden>
+                {%- unless acc.has_only_default_variant -%}
+                  <div class="accessory-bundle__selects">
+                    {%- for opt in acc.options_with_values -%}
+                      <label class="accessory-bundle__select v-stack gap-1">
+                        <span class="text-sm text-subdued">{{ opt.name }}</span>
+                        <select data-option data-option-name="{{ opt.name | escape }}" data-position="{{ opt.position }}">
+                          {%- for val in opt.values -%}
+                            <option value="{{ val | escape }}">{{ val }}</option>
+                          {%- endfor -%}
+                        </select>
+                      </label>
+                    {%- endfor -%}
+                  </div>
+                  <script type="application/json" data-variants>[{%- for v in acc.variants -%}{"id":{{ v.id }},"available":{{ v.available }},"price":{{ v.price }},"options":{{ v.options | json }}}{%- unless forloop.last -%},{%- endunless -%}{%- endfor -%}]</script>
+                {%- endunless -%}
+
+                <input type="hidden" disabled name="items[{{ i }}][id]" value="{{ acc_sel.id }}" data-acc-id data-price="{{ acc_sel.price }}">
+                <input type="hidden" disabled name="items[{{ i }}][quantity]" value="1" data-acc-qty>
+              </div>
+            </div>
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+
+      {%- if block.settings.show_total -%}
+        <div class="accessory-bundle__total h-stack justify-between">
+          <span class="bold">Total</span>
+          <span class="bold" data-total>{{ sel.price | money }}</span>
+        </div>
+      {%- endif -%}
+
+      <div class="accessory-bundle__actions v-stack gap-2">
+        {%- if block.settings.show_quantity_selector -%}
+          <div class="accessory-bundle__qty" data-qty>
+            <button type="button" class="accessory-bundle__qty-btn" data-qty-minus aria-label="Diminuer la quantité">&minus;</button>
+            <input type="number" class="accessory-bundle__qty-input" name="items[0][quantity]" value="1" min="1" inputmode="numeric" aria-label="Quantité">
+            <button type="button" class="accessory-bundle__qty-btn" data-qty-plus aria-label="Augmenter la quantité">+</button>
+          </div>
+        {%- else -%}
+          <input type="hidden" name="items[0][quantity]" value="1">
+        {%- endif -%}
+
+        <button type="submit" class="button w-full accessory-bundle__submit" data-submit {% unless sel.available %}disabled{% endunless %}>
+          <span data-submit-label>{% if sel.available %}{{ block.settings.button_label | default: 'Ajouter au panier' }}{% else %}{{ 'product.general.sold_out_button' | t }}{% endif %}</span>
+        </button>
+      </div>
+    </accessory-bundle>
+  </form>
+</product-form>
+
+{%- style -%}
+  .accessory-bundle__item { border: 1px solid rgb(var(--border-color, 0 0 0) / 12%); border-radius: var(--rounded-sm, 6px); padding: 0.75rem 1rem; }
+  .accessory-bundle__head { display: flex; align-items: center; gap: 0.75rem; cursor: pointer; margin: 0; }
+  .accessory-bundle__img { border-radius: var(--rounded-xs, 4px); object-fit: cover; flex: 0 0 auto; }
+  .accessory-bundle__info { gap: 0.1rem; flex: 1 1 auto; }
+  .accessory-bundle__check { width: 1.15rem; height: 1.15rem; flex: 0 0 auto; accent-color: rgb(var(--primary-button-background, 0 0 0)); }
+  .accessory-bundle__options { margin-top: 0.75rem; padding-left: calc(1.15rem + 0.75rem); }
+  .accessory-bundle__selects { display: flex; flex-wrap: wrap; gap: 0.75rem; }
+  .accessory-bundle__select { flex: 1 1 8rem; min-width: 7rem; }
+  .accessory-bundle__select select { width: 100%; padding: 0.5rem 0.65rem; border: 1px solid rgb(var(--border-color, 0 0 0) / 25%); border-radius: var(--rounded-xs, 4px); background: transparent; font: inherit; }
+  .accessory-bundle__item.is-unavailable { opacity: 0.55; }
+  .accessory-bundle__total { padding-top: 0.5rem; border-top: 1px solid rgb(var(--border-color, 0 0 0) / 12%); font-size: 1.05rem; }
+  .accessory-bundle__qty { display: inline-flex; align-items: stretch; border: 1px solid rgb(var(--border-color, 0 0 0) / 25%); border-radius: var(--rounded-xs, 4px); width: max-content; }
+  .accessory-bundle__qty-btn { width: 2.5rem; background: transparent; border: 0; font-size: 1.1rem; cursor: pointer; line-height: 1; }
+  .accessory-bundle__qty-input { width: 3rem; text-align: center; border: 0; border-inline: 1px solid rgb(var(--border-color, 0 0 0) / 25%); background: transparent; font: inherit; -moz-appearance: textfield; }
+  .accessory-bundle__qty-input::-webkit-outer-spin-button,
+  .accessory-bundle__qty-input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+{%- endstyle -%}
+
+<script>
+  (() => {
+    if (window.customElements.get('accessory-bundle')) return;
+
+    class AccessoryBundle extends HTMLElement {
+      connectedCallback() {
+        this.form = this.closest('form');
+        this.mainId = this.querySelector('[data-main-id]');
+        this.totalEl = this.querySelector('[data-total]');
+        this.submitBtn = this.querySelector('[data-submit]');
+        this.submitLabel = this.querySelector('[data-submit-label]');
+        this.defaultLabel = this.submitLabel ? this.submitLabel.textContent.trim() : '';
+        this.soldOutLabel = this.dataset.soldOut || 'Épuisé';
+        this.locale = this.dataset.locale || 'fr';
+        this.currency = this.dataset.currency || 'EUR';
+        this.optionNames = (this.dataset.optionNames || '').split(',').map((s) => s.trim());
+        this.qtyInput = this.querySelector('[name="items[0][quantity]"]');
+        try { this.mainVariant = JSON.parse(this.querySelector('[data-main-variant]').textContent); }
+        catch (e) { this.mainVariant = null; }
+
+        this.rows = Array.from(this.querySelectorAll('[data-accessory]'));
+        this.rows.forEach((row) => this.bindRow(row));
+
+        this._onVariant = (e) => { if (e.detail && e.detail.variant) this.setMainVariant(e.detail.variant); };
+        document.addEventListener('variant:change', this._onVariant);
+
+        if (this.form) this.form.addEventListener('formdata', (e) => this.reindex(e.formData));
+
+        if (this.qtyInput) {
+          this.qtyInput.addEventListener('change', () => { this.normalizeQty(); this.updateTotal(); });
+          const minus = this.querySelector('[data-qty-minus]');
+          const plus = this.querySelector('[data-qty-plus]');
+          if (minus) minus.addEventListener('click', () => { this.qtyInput.value = Math.max(1, (parseInt(this.qtyInput.value, 10) || 1) - 1); this.updateTotal(); });
+          if (plus) plus.addEventListener('click', () => { this.qtyInput.value = (parseInt(this.qtyInput.value, 10) || 1) + 1; this.updateTotal(); });
+        }
+
+        if (this.mainVariant) this.setMainVariant(this.mainVariant);
+        this.updateTotal();
+      }
+
+      disconnectedCallback() {
+        document.removeEventListener('variant:change', this._onVariant);
+      }
+
+      bindRow(row) {
+        const toggle = row.querySelector('[data-toggle]');
+        const options = row.querySelector('[data-options]');
+        const accId = row.querySelector('[data-acc-id]');
+        const accQty = row.querySelector('[data-acc-qty]');
+        const selects = Array.from(row.querySelectorAll('[data-option]'));
+        let variants = [];
+        const vjson = row.querySelector('[data-variants]');
+        if (vjson) { try { variants = JSON.parse(vjson.textContent); } catch (e) {} }
+        row._refs = { toggle, options, accId, accQty, selects, variants };
+
+        if (!toggle) return;
+        toggle.addEventListener('change', () => {
+          const on = toggle.checked;
+          if (options) options.hidden = !on;
+          if (accId) accId.disabled = !on;
+          if (accQty) accQty.disabled = !on;
+          if (on) { this.applyAutoMatch(row); this.resolveRow(row); }
+          this.updateTotal();
+        });
+        selects.forEach((s) => s.addEventListener('change', () => { this.resolveRow(row); this.updateTotal(); }));
+      }
+
+      setMainVariant(variant) {
+        this.mainVariant = variant || {};
+        if (this.mainId) this.mainId.value = this.mainVariant.id || '';
+        const available = this.mainVariant && this.mainVariant.available !== false && this.mainVariant.id;
+        if (this.submitBtn) this.submitBtn.disabled = !available;
+        if (this.submitLabel) this.submitLabel.textContent = available ? this.defaultLabel : this.soldOutLabel;
+        this.tailleValue = this.mainOption('Taille');
+        this.rows.forEach((row) => { if (row._refs && row._refs.toggle && row._refs.toggle.checked) { this.applyAutoMatch(row); this.resolveRow(row); } });
+        this.updateTotal();
+      }
+
+      mainOption(name) {
+        if (!this.mainVariant || !Array.isArray(this.mainVariant.options)) return null;
+        const idx = this.optionNames.indexOf(name);
+        return idx >= 0 ? this.mainVariant.options[idx] : null;
+      }
+
+      applyAutoMatch(row) {
+        if (!this.tailleValue || !row._refs) return;
+        const sel = row._refs.selects.find((s) => (s.dataset.optionName || '').toLowerCase() === 'taille');
+        if (sel && Array.from(sel.options).some((o) => o.value === this.tailleValue)) {
+          sel.value = this.tailleValue;
+        }
+      }
+
+      resolveRow(row) {
+        const refs = row._refs;
+        if (!refs || !refs.variants.length || !refs.selects.length) return;
+        const chosen = refs.selects
+          .slice()
+          .sort((a, b) => (parseInt(a.dataset.position, 10) || 0) - (parseInt(b.dataset.position, 10) || 0))
+          .map((s) => s.value);
+        const match = refs.variants.find((v) => v.options.length === chosen.length && v.options.every((val, idx) => val === chosen[idx]));
+        if (match && refs.accId) {
+          refs.accId.value = match.id;
+          refs.accId.dataset.price = match.price;
+          row.classList.toggle('is-unavailable', match.available === false);
+          const priceEl = row.querySelector('[data-row-price]');
+          if (priceEl) priceEl.textContent = this.money(match.price);
+        }
+      }
+
+      updateTotal() {
+        let cents = 0;
+        const qty = this.qtyInput ? Math.max(1, parseInt(this.qtyInput.value, 10) || 1) : 1;
+        if (this.mainVariant && typeof this.mainVariant.price === 'number') cents += this.mainVariant.price * qty;
+        this.rows.forEach((row) => {
+          const refs = row._refs;
+          if (refs && refs.toggle && refs.toggle.checked && refs.accId) {
+            const p = parseInt(refs.accId.dataset.price, 10);
+            if (!isNaN(p)) cents += p;
+          }
+        });
+        if (this.totalEl) this.totalEl.textContent = this.money(cents);
+      }
+
+      money(cents) {
+        const value = (cents || 0) / 100;
+        try { return new Intl.NumberFormat(this.locale, { style: 'currency', currency: this.currency }).format(value); }
+        catch (e) { return value.toFixed(2) + ' €'; }
+      }
+
+      reindex(formData) {
+        const items = {};
+        for (const [key, val] of Array.from(formData.entries())) {
+          const m = key.match(/^items\[(\d+)\]\[(id|quantity)\]$/);
+          if (m) { (items[m[1]] = items[m[1]] || {})[m[2]] = val; formData.delete(key); }
+        }
+        Object.keys(items).map(Number).sort((a, b) => a - b).forEach((orig, i) => {
+          const it = items[orig];
+          if (!it.id) return;
+          formData.append('items[' + i + '][id]', it.id);
+          formData.append('items[' + i + '][quantity]', it.quantity || '1');
+        });
+      }
+
+      normalizeQty() {
+        if (!this.qtyInput) return;
+        this.qtyInput.value = Math.max(1, parseInt(this.qtyInput.value, 10) || 1);
+      }
+    }
+
+    window.customElements.define('accessory-bundle', AccessoryBundle);
+  })();
+</script>

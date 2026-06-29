@@ -133,6 +133,9 @@ no need to manually pass the section as it is globally available)
               {%- endfor -%}
             {%- endif -%}
 
+          {%- when 'accessory_bundle' -%}
+            {%- render 'accessory-bundle', product: product, block: block, product_form_id: product_form_id -%}
+
           {%- when 'vendor' -%}
             {%- if product != blank -%}
               {%- render 'vendor' with product.vendor, class: 'subheading text-subdued' -%}
