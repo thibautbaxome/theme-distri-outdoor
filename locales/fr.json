@@ -78,6 +78,10 @@
       "sold_out_button": "En rupture",
       "unavailable_button": "Indisponible",
       "added_to_cart": "{{product_title}} a été ajouté au panier",
+      "variant_in_cart_count": {
+        "one": "{{ count }} dans le panier",
+        "other": "{{ count }} dans le panier"
+      },
       "view_details": "Voir les détails",
       "choose_options": "Choisir les options",
       "sold_out_badge": "En rupture",
@@ -339,6 +343,7 @@
       "empty": "Votre panier est vide",
       "remove_item": "Supprimer l'article {{ title }}",
       "item_count": {
+        "zero": "{{ count }} article",
         "one": "{{ count }} article",
         "other": "{{ count }} articles"
       },
