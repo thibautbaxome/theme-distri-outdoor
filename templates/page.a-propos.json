@@ -1,0 +1,167 @@
+{
+  "sections": {
+    "hero": {
+      "type": "text-with-media",
+      "blocks": {
+        "sub": {
+          "type": "subheading",
+          "settings": {
+            "text": "Notre histoire",
+            "position": "top_left"
+          }
+        },
+        "h": {
+          "type": "heading",
+          "settings": {
+            "text": "Qui sommes-nous ?",
+            "heading_tag": "h1",
+            "position": "top_left",
+            "highlight_effect": "default",
+            "highlight_accent_color": "",
+            "highlight_text_color": ""
+          }
+        },
+        "rt": {
+          "type": "richtext",
+          "settings": {
+            "text": "<p>Distri-Outdoor, c'est l'histoire d'une passion et d'une vision. Fondée par Lionel Dufresnes, l'entreprise est née d'une envie simple mais essentielle : améliorer le confort et l'esthétique des espaces extérieurs, pour les particuliers comme pour les professionnels.</p><p>De la terrasse familiale au jardin d'un restaurant, nous sommes convaincus qu'un extérieur bien pensé change la façon de vivre, de recevoir et de partager.</p>",
+            "position": "bottom_left"
+          }
+        },
+        "btn": {
+          "type": "button",
+          "settings": {
+            "text": "Découvrir la boutique",
+            "url": "/collections/catalogue",
+            "position": "bottom_left",
+            "style": "solid",
+            "background": "",
+            "text_color": ""
+          }
+        }
+      },
+      "block_order": ["sub", "h", "rt", "btn"],
+      "settings": {
+        "color_scheme": "scheme-1",
+        "content_position": "start",
+        "content_percentage_width": 50,
+        "overlay_color": "#000000",
+        "overlay_opacity": 20,
+        "add_media_spacing": false,
+        "autoplay_video": true,
+        "primary_image": "shopify://shop_images/Corten_840_rond.jpg",
+        "secondary_media_width": 60,
+        "secondary_media_mobile_width": 60,
+        "show_secondary_media_on_mobile": true,
+        "secondary_media_alignment": "place-self-center-start",
+        "secondary_media_shape": "blob-2"
+      }
+    },
+    "valeurs": {
+      "type": "text-with-icons",
+      "blocks": {
+        "durabilite": {
+          "type": "item",
+          "settings": {
+            "icon": "none",
+            "title": "Durabilité",
+            "heading_tag": "h3",
+            "content": "<p>Des matériaux qui durent — acier corten, céramique, inox alimentaire — pensés pour résister aux saisons et vous accompagner des années.</p>"
+          }
+        },
+        "design": {
+          "type": "item",
+          "settings": {
+            "icon": "none",
+            "title": "Design",
+            "heading_tag": "h3",
+            "content": "<p>Des produits aussi beaux qu'efficaces, qui s'intègrent avec élégance à votre terrasse comme à votre jardin.</p>"
+          }
+        },
+        "convivialite": {
+          "type": "item",
+          "settings": {
+            "icon": "none",
+            "title": "Convivialité",
+            "heading_tag": "h3",
+            "content": "<p>Cuisiner au feu de bois, profiter des soirées d'été à l'abri des moustiques : nos équipements sont faits pour rassembler.</p>"
+          }
+        }
+      },
+      "block_order": ["durabilite", "design", "convivialite"],
+      "settings": {
+        "color_scheme": "scheme-6",
+        "subheading": "Nos valeurs",
+        "title": "Ce qui nous guide",
+        "content": "",
+        "heading_tag": "h2",
+        "text_alignment": "center",
+        "items_per_row_desktop": 3,
+        "stack_on_mobile": true,
+        "separator_style": "horizontal",
+        "icon_position": "stacked",
+        "icon_width": 36,
+        "mobile_icon_width": 32,
+        "item_text_alignment": "left"
+      }
+    },
+    "engagement": {
+      "type": "text-with-media",
+      "blocks": {
+        "sub": {
+          "type": "subheading",
+          "settings": {
+            "text": "Notre exigence",
+            "position": "top_left"
+          }
+        },
+        "h": {
+          "type": "heading",
+          "settings": {
+            "text": "Le savoir-faire français au cœur de notre sélection",
+            "heading_tag": "h2",
+            "position": "top_left",
+            "highlight_effect": "default",
+            "highlight_accent_color": "",
+            "highlight_text_color": ""
+          }
+        },
+        "rt": {
+          "type": "richtext",
+          "settings": {
+            "text": "<p>Nous sélectionnons en priorité des fabrications françaises. Nos braseros modulables BRAZIR sont fabriqués en France, en acier corten ou thermolaqué, et nos bornes anti-moustiques QISTA sont conçues et assemblées en France.</p><p>Pour le reste de notre gamme — kamados, accessoires, mobilier — nous choisissons chaque produit pour sa qualité, sa praticité et son design, afin de vous proposer une sélection à la hauteur de vos attentes.</p><p>Notre objectif reste le même : mettre notre expertise au service de vos envies, et faire de chaque espace extérieur un lieu unique et accueillant.</p>",
+            "position": "bottom_left"
+          }
+        },
+        "btn": {
+          "type": "button",
+          "settings": {
+            "text": "Nous contacter",
+            "url": "/pages/contact",
+            "position": "bottom_left",
+            "style": "outline",
+            "background": "",
+            "text_color": ""
+          }
+        }
+      },
+      "block_order": ["sub", "h", "rt", "btn"],
+      "settings": {
+        "color_scheme": "scheme-2",
+        "content_position": "end",
+        "content_percentage_width": 50,
+        "overlay_color": "#000000",
+        "overlay_opacity": 20,
+        "add_media_spacing": false,
+        "autoplay_video": true,
+        "primary_image": "shopify://shop_images/Qista-bam-visio.jpg",
+        "secondary_media_width": 50,
+        "secondary_media_mobile_width": 60,
+        "show_secondary_media_on_mobile": true,
+        "secondary_media_alignment": "place-self-center-end",
+        "secondary_media_shape": "none"
+      }
+    }
+  },
+  "order": ["hero", "valeurs", "engagement"]
+}

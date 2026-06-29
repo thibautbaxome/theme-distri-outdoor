@@ -353,6 +353,63 @@
         "show_scrolling_bar": true
       }
     },
+    "histoire": {
+      "type": "text-with-media",
+      "blocks": {
+        "sub": {
+          "type": "subheading",
+          "settings": {
+            "text": "Notre histoire",
+            "position": "top_left"
+          }
+        },
+        "h": {
+          "type": "heading",
+          "settings": {
+            "text": "Une passion devenue métier",
+            "heading_tag": "h3",
+            "position": "top_left",
+            "highlight_effect": "default",
+            "highlight_accent_color": "",
+            "highlight_text_color": ""
+          }
+        },
+        "rt": {
+          "type": "richtext",
+          "settings": {
+            "text": "<p>Distri-Outdoor est né d'une envie simple : transformer terrasses et jardins en véritables lieux de partage. Fondée par Lionel Dufresnes, notre maison sélectionne des équipements d'extérieur durables, beaux et conviviaux — avec une priorité donnée aux fabrications françaises.</p>",
+            "position": "bottom_left"
+          }
+        },
+        "btn": {
+          "type": "button",
+          "settings": {
+            "text": "Notre histoire",
+            "url": "/pages/a-propos",
+            "position": "bottom_left",
+            "style": "outline",
+            "background": "",
+            "text_color": ""
+          }
+        }
+      },
+      "block_order": ["sub", "h", "rt", "btn"],
+      "settings": {
+        "color_scheme": "scheme-2",
+        "content_position": "end",
+        "content_percentage_width": 50,
+        "overlay_color": "#000000",
+        "overlay_opacity": 20,
+        "add_media_spacing": false,
+        "autoplay_video": true,
+        "primary_image": "shopify://shop_images/Corten_840_carree.jpg",
+        "secondary_media_width": 60,
+        "secondary_media_mobile_width": 60,
+        "show_secondary_media_on_mobile": true,
+        "secondary_media_alignment": "place-self-center-end",
+        "secondary_media_shape": "blob-2"
+      }
+    },
     "faq": {
       "type": "faq",
       "blocks": {
@@ -441,6 +498,7 @@
     "concept",
     "modularite",
     "carousel_accessoires",
+    "histoire",
     "faq",
     "newsletter"
   ]
