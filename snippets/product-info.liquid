@@ -94,7 +94,7 @@ no need to manually pass the section as it is globally available)
 
           {%- when 'caracteristiques' -%}
             {%- liquid
-              assign co_marque = product.metafields.custom.marque.value
+              assign co_marque = product.vendor
               assign co_matiere = product.metafields.custom.matiere.value
               assign co_garantie = product.metafields.custom.garantie.value
             -%}
