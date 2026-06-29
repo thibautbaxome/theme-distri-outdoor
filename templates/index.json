@@ -295,7 +295,7 @@
         "heading_tag": "h3",
         "scrolling_title_separator": "diamond",
         "scrolling_title": false,
-        "button_link": "",
+        "button_link": "shopify://blogs/infos",
         "button_text": "Voir nos autres articles",
         "button_style": "outline",
         "blog_post_card_heading_size": "h5",
