@@ -159,8 +159,42 @@ based on your desired layout (and remove most of the settings associated), and t
           endif
         -%}
 
+        {%- liquid
+          # Si la collection est filtrée par une option (couleur/forme/taille), afficher l'image de la variante correspondante
+          assign card_primary_media = product.featured_media
+          assign active_option_filters = ''
+          for f in collection.filters
+            if f.param_name contains 'filter.v.option'
+              for av in f.active_values
+                assign active_option_filters = active_option_filters | append: '|' | append: av.value
+              endfor
+            endif
+          endfor
+          if active_option_filters != blank
+            assign filter_parts = active_option_filters | split: '|'
+            for v in product.variants
+              if v.image == blank
+                continue
+              endif
+              assign variant_vals = v.options | join: '|' | prepend: '|'
+              assign is_match = true
+              for fp in filter_parts
+                assign needle = fp | prepend: '|'
+                unless variant_vals contains needle
+                  assign is_match = false
+                  break
+                endunless
+              endfor
+              if is_match
+                assign card_primary_media = v.image
+                break
+              endif
+            endfor
+          endif
+        -%}
+
         {%- capture main_image_classes -%}product-card__image product-card__image--primary {% if settings.product_card_image_aspect_ratio contains 'crop' %}size-full object-cover{% endif %} aspect-{{ settings.product_card_image_aspect_ratio | split: '_' | first }}{%- endcapture -%}
-        {{- product.featured_media | image_url: width: product.featured_media.width | image_tag: loading: main_media_loading_strategy, sizes: sizes, widths: '200,300,400,500,600,700,800,900,1000,1200,1400,1600,1800', class: main_image_classes -}}
+        {{- card_primary_media | image_url: width: card_primary_media.width | image_tag: loading: main_media_loading_strategy, sizes: sizes, widths: '200,300,400,500,600,700,800,900,1000,1200,1400,1600,1800', class: main_image_classes -}}
 
         {%- liquid
           if show_secondary_image and product.media.size > 1
