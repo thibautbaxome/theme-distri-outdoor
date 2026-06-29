@@ -123,40 +123,22 @@
         "item_text_alignment": "left"
       }
     },
-    "1782655618e46a7273": {
-      "type": "apps",
-      "blocks": {
-        "forms_inline_M3ytYh": {
-          "type": "shopify://apps/forms/blocks/inline/8744a304-fcb1-4347-b211-bb6b4759a76a",
-          "settings": {
-            "form_id": "550451",
-            "text_color": "#202020",
-            "button_background_color": "#202020",
-            "button_label_color": "#FFFFFF",
-            "links_color": "#1878B9",
-            "errors_color": "#E02229",
-            "text_alignment": "center",
-            "form_alignment": "center",
-            "padding_top": 0,
-            "padding_bottom": 24,
-            "padding_right": 0,
-            "padding_left": 0
-          }
-        }
-      },
-      "block_order": [
-        "forms_inline_M3ytYh"
-      ],
+    "reservation": {
+      "type": "contact",
       "settings": {
-        "color_scheme": "",
-        "add_vertical_spacing": true,
-        "add_horizontal_spacing": true
+        "color_scheme": "scheme-1",
+        "layout": "stacked",
+        "subheading": "Réservation",
+        "title": "Réservez votre brasero",
+        "heading_size": "h2",
+        "content": "<p>Anniversaire, événement d'entreprise ou week-end entre amis ? Indiquez-nous vos dates, le lieu et le nombre de personnes : notre équipe revient vers vous rapidement avec un devis.</p>",
+        "show_social_media": false
       }
     }
   },
   "order": [
     "hero",
     "infos",
-    "1782655618e46a7273"
+    "reservation"
   ]
 }
