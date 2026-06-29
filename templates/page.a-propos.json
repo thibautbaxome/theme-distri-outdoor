@@ -14,7 +14,7 @@
           "type": "heading",
           "settings": {
             "text": "Qui sommes-nous ?",
-            "heading_tag": "h1",
+            "heading_tag": "h3",
             "position": "top_left",
             "highlight_effect": "default",
             "highlight_accent_color": "",
@@ -63,27 +63,27 @@
         "durabilite": {
           "type": "item",
           "settings": {
-            "icon": "none",
+            "icon": "picto-secure",
             "title": "Durabilité",
-            "heading_tag": "h3",
+            "heading_tag": "h5",
             "content": "<p>Des matériaux qui durent — acier corten, céramique, inox alimentaire — pensés pour résister aux saisons et vous accompagner des années.</p>"
           }
         },
         "design": {
           "type": "item",
           "settings": {
-            "icon": "none",
+            "icon": "picto-sparkle",
             "title": "Design",
-            "heading_tag": "h3",
+            "heading_tag": "h5",
             "content": "<p>Des produits aussi beaux qu'efficaces, qui s'intègrent avec élégance à votre terrasse comme à votre jardin.</p>"
           }
         },
         "convivialite": {
           "type": "item",
           "settings": {
-            "icon": "none",
+            "icon": "picto-drink",
             "title": "Convivialité",
-            "heading_tag": "h3",
+            "heading_tag": "h5",
             "content": "<p>Cuisiner au feu de bois, profiter des soirées d'été à l'abri des moustiques : nos équipements sont faits pour rassembler.</p>"
           }
         }
@@ -94,7 +94,7 @@
         "subheading": "Nos valeurs",
         "title": "Ce qui nous guide",
         "content": "",
-        "heading_tag": "h2",
+        "heading_tag": "h3",
         "text_alignment": "center",
         "items_per_row_desktop": 3,
         "stack_on_mobile": true,
@@ -119,7 +119,7 @@
           "type": "heading",
           "settings": {
             "text": "Le savoir-faire français au cœur de notre sélection",
-            "heading_tag": "h2",
+            "heading_tag": "h3",
             "position": "top_left",
             "highlight_effect": "default",
             "highlight_accent_color": "",
@@ -159,7 +159,7 @@
         "secondary_media_mobile_width": 60,
         "show_secondary_media_on_mobile": true,
         "secondary_media_alignment": "place-self-center-end",
-        "secondary_media_shape": "none"
+        "secondary_media_shape": "blob-2"
       }
     }
   },
