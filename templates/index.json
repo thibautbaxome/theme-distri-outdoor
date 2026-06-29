@@ -205,7 +205,7 @@
         "products_per_row_mobile": "2",
         "products_per_row_desktop": 4,
         "tabs_alignment": "start",
-        "tabs_icon": "circle",
+        "tabs_icon": "diamond",
         "show_view_all_button": true,
         "show_scrolling_bar": true
       }
@@ -293,7 +293,7 @@
         "desktop_layout": "carousel",
         "title": "Le journal",
         "heading_tag": "h3",
-        "scrolling_title_separator": "circle",
+        "scrolling_title_separator": "diamond",
         "scrolling_title": false,
         "button_link": "",
         "button_text": "Voir nos autres articles",
@@ -329,7 +329,7 @@
         "products_per_row_mobile": "2",
         "products_per_row_desktop": 4,
         "tabs_alignment": "start",
-        "tabs_icon": "circle",
+        "tabs_icon": "diamond",
         "show_view_all_button": true,
         "show_scrolling_bar": true
       }
