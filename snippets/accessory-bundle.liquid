@@ -117,11 +117,6 @@ Tout est ajouté au panier en une requête via les items[] du <product-form> nat
                   <input type="hidden" disabled name="items[{{ i }}][id]" value="{{ acc_sel.id }}" data-acc-id data-price="{{ acc_sel.price }}">
                   <input type="hidden" disabled name="items[{{ i }}][quantity]" value="1" data-acc-qty>
                 </div>
-
-                <label class="accessory-bundle__toggle" for="{{ acc_check_id }}">
-                  <span class="accessory-bundle__toggle-off">+ Ajouter</span>
-                  <span class="accessory-bundle__toggle-on">&check; Ajouté</span>
-                </label>
               </div>
             </div>
           {%- endfor -%}
@@ -135,7 +130,7 @@ Tout est ajouté au panier en une requête via les items[] du <product-form> nat
         </div>
       {%- endif -%}
 
-      <div class="accessory-bundle__actions v-stack gap-2">
+      <div class="accessory-bundle__actions h-stack gap-2">
         {%- if block.settings.show_quantity_selector -%}
           <div class="accessory-bundle__qty" data-qty>
             <button type="button" class="accessory-bundle__qty-btn" data-qty-minus aria-label="Diminuer la quantité">&minus;</button>
@@ -146,7 +141,7 @@ Tout est ajouté au panier en une requête via les items[] du <product-form> nat
           <input type="hidden" name="items[0][quantity]" value="1">
         {%- endif -%}
 
-        <button type="submit" class="button w-full accessory-bundle__submit" data-submit {% unless sel.available %}disabled{% endunless %}>
+        <button type="submit" class="button accessory-bundle__submit" data-submit {% unless sel.available %}disabled{% endunless %}>
           <span data-submit-label>{% if sel.available %}{{ block.settings.button_label | default: 'Ajouter au panier' }}{% else %}{{ 'product.general.sold_out_button' | t }}{% endif %}</span>
         </button>
       </div>
@@ -155,17 +150,17 @@ Tout est ajouté au panier en une requête via les items[] du <product-form> nat
 </product-form>
 
 {%- style -%}
-  .accessory-bundle__card { position: relative; }
-  .accessory-bundle__media { display: block; position: relative; cursor: pointer; border-radius: var(--rounded-sm, 8px); overflow: hidden; }
-  .accessory-bundle__media img { display: block; width: 100%; height: auto; transition: transform 0.4s ease; }
-  .accessory-bundle__card:hover .accessory-bundle__media img { transform: scale(1.03); }
+  .accessory-bundle__card { position: relative; cursor: pointer; }
+  .accessory-bundle__media { display: block; position: relative; border-radius: var(--rounded-sm, 8px); overflow: hidden; aspect-ratio: 1 / 1; }
+  .accessory-bundle__media img { display: block; width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease; }
+  .accessory-bundle__card:hover .accessory-bundle__media img { transform: scale(1.04); }
   .accessory-bundle__badge {
     position: absolute; top: 0.6rem; right: 0.6rem; width: 1.65rem; height: 1.65rem; border-radius: 999px;
-    background: rgb(var(--background, 255 255 255) / 0.9); border: 1.5px solid rgb(var(--text-color, 0 0 0) / 0.25);
-    display: grid; place-items: center; transition: all 0.18s ease; box-shadow: 0 1px 5px rgb(0 0 0 / 0.12);
+    background: rgb(var(--background, 255 255 255) / 0.92); border: 1.5px solid rgb(var(--text-color, 0 0 0) / 0.25);
+    display: grid; place-items: center; transition: all 0.18s ease; box-shadow: 0 1px 5px rgb(0 0 0 / 0.12); z-index: 1;
   }
   .accessory-bundle__badge::after { content: ""; width: 0.55rem; height: 0.3rem; border-left: 2px solid #fff; border-bottom: 2px solid #fff; transform: rotate(-45deg) translate(0, -1px); opacity: 0; transition: opacity 0.18s ease; }
-  .accessory-bundle__card.is-selected .accessory-bundle__media { box-shadow: 0 0 0 2px rgb(var(--primary-button-background, 182 90 48)); }
+  .accessory-bundle__card.is-selected .accessory-bundle__media { box-shadow: inset 0 0 0 3px rgb(var(--primary-button-background, 182 90 48)); }
   .accessory-bundle__card.is-selected .accessory-bundle__badge { background: rgb(var(--primary-button-background, 182 90 48)); border-color: rgb(var(--primary-button-background, 182 90 48)); }
   .accessory-bundle__card.is-selected .accessory-bundle__badge::after { opacity: 1; }
 
@@ -173,18 +168,10 @@ Tout est ajouté au panier en une requête via les items[] du <product-form> nat
   .accessory-bundle__card.is-selected .accessory-bundle__options { display: grid; gap: 0.5rem; }
   .accessory-bundle__select select { width: 100%; padding: 0.45rem 0.6rem; border: 1px solid rgb(var(--text-color, 0 0 0) / 0.25); border-radius: var(--rounded-xs, 4px); background: transparent; font: inherit; }
 
-  .accessory-bundle__toggle {
-    display: inline-flex; align-items: center; justify-content: center; gap: 0.35rem; cursor: pointer;
-    padding: 0.4rem 0.75rem; border: 1px solid rgb(var(--text-color, 0 0 0) / 0.3); border-radius: 999px;
-    font-size: 0.82rem; line-height: 1; transition: all 0.18s ease; width: max-content;
-  }
-  .accessory-bundle__toggle-on { display: none; }
-  .accessory-bundle__card.is-selected .accessory-bundle__toggle { background: rgb(var(--primary-button-background, 182 90 48)); border-color: rgb(var(--primary-button-background, 182 90 48)); color: rgb(var(--primary-button-text-color, 255 255 255)); }
-  .accessory-bundle__card.is-selected .accessory-bundle__toggle-off { display: none; }
-  .accessory-bundle__card.is-selected .accessory-bundle__toggle-on { display: inline; }
-
+  .accessory-bundle__actions { align-items: stretch; }
+  .accessory-bundle__submit { flex: 1 1 auto; }
   .accessory-bundle__total { padding-top: 0.65rem; border-top: 1px solid rgb(var(--text-color, 0 0 0) / 0.12); font-size: 1.1rem; }
-  .accessory-bundle__qty { display: inline-flex; align-items: stretch; border: 1px solid rgb(var(--text-color, 0 0 0) / 0.25); border-radius: var(--rounded-xs, 4px); width: max-content; }
+  .accessory-bundle__qty { display: inline-flex; align-items: stretch; flex: 0 0 auto; border: 1px solid rgb(var(--text-color, 0 0 0) / 0.25); border-radius: var(--rounded-xs, 4px); }
   .accessory-bundle__qty-btn { width: 2.5rem; background: transparent; border: 0; font-size: 1.1rem; cursor: pointer; line-height: 1; }
   .accessory-bundle__qty-input { width: 3rem; text-align: center; border: 0; border-inline: 1px solid rgb(var(--text-color, 0 0 0) / 0.25); background: transparent; font: inherit; -moz-appearance: textfield; }
   .accessory-bundle__qty-input::-webkit-outer-spin-button,

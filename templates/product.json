@@ -46,7 +46,7 @@
           "type": "variant_picker",
           "settings": {
             "hide_sold_out_variants": false,
-            "separate_options": true,
+            "separate_options": false,
             "selector_style": "block",
             "swatch_selector_style": "block_swatch",
             "swatch_selector_size": "lg",
@@ -95,12 +95,6 @@
             "icon": "none",
             "page": ""
           }
-        },
-        "faq_block": {
-          "type": "product_faq",
-          "settings": {
-            "title": "Questions fréquentes"
-          }
         }
       },
       "block_order": [
@@ -115,8 +109,7 @@
         "separator_2",
         "livraison",
         "specs",
-        "accordion_xhdtRj",
-        "faq_block"
+        "accordion_xhdtRj"
       ],
       "settings": {
         "color_scheme": "scheme-1",
@@ -165,10 +158,19 @@
         "show_view_all_button": true,
         "show_scrolling_bar": true
       }
+    },
+    "product-faq": {
+      "type": "product-faq",
+      "settings": {
+        "color_scheme": "scheme-1",
+        "title": "Questions fréquentes",
+        "heading_size": "h3"
+      }
     }
   },
   "order": [
     "main",
+    "product-faq",
     "related-products"
   ]
 }

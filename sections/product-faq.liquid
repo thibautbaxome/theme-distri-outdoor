@@ -1,0 +1,58 @@
+{%- comment -%}
+  FAQ produit : lit le métachamp custom.faq (liste de métaobjets faq_item) du produit courant
+  et l'affiche en accordéons, en section pleine largeur (comme la FAQ de collection).
+  Le schéma FAQPage correspondant est injecté dans snippets/microdata-schema.liquid.
+{%- endcomment -%}
+
+{%- assign faq = product.metafields.custom.faq.value -%}
+
+{%- if faq != blank -%}
+  <div class="color-scheme color-scheme--{{ section.settings.color_scheme.id }}">
+    <div class="container section-spacing">
+      <div class="section-stack">
+        {%- if section.settings.title != blank -%}
+          <h2 class="{{ section.settings.heading_size }}">{{ section.settings.title }}</h2>
+        {%- endif -%}
+
+        <div class="faq__content">
+          {%- for item in faq -%}
+            {%- render 'accordion', title: item.question.value, content: item.answer.value, prose_content: true -%}
+          {%- endfor -%}
+        </div>
+      </div>
+    </div>
+  </div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Product FAQ",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:global.colors.scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "title",
+      "label": "t:global.text.heading",
+      "default": "Questions fréquentes"
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "label": "t:global.text.heading_size",
+      "default": "h3",
+      "options": [
+        { "value": "h2", "label": "H2" },
+        { "value": "h3", "label": "H3" },
+        { "value": "h4", "label": "H4" }
+      ]
+    }
+  ],
+  "presets": [{ "name": "Product FAQ" }]
+}
+{% endschema %}
