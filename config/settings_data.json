@@ -81,7 +81,7 @@
       },
       "15037621279992766403": {
         "type": "shopify://apps/alma-widget/blocks/app-embed/4f38fc15-ea4e-44b3-96e0-0c0f2daa413f",
-        "disabled": false,
+        "disabled": true,
         "settings": {
           "merchantId": "",
           "badgeDisplayedOnProduct": true,
