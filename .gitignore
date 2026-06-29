@@ -1,6 +1,9 @@
 # Dependencies
 node_modules/
 
+# IDE
+.idea/
+
 # Shopify CLI
 .shopify/
 
