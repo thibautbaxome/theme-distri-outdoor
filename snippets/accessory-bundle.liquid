@@ -1,6 +1,7 @@
 {%- doc -%}
 Configurateur « pack » : bouton d'ajout au panier du produit principal + accessoires
-complémentaires (métachamp Search & Discovery) à cocher, chacun avec son sélecteur de taille/options.
+complémentaires (métachamp Search & Discovery) présentés en cartes sélectionnables dans
+un carrousel, chacune avec son sélecteur de taille/options.
 Tout est ajouté au panier en une requête via les items[] du <product-form> natif.
 
 @param {object} product - le produit principal
@@ -12,6 +13,7 @@ Tout est ajouté au panier en une requête via les items[] du <product-form> nat
   assign sel = product.selected_or_first_available_variant
   assign comp = product.metafields.shopify--discovery--product_recommendation.complementary_products.value
   assign bundle_form_id = product_form_id | append: '-bundle'
+  assign carousel_id = bundle_form_id | append: '-carousel'
 
   assign option_names = ''
   for o in product.options_with_values
@@ -20,6 +22,15 @@ Tout est ajouté au panier en une requête via les items[] du <product-form> nat
       assign option_names = option_names | append: ','
     endunless
   endfor
+
+  case settings.product_card_style
+    when 'subheading'
+      assign title_class = 'subheading'
+    when 'heading'
+      assign title_class = 'heading'
+    else
+      assign title_class = 'text-sm bold'
+  endcase
 -%}
 
 <product-form>
@@ -37,33 +48,59 @@ Tout est ajouté au panier en une requête via les items[] du <product-form> nat
       <input type="hidden" name="items[0][id]" value="{{ sel.id }}" data-main-id>
 
       {%- if comp != blank -%}
-        <div class="accessory-bundle__list v-stack gap-3">
+        <div class="accessory-bundle__head h-stack justify-between gap-2">
           {%- if block.settings.accessories_heading != blank -%}
             <p class="bold">{{ block.settings.accessories_heading }}</p>
           {%- endif -%}
 
+          {%- if comp.size > 2 -%}
+            <div class="h-stack gap-2">
+              <carousel-prev-button aria-controls="{{ carousel_id }}">
+                <button type="button" disabled class="circle-button">
+                  <span class="sr-only">{{ 'general.accessibility.previous' | t }}</span>
+                  {%- render 'icon' with 'big-arrow-left', width: 9, direction_aware: true -%}
+                </button>
+              </carousel-prev-button>
+              <carousel-next-button aria-controls="{{ carousel_id }}">
+                <button type="button" class="circle-button">
+                  <span class="sr-only">{{ 'general.accessibility.next' | t }}</span>
+                  {%- render 'icon' with 'big-arrow-right', width: 9, direction_aware: true -%}
+                </button>
+              </carousel-next-button>
+            </div>
+          {%- endif -%}
+        </div>
+
+        <scroll-carousel id="{{ carousel_id }}" class="accessory-bundle__carousel complementary-products complementary-products--vertical scroll-area bleed sm:unbleed snap-x">
           {%- for acc in comp -%}
             {%- liquid
               assign i = forloop.index
               assign acc_sel = acc.selected_or_first_available_variant
+              assign acc_check_id = bundle_form_id | append: '-acc-' | append: i
             -%}
-            <div class="accessory-bundle__item" data-accessory>
-              <label class="accessory-bundle__head">
-                <input type="checkbox" class="accessory-bundle__check" data-toggle>
+            <div class="product-cross-sell product-cross-sell--vertical snap-start accessory-bundle__card" data-accessory>
+              <input type="checkbox" class="accessory-bundle__check sr-only" id="{{ acc_check_id }}" data-toggle>
+
+              <label class="accessory-bundle__media" for="{{ acc_check_id }}">
                 {%- if acc.featured_media != blank -%}
-                  {{ acc.featured_media | image_url: width: 120 | image_tag: loading: 'lazy', class: 'accessory-bundle__img', width: 56, height: 56 }}
+                  {{ acc.featured_media | image_url: width: 600 | image_tag: loading: 'lazy', sizes: '200px', widths: '200,400,600' }}
                 {%- endif -%}
-                <span class="accessory-bundle__info v-stack">
-                  <span class="accessory-bundle__title">{{ acc.title }}</span>
-                  <span class="text-subdued text-sm" data-row-price>
-                    {%- if acc.price_varies -%}dès {{ acc.price_min | money }}{%- else -%}{{ acc.price_min | money }}{%- endif -%}
-                  </span>
-                </span>
+                <span class="accessory-bundle__badge" aria-hidden="true"></span>
               </label>
 
-              <div class="accessory-bundle__options" data-options hidden>
-                {%- unless acc.has_only_default_variant -%}
-                  <div class="accessory-bundle__selects">
+              <div class="v-stack gap-2">
+                <div class="v-stack gap-0.5">
+                  {%- if settings.product_card_show_vendor and acc.vendor != blank -%}
+                    {%- render 'vendor' with acc.vendor, class: 'subheading text-subdued' -%}
+                  {%- endif -%}
+                  <a href="{{ acc.url }}" class="{{ title_class }}">{{ acc.title }}</a>
+                  <span class="price" data-row-price>
+                    {%- if acc.price_varies -%}dès {{ acc.price_min | money }}{%- else -%}{{ acc.price_min | money }}{%- endif -%}
+                  </span>
+                </div>
+
+                <div class="accessory-bundle__options" data-options hidden>
+                  {%- unless acc.has_only_default_variant -%}
                     {%- for opt in acc.options_with_values -%}
                       <label class="accessory-bundle__select v-stack gap-1">
                         <span class="text-sm text-subdued">{{ opt.name }}</span>
@@ -74,16 +111,21 @@ Tout est ajouté au panier en une requête via les items[] du <product-form> nat
                         </select>
                       </label>
                     {%- endfor -%}
-                  </div>
-                  <script type="application/json" data-variants>[{%- for v in acc.variants -%}{"id":{{ v.id }},"available":{{ v.available }},"price":{{ v.price }},"options":{{ v.options | json }}}{%- unless forloop.last -%},{%- endunless -%}{%- endfor -%}]</script>
-                {%- endunless -%}
+                    <script type="application/json" data-variants>[{%- for v in acc.variants -%}{"id":{{ v.id }},"available":{{ v.available }},"price":{{ v.price }},"options":{{ v.options | json }}}{%- unless forloop.last -%},{%- endunless -%}{%- endfor -%}]</script>
+                  {%- endunless -%}
 
-                <input type="hidden" disabled name="items[{{ i }}][id]" value="{{ acc_sel.id }}" data-acc-id data-price="{{ acc_sel.price }}">
-                <input type="hidden" disabled name="items[{{ i }}][quantity]" value="1" data-acc-qty>
+                  <input type="hidden" disabled name="items[{{ i }}][id]" value="{{ acc_sel.id }}" data-acc-id data-price="{{ acc_sel.price }}">
+                  <input type="hidden" disabled name="items[{{ i }}][quantity]" value="1" data-acc-qty>
+                </div>
+
+                <label class="accessory-bundle__toggle" for="{{ acc_check_id }}">
+                  <span class="accessory-bundle__toggle-off">+ Ajouter</span>
+                  <span class="accessory-bundle__toggle-on">&check; Ajouté</span>
+                </label>
               </div>
             </div>
           {%- endfor -%}
-        </div>
+        </scroll-carousel>
       {%- endif -%}
 
       {%- if block.settings.show_total -%}
@@ -113,20 +155,38 @@ Tout est ajouté au panier en une requête via les items[] du <product-form> nat
 </product-form>
 
 {%- style -%}
-  .accessory-bundle__item { border: 1px solid rgb(var(--border-color, 0 0 0) / 12%); border-radius: var(--rounded-sm, 6px); padding: 0.75rem 1rem; }
-  .accessory-bundle__head { display: flex; align-items: center; gap: 0.75rem; cursor: pointer; margin: 0; }
-  .accessory-bundle__img { border-radius: var(--rounded-xs, 4px); object-fit: cover; flex: 0 0 auto; }
-  .accessory-bundle__info { gap: 0.1rem; flex: 1 1 auto; }
-  .accessory-bundle__check { width: 1.15rem; height: 1.15rem; flex: 0 0 auto; accent-color: rgb(var(--primary-button-background, 0 0 0)); }
-  .accessory-bundle__options { margin-top: 0.75rem; padding-left: calc(1.15rem + 0.75rem); }
-  .accessory-bundle__selects { display: flex; flex-wrap: wrap; gap: 0.75rem; }
-  .accessory-bundle__select { flex: 1 1 8rem; min-width: 7rem; }
-  .accessory-bundle__select select { width: 100%; padding: 0.5rem 0.65rem; border: 1px solid rgb(var(--border-color, 0 0 0) / 25%); border-radius: var(--rounded-xs, 4px); background: transparent; font: inherit; }
-  .accessory-bundle__item.is-unavailable { opacity: 0.55; }
-  .accessory-bundle__total { padding-top: 0.5rem; border-top: 1px solid rgb(var(--border-color, 0 0 0) / 12%); font-size: 1.05rem; }
-  .accessory-bundle__qty { display: inline-flex; align-items: stretch; border: 1px solid rgb(var(--border-color, 0 0 0) / 25%); border-radius: var(--rounded-xs, 4px); width: max-content; }
+  .accessory-bundle__card { position: relative; }
+  .accessory-bundle__media { display: block; position: relative; cursor: pointer; border-radius: var(--rounded-sm, 8px); overflow: hidden; }
+  .accessory-bundle__media img { display: block; width: 100%; height: auto; transition: transform 0.4s ease; }
+  .accessory-bundle__card:hover .accessory-bundle__media img { transform: scale(1.03); }
+  .accessory-bundle__badge {
+    position: absolute; top: 0.6rem; right: 0.6rem; width: 1.65rem; height: 1.65rem; border-radius: 999px;
+    background: rgb(var(--background, 255 255 255) / 0.9); border: 1.5px solid rgb(var(--text-color, 0 0 0) / 0.25);
+    display: grid; place-items: center; transition: all 0.18s ease; box-shadow: 0 1px 5px rgb(0 0 0 / 0.12);
+  }
+  .accessory-bundle__badge::after { content: ""; width: 0.55rem; height: 0.3rem; border-left: 2px solid #fff; border-bottom: 2px solid #fff; transform: rotate(-45deg) translate(0, -1px); opacity: 0; transition: opacity 0.18s ease; }
+  .accessory-bundle__card.is-selected .accessory-bundle__media { box-shadow: 0 0 0 2px rgb(var(--primary-button-background, 182 90 48)); }
+  .accessory-bundle__card.is-selected .accessory-bundle__badge { background: rgb(var(--primary-button-background, 182 90 48)); border-color: rgb(var(--primary-button-background, 182 90 48)); }
+  .accessory-bundle__card.is-selected .accessory-bundle__badge::after { opacity: 1; }
+
+  .accessory-bundle__options { display: none; }
+  .accessory-bundle__card.is-selected .accessory-bundle__options { display: grid; gap: 0.5rem; }
+  .accessory-bundle__select select { width: 100%; padding: 0.45rem 0.6rem; border: 1px solid rgb(var(--text-color, 0 0 0) / 0.25); border-radius: var(--rounded-xs, 4px); background: transparent; font: inherit; }
+
+  .accessory-bundle__toggle {
+    display: inline-flex; align-items: center; justify-content: center; gap: 0.35rem; cursor: pointer;
+    padding: 0.4rem 0.75rem; border: 1px solid rgb(var(--text-color, 0 0 0) / 0.3); border-radius: 999px;
+    font-size: 0.82rem; line-height: 1; transition: all 0.18s ease; width: max-content;
+  }
+  .accessory-bundle__toggle-on { display: none; }
+  .accessory-bundle__card.is-selected .accessory-bundle__toggle { background: rgb(var(--primary-button-background, 182 90 48)); border-color: rgb(var(--primary-button-background, 182 90 48)); color: rgb(var(--primary-button-text-color, 255 255 255)); }
+  .accessory-bundle__card.is-selected .accessory-bundle__toggle-off { display: none; }
+  .accessory-bundle__card.is-selected .accessory-bundle__toggle-on { display: inline; }
+
+  .accessory-bundle__total { padding-top: 0.65rem; border-top: 1px solid rgb(var(--text-color, 0 0 0) / 0.12); font-size: 1.1rem; }
+  .accessory-bundle__qty { display: inline-flex; align-items: stretch; border: 1px solid rgb(var(--text-color, 0 0 0) / 0.25); border-radius: var(--rounded-xs, 4px); width: max-content; }
   .accessory-bundle__qty-btn { width: 2.5rem; background: transparent; border: 0; font-size: 1.1rem; cursor: pointer; line-height: 1; }
-  .accessory-bundle__qty-input { width: 3rem; text-align: center; border: 0; border-inline: 1px solid rgb(var(--border-color, 0 0 0) / 25%); background: transparent; font: inherit; -moz-appearance: textfield; }
+  .accessory-bundle__qty-input { width: 3rem; text-align: center; border: 0; border-inline: 1px solid rgb(var(--text-color, 0 0 0) / 0.25); background: transparent; font: inherit; -moz-appearance: textfield; }
   .accessory-bundle__qty-input::-webkit-outer-spin-button,
   .accessory-bundle__qty-input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
 {%- endstyle -%}
@@ -189,6 +249,7 @@ Tout est ajouté au panier en une requête via les items[] du <product-form> nat
         if (!toggle) return;
         toggle.addEventListener('change', () => {
           const on = toggle.checked;
+          row.classList.toggle('is-selected', on);
           if (options) options.hidden = !on;
           if (accId) accId.disabled = !on;
           if (accQty) accQty.disabled = !on;
