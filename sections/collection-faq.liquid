@@ -13,12 +13,10 @@
           <h2 class="{{ section.settings.heading_size }}">{{ section.settings.title }}</h2>
         {%- endif -%}
 
-        <div class="faq">
-          <div class="faq__content">
-            {%- for item in faq -%}
-              {%- render 'accordion', title: item.question.value, content: item.answer.value, prose_content: true -%}
-            {%- endfor -%}
-          </div>
+        <div class="faq__content">
+          {%- for item in faq -%}
+            {%- render 'accordion', title: item.question.value, content: item.answer.value, prose_content: true -%}
+          {%- endfor -%}
         </div>
       </div>
     </div>
