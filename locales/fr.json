@@ -97,7 +97,7 @@
       "on_sale_badge": "Promo",
       "discount_badge_html": "Economisez {{ savings }}",
       "sku": "SKU:",
-      "variant": "Variant",
+      "variant": "Variante",
       "view_in_space": "Afficher dans votre espace",
       "taxes_included": "Taxes inclues",
       "taxes_excluded": "Taxes exclues",
@@ -166,7 +166,7 @@
       "empty_collection": "Cette collection est vide",
       "all_collections": "Toutes les collections",
       "no_collections": "Cette boutique ne contient aucune collection.",
-      "continue_shopping": "Continue shopping"
+      "continue_shopping": "Continuer mes achats"
     },
     "quick_links": {
       "navigate_to": "Aller à"
@@ -416,7 +416,7 @@
       "products": "Produits",
       "suggestions": "Suggestions",
       "collections": "Collections",
-      "articles": "Blog posts",
+      "articles": "Articles de blog",
       "pages": "Pages",
       "clear": "Effacer",
       "view_all_results": "Voir les résultats",
@@ -446,7 +446,7 @@
       "out_of_html": "sur {{ initial_value }}",
       "redeem_instructions": "Rentrez ce code au moment du paiement pour utiliser votre carte cadeau :",
       "code": "Code de la carte cadeau",
-      "expires_on": "Expires on: {{ expires_on }}",
+      "expires_on": "Expire le : {{ expires_on }}",
       "expired": "Votre carte cadeau a expiré ou a été désactivé.",
       "add_to_apple_wallet": "Ajouter à Apple Wallet"
     },
