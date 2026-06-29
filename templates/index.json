@@ -508,6 +508,7 @@
         "subheading": "FAQ",
         "title": "Questions fréquentes",
         "title_tag": "h3",
+        "html_tag": "h2",
         "content": "",
         "button_text": "Toutes les questions",
         "button_url": "/pages/faq",
