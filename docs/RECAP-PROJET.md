@@ -44,7 +44,7 @@
 - **Footer** : barre de réassurance FR, 2 colonnes (Boutique / Informations via `footer-boutique` + `footer-infos`, **À propos** ajouté dans Informations), bloc À propos, **bloc Contact** (tél `06 68 53 54 07` + `contact@distri-outdoor.fr`, repris de la prod), **icônes réseaux Facebook + Instagram** (réglages thème `social_facebook`/`social_instagram` + toggle `show_social_media`), newsletter FR.
 - **Barre d'annonce** : activée (fond cuivre, défilement auto), 3 messages — tagline marque · « Une sélection de fabrications françaises » (**reformulé prudemment** : la prod disait « 100 % made in France », inexact pour un distributeur) · livraison France.
 - **Pages** :
-  - **Contact** (intro + formulaire FR), **FAQ** (page créée + contenu FR prudent), **Location** (contenu récupéré de la prod live → template thème : hero + 3 colonnes infos + CTA, formulaire à ajouter côté client).
+  - **Contact** (intro + formulaire de contact natif FR), **FAQ** (page créée + contenu FR prudent), **Location** (contenu récupéré de la prod live → template thème : hero + 3 colonnes infos + CTA + **formulaire Shopify Forms** « Réservez votre brasero » — conservé pour la capture de leads, placeholder retiré et bouton aux couleurs du thème).
   - **À propos** (créée) : histoire de la marque + fondateur (Lionel Dufresnes), valeurs Durabilité/Design/Convivialité, savoir-faire français prudent. Contenu **récupéré du bloc « Qui sommes-nous ? » de la home prod** puis étoffé. Liée dans le menu principal **et** le footer ; teaser sur la home.
 - **Décisions « com' » en attente** : formulation « fabrications françaises » (barre d'annonce) ; affichage ou non du nom du fondateur dans le contact footer.
 
