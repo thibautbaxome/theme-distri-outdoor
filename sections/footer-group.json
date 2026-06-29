@@ -102,13 +102,22 @@
             "content": "<p>Distri-Outdoor, votre spécialiste de l'extérieur : braseros-planchas, kamados, bornes anti-moustiques et mobilier de jardin. Une sélection exigeante pour transformer chaque terrasse en lieu de partage.</p>",
             "enable_follow_on_shop": true
           }
+        },
+        "contact": {
+          "type": "text",
+          "settings": {
+            "title": "Contact",
+            "content": "<p>Une question ? Notre équipe vous répond.<\/p><p><a href=\"tel:+33668535407\">06 68 53 54 07<\/a><br><a href=\"mailto:contact@distri-outdoor.fr\">contact@distri-outdoor.fr<\/a><\/p>",
+            "enable_follow_on_shop": false
+          }
         }
       },
       "block_order": [
         "newsletter",
         "links",
         "links_infos",
-        "text"
+        "text",
+        "contact"
       ],
       "settings": {
         "color_scheme": "",

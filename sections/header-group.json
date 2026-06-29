@@ -13,11 +13,36 @@
   "sections": {
     "announcement-bar": {
       "type": "announcement-bar",
+      "blocks": {
+        "msg_brand": {
+          "type": "message",
+          "settings": {
+            "text": "🔥 Le monde extérieur vous attend &mdash; Distri-Outdoor"
+          }
+        },
+        "msg_france": {
+          "type": "message",
+          "settings": {
+            "text": "🇫🇷 Une sélection de fabrications françaises"
+          }
+        },
+        "msg_livraison": {
+          "type": "message",
+          "settings": {
+            "text": "🚚 Livraison suivie partout en France métropolitaine"
+          }
+        }
+      },
+      "block_order": [
+        "msg_brand",
+        "msg_france",
+        "msg_livraison"
+      ],
       "settings": {
-        "color_scheme": "",
+        "color_scheme": "scheme-6",
         "enable_sticky": false,
         "show_on_homepage_only": false,
-        "autoplay": false,
+        "autoplay": true,
         "cycle_speed": 5
       }
     },
