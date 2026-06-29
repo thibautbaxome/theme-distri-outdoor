@@ -272,6 +272,68 @@
         "secondary_media_shape": "blob-2"
       }
     },
+    "blog_posts_mj8pUM": {
+      "type": "blog-posts",
+      "blocks": {
+        "blog_4XWqCf": {
+          "type": "blog",
+          "settings": {
+            "blog": "infos",
+            "posts_count": 3
+          }
+        }
+      },
+      "block_order": [
+        "blog_4XWqCf"
+      ],
+      "name": "t:sections.blog_posts.name",
+      "settings": {
+        "color_scheme": "scheme-6",
+        "mobile_layout": "carousel",
+        "desktop_layout": "carousel",
+        "title": "Le journal",
+        "heading_tag": "h3",
+        "scrolling_title_separator": "circle",
+        "scrolling_title": false,
+        "button_link": "",
+        "button_text": "Voir nos autres articles",
+        "button_style": "outline",
+        "blog_post_card_heading_size": "h5",
+        "separator_style": "space",
+        "show_category": false,
+        "show_date": false,
+        "show_excerpt": true
+      }
+    },
+    "carousel_accessoires": {
+      "type": "featured-collections",
+      "blocks": {
+        "c1": {
+          "type": "collection",
+          "settings": {
+            "collection": "accessoires-braseros",
+            "products_count": 8,
+            "title": "Les accessoires",
+            "content": "<p>Grilles, plancha, four à pizza, housses…</p>",
+            "link": "/collections/accessoires-braseros"
+          }
+        }
+      },
+      "block_order": [
+        "c1"
+      ],
+      "settings": {
+        "color_scheme": "scheme-1",
+        "stack_products_mobile": false,
+        "stack_products_desktop": false,
+        "products_per_row_mobile": "2",
+        "products_per_row_desktop": 4,
+        "tabs_alignment": "start",
+        "tabs_icon": "circle",
+        "show_view_all_button": true,
+        "show_scrolling_bar": true
+      }
+    },
     "modularite": {
       "type": "text-with-icons",
       "blocks": {
@@ -322,35 +384,6 @@
         "icon_width": 36,
         "mobile_icon_width": 32,
         "item_text_alignment": "left"
-      }
-    },
-    "carousel_accessoires": {
-      "type": "featured-collections",
-      "blocks": {
-        "c1": {
-          "type": "collection",
-          "settings": {
-            "collection": "accessoires-braseros",
-            "products_count": 8,
-            "title": "Les accessoires",
-            "content": "<p>Grilles, plancha, four à pizza, housses…</p>",
-            "link": "/collections/accessoires-braseros"
-          }
-        }
-      },
-      "block_order": [
-        "c1"
-      ],
-      "settings": {
-        "color_scheme": "scheme-1",
-        "stack_products_mobile": false,
-        "stack_products_desktop": false,
-        "products_per_row_mobile": "2",
-        "products_per_row_desktop": 4,
-        "tabs_alignment": "start",
-        "tabs_icon": "circle",
-        "show_view_all_button": true,
-        "show_scrolling_bar": true
       }
     },
     "histoire": {
@@ -501,8 +534,9 @@
     "univers",
     "carousel_braseros",
     "concept",
-    "modularite",
+    "blog_posts_mj8pUM",
     "carousel_accessoires",
+    "modularite",
     "histoire",
     "faq",
     "newsletter"
