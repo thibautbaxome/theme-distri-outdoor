@@ -64,10 +64,6 @@
             "show_quantity_selector": true
           }
         },
-        "separator_2": {
-          "type": "separator",
-          "settings": {}
-        },
         "livraison": {
           "type": "accordion",
           "settings": {
@@ -106,7 +102,6 @@
         "separator_zkTWtF",
         "variant_picker",
         "accessory_bundle",
-        "separator_2",
         "livraison",
         "specs",
         "accordion_xhdtRj"
@@ -126,6 +121,14 @@
         "enable_video_looping": true,
         "enable_image_zoom": true,
         "max_image_zoom_level": 3
+      }
+    },
+    "product-faq": {
+      "type": "product-faq",
+      "settings": {
+        "color_scheme": "scheme-1",
+        "title": "Questions fréquentes",
+        "heading_size": "h3"
       }
     },
     "related-products": {
@@ -157,14 +160,6 @@
         "products_per_row_desktop": 4,
         "show_view_all_button": true,
         "show_scrolling_bar": true
-      }
-    },
-    "product-faq": {
-      "type": "product-faq",
-      "settings": {
-        "color_scheme": "scheme-1",
-        "title": "Questions fréquentes",
-        "heading_size": "h3"
       }
     }
   },
