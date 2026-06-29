@@ -77,7 +77,7 @@
         "durabilite": {
           "type": "item",
           "settings": {
-            "icon": "picto-secure",
+            "icon": "picto-happy",
             "title": "Durabilité",
             "heading_tag": "h5",
             "content": "<p>Des matériaux qui durent — acier corten, céramique, inox alimentaire — pensés pour résister aux saisons et vous accompagner des années.</p>"
