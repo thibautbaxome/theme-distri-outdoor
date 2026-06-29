@@ -123,22 +123,57 @@
         "item_text_alignment": "left"
       }
     },
-    "reservation": {
-      "type": "contact",
+    "1782655618e46a7273": {
+      "type": "apps",
+      "blocks": {
+        "section-header": {
+          "type": "_section-header",
+          "static": true,
+          "settings": {
+            "subheading": "",
+            "title": "",
+            "content": "",
+            "button_text": "",
+            "button_link": "",
+            "button_style": "outline",
+            "text_alignment": "center",
+            "heading_size": "h2",
+            "title_icon": "none",
+            "show_scrolling_title": false
+          },
+          "blocks": {}
+        },
+        "forms_inline_M3ytYh": {
+          "type": "shopify://apps/forms/blocks/inline/8744a304-fcb1-4347-b211-bb6b4759a76a",
+          "settings": {
+            "form_id": "550451",
+            "text_color": "#1b1714",
+            "button_background_color": "#da4b1e",
+            "button_label_color": "#f3ece1",
+            "links_color": "#da4b1e",
+            "errors_color": "#E02229",
+            "text_alignment": "center",
+            "form_alignment": "center",
+            "padding_top": 0,
+            "padding_bottom": 24,
+            "padding_right": 0,
+            "padding_left": 0
+          }
+        }
+      },
+      "block_order": [
+        "forms_inline_M3ytYh"
+      ],
       "settings": {
-        "color_scheme": "scheme-1",
-        "layout": "stacked",
-        "subheading": "Réservation",
-        "title": "Réservez votre brasero",
-        "heading_size": "h2",
-        "content": "<p>Anniversaire, événement d'entreprise ou week-end entre amis ? Indiquez-nous vos dates, le lieu et le nombre de personnes : notre équipe revient vers vous rapidement avec un devis.</p>",
-        "show_social_media": false
+        "color_scheme": "",
+        "add_vertical_spacing": true,
+        "add_horizontal_spacing": true
       }
     }
   },
   "order": [
     "hero",
     "infos",
-    "reservation"
+    "1782655618e46a7273"
   ]
 }
