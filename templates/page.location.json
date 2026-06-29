@@ -23,7 +23,7 @@
           "type": "heading",
           "settings": {
             "text": "Louer un brasero à portée de main",
-            "heading_tag": "h1",
+            "heading_tag": "h3",
             "position": "top_left",
             "highlight_effect": "default",
             "highlight_accent_color": "",
@@ -67,8 +67,8 @@
         "secondary_media_width": 60,
         "secondary_media_mobile_width": 60,
         "show_secondary_media_on_mobile": true,
-        "secondary_media_alignment": "place-self-center",
-        "secondary_media_shape": "none"
+        "secondary_media_alignment": "place-self-center-start",
+        "secondary_media_shape": "blob-2"
       }
     },
     "infos": {
@@ -77,27 +77,27 @@
         "zone": {
           "type": "item",
           "settings": {
-            "icon": "none",
+            "icon": "picto-truck",
             "title": "Zone & livraison",
-            "heading_tag": "h3",
+            "heading_tag": "h5",
             "content": "<p>Retrait gratuit sur rendez-vous près de Vienne. Livraison jusqu'à 60 km (Lyon sud, Nord-Isère, Vallée du Rhône) : 100 € TTC.</p>"
           }
         },
         "tarifs": {
           "type": "item",
           "settings": {
-            "icon": "none",
+            "icon": "picto-price-tag",
             "title": "Tarifs & conditions",
-            "heading_tag": "h3",
+            "heading_tag": "h5",
             "content": "<p>150 € TTC la journée ou le week-end. Caution de 1 000 € par chèque (non encaissé, restitué au retour du matériel en bon état). Paiement CB, virement, chèque ou espèces.</p>"
           }
         },
         "creneaux": {
           "type": "item",
           "settings": {
-            "icon": "none",
+            "icon": "picto-date",
             "title": "Créneaux & réservation",
-            "heading_tag": "h3",
+            "heading_tag": "h5",
             "content": "<p>Retrait dès le vendredi après-midi, retour le lundi matin, horaires flexibles. 2 braseros disponibles à la location.</p>"
           }
         }
