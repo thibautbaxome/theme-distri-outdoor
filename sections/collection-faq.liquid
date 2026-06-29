@@ -13,13 +13,12 @@
           <h2 class="{{ section.settings.heading_size }}">{{ section.settings.title }}</h2>
         {%- endif -%}
 
-        <div class="prose">
-          {%- for item in faq -%}
-            <details style="border-top: 1px solid rgb(var(--text-color) / 0.15); padding: 1rem 0;">
-              <summary style="cursor: pointer; font-weight: 600;">{{ item.question.value }}</summary>
-              <div style="margin-block-start: 0.6rem;"><p>{{ item.answer.value }}</p></div>
-            </details>
-          {%- endfor -%}
+        <div class="faq">
+          <div class="faq__content">
+            {%- for item in faq -%}
+              {%- render 'accordion', title: item.question.value, content: item.answer.value, prose_content: true -%}
+            {%- endfor -%}
+          </div>
         </div>
       </div>
     </div>
