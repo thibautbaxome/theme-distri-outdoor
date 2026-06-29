@@ -17,7 +17,7 @@ On donne aux moteurs (classiques **et** génératifs) des blocs **factuels, stru
 
 **Chantier 2 — Collections : ✅ FAIT.** 9 **descriptions visibles** (bannière) + métachamp collection `custom.faq` (6 collections) + section `sections/collection-faq.liquid` (dans `collection.json`) + FAQPage collection. ⚠️ *Les descriptions visibles de collection étaient vides → ajout additif ; à confirmer « garder/vider ».*
 
-**Wave 2 meta : ✅ FAIT** (sauf 1 point) — `alt` des 44 images en avant (étaient vides) ; suffixe `– Distri-Outdoor` dans les `<title>` (`layout/theme.liquid`) ; sameAs FB/IG. ❌ *Non fait : marque réelle (BRAZIR…) dans le `structured_data` produit — Shopify le génère depuis `product.vendor` (= « DISTRI-OUTDOOR »), surcharge impossible sans changer le vendor → décision data client.*
+**Wave 2 meta : ✅ FAIT** — `alt` des 44 images en avant (étaient vides) ; suffixe `– Distri-Outdoor` dans les `<title>` (`layout/theme.liquid`) ; sameAs FB/IG. **Marque dans le `structured_data` : ✅ réglé le 2026-06-29** en migrant `vendor` vers la vraie marque (BRAZIR/ChefBBQ/Mességué/Qista/LMC/Comme Avant) et en supprimant le métachamp `custom.marque` (le bloc Caractéristiques lit `product.vendor`).
 
 **Chantier 3 — Réécriture des descriptions : ❌ ANNULÉ.** Incident : 12 corps de fiches phares avaient été réécrits en prod par malentendu (« go » compris pour les corps au lieu des meta). **Tout a été restauré à l'identique** depuis le texte capturé en début de session. **Règle actée : on ne touche plus aux corps de fiche produit** (meta uniquement). Les 33 autres n'avaient pas été touchées.
 
