@@ -107,7 +107,7 @@
           "type": "text",
           "settings": {
             "title": "Contact",
-            "content": "<p>Une question ? Notre équipe vous répond.<\/p><p><a href=\"tel:+33668535407\">06 68 53 54 07<\/a><br><a href=\"mailto:contact@distri-outdoor.fr\">contact@distri-outdoor.fr<\/a><\/p>",
+            "content": "<p>Une question ? Notre équipe vous répond.</p><p><a href=\"tel:+33668535407\">06 68 53 54 07</a><br><a href=\"mailto:contact@distri-outdoor.fr\">contact@distri-outdoor.fr</a></p>",
             "enable_follow_on_shop": false
           }
         }
@@ -123,7 +123,7 @@
         "color_scheme": "",
         "show_social_media": true,
         "show_payment_icons": true,
-        "show_powered_by_shopify": true,
+        "show_powered_by_shopify": false,
         "show_country_selector": true,
         "show_country_name": true,
         "show_country_flag": true,
