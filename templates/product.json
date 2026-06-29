@@ -126,7 +126,7 @@
     "product-faq": {
       "type": "product-faq",
       "settings": {
-        "color_scheme": "scheme-1",
+        "color_scheme": "scheme-6",
         "title": "Questions fréquentes",
         "heading_size": "h3"
       }
