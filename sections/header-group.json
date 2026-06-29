@@ -48,8 +48,6 @@
     },
     "header": {
       "type": "header",
-      "blocks": {},
-      "block_order": [],
       "settings": {
         "color_scheme": "scheme-1",
         "enable_sticky": true,
