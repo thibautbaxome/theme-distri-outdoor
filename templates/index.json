@@ -467,7 +467,7 @@
           "type": "question",
           "settings": {
             "question": "Vos braseros sont-ils fabriqués en France ?",
-            "answer": "<p>Oui, les braseros BRAZIR sont fabriqués en France et garantis 5 ans.</p>",
+            "answer": "<p>Oui, les braseros BRAZIR sont fabriqués en France et garantis 2 ans.</p>",
             "icon": "none",
             "icon_width": 24,
             "mobile_icon_width": 20
