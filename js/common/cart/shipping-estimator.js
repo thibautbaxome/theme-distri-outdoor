@@ -56,7 +56,13 @@ export class ShippingEstimator extends HTMLElement {
   #formatShippingRates(shippingRates) {
     // We create our HTML for the rates
     let formattedShippingRates = shippingRates.map((shippingRate) => {
-      return `<li>${shippingRate['presentment_name']}: ${shippingRate['currency']} ${shippingRate['price']}</li>`;
+      let formattedPrice;
+      try {
+        formattedPrice = new Intl.NumberFormat(document.documentElement.lang || 'fr', { style: 'currency', currency: shippingRate['currency'] }).format(parseFloat(shippingRate['price']));
+      } catch (e) {
+        formattedPrice = `${shippingRate['price']} ${shippingRate['currency']}`;
+      }
+      return `<li>${shippingRate['presentment_name']} : ${formattedPrice}</li>`;
     });
 
     this.resultsElement.innerHTML = `

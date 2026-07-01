@@ -2023,7 +2023,13 @@ getAsyncShippingRates_fn = async function(zip, country, province) {
 };
 formatShippingRates_fn = function(shippingRates) {
   let formattedShippingRates = shippingRates.map((shippingRate) => {
-    return `<li>${shippingRate["presentment_name"]}: ${shippingRate["currency"]} ${shippingRate["price"]}</li>`;
+    let formattedPrice;
+    try {
+      formattedPrice = new Intl.NumberFormat(document.documentElement.lang || "fr", { style: "currency", currency: shippingRate["currency"] }).format(parseFloat(shippingRate["price"]));
+    } catch (e) {
+      formattedPrice = `${shippingRate["price"]} ${shippingRate["currency"]}`;
+    }
+    return `<li>${shippingRate["presentment_name"]} : ${formattedPrice}</li>`;
   });
   this.resultsElement.innerHTML = `
       <div class="v-stack gap-2">
