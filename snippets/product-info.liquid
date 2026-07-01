@@ -113,11 +113,19 @@ no need to manually pass the section as it is globally available)
             {%- liquid
               assign re_fr = product.metafields.custom.fabrique_en_france.value
               assign re_garantie = product.metafields.custom.garantie.value
+              assign re_delai = product.metafields.custom.delai_livraison.value
             -%}
-            {%- if re_fr or re_garantie != blank -%}
-              <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
-                {%- if re_fr -%}<span style="display: inline-flex; align-items: center; padding: 0.4em 0.8em; font-size: 0.8rem; letter-spacing: 0.04em; border: 1px solid rgb(var(--text-color) / 0.25); border-radius: var(--button-border-radius, 4px);">Fabriqué en France</span>{%- endif -%}
-                {%- if re_garantie != blank -%}<span style="display: inline-flex; align-items: center; padding: 0.4em 0.8em; font-size: 0.8rem; letter-spacing: 0.04em; border: 1px solid rgb(var(--text-color) / 0.25); border-radius: var(--button-border-radius, 4px);">Garantie {{ re_garantie }}</span>{%- endif -%}
+            {%- if re_fr or re_garantie != blank or re_delai != blank -%}
+              <div style="display: flex; flex-direction: column; gap: 0.6rem;">
+                {%- if re_fr or re_garantie != blank -%}
+                  <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
+                    {%- if re_fr -%}<span style="display: inline-flex; align-items: center; padding: 0.4em 0.8em; font-size: 0.8rem; letter-spacing: 0.04em; border: 1px solid rgb(var(--text-color) / 0.25); border-radius: var(--button-border-radius, 4px);">Fabriqué en France</span>{%- endif -%}
+                    {%- if re_garantie != blank -%}<span style="display: inline-flex; align-items: center; padding: 0.4em 0.8em; font-size: 0.8rem; letter-spacing: 0.04em; border: 1px solid rgb(var(--text-color) / 0.25); border-radius: var(--button-border-radius, 4px);">Garantie {{ re_garantie }}</span>{%- endif -%}
+                  </div>
+                {%- endif -%}
+                {%- if re_delai != blank -%}
+                  <p style="margin: 0; font-size: 0.85rem; color: rgb(var(--text-color) / 0.7);">Livraison estimée&nbsp;: {{ re_delai }}</p>
+                {%- endif -%}
               </div>
             {%- endif -%}
 
