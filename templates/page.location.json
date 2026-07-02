@@ -127,7 +127,7 @@
         "overlay_opacity": 20,
         "add_media_spacing": false,
         "autoplay_video": true,
-        "primary_image": "shopify://shop_images/Corten_840_carree.jpg",
+        "primary_image": "shopify://shop_images/DSC03131_jpg.webp",
         "secondary_media_width": 60,
         "secondary_media_mobile_width": 60,
         "show_secondary_media_on_mobile": true,
@@ -240,7 +240,7 @@
         "overlay_opacity": 20,
         "add_media_spacing": false,
         "autoplay_video": true,
-        "primary_image": "shopify://shop_images/Corten_840_rond.jpg",
+        "primary_image": "shopify://shop_images/DSC08090_jpg.webp",
         "secondary_media_width": 60,
         "secondary_media_mobile_width": 60,
         "show_secondary_media_on_mobile": true,
@@ -368,6 +368,23 @@
     "1782655618e46a7273": {
       "type": "apps",
       "blocks": {
+        "forms_inline_M3ytYh": {
+          "type": "shopify://apps/forms/blocks/inline/8744a304-fcb1-4347-b211-bb6b4759a76a",
+          "settings": {
+            "form_id": "550451",
+            "text_color": "#1b1714",
+            "button_background_color": "#da4b1e",
+            "button_label_color": "#f3ece1",
+            "links_color": "#da4b1e",
+            "errors_color": "#e02229",
+            "text_alignment": "center",
+            "form_alignment": "center",
+            "padding_top": 0,
+            "padding_bottom": 24,
+            "padding_right": 0,
+            "padding_left": 0
+          }
+        },
         "section-header": {
           "type": "_section-header",
           "static": true,
@@ -384,23 +401,6 @@
             "show_scrolling_title": false
           },
           "blocks": {}
-        },
-        "forms_inline_M3ytYh": {
-          "type": "shopify://apps/forms/blocks/inline/8744a304-fcb1-4347-b211-bb6b4759a76a",
-          "settings": {
-            "form_id": "550451",
-            "text_color": "#1b1714",
-            "button_background_color": "#da4b1e",
-            "button_label_color": "#f3ece1",
-            "links_color": "#da4b1e",
-            "errors_color": "#E02229",
-            "text_alignment": "center",
-            "form_alignment": "center",
-            "padding_top": 0,
-            "padding_bottom": 24,
-            "padding_right": 0,
-            "padding_left": 0
-          }
         }
       },
       "block_order": [
