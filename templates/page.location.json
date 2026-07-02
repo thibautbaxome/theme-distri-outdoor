@@ -372,9 +372,9 @@
           "type": "_section-header",
           "static": true,
           "settings": {
-            "subheading": "Réservation",
-            "title": "Réservez votre brasero",
-            "content": "<p>Indiquez vos dates et votre besoin : nous revenons vers vous rapidement.</p>",
+            "subheading": "",
+            "title": "",
+            "content": "",
             "button_text": "",
             "button_link": "",
             "button_style": "outline",
