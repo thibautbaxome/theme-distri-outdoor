@@ -23,7 +23,7 @@
     {%- endcomment -%}
 
     <div class="section-split__column section-split__column--image {% unless section.settings.add_media_spacing %}section-split__column--flushed{% endunless %}">
-      <div class="content-box h-full">
+      <div class="content-box h-full min-h-{{ section.settings.media_height }}">
         <div class="content-box__background-media">
           {%- liquid
             if section.settings.primary_video != blank
@@ -280,6 +280,21 @@
       "type": "header",
       "content": "t:sections.text_with_media.media_category",
       "info": "t:sections.text_with_media.media_category_info"
+    },
+    {
+      "type": "select",
+      "id": "media_height",
+      "label": "Hauteur du média",
+      "info": "Impose une hauteur au visuel. « Adaptée au contenu » laisse la hauteur se caler sur le texte (comportement par défaut).",
+      "options": [
+        { "value": "auto", "label": "Adaptée au contenu" },
+        { "value": "xs", "label": "Très petite" },
+        { "value": "sm", "label": "Petite" },
+        { "value": "md", "label": "Moyenne" },
+        { "value": "lg", "label": "Grande" },
+        { "value": "fill", "label": "Plein écran" }
+      ],
+      "default": "auto"
     },
     {
       "type": "checkbox",
