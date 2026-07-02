@@ -72,6 +72,182 @@
         "secondary_media_shape": "blob-2"
       }
     },
+    "presentation": {
+      "type": "text-with-media",
+      "blocks": {
+        "sub": {
+          "type": "subheading",
+          "settings": {
+            "text": "La formule location",
+            "position": "top_left"
+          }
+        },
+        "h": {
+          "type": "heading",
+          "settings": {
+            "text": "Recevez autour du feu, sans contrainte",
+            "heading_tag": "h3",
+            "html_tag": "h2",
+            "position": "top_left",
+            "highlight_effect": "default",
+            "highlight_accent_color": "",
+            "highlight_text_color": ""
+          }
+        },
+        "rt": {
+          "type": "richtext",
+          "settings": {
+            "text": "<p>Vous organisez un événement et vous voulez marquer les esprits ? Louez un brasero-plancha BRAZIR M et offrez à vos invités une cuisine live, conviviale et spectaculaire : cuisson au feu de bois, en plancha tout autour du foyer ou en grill, pour régaler 30 à 40 personnes.</p><p>Nous vous confions un matériel propre, vérifié et prêt à l'emploi. Vous n'avez plus qu'à allumer le feu.</p>",
+            "position": "bottom_left"
+          }
+        },
+        "btn": {
+          "type": "button",
+          "settings": {
+            "text": "Nous contacter",
+            "url": "/pages/contact",
+            "position": "bottom_left",
+            "style": "outline",
+            "background": "",
+            "text_color": ""
+          }
+        }
+      },
+      "block_order": [
+        "sub",
+        "h",
+        "rt",
+        "btn"
+      ],
+      "settings": {
+        "color_scheme": "scheme-1",
+        "content_position": "end",
+        "content_percentage_width": 50,
+        "overlay_color": "#000000",
+        "overlay_opacity": 20,
+        "add_media_spacing": false,
+        "autoplay_video": true,
+        "primary_image": "shopify://shop_images/Corten_840_carree.jpg",
+        "secondary_media_width": 60,
+        "secondary_media_mobile_width": 60,
+        "show_secondary_media_on_mobile": true,
+        "secondary_media_alignment": "place-self-center-end",
+        "secondary_media_shape": "blob-2"
+      }
+    },
+    "cas_usage": {
+      "type": "text-with-icons",
+      "blocks": {
+        "anniv": {
+          "type": "item",
+          "settings": {
+            "icon": "picto-sparkle",
+            "title": "Anniversaires & fêtes",
+            "heading_tag": "h5",
+            "content": "<p>Un repas convivial autour du feu, pour petits et grands.</p>"
+          }
+        },
+        "mariage": {
+          "type": "item",
+          "settings": {
+            "icon": "picto-star",
+            "title": "Mariages & réceptions",
+            "heading_tag": "h5",
+            "content": "<p>Une animation culinaire originale qui marque vos invités.</p>"
+          }
+        },
+        "entreprise": {
+          "type": "item",
+          "settings": {
+            "icon": "picto-chef",
+            "title": "Séminaires & entreprise",
+            "heading_tag": "h5",
+            "content": "<p>Un team-building gourmand, en plein air.</p>"
+          }
+        },
+        "amis": {
+          "type": "item",
+          "settings": {
+            "icon": "picto-fork-knife",
+            "title": "Week-ends entre amis",
+            "heading_tag": "h5",
+            "content": "<p>La plancha géante pour vos grandes tablées du week-end.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "anniv",
+        "mariage",
+        "entreprise",
+        "amis"
+      ],
+      "settings": {
+        "color_scheme": "scheme-2",
+        "subheading": "Pour quelles occasions ?",
+        "title": "Le brasero qui rassemble",
+        "content": "",
+        "heading_tag": "h3",
+        "text_alignment": "center",
+        "items_per_row_desktop": 4,
+        "stack_on_mobile": true,
+        "separator_style": "none",
+        "icon_position": "stacked",
+        "icon_width": 36,
+        "mobile_icon_width": 32,
+        "item_text_alignment": "center"
+      }
+    },
+    "experience": {
+      "type": "text-with-media",
+      "blocks": {
+        "sub": {
+          "type": "subheading",
+          "settings": {
+            "text": "Clé en main",
+            "position": "top_left"
+          }
+        },
+        "h": {
+          "type": "heading",
+          "settings": {
+            "text": "Un équipement complet, prêt à l'emploi",
+            "heading_tag": "h3",
+            "html_tag": "h2",
+            "position": "top_left",
+            "highlight_effect": "default",
+            "highlight_accent_color": "",
+            "highlight_text_color": ""
+          }
+        },
+        "rt": {
+          "type": "richtext",
+          "settings": {
+            "text": "<p>Le brasero BRAZIR M vous est remis avec sa grille de cuisson, nettoyé et vérifié. Vous choisissez votre mode de cuisson — plancha, grill ou feu de bois — et vous profitez. Nos conseils d'allumage et d'utilisation vous sont transmis à la remise du matériel.</p><p><strong>Inclus :</strong> brasero BRAZIR M · grille de cuisson · conseils d'utilisation.</p>",
+            "position": "bottom_left"
+          }
+        }
+      },
+      "block_order": [
+        "sub",
+        "h",
+        "rt"
+      ],
+      "settings": {
+        "color_scheme": "scheme-1",
+        "content_position": "start",
+        "content_percentage_width": 50,
+        "overlay_color": "#000000",
+        "overlay_opacity": 20,
+        "add_media_spacing": false,
+        "autoplay_video": true,
+        "primary_image": "shopify://shop_images/Corten_840_rond.jpg",
+        "secondary_media_width": 60,
+        "secondary_media_mobile_width": 60,
+        "show_secondary_media_on_mobile": true,
+        "secondary_media_alignment": "place-self-center-start",
+        "secondary_media_shape": "blob-2"
+      }
+    },
     "infos": {
       "type": "text-with-icons",
       "blocks": {
@@ -124,6 +300,71 @@
         "item_text_alignment": "left"
       }
     },
+    "faq_location": {
+      "type": "faq",
+      "blocks": {
+        "q1": {
+          "type": "question",
+          "settings": {
+            "question": "Pour combien de personnes ?",
+            "answer": "<p>Le BRAZIR M offre une grande surface de cuisson, idéale pour 30 à 40 convives.</p>",
+            "icon": "none",
+            "icon_width": 24,
+            "mobile_icon_width": 20
+          }
+        },
+        "q2": {
+          "type": "question",
+          "settings": {
+            "question": "Qu'est-ce qui est inclus dans la location ?",
+            "answer": "<p>Le brasero BRAZIR M et sa grille de cuisson, propres et prêts à l'emploi. Vous prévoyez simplement le combustible (bois ou charbon de bois).</p>",
+            "icon": "none",
+            "icon_width": 24,
+            "mobile_icon_width": 20
+          }
+        },
+        "q3": {
+          "type": "question",
+          "settings": {
+            "question": "Faut-il savoir cuisiner au brasero ?",
+            "answer": "<p>Aucune expérience requise : la cuisson au feu de bois est simple et intuitive, et nous vous transmettons les conseils d'allumage et d'utilisation à la remise du matériel.</p>",
+            "icon": "none",
+            "icon_width": 24,
+            "mobile_icon_width": 20
+          }
+        },
+        "q4": {
+          "type": "question",
+          "settings": {
+            "question": "Comment réserver ?",
+            "answer": "<p>Remplissez le formulaire ci-dessous ou contactez-nous. 2 braseros sont disponibles à la location : pensez à réserver tôt en haute saison.</p>",
+            "icon": "none",
+            "icon_width": 24,
+            "mobile_icon_width": 20
+          }
+        }
+      },
+      "block_order": [
+        "q1",
+        "q2",
+        "q3",
+        "q4"
+      ],
+      "settings": {
+        "color_scheme": "scheme-1",
+        "layout": "stacked",
+        "accordion_style": "background",
+        "question_style": "text",
+        "subheading": "Bon à savoir",
+        "title": "Questions fréquentes sur la location",
+        "title_tag": "h3",
+        "html_tag": "h2",
+        "content": "",
+        "button_text": "Nous contacter",
+        "button_url": "/pages/contact",
+        "button_style": "outline"
+      }
+    },
     "1782655618e46a7273": {
       "type": "apps",
       "blocks": {
@@ -131,14 +372,14 @@
           "type": "_section-header",
           "static": true,
           "settings": {
-            "subheading": "",
-            "title": "",
-            "content": "",
+            "subheading": "Réservation",
+            "title": "Réservez votre brasero",
+            "content": "<p>Indiquez vos dates et votre besoin : nous revenons vers vous rapidement.</p>",
             "button_text": "",
             "button_link": "",
             "button_style": "outline",
             "text_alignment": "center",
-            "heading_size": "h2",
+            "heading_size": "h3",
             "title_icon": "none",
             "show_scrolling_title": false
           },
@@ -174,7 +415,11 @@
   },
   "order": [
     "hero",
+    "presentation",
+    "cas_usage",
+    "experience",
     "infos",
+    "faq_location",
     "1782655618e46a7273"
   ]
 }
