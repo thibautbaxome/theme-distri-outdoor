@@ -263,7 +263,7 @@
         "content_percentage_width": 50,
         "overlay_color": "#000000",
         "overlay_opacity": 20,
-        "media_height": "auto",
+        "media_height": "lg",
         "add_media_spacing": false,
         "autoplay_video": true,
         "primary_image": "shopify://shop_images/41A9481.jpg",
