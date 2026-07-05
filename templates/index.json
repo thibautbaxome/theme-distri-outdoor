@@ -27,6 +27,7 @@
           "blocks": {
             "slide_heading": {
               "type": "heading",
+              "disabled": true,
               "settings": {
                 "text": "Votre extérieur à portée de main",
                 "heading_size": "display-m",
@@ -40,6 +41,7 @@
             },
             "slide_text": {
               "type": "rich-text",
+              "disabled": true,
               "settings": {
                 "text": "<p>Une sélection de produits français de qualité pour vos espaces extérieurs.</p>",
                 "content_width": "sm"
