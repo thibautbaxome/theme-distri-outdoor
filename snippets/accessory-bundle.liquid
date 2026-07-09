@@ -99,7 +99,7 @@ Tout est ajouté au panier en une requête via les items[] du <product-form> nat
                   </span>
                 </div>
 
-                <div class="accessory-bundle__options" data-options hidden>
+                <div class="accessory-bundle__options" data-options>
                   {%- unless acc.has_only_default_variant -%}
                     {%- for opt in acc.options_with_values -%}
                       <label class="accessory-bundle__select v-stack gap-1">
@@ -164,8 +164,7 @@ Tout est ajouté au panier en une requête via les items[] du <product-form> nat
   .accessory-bundle__card.is-selected .accessory-bundle__badge { background: rgb(var(--primary-button-background, 182 90 48)); border-color: rgb(var(--primary-button-background, 182 90 48)); }
   .accessory-bundle__card.is-selected .accessory-bundle__badge::after { opacity: 1; }
 
-  .accessory-bundle__options { display: none; }
-  .accessory-bundle__card.is-selected .accessory-bundle__options { display: grid; gap: 0.5rem; }
+  .accessory-bundle__options { display: grid; gap: 0.5rem; }
   .accessory-bundle__select select { width: 100%; padding: 0.45rem 0.6rem; border: 1px solid rgb(var(--text-color, 0 0 0) / 0.25); border-radius: var(--rounded-xs, 4px); background: transparent; font: inherit; }
 
   .accessory-bundle__actions { align-items: stretch; }
@@ -237,7 +236,6 @@ Tout est ajouté au panier en une requête via les items[] du <product-form> nat
         toggle.addEventListener('change', () => {
           const on = toggle.checked;
           row.classList.toggle('is-selected', on);
-          if (options) options.hidden = !on;
           if (accId) accId.disabled = !on;
           if (accQty) accQty.disabled = !on;
           if (on) { this.applyAutoMatch(row); this.resolveRow(row); }
