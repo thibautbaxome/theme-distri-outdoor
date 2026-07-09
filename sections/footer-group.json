@@ -21,7 +21,7 @@
             "icon_width": 24,
             "mobile_icon_width": 20,
             "title": "Spécialiste de l'outdoor",
-            "content": "Braseros, kamados, anti-moustiques & mobilier."
+            "content": "Braseros, anti-moustiques & mobilier."
           }
         },
         "item-2": {
@@ -99,7 +99,7 @@
           "type": "text",
           "settings": {
             "title": "À propos",
-            "content": "<p>Distri-Outdoor, votre spécialiste de l'extérieur : braseros-planchas, kamados, bornes anti-moustiques et mobilier de jardin. Une sélection exigeante pour transformer chaque terrasse en lieu de partage.</p>",
+            "content": "<p>Distri-Outdoor, votre spécialiste de l'extérieur : braseros-planchas, bornes anti-moustiques et mobilier de jardin. Une sélection exigeante pour transformer chaque terrasse en lieu de partage.</p>",
             "enable_follow_on_shop": true
           }
         },

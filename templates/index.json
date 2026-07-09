@@ -50,7 +50,7 @@
               "type": "button",
               "settings": {
                 "text": "Découvrir la boutique",
-                "url": "/collections/braseros-kamados-borne",
+                "url": "/collections/catalogue",
                 "open_in_new_tab": false,
                 "style": "solid",
                 "background": "",
