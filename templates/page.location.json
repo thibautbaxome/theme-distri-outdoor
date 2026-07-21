@@ -34,7 +34,7 @@
         "rt": {
           "type": "richtext",
           "settings": {
-            "text": "<p>Pour vos anniversaires, événements d'entreprise ou week-ends entre amis, louez un brasero BRAZIR M : une cuisson au feu de bois, en plancha ou en grill, pour 30 à 40 personnes.</p>",
+            "text": "<p>Pour vos anniversaires, événements d'entreprise ou week-ends entre amis, louez un brasero BRAZIR M : une cuisson au feu de bois, en plancha ou en grill, jusqu'à 40 personnes.</p>",
             "position": "bottom_left"
           }
         },
@@ -59,13 +59,13 @@
       "settings": {
         "color_scheme": "scheme-1",
         "content_position": "start",
-        "content_percentage_width": 50,
+        "content_percentage_width": 45,
         "overlay_color": "#000000",
         "overlay_opacity": 20,
-        "media_height": "lg",
+        "media_height": "md",
         "add_media_spacing": false,
         "autoplay_video": true,
-        "primary_image": "shopify://shop_images/DSC0148.jpg",
+        "primary_image": "shopify://shop_images/41A9447.jpg",
         "secondary_media_width": 60,
         "secondary_media_mobile_width": 60,
         "show_secondary_media_on_mobile": true,
