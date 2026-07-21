@@ -310,7 +310,7 @@
           "type": "question",
           "settings": {
             "question": "Pour combien de personnes ?",
-            "answer": "<p>Le BRAZIR M offre une grande surface de cuisson, idéale pour 30 à 40 convives.</p>",
+            "answer": "<p>Le BRAZIR M offre une grande surface de cuisson, jusqu'à 40 convives par brasero.</p>",
             "icon": "none",
             "icon_width": 24,
             "mobile_icon_width": 20
